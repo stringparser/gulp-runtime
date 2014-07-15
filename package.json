@@ -1,5 +1,23 @@
 {
   "name": "gulp-stdinr",
   "version": "0.0.1",
-  "description": "gulp hook to stdin"
+  "description": "gulp hook to stdin",
+  "author": "Javier Carrillo <stringparser@gmail.com> (http://www.stringparser.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stringparser/gulp-stdin"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "keywords": [
+    "utility",
+    "gulp",
+    "process",
+    "stdin"
+  ],
+  "devDependencies": {
+    "gulp": "^3.8.6"
+  },
+  "license": "MIT"
 }
