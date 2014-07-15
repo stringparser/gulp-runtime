@@ -7,13 +7,16 @@
     "type": "git",
     "url": "https://github.com/stringparser/gulp-stdin"
   },
+  "main" : "./index.js",
   "keywords": [
     "utility",
     "gulp",
     "process",
-    "stdin"
+    "stdin",
+    "cli"
   ],
   "devDependencies": {
+    "callsite": "^1.0.0",
     "gulp": "^3.8.6"
   },
   "license": "MIT"
