@@ -1,0 +1,5 @@
+{
+  "name": "gulp-stdinr",
+  "version": "0.0.1",
+  "description": "gulp hook to stdin"
+}
