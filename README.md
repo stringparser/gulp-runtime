@@ -1,9 +1,9 @@
-## Warning!
-#### Work in progress :)
-
 ## gulp-repl
 
 Use gulp as a repl after it starts your tasks.
+
+## Warning!
+#### Work in progress :). Not yet on npm or anything.
 
 ## Why?
 
