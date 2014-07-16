@@ -1,13 +1,13 @@
 {
-  "name": "gulp-repl",
+  "name": "gulp-runtime",
   "version": "0.0.1",
-  "description": "gulp repl with simple hooks",
+  "description": "gulp runtime manager",
   "author": "Javier Carrillo <stringparser@gmail.com> (http://www.stringparser.com)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stringparser/gulp-stdin"
+    "url": "https://github.com/stringparser/gulp-runtime"
   },
-  "main": "./gulp-repl.js",
+  "main": "./gulp-runtime.js",
   "keywords": [
     "utility",
     "gulp",
@@ -15,14 +15,9 @@
     "stdin",
     "cli"
   ],
-  "devDependencies": {
-    "callsite": "^1.0.0",
-    "gulp": "^3.8.6",
-    "gulp-util": "^2.2.20"
-  },
-  "license": "MIT",
   "dependencies": {
     "gulp": "^3.8.6",
     "gulp-util": "^2.2.20"
-  }
+  },
+  "license": "MIT"
 }
