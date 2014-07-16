@@ -1,9 +1,8 @@
-## gulp-repl
+## gulp-runtime
 
-Use gulp as a repl after it starts your tasks.
+gulp runtime manager.
 
-## Warning!
-#### Work in progress :). Not yet on npm or anything.
+<span class="color: red">Warning!: </span> Work in progress :). Not yet on npm or anything.
 
 ## Why?
 
