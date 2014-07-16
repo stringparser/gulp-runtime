@@ -1,13 +1,13 @@
 {
-  "name": "gulp-stdinr",
+  "name": "gulp-repl",
   "version": "0.0.1",
-  "description": "gulp hook to stdin",
+  "description": "gulp repl with simple hooks",
   "author": "Javier Carrillo <stringparser@gmail.com> (http://www.stringparser.com)",
   "repository": {
     "type": "git",
     "url": "https://github.com/stringparser/gulp-stdin"
   },
-  "main": "./gulp-stdin.js",
+  "main": "./gulp-repl.js",
   "keywords": [
     "utility",
     "gulp",
