@@ -1,8 +1,13 @@
-## gulp-stdin
+## Warning! Work in progress :)
 
-Use `process.stdin` to start gulp tasks.
+## gulp-repl
 
-## Usage
+Use gulp as a repl after it starts your tasks.
+
+## Use case
+
+ - Add/remove tasks at runtime.
+ - Use `gulp` cli at runtime.
 
 ## License
 

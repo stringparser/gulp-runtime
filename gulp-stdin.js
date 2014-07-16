@@ -1,33 +1,37 @@
 'use strict';
 
-// module dependencies
+// Module dependencies
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var spawn = require('child_process').spawn;
+var child = require('child_process');
 
 // helpers
-var input = process.stdin;
-var output = process.stdout;
-var error = process.stderr;
+var stdin = process.stdin;
+var stdout = process.stdout;
+var stderr = process.stderr;
 
 // go to `old` stream mode
-input.resume();
+// and set encoding
+stdin.resume();
+stdin.setEncoding('utf8');
 
-input.setEncoding('utf8');
+stdin.on('data', function(data){
 
-input.on('data', function(data){
-
-  // preference to gulp cli
   if(data[0] === '-'){
-    data = data.trim()
-               .replace(/[ ]+/g,' ')
-               .split(' ');
-
-    spawn('gulp', data, {
-      stdio : 'inherit'
-    });
+    data = data.trim().replace(/[ ]+/g, ' ').split(' ');
+    stdin.pipe(spawnedGulp(data));
   }
   else
-    gutil.log(data);
-});
+    gutil.log('> command');
+})
 
+stdin.on('end', function(data){
+
+  gutil.log('>');
+})
+
+function spawnedGulp(data){
+  return child.spawn('gulp', data, {
+    stdio : 'inherit'
+  });
+}
