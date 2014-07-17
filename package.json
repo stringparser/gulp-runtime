@@ -16,8 +16,18 @@
     "cli"
   ],
   "dependencies": {
+    "fixture-stdout": "^0.2.1",
     "gulp": "^3.8.6",
-    "gulp-util": "^2.2.20"
+    "gulp-footer": "^1.0.5",
+    "gulp-util": "^2.2.20",
+    "mux-demux": "^3.7.9",
+    "stream-combiner2": "^1.0.1",
+    "through2": "^0.5.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "concat-stream": "^1.4.6",
+    "sculpt": "^0.1.2",
+    "through": "^2.3.4"
+  }
 }

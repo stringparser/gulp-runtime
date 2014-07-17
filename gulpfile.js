@@ -1,10 +1,18 @@
-var gulp = require('gulp');
+var gulp = require('./runtime');
+var gutil = require('gulp-util');
 
 gulp.task('default', function(){
-  console.log(process.argv);
+  gutil.log(' > default')
 })
+gulp.task('css', logger)
+gulp.task('js', logger)
+gulp.task('process', ['css', 'js'], logger)
 
 
-process.stdin.on('data', function(chunk){
-  console.log('gulp says : ', chunk.toString())
-})
+
+//
+// test function
+var logger = function (args){
+
+  console.log('hey')
+}
