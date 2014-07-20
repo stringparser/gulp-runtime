@@ -2,99 +2,39 @@
 
 // Module dependencies
 var gulp = require('gulp');
-var gutil = require('gulp-util');
-var exec = require('child_process').exec;
+var gutil = require('gulp-util')
 var spawn = require('child_process').spawn;
-var through = require('through2');
 var runtime = require('sculpt');
 
-// helpers
-var child;
-var handles = {
-  attach : function(/* args */){
+// expose `gulp`
+module.exports = gulp;
 
-    var args = Array.prototype.slice.call(arguments);
-    args.forEach(function(std){
-      stdioEvents.forEach(function(e){
-        std.on(e, function(){
-          console.log(e)
-          console.log(arguments)
-        })
-      })
-    })
-  }
-};
+// helpers
 var promptText = ' > gulp ';
 var stdin = process.stdin;
 var stdout = process.stdout;
 var stderr = process.stderr;
-var tasks = gulp.tasks;
-var stdioEvents = [
-  'end', 'exit', 'finish', 'close'
-];
+var task = gulp.tasks;
 
-stdin.resume();
 stdin.setEncoding('utf8');
 
 stdin.pipe(
-  runtime.map(manager)
+  runtime.filter(manager)
 ).pipe(stdout);
 
 function manager(chunk){
 
+  var argv = chunk.trim().replace(/[ ]+/g, ' ');
+  var filter = true;
 
-
-  var wait = false;
-  var argv = chunk.trim()
-                  .replace(/[ ]+/g, ' ')
-                  .split(' ');
-
-  if(argv[0][0] === '-')
-    wait = true;
-  else if(tasks[argv[0]])
-    wait = true;
+  if(argv[0] === '-')
+    childGulp(argv);
+  else if(task[argv[0]])
+    chunk = JSON.stringify(task[argv[0]], null, '\t');
   else
-    wait = false;
+    filter = false;
 
-  if(wait){
-
-    // by default, preserve colors
-    if(argv[0] !== '--color' || argv[0] !== '--no-color')
-      argv.unshift('--color');
-
-    var c = 0;
-    child = spawn('gulp', argv);
-    child.unref();
-
-    var all = [];
-    var plumber = through({ encoding : 'utf8'}, function(chunk, enc, cb){
-      this.push(chunk);
-      cb();
-    }).on('data', function(data){
-      stdout.write(data)
-    }).on('end', function(){
-      console.log('ended!')
-    })
-
-    child.stdout.on('data', function(buf) {
-      console.log('[STR] stdout "%s"', String(buf));
-      stdout += buf;
-    });
-    child.stderr.on('data', function(buf) {
-      console.log('[STR] stderr "%s"', String(buf));
-      stderr += buf;
-    });
-    child.on('close', function(code) {
-      console.log('[END] code', code);
-      console.log('[END] stdout "%s"', stdout);
-      console.log('[END] stderr "%s"', stderr);
-    });
-
-    return '';
-
-  }
-  else
-    return chunk;
+  return filter ? chunk : '';
 }
 
 function prompt(e, fn){
@@ -121,9 +61,31 @@ gulp.on('task_start', function(){
     prompt('task_not_found', gulp);
   })
 
+function childGulp(argv){
 
-// Flush
-// https://gist.github.com/3427357
+  argv = argv.split(' ');
+
+  // maintain default '--color'
+  if(argv[0] !== '--color' && argv[0] !== '--no-color')
+    argv.unshift('--color');
+
+  stdout.write('\n')
+  gutil.log('child gulp started', argv);
+  var child = spawn('gulp', argv);
+
+  child.stdin.end();
+
+  // Handle output
+  child.stdout.on('data', function(chunk){
+    stdout.write(chunk)
+  }).on('end', function(){
+    stdout.write(promptText);
+    child.kill();
+  })
+}
+
+// flush on exit
+// taken from https://gist.github.com/3427357
 function flushExit(exitCode) {
   if (process.stdout._pendingWriteReqs || process.stderr._pendingWriteReqs) {
     process.nextTick(function() {
@@ -133,5 +95,3 @@ function flushExit(exitCode) {
     process.exit(exitCode);
   }
 }
-
-module.exports = gulp;
