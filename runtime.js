@@ -1,66 +1,33 @@
 'use strict';
 
 // Module dependencies
-var gulp = require('gulp')
-  , gutil = require('gulp-util')
-  , spawn = require('child_process').spawn
-  , plumber = require('sculpt');
-
-// gulp runtime mods
-var gulp = require('./gulp-instance')(gulp);
-
-// expose `gulp`
-module.exports = gulp;
+var spawn = require('child_process').spawn
+  , plumber = require('sculpt')
+  , lib = require('./lib');
 
 // helpers
 var stdin = process.stdin
   , stdout = process.stdout
-  , stderr = process.stderr
-  , tasks = gulp.tasks
-  , promptText = require('./util').promptText;
+  , stderr = process.stderr;
 
-// set encoding
-stdin.setEncoding('utf8');
+// expose `runtime`
+module.exports = function (gulp){
 
-// pipes!
-stdin.pipe(
-  plumber.filter(manager)
-).pipe(stdout);
+  var runtime = {};
 
-// runtime manager
-function manager(chunk){
+  // attach current instance
+  runtime.instance = gulp;
+  // make a manager
+  runtime.manager = lib.manager(runtime);
 
-  var argv = chunk.trim().replace(/[ ]+/g, ' ');
-  var filter = true;
+  // set encoding & pipe!
+  stdin.setEncoding('utf8');
+  stdin.pipe(
+    plumber.map(runtime.manager)
+  ).pipe(stdout);
 
-  if(argv[0] === '-')
-    childGulp(argv);
-  else if(tasks[argv[0]])
-    chunk = JSON.stringify(task[argv[0]], null, '\t');
-  else
-    filter = false;
+  console.log(stdout)
 
-  return filter ? '' : chunk;
+  return runtime;
 }
 
-function childGulp(argv){
-
-  argv = argv.split(' ');
-
-  // maintain default '--color'
-  if(argv[0] !== '--color' && argv[0] !== '--no-color')
-    argv.unshift('--color');
-
-  stdout.write('\n Child gulp started '+ JSON.stringify(argv) + '\n\n');
-  var child = spawn('gulp', argv);
-
-  child.stdin.end();
-
-  // Handle output
-  child.stdout.on('data', function(chunk){
-    stdout.write(chunk)
-  }).on('end', function(){
-    stdout.write(promptText);
-    child.kill();
-  })
-}
