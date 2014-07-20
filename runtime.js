@@ -1,27 +1,33 @@
 'use strict';
 
 // Module dependencies
-var gulp = require('gulp');
-var gutil = require('gulp-util')
-var spawn = require('child_process').spawn;
-var runtime = require('sculpt');
+var gulp = require('gulp')
+  , gutil = require('gulp-util')
+  , spawn = require('child_process').spawn
+  , plumber = require('sculpt');
+
+// gulp runtime mods
+var gulp = require('./gulp-instance')(gulp);
 
 // expose `gulp`
 module.exports = gulp;
 
 // helpers
-var promptText = ' > gulp ';
-var stdin = process.stdin;
-var stdout = process.stdout;
-var stderr = process.stderr;
-var task = gulp.tasks;
+var stdin = process.stdin
+  , stdout = process.stdout
+  , stderr = process.stderr
+  , tasks = gulp.tasks
+  , promptText = require('./util').promptText;
 
+// set encoding
 stdin.setEncoding('utf8');
 
+// pipes!
 stdin.pipe(
-  runtime.filter(manager)
+  plumber.filter(manager)
 ).pipe(stdout);
 
+// runtime manager
 function manager(chunk){
 
   var argv = chunk.trim().replace(/[ ]+/g, ' ');
@@ -29,37 +35,13 @@ function manager(chunk){
 
   if(argv[0] === '-')
     childGulp(argv);
-  else if(task[argv[0]])
+  else if(tasks[argv[0]])
     chunk = JSON.stringify(task[argv[0]], null, '\t');
   else
     filter = false;
 
-  return filter ? chunk : '';
+  return filter ? '' : chunk;
 }
-
-function prompt(e, fn){
-
-  if(typeof e === 'string' && fn && fn.on)
-    fn.once(e, function(){
-      console.log('event : '+e);
-      stdout.write(promptText);
-    });
-  else {
-    console.log('else prompts', arguments)
-    stdout.write(promptText);
-  }
-}
-
-
-//
-// propmt from the global gulp
-gulp.on('task_start', function(){
-    prompt('task_stop', gulp);
-  }).on('task_err', function(){
-    prompt('task_err', gulp)
-  }).on('task_not_found', function(){
-    prompt('task_not_found', gulp);
-  })
 
 function childGulp(argv){
 
@@ -69,8 +51,7 @@ function childGulp(argv){
   if(argv[0] !== '--color' && argv[0] !== '--no-color')
     argv.unshift('--color');
 
-  stdout.write('\n')
-  gutil.log('child gulp started', argv);
+  stdout.write('\n Child gulp started '+ JSON.stringify(argv) + '\n\n');
   var child = spawn('gulp', argv);
 
   child.stdin.end();
@@ -82,16 +63,4 @@ function childGulp(argv){
     stdout.write(promptText);
     child.kill();
   })
-}
-
-// flush on exit
-// taken from https://gist.github.com/3427357
-function flushExit(exitCode) {
-  if (process.stdout._pendingWriteReqs || process.stderr._pendingWriteReqs) {
-    process.nextTick(function() {
-      exit(exitCode);
-    });
-  } else {
-    process.exit(exitCode);
-  }
 }
