@@ -10,23 +10,21 @@ var stdin = process.stdin
   , stdout = process.stdout
   , stderr = process.stderr;
 
+// utf8 encoding for stdin
+stdin.setEncoding('utf8');
+
 // expose `runtime`
 module.exports = function (gulp){
 
   var runtime = {};
 
-  // attach current instance
-  runtime.instance = gulp;
-  // make a manager
+  // attach current instance and provide manager
+  runtime.instance = lib.instance(gulp);
   runtime.manager = lib.manager(runtime);
 
-  // set encoding & pipe!
-  stdin.setEncoding('utf8');
   stdin.pipe(
     plumber.map(runtime.manager)
   ).pipe(stdout);
-
-  console.log(stdout)
 
   return runtime;
 }
