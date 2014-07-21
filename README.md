@@ -1,12 +1,15 @@
 ## gulp-runtime
+#### Simple gulp runtime manager.
 
-Lazy to open a new terminal tab?
+Lazy to open a new tab terminal?
 
 ```js
 npm install gulp-runtime --save-dev
 ```
 
-- Warning!: Work in progress :)
+ - Keep interacting with `gulp` without opening a new tab terminal!
+
+ - Warning!: Work in progress :)
 
 ## How
 
