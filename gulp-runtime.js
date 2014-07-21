@@ -1,27 +1,23 @@
 'use strict';
 
 // Module dependencies
-var gulp = require('gulp')
-  , spawn = require('child_process').spawn
-  , plumber = require('sculpt')
-  , lib = require('./lib');
+var plumber = require('sculpt')
+  , lib = require('./lib')
+  , utils = require('./utils')
+  , promptText = utils.promptText;
 
-// helpers
-var stdin = process.stdin
-  , stdout = process.stdout
-  , stderr = process.stderr;
-
-// utf8 encoding for stdin
-stdin.setEncoding('utf8');
-
-// expose `runtime`
-module.exports = function runtime(){
+// runtime hooks
+function runtime(gulp){
 
   var runtime = {};
 
-  // attach current instance and provide manager
-  runtime.instance = lib.instance(gulp);
+  // - attach current gulp instance
+  // - provide manager
+  runtime.instance = gulp;
   runtime.manager = lib.manager(runtime);
+  runtime.onEnd = gulp.doneCallback = function onEndTasks(){
+    stdout.write(promptText)
+  };
 
   stdin.pipe(
     plumber.map(runtime.manager)
@@ -30,3 +26,13 @@ module.exports = function runtime(){
   return runtime;
 }
 
+// Expose `runtime`
+module.exports = runtime;
+
+// helpers
+var stdin = process.stdin
+  , stdout = process.stdout
+  , stderr = process.stderr;
+
+// utf8 encoding for stdin
+stdin.setEncoding('utf8');

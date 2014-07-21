@@ -10,12 +10,12 @@ Warning!: Work in progress :)
 
 ## How
 
-Include the package in your `gulpfile` passing `gulp` itself
+Include the package in your `gulpfile`
 
 ```js
  // Your favourite gulpfile.js
  var gulp = require('gulp');
- var runtime = require('gulp-runtime')(gulp);
+ var runtime = require('gulp-runtime');
 ```
 
 ## onUse

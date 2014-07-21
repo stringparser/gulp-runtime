@@ -1,3 +1,3 @@
 
 // default prompt text
-exports.promptText = promptText = ' > gulp ';
+exports.promptText = ' > gulp ';
