@@ -1,7 +1,8 @@
 'use strict';
 
 // Module dependencies
-var spawn = require('child_process').spawn
+var gulp = require('gulp')
+  , spawn = require('child_process').spawn
   , plumber = require('sculpt')
   , lib = require('./lib');
 
@@ -14,7 +15,7 @@ var stdin = process.stdin
 stdin.setEncoding('utf8');
 
 // expose `runtime`
-module.exports = function (gulp){
+module.exports = function runtime(){
 
   var runtime = {};
 
