@@ -33,7 +33,7 @@ After you run the `gulpfile` a prompt ` > gulp ` attached to the current gulp in
 ```
 
 
-So to see the current task tree (see other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
+See the current task tree (see other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
 ```bash
  > gulp -T
 [13:07:51] Using gulpfile /home/javier/code/gulp/runtime/gulpfile.js
@@ -45,7 +45,7 @@ So to see the current task tree (see other [`gulp` cli commands](https://github.
 [13:07:51]   ├── css
 [13:07:51]   └── js
 ```
-To start a task
+Start a given task
 ```bash
  > gulp process
 [13:50:56] Starting 'css'...
@@ -57,7 +57,7 @@ To start a task
  > gulp
 ```
 
-Show a task function
+Show task function
 To start a task
 ``` bash
  > gulp show process
@@ -69,6 +69,7 @@ gulp.task('process',["css","js"],function () {});
 
  - [X] Use gulp cli at runtime.
  - [X] See task functions using `show` command.
+ - [ ] API documentation.
  - [ ] Include taks as separate files on a folder.
  - [ ] Provide `real life` examples.
  - [ ] Write tests.
