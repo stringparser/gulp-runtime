@@ -8,11 +8,11 @@ Warning!: Work in progress :)
 
 ## Why?
 
- Lazy to open a new terminal tab? I'm here to help.
+Lazy to open a new terminal tab? I'm here to help.
 
 ## How
 
-  Include the package in your `gulpfile` passing `gulp` itself
+Include the package in your `gulpfile` passing `gulp` itself
 
 ```js
  // Your favourite gulpfile.js
@@ -20,7 +20,9 @@ Warning!: Work in progress :)
  var runtime = require('gulp-runtime')(gulp);
 ```
 
-  After you run the `gulpfile` a prompt ` > gulp ` attached to the current gulp instance is displayed like so
+## onUse
+
+After you run the `gulpfile` a prompt ` > gulp ` attached to the current gulp instance is displayed like so
 
 ```bash
 [13:07:50] Using gulpfile /home/javier/code/gulp/runtime/gulpfile.js
@@ -29,7 +31,7 @@ Warning!: Work in progress :)
 [13:07:50] Finished 'default' after 800 μs
  > gulp
 ```
-## onUse
+
 
 So to see the current task tree
 ```bash
