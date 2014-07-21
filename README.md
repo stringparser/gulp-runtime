@@ -2,7 +2,9 @@
 
 gulp runtime manager.
 
-`npm install gulp-runtime --save-dev`
+```js
+npm install gulp-runtime --save-dev
+```
 
 Warning!: Work in progress :)
 
@@ -69,7 +71,7 @@ gulp.task('process',["css","js"],function () {});
 
  - [X] Use gulp cli at runtime.
  - [X] See task functions using `show` command.
- - [ ] Include taks as separate files on a folder.
+ - [ ] Include taks inside a `watched` folder.
  - [ ] API documentation.
  - [ ] Provide `real life` examples.
  - [ ] Write tests.
