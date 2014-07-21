@@ -9,8 +9,6 @@ gulp.task('css', logger)
 gulp.task('js', logger)
 gulp.task('process', ['css', 'js'], logger)
 
-
-
 //
 // test function
 var logger = function (args){

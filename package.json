@@ -16,7 +16,7 @@
   "dependencies": {
     "sculpt": "^0.1.2",
     "gulp": "^3.8.6",
-    "gulp-util": "^2.2.20",
+    "gulp-util": "^2.2.20"
   },
   "license": "MIT"
 }

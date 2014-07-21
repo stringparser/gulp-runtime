@@ -11,7 +11,7 @@ Warning!: Work in progress :)
 ## TODO
 
  - <s>Use gulp cli at runtime</s>.
- - <s>See task function</s>.
+ - <s>See task functions</s>.
  - Add/remove tasks at runtime.
  - Write tests.
 
