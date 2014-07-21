@@ -56,6 +56,14 @@ To start a task
  > gulp
 ```
 
+Show a task function
+To start a task
+``` bash
+ > gulp show process
+gulp.task('process',["css","js"],function () {});
+ > gulp
+```
+
 ## TODO
 
  - <s>Use gulp cli at runtime</s>.
