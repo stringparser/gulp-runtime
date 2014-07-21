@@ -1,5 +1,5 @@
 ## gulp-runtime
-#### Simple gulp runtime manager.
+#### gulp runtime manager
 
 Lazy to open a new tab terminal?
 
