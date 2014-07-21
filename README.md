@@ -32,7 +32,7 @@ Warning!: Work in progress :)
 ```
 
 So to see the current task tree
-```
+```bash
  > gulp -T
 [13:07:51] Using gulpfile /home/javier/code/gulp/runtime/gulpfile.js
 [13:07:51] Tasks for /home/javier/code/gulp/runtime/gulpfile.js
@@ -44,9 +44,8 @@ So to see the current task tree
 [13:07:51]   └── js
 ```
 To start a task
-```
+```bash
  > gulp process
-
 [13:50:56] Starting 'css'...
 [13:50:56] Finished 'css' after 14 μs
 [13:50:56] Starting 'js'...
@@ -66,10 +65,10 @@ gulp.task('process',["css","js"],function () {});
 
 ## TODO
 
- - <s>Use gulp cli at runtime</s>.
- - <s>See task functions</s>.
- - Provide a way to include taks as separate files on a folder.
- - Write tests.
+ [*] Use gulp cli at runtime.
+ [*] See task functions using `show` command.
+ [ ] Provide a way to include taks as separate files on a folder.
+ [ ] Write tests.
 
 ## License
 
