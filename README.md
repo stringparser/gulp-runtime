@@ -33,7 +33,7 @@ After you run the `gulpfile` a prompt ` > gulp ` attached to the current gulp in
 ```
 
 
-So to see the current task tree
+So to see the current task tree (see other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
 ```bash
  > gulp -T
 [13:07:51] Using gulpfile /home/javier/code/gulp/runtime/gulpfile.js
