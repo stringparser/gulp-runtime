@@ -2,16 +2,18 @@
 
 gulp runtime manager.
 
-<span class="color: red">Warning!: </span> Work in progress :). Not yet on npm or anything.
+Warning!: Work in progress :)
 
 ## Why?
 
- - Add/remove tasks at runtime.
- - Use `gulp` cli at runtime.
+ Laziness: don't want to open an extra terminal tab.
 
 ## TODO
 
- - Add hooks to manage tasks.
+ - <s>Use gulp cli at runtime</s>.
+ - <s>See task function</s>.
+ - Add/remove tasks at runtime.
+ - Write tests.
 
 ## License
 
