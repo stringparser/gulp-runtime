@@ -69,8 +69,8 @@ gulp.task('process',["css","js"],function () {});
 
  - [X] Use gulp cli at runtime.
  - [X] See task functions using `show` command.
- - [ ] API documentation.
  - [ ] Include taks as separate files on a folder.
+ - [ ] API documentation.
  - [ ] Provide `real life` examples.
  - [ ] Write tests.
 
