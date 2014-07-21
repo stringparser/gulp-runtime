@@ -69,7 +69,8 @@ gulp.task('process',["css","js"],function () {});
 
  - [X] Use gulp cli at runtime.
  - [X] See task functions using `show` command.
- - [ ] Provide a way to include taks as separate files on a folder.
+ - [ ] Include taks as separate files on a folder.
+ - [ ] Provide `real life` examples.
  - [ ] Write tests.
 
 ## License
