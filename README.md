@@ -1,16 +1,12 @@
 ## gulp-runtime
 
-gulp runtime manager.
+Lazy to open a new terminal tab? I'm here to help.
 
 ```js
 npm install gulp-runtime --save-dev
 ```
 
 Warning!: Work in progress :)
-
-## Why?
-
-Lazy to open a new terminal tab? I'm here to help.
 
 ## How
 
@@ -60,7 +56,6 @@ Start a given task
 ```
 
 Show task function
-To start a task
 ``` bash
  > gulp show process
 gulp.task('process',["css","js"],function () {});
