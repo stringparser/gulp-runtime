@@ -12,8 +12,7 @@ Warning!: Work in progress :)
 
 ## How
 
-  Include the package in your `gulpfile` and when you run `gulp`
-  you'll get a gulp cli prompt like ` > gulp ` attached to the current gulp instance like so.
+  Include the package in your `gulpfile` passing `gulp` itself
 
 ```js
  // Your favourite gulpfile.js
@@ -21,7 +20,7 @@ Warning!: Work in progress :)
  var runtime = require('gulp-runtime')(gulp);
 ```
 
-  After running the gulpfile you'll get
+  After you run the `gulpfile` a prompt ` > gulp ` attached to the current gulp instance is displayed like so
 
 ```bash
 [13:07:50] Using gulpfile /home/javier/code/gulp/runtime/gulpfile.js
@@ -30,6 +29,7 @@ Warning!: Work in progress :)
 [13:07:50] Finished 'default' after 800 μs
  > gulp
 ```
+## onUse
 
 So to see the current task tree
 ```bash
