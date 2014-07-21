@@ -13,10 +13,10 @@ Warning!: Work in progress :)
 ## How
 
   Include the package in your `gulpfile` and when you run `gulp`
-  you'll get a cli interface for the current gulp instance like so.
+  you'll get a gulp cli prompt like ` > gulp ` attached to the current gulp instance like so.
 
 ```js
- \* Your favourite gulpfile.js *\
+ // Your favourite gulpfile.js
  var gulp = require('gulp');
  var runtime = require('gulp-runtime')(gulp);
 ```
@@ -28,6 +28,11 @@ Warning!: Work in progress :)
 [13:07:50] Starting 'default'...
 [13:07:50]  > default
 [13:07:50] Finished 'default' after 800 μs
+ > gulp
+```
+
+So to see the current task tree
+```
  > gulp -T
 [13:07:51] Using gulpfile /home/javier/code/gulp/runtime/gulpfile.js
 [13:07:51] Tasks for /home/javier/code/gulp/runtime/gulpfile.js
@@ -38,13 +43,24 @@ Warning!: Work in progress :)
 [13:07:51]   ├── css
 [13:07:51]   └── js
 ```
+To start a task
+```
+ > gulp process
 
+[13:50:56] Starting 'css'...
+[13:50:56] Finished 'css' after 14 μs
+[13:50:56] Starting 'js'...
+[13:50:56] Finished 'js' after 11 μs
+[13:50:56] Starting 'process'...
+[13:50:56] Finished 'process' after 11 μs
+ > gulp
+```
 
 ## TODO
 
  - <s>Use gulp cli at runtime</s>.
  - <s>See task functions</s>.
- - Add/remove tasks at runtime.
+ - Provide a way to include taks as separate files on a folder.
  - Write tests.
 
 ## License
