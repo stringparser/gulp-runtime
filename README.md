@@ -1,12 +1,12 @@
 ## gulp-runtime
 
-Lazy to open a new terminal tab? I'm here to help.
+Lazy to open a new terminal tab?
 
 ```js
 npm install gulp-runtime --save-dev
 ```
 
-Warning!: Work in progress :)
+- Warning!: Work in progress :)
 
 ## How
 
