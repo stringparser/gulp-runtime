@@ -1,7 +1,6 @@
 ## gulp-runtime
-#### gulp runtime manager
 
-Lazy to open a new tab terminal?
+Lazy to open a new tab terminal to use the cli?
 
 ```js
 npm install gulp-runtime --save-dev
