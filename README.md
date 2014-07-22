@@ -13,7 +13,8 @@ npm install gulp-runtime --save-dev
  At runtime you are able to:
   - Use `gulp cli` commandline.
   - Run `gulp tasks`.
-  - Print a given `<task>`
+  - Print a given `<task>`.
+  - Register custom runtime commands (not necesary tasks to run).
 
  See the [todo](#todo) list for the features planned.
 
@@ -81,7 +82,7 @@ gulp.task('process',["css","js"],function () {});
  - [X] Support standard shell behavior (Ctrl+L, Ctrl+C, history, etc.).
     * [`readline`](http://nodejs.org/api/readline.html) to the rescue. It even provides completion options!
  - [ ] Include all taks inside a folder.
- - [ ] Register custom runtime commands.
+ - [X] Register custom runtime commands.
  - [ ] Command completion.
  - [ ] API documentation.
  - [ ] Write tests.
