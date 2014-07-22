@@ -1,15 +1,14 @@
 
 // module dependencies
-var gulp = require('gulp')
-  , ansiJS = require('ansi-highlight')
+var ansiJS = require('ansi-highlight')
   , PluginError = require('gulp-util').PluginError;
 
-module.exports = function printTask(task, cb){
+module.exports = function printTask(gulp, task, cb){
 
   var task = gulp.tasks[task]
-    , strDeps = task.dep.length !== 0 ? (' '+task.dep).toString() + ',' : ''
-    , strTaskFn = (' '+task.fn).toString()
-    , str = 'gulp.task(\'' + task.name + '\',';
+  , strDeps = task.dep.length !== 0 ? (' '+task.dep).toString() + ',' : ''
+  , strTaskFn = (' '+task.fn).toString()
+  , str = 'gulp.task(\'' + task.name + '\',';
 
   str += strDeps + strTaskFn + ');'
 
