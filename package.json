@@ -14,9 +14,12 @@
     "runtime"
   ],
   "dependencies": {
-    "sculpt": "^0.1.2",
+    "ansi-highlight": "^1.0.2",
+    "charm": "^0.2.0",
     "gulp": "^3.8.6",
-    "gulp-util": "^2.2.20"
+    "gulp-util": "^2.2.20",
+    "keypress": "^0.2.1",
+    "sculpt": "^0.1.2"
   },
   "license": "MIT"
 }

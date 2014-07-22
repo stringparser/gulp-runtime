@@ -1,7 +1,6 @@
 
 // module dependencies
-var spawn = require('child_process').spawn
-  , promptText = require('./prompt').promptText;
+var spawn = require('child_process').spawn;
 
 // helpers
 var stdout = process.stdout;
@@ -12,7 +11,6 @@ module.exports = function childGulp(argv, cb){
   if(argv[0] !== '--color' && argv[0] !== '--no-color')
     argv.unshift('--color');
 
-  /*stdout.write('\n Child gulp started '+ JSON.stringify(argv) + '\n\n');*/
   var child = spawn('gulp', argv);
 
   // don't keep parent process waiting
@@ -24,7 +22,6 @@ module.exports = function childGulp(argv, cb){
 
     child.kill();
 
-    stdout.write(promptText);
     // provide callback
     if( typeof cb === 'function')
       cb(child)
