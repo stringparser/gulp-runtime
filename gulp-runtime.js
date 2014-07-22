@@ -1,13 +1,14 @@
 'use strict';
 
 // Module dependencies
-var plumber = require('sculpt')
+var gulp = require('gulp');
+  , plumber = require('sculpt')
   , lib = require('./lib')
   , utils = require('./utils')
   , promptText = utils.promptText;
 
 // runtime hooks
-function runtime(gulp){
+function runtime(){
 
   var runtime = {};
 
