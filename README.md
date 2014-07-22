@@ -14,9 +14,9 @@ npm install gulp-runtime --save-dev
  See the [todo](#todo) list for the features planned.
 
  ```js
-  'Warning!'
+  'Warning!': Work in progress :)
  ```
- Work in progress :)
+
 
 ## How
 
