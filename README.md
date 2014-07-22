@@ -11,8 +11,12 @@ npm install gulp-runtime --save-dev
   - Run `gulp tasks`.
   - Print a given `<task>`
 
- See the [todo](#todo) list to see the features planned.
- `'Warning'`!: Work in progress :)
+ See the [todo](#todo) list for the features planned.
+
+ ```js
+  'Warning!'
+ ```
+ Work in progress :)
 
 ## How
 
