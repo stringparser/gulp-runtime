@@ -7,8 +7,8 @@ var gulp = require('gulp')
 module.exports = function printTask(task, cb){
 
   var task = gulp.tasks[task]
-    , strDeps = task.dep.length !== 0 ? JSON.stringify(task.dep) + ',' : ''
-    , strTaskFn = JSON.stringify(task.fn)
+    , strDeps = task.dep.length !== 0 ? (' '+task.dep).toString() + ',' : ''
+    , strTaskFn = (' '+task.fn).toString()
     , str = 'gulp.task(\'' + task.name + '\',';
 
   str += strDeps + strTaskFn + ');'
