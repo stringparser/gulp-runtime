@@ -1,6 +1,7 @@
 
 // module dependencies
-var spawn = require('child_process').spawn;
+var spawn = require('child_process').spawn
+  , PluginError = require('gulp-util').PluginError;
 
 // helpers
 var stdout = process.stdout;
@@ -20,10 +21,14 @@ module.exports = function childGulp(argv, cb){
     stdout.write(chunk);
   }).on('end', function(){
 
-    child.kill();
-
     // provide callback
     if( typeof cb === 'function')
-      cb(child)
+      cb(child);
+    else if(typeof cb !== 'undefined')
+      throw new PluginError({
+        plugin : 'gulp-runtime',
+        message : 'childGulp needs a callback\n Report this error'
+      })
+
   })
 }

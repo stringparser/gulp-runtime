@@ -7,7 +7,10 @@
     "type": "git",
     "url": "https://github.com/stringparser/gulp-runtime"
   },
-  "main": "./gulp-runtime.js",
+  "main": "./lib/gulp-runtime.js",
+  "scripts" : {
+    "test" : "gulp"
+  },
   "keywords": [
     "gulp",
     "gulpplugin",

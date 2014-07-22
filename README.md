@@ -1,5 +1,9 @@
 ## gulp-runtime
 
+ ```js
+  'Warning!': Work in progress :)
+ ```
+
  Want to use gulp whilst is running?
 
 ```js
@@ -12,10 +16,6 @@ npm install gulp-runtime --save-dev
   - Print a given `<task>`
 
  See the [todo](#todo) list for the features planned.
-
- ```js
-  'Warning!': Work in progress :)
- ```
 
 
 ## How
@@ -75,12 +75,14 @@ gulp.task('process',["css","js"],function () {});
 ## TODO
 
  - [X] Use gulp cli at runtime.
- - [X] Print task functions directly on the terminal.
- - [X] Highlight printed code directly on the terminal
-      * Thanks to the awesome [dominic tarr's `ansi-higlight`](https://github.com/dominictarr/ansi-highlight).
- - [X] Support standard shell behaviour (Ctrl+L, Ctrl+C, etc.).
+ - [X] Display task code directly on the terminal.
+ - [X] Highlight task code accordingly.
+    * Thanks to the awesome [dominic tarr's `ansi-higlight`](https://github.com/dominictarr/ansi-highlight).
+ - [X] Support standard shell behavior (Ctrl+L, Ctrl+C, history, etc.).
     * [`readline`](http://nodejs.org/api/readline.html) to the rescue. It even provides completion options!
- - [ ] Provide api to include all taks inside a folder.
+ - [ ] Include all taks inside a folder.
+ - [ ] Register custom runtime commands.
+ - [ ] Command completion.
  - [ ] API documentation.
  - [ ] Write tests.
  - [ ] Provide `real life` examples.
