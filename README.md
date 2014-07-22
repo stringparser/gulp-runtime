@@ -6,14 +6,13 @@
 npm install gulp-runtime --save-dev
 ```
 
- Warning!: Work in progress :)
-
  At runtime you are able to:
   - Use `gulp cli` commandline.
   - Run `gulp tasks`.
   - Print a given `<task>`
 
  See the [todo](#todo) list to see the features planned.
+ `'Warning'`!: Work in progress :)
 
 ## How
 
