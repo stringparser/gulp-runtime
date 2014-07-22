@@ -66,8 +66,9 @@ gulp.task('process',["css","js"],function () {});
 
  - [X] Use gulp cli at runtime.
  - [X] Print task functions directly on the terminal.
- - [X] Highlight printed code (awesome [dominic tarr's `ansi-higlight`](https://github.com/dominictarr/ansi-highlight)).
- - [ ] Support basic terminal commands such as `clear`.
+ - [X] Highlight printed code directly on the terminal (awesome [dominic tarr's `ansi-higlight`](https://github.com/dominictarr/ansi-highlight)).
+ - [X] Support standard shell behaviour (Ctrl+L, Ctrl+C, etc.).
+    * [`readline`](http://nodejs.org/api/readline.html) to the rescue. It even provides completion options!
  - [ ] Provide api to include all taks inside a folder.
  - [ ] API documentation.
  - [ ] Provide `real life` examples.
