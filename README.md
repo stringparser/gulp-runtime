@@ -1,7 +1,7 @@
 ## gulp-runtime
 
  ```js
-  'Warning!': Work in progress :)
+  'Warning!': Work in progress :). At the moment is usable.
  ```
 
  Want to use gulp whilst is running?
