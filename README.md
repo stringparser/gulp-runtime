@@ -71,8 +71,8 @@ gulp.task('process',["css","js"],function () {});
     * [`readline`](http://nodejs.org/api/readline.html) to the rescue. It even provides completion options!
  - [ ] Provide api to include all taks inside a folder.
  - [ ] API documentation.
- - [ ] Provide `real life` examples.
  - [ ] Write tests.
+ - [ ] Provide `real life` examples.
 
 ## License
 

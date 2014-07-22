@@ -3,7 +3,7 @@
 var ansiJS = require('ansi-highlight')
   , cliText = require('../lib/runtime').cliText;
 
-module.exports = function printTask(task, argv){
+exports = module.exports = function printTask(task, argv){
 
   var dep = task.dep
     , strFn = JSON.stringify(dep)
