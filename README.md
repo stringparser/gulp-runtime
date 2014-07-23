@@ -1,6 +1,7 @@
+
 [![NPM](https://nodei.co/npm/gulp-runtime.png?downloads=true)](https://nodei.co/npm/gulp-runtime/)
 
-## gulp-runtime
+## gulp-runtime [![GitHub version](https://badge.fury.io/gh/stringparser%2Fgulp-runtime.svg)](http://badge.fury.io/gh/stringparser%2Fgulp-runtime)
 
  Want to use gulp whilst is running?
 
