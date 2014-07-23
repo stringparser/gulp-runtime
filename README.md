@@ -17,7 +17,7 @@ I apologize beforehand for the missing documentation and possible bugs. Soon.
 <hr>
 <br />
 
-## How
+## onUse
 
 Pass a `gulp` instance to the plugin.
 
@@ -26,8 +26,6 @@ Pass a `gulp` instance to the plugin.
  var gulp = require('gulp');
  var runtime = require('gulp-runtime')(gulp);
 ```
-
-## onUse
 
 After all tasks are done, a prompt is displayed
 ```bash
@@ -77,7 +75,7 @@ gulp.task('process',["css","js"],function () {});
     * Thanks to the awesome [dominic tarr's `ansi-higlight`](https://github.com/dominictarr/ansi-highlight).
  - [X] Support standard shell behavior (Ctrl+L, Ctrl+C, history, etc.).
     * [`readline`](http://nodejs.org/api/readline.html) to the rescue. It even provides completion options!
- - [ ] Include all taks inside a folder.
+ - [X] Include all taks inside a folder.
  - [X] Register custom runtime commands.
  - [ ] Command completion.
  - [ ] API documentation.
