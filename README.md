@@ -12,7 +12,7 @@
 At the moment you are able to: use gulp at runtime, print task sourcecode highlighted directly on the terminal and define custom commands.
 
 See the [todo](#todo) for the complete list of features planned.
-I apologize beforehand for the missing documentation and possible bugs. Soon.
+I apologize beforehand for the missing documentation and bugs.
 <hr>
 
 ## onUse
