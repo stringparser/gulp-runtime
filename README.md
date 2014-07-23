@@ -17,12 +17,12 @@ npm install gulp-runtime --save-dev
 
 ## How
 
-Include the package in your `gulpfile`
+Include the package in your `gulpfile` and <b>pass the gulp itself</b>.
 
 ```js
  // Your favourite gulpfile.js
  var gulp = require('gulp');
- var runtime = require('gulp-runtime');
+ var runtime = require('gulp-runtime')(gulp); // !important
 ```
 
 ## onUse
