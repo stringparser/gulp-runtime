@@ -9,9 +9,9 @@ module.exports = function printTask(task, cb){
       ' '+JSON.stringify(task.dep) + ','
     ) : ''
   , strTaskFn = (' '+task.fn).toString()
-  , str = 'gulp.task(\'' + task.name + '\',';
+  , str = '\ngulp.task(\'' + task.name + '\',';
 
-  str += strDeps + strTaskFn + ');'
+  str += strDeps + strTaskFn + ');\n'
 
   if(typeof cb === 'function')
     cb(ansiJS(str));
