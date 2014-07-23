@@ -19,7 +19,7 @@ I apologize beforehand for the missing documentation and possible bugs. Soon.
 
 ## How
 
-Pass the `gulp` instance to the plugin.
+Pass a `gulp` instance to the plugin.
 
 ```js
  // Your favourite gulpfile.js
