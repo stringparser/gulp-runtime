@@ -5,7 +5,7 @@
  npm install gulp-runtime --save-dev
  ```
 
-  #### Implementation status.
+#### Implementation status.
     At runtime you are able to:
       - Use `gulp cli`.
       - Run `gulp tasks`.
