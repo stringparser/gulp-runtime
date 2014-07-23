@@ -29,7 +29,6 @@ Include the package in your `gulpfile` and <b>pass `gulp` itself</b>.
 
 After all tasks are done a prompt (attached to the current `gulp` instance) is displayed
 ```bash
-[13:07:50] Using gulpfile /home/javier/code/gulp/runtime/gulpfile.js
 [13:07:50] Starting 'default'...
 [13:07:50]  > default
 [13:07:50] Finished 'default' after 800 μs
@@ -40,8 +39,7 @@ After all tasks are done a prompt (attached to the current `gulp` instance) is d
 See the current task tree (or other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
 ```bash
  > gulp -T
-[13:07:51] Using gulpfile /home/javier/code/gulp/runtime/gulpfile.js
-[13:07:51] Tasks for /home/javier/code/gulp/runtime/gulpfile.js
+[13:07:51] Tasks for ~/code/gulp/runtime/gulpfile.js
 [13:07:51] ├── default
 [13:07:51] ├── css
 [13:07:51] ├── js
