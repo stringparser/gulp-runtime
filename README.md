@@ -13,6 +13,10 @@ At the moment you are able to: use gulp at runtime, print task sourcecode highli
 
 See the [todo](#todo) for the complete list of features planned.
 I apologize beforehand for the missing documentation and bugs.
+
+Example with the [greypant's gulp-starter](https://github.com/greypants/gulp-starter) repo
+
+![greypants/gulp-starter repo](./img/syntax-higlight.png)
 <hr>
 
 ## onUse
@@ -32,7 +36,6 @@ After all tasks are done, a prompt is displayed
 [13:07:50] Finished 'default' after 800 μs
  > gulp
 ```
-
 See the current task tree (or other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
 ```bash
  > gulp -T
