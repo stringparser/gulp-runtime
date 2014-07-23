@@ -27,8 +27,7 @@ Include the package in your `gulpfile` and <b>pass `gulp` itself</b>.
 
 ## onUse
 
-After you run the `gulpfile` a prompt ` > gulp ` attached to the current gulp instance is displayed like so
-
+After all tasks are done a prompt (attached to the current `gulp` instance) is displayed
 ```bash
 [13:07:50] Using gulpfile /home/javier/code/gulp/runtime/gulpfile.js
 [13:07:50] Starting 'default'...
