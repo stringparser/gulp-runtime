@@ -1,13 +1,8 @@
-
-[![NPM](https://nodei.co/npm/gulp-runtime.png?downloads=true)](https://nodei.co/npm/gulp-runtime/)
-
 ## gulp-runtime [![GitHub version](https://badge.fury.io/gh/stringparser%2Fgulp-runtime.svg)](http://badge.fury.io/gh/stringparser%2Fgulp-runtime)
 
  Want to use gulp whilst is running?
 
-```js
-npm install gulp-runtime --save-dev
-```
+[![NPM](https://nodei.co/npm/gulp-runtime.png?downloads=true)](https://nodei.co/npm/gulp-runtime/)
 
  At runtime you are able to:
   - Use `gulp cli` commandline.
