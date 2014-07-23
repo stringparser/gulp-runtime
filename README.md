@@ -12,29 +12,28 @@ npm install gulp-runtime --save-dev
   - Print a given `<task>`.
   - Use custom runtime commands.
 
- See the [todo](#todo) list for the features planned.
- I apologize beforehand for the missing documentation. Soon.
+See the [todo](#todo) list for the features planned.
+I apologize beforehand for the missing documentation. Soon.
 
 ## How
 
-Include the package in your `gulpfile` and <b>pass `gulp` itself</b>.
+Pass the `gulp` instance to the plugin.
 
 ```js
  // Your favourite gulpfile.js
  var gulp = require('gulp');
- var runtime = require('gulp-runtime')(gulp); // !important
+ var runtime = require('gulp-runtime')(gulp);
 ```
 
 ## onUse
 
-After all tasks are done a prompt (attached to the current `gulp` instance) is displayed
+After all tasks are done, a prompt is displayed
 ```bash
 [13:07:50] Starting 'default'...
 [13:07:50]  > default
 [13:07:50] Finished 'default' after 800 μs
  > gulp
 ```
-
 
 See the current task tree (or other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
 ```bash
