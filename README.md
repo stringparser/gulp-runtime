@@ -6,11 +6,8 @@
  ```
 
 #### Implementation status.
-  At runtime you are able to:
-    - Use `gulp cli`.
-    - Run `gulp tasks`.
-    - Print `<task>`'s highlighted code on the terminal.
-    - Use custom runtime commands.
+
+At the moment you are able to: use `gulp cli`, run `gulp tasks`, print `<task>`'s highlighted code on the terminal and use custom commands.
 
 See the [todo](#todo) list for the features planned.
 I apologize beforehand for the missing documentation. Soon.
