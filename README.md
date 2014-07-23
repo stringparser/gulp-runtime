@@ -16,7 +16,7 @@ I apologize beforehand for the missing documentation and bugs.
 
 Example with the [greypant's gulp-starter](https://github.com/greypants/gulp-starter) repo
 
-![greypants/gulp-starter repo](./img/syntax-higlight.png)
+![greypants/gulp-starter repo](https://raw.githubusercontent.com/stringparser/gulp-runtime/master/img/syntax-higlight.png)
 <hr>
 
 ## onUse
