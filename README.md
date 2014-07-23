@@ -1,14 +1,16 @@
 ## gulp-runtime [![GitHub version](https://badge.fury.io/gh/stringparser%2Fgulp-runtime.svg)](http://badge.fury.io/gh/stringparser%2Fgulp-runtime)
 
  Want to use gulp whilst is running?
+ ```js
+ npm install gulp-runtime --save-dev
+ ```
 
-[![NPM](https://nodei.co/npm/gulp-runtime.png?downloads=true)](https://nodei.co/npm/gulp-runtime/)
-
- At runtime you are able to:
-  - Use `gulp cli` commandline.
-  - Run `gulp tasks`.
-  - Print a given `<task>`.
-  - Use custom runtime commands.
+  #### Implementation status.
+    At runtime you are able to:
+      - Use `gulp cli`.
+      - Run `gulp tasks`.
+      - Print `<task>`'s highlighted code on the terminal.
+      - Use custom runtime commands.
 
 See the [todo](#todo) list for the features planned.
 I apologize beforehand for the missing documentation. Soon.
@@ -64,6 +66,8 @@ gulp.task('process',["css","js"],function () {});
 ```
 
 ## TODO
+
+[![NPM](https://nodei.co/npm/gulp-runtime.png?downloads=true)](https://nodei.co/npm/gulp-runtime/)
 
  - [X] Use gulp cli at runtime.
  - [X] Display task code directly on the terminal.
