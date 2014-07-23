@@ -3,10 +3,11 @@
 var ansiJS = require('ansi-highlight')
   , PluginError = require('gulp-util').PluginError;
 
-module.exports = function printTask(gulp, task, cb){
+module.exports = function printTask(task, cb){
 
-  var task = gulp.tasks[task]
-  , strDeps = task.dep.length !== 0 ? (' '+task.dep).toString() + ',' : ''
+  var strDeps = task.dep.length !== 0 ? (
+      ' '+JSON.stringify(task.dep) + ','
+    ) : ''
   , strTaskFn = (' '+task.fn).toString()
   , str = 'gulp.task(\'' + task.name + '\',';
 

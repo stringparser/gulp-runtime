@@ -10,10 +10,10 @@ npm install gulp-runtime --save-dev
   - Use `gulp cli` commandline.
   - Run `gulp tasks`.
   - Print a given `<task>`.
-  - Register custom runtime commands (not necesary tasks to run).
+  - Use custom runtime commands.
 
  See the [todo](#todo) list for the features planned.
-
+ I apologize beforehand for the missing documentation. Soon.
 
 ## How
 
