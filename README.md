@@ -1,6 +1,6 @@
 ## gulp-runtime
 [![Travis status](https://travis-ci.org/stringparser/gulp-runtime.svg?branch=master)](https://travis-ci.org/stringparser/gulp-runtime/builds)
-[![GitHub version](https://badge.fury.io/gh/stringparser%2Fgulp-runtime.svg)](http://badge.fury.io/gh/stringparser%2Fgulp-runtime)
+[![NPM version](https://badge.fury.io/js/gulp-runtime.svg)](http://badge.fury.io/js/gulp-runtime)
 
  Want to use gulp whilst is running?
  ```js
