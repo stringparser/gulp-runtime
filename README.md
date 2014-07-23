@@ -10,7 +10,7 @@
 <hr>
 <b>Implementation status: young and crazy</b>
 
-At the moment you are able to: use gulp from the terminal, print task sourcecode highlighted directly on the terminal and define custome commands.
+At the moment you are able to: use gulp at runtime, print task sourcecode highlighted directly on the terminal and define custom commands.
 
 See the [todo](#todo) for the complete list of features planned.
 I apologize beforehand for the missing documentation and possible bugs. Soon.
