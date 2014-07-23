@@ -6,7 +6,6 @@
  ```js
  npm install gulp-runtime --save-dev
  ```
-<br />
 <hr>
 <b>Implementation status: young and crazy</b>
 
@@ -15,7 +14,6 @@ At the moment you are able to: use gulp at runtime, print task sourcecode highli
 See the [todo](#todo) for the complete list of features planned.
 I apologize beforehand for the missing documentation and possible bugs. Soon.
 <hr>
-<br />
 
 ## onUse
 
