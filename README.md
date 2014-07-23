@@ -7,14 +7,15 @@
  npm install gulp-runtime --save-dev
  ```
 <br />
-<br />
-
+<hr>
 <b>Implementation status: young and crazy</b>
 
-At the moment you are able to: use `gulp cli`, run `gulp tasks`, print `<task>`'s highlighted code on the terminal and use custom commands.
+At the moment you are able to: use gulp from the terminal, print task sourcecode highlighted directly on the terminal and define custome commands.
 
 See the [todo](#todo) for the complete list of features planned.
 I apologize beforehand for the missing documentation and possible bugs. Soon.
+<hr>
+<br />
 
 ## How
 
