@@ -1,15 +1,15 @@
 {
   "name": "gulp-runtime",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "gulp runtime manager",
   "author": "Javier Carrillo <stringparser@gmail.com> (http://www.stringparser.com)",
   "repository": {
     "type": "git",
     "url": "https://github.com/stringparser/gulp-runtime"
   },
-  "main": "./lib/gulp-runtime",
-  "scripts" : {
-    "start" : "gulp"
+  "main": "./lib/runtime",
+  "scripts": {
+    "start": "gulp"
   },
   "keywords": [
     "gulp",
@@ -19,7 +19,9 @@
   "dependencies": {
     "ansi-highlight": "^1.0.2",
     "gulp": "^3.8.6",
-    "gulp-util": "^2.2.20"
+    "gulp-util": "^2.2.20",
+    "minimist": "^0.2.0",
+    "utils-merge": "^1.0.0"
   },
   "license": "MIT"
 }

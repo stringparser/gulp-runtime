@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var runtime = require('./lib/gulp-runtime');
+var runtime = require('../../../runtime');
 
 gulp.task('default', function(){
   gutil.log(' > default')
