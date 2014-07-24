@@ -15,12 +15,6 @@ At the moment you are able to: use gulp at runtime, print task sourcecode highli
 
 See the [todo](#todo) for the complete list of features planned.
 I apologize beforehand for the missing documentation and bugs.
-
-<!--
-Example with the [greypant's gulp-starter](https://github.com/greypants/gulp-starter) repo
-
-![greypants/gulp-starter repo](https://raw.githubusercontent.com/stringparser/gulp-runtime/master/img/syntax-higlight.png)
--->
 <hr>
 
 ## onUse
