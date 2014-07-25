@@ -66,9 +66,9 @@ gulp.task('process',["css","js"],function () {});
  > gulp
 ```
 
-## TODO
-
 [![NPM](https://nodei.co/npm/gulp-runtime.png?downloads=true)](https://nodei.co/npm/gulp-runtime/)
+
+## TODO
 
  - [X] Use gulp cli at runtime.
  - [X] Display task code directly on the terminal.
