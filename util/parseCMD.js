@@ -16,6 +16,7 @@ module.exports = function parseCMD(cmd){
       args._ = args._.length === 0 ? null : args._;
 
   var ret = {
+    raw : argv,
     argv : [],
     _ : args._,
     param : {},

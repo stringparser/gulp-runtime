@@ -24,7 +24,8 @@ var runtime2 = Runtime({
 
 runtime.setPrompt(' test > gulp ');
 runtime.prompt();
-runtime.set('show', function(){
+runtime.set('show', function(cmd, args, next){
   console.log(arguments)
+  next();
 })
 
