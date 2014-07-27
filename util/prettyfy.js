@@ -4,15 +4,35 @@
  */
 var ansiJS = require('ansi-highlight');
 
-module.exports = function prettyfy(obj){
+var prettyfy = exports = module.exports = {}
 
-  return ansiJS(
-    JSON.stringify(obj, function(key, value){
-      if(typeof value === 'function'){
-        return  ''+value;
-      }
+prettyfy.str = function(obj){
+
+  return JSON.stringify( obj ,
+    function (key, value){
+
+      if(typeof value === 'function')
+        return  value.toString();
+      else if(typeof value === 'string')
+        return '\''+value+'\'';
       else
         return value;
-    }, '  ').split(/\\n/g).join('\n')
-  );
+
+    }, '   ').replace(/\"/g, '')
+             .replace(/\\\\n/g,'<n>')
+             .replace(/\\n/g, '\n')
+             .replace(/\<n\>/g, '\\n')
 }
+
+prettyfy.log = function(obj){
+  var str = prettyfy.str(obj);
+  console.log(str);
+}
+
+prettyfy.logColor = function(obj){
+  var str = prettyfy.str(obj);
+      str = ansiJS(str);
+
+  console.log(str);
+}
+

@@ -13,12 +13,13 @@ module.exports = function parseCMD(cmd){
   // careful with that axe eugene
   var argv = cmd.replace(/[ ]{2,}/g,' ').split(' ');
   var args = minimist(argv);
-      args._ = args._.length === 0 ? args._ : null;
+      args._ = args._.length === 0 ? null : args._;
 
   var ret = {
     argv : [],
     _ : args._,
-    param : {}
+    param : {},
+    __proto__ : {}
   };
 
   argv.forEach(function(arg, index){
@@ -45,7 +46,7 @@ module.exports = function parseCMD(cmd){
 
   })
 
-  ret.get = function(elem){
+  ret.__proto__.get = function(elem){
 
     return this.argv[this.argv.indexOf(elem)];
   }
