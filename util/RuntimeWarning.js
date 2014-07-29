@@ -5,12 +5,12 @@
 
 var color = require('gulp-util').colors;
 
-module.exports = function RuntimeWarning(cb){
+module.exports = function RuntimeWarning(options){
 
-  var warn = cb();
+  var warn = options.message || options();
 
   if(warn){
-    var message = 'Plugin ' + color.cyan('gulp-runtime') + '\n' +
+    var message = 'Plugin: ' + color.cyan('gulp-runtime') + '\n' +
                   '[' + color.yellow('warning') + '] -> '
 
     console.log(

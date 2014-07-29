@@ -1,5 +1,6 @@
 
 var gulp = require('gulp');
+var prettyfy = require('../util/prettyfy');
 
 gulp.task('js', function(){
   console.log('js!')
@@ -9,23 +10,8 @@ gulp.task('css', function(){
 })
 gulp.task('process', ['css', 'js']);
 
-var Runtime = require('../lib/runtime');
-var runtime = Runtime({
-  input : process.stdin,
-  output : process.stdout,
-  scope : gulp,
-  context : gulp.tasks
-})
+var runtime = require('../lib/gulp-runtime');
 
-var runtime2 = Runtime({
-  input : process.stdin,
-  output : process.stdout
-})
-
-runtime.setPrompt(' test > gulp ');
-runtime.prompt();
-runtime.set('show', function(cmd, args, next){
+runtime.set('show', function(cmd, args){
   console.log(arguments)
-  next();
 })
-
