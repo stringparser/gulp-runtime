@@ -29,7 +29,7 @@ prettyfy.log = function(obj){
   console.log(str);
 }
 
-prettyfy.logColor = function(obj){
+prettyfy.color = function(obj){
   var str = prettyfy.str(obj);
       str = ansiJS(str);
 
