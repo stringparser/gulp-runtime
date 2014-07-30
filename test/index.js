@@ -1,6 +1,6 @@
 
 var gulp = require('gulp');
-var prettyfy = require('../util/prettyfy');
+var prettyfy = require('gulp-runtime');
 
 gulp.task('js', function(){
   console.log('js!')

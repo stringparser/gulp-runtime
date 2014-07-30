@@ -10,7 +10,7 @@
   "main": "./lib/runtime",
   "scripts": {
     "start": "gulp",
-    "completion" : "install-completion bash myBashCompletion && install-completion zsh myZshCompletion"
+    "completion": "install-completion bash myBashCompletion && install-completion zsh myZshCompletion"
   },
   "keywords": [
     "gulp",
