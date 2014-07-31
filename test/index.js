@@ -1,17 +1,24 @@
 
-var gulp = require('gulp');
-var prettyfy = require('gulp-runtime');
+var prettyfy = require('../util/prettyfy');
+var runtime = require('../lib/runtime')('gulp');
 
-gulp.task('js', function(){
-  console.log('js!')
+
+runtime.onStartup(function(){
+/*  console.log('\n Runtime handlers \n')
+  console.log(this._Handle)
+  console.log('\n  Startup runtime: \n')
+  console.log(this)*/
 })
-gulp.task('css', function(){
-  console.log('css!')
+
+runtime.onStartup(function(){
+  console.log('\n Command proposal', this.command('hello'))
+  console.log('')
+  this.prompt();
 })
-gulp.task('process', ['css', 'js']);
 
-var runtime = require('../lib/gulp-runtime');
-
-runtime.set('show', function(cmd, args){
+runtime.set('this', function(){
+  console.log(this);
   console.log(arguments)
+}).command('that', function(){
+  console.log('that')
 })

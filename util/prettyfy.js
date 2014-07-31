@@ -35,4 +35,3 @@ prettyfy.color = function(obj){
 
   console.log(str);
 }
-
