@@ -64,8 +64,6 @@ gulp.task('process',["css","js"],function () {});
  > gulp
 ```
 
-[![NPM](https://nodei.co/npm/gulp-runtime.png?downloads=true)](https://nodei.co/npm/gulp-runtime/)
-
 ## TODO
 
  - [X] Use gulp cli at runtime.
@@ -80,6 +78,9 @@ gulp.task('process',["css","js"],function () {});
  - [ ] API documentation.
  - [ ] Write tests.
  - [ ] Provide `real life` examples.
+
+<hr>
+[![NPM](https://nodei.co/npm/gulp-runtime.png?downloads=true)](https://nodei.co/npm/gulp-runtime/)
 
 ## Example
 
