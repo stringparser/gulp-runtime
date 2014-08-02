@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# taken from
+# Taken from TJ's commander tests
 # https://github.com/visionmedia/commander.js/blob/master/test/run
 
 export NODE_ENV=test
