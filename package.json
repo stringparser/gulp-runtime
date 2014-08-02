@@ -24,5 +24,8 @@
     "minimist": "^0.2.0",
     "utils-merge": "^1.0.0"
   },
+  "devDependencies": {
+    "should": "^4.0.4"
+  },
   "license": "MIT"
 }
