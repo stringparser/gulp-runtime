@@ -18,7 +18,7 @@
     "runtime"
   ],
   "dependencies": {
-    "ansi-highlight": "^1.0.2",
+    "ansi-highlight": "~1.0.2",
     "gulp": "^3.8.6",
     "gulp-util": "^2.2.20",
     "minimist": "^0.2.0",
