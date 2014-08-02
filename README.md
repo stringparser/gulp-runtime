@@ -6,10 +6,10 @@
 
 <b>Implementation status: young and crazy</b>
 
-See the [todo](#todo) for the complete list of features planned.
+See the [todo](#todo) for a list of features planned.
+
 I apologize beforehand for the missing documentation and bugs.
 
-See [screenshot](#example) below for a 'live' example.
 <hr>
 
  Want to use gulp whilst is running?
