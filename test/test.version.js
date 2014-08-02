@@ -32,6 +32,7 @@ var version = command.version;
     .and.be.a.String;
 
 //
-// ## readline interface will wait otherwise
+// if we arrived where should.be.ok :)
+// stdin will wait otherwise
 //
 process.exit(0)
