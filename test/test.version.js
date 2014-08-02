@@ -1,10 +1,13 @@
 /*
  * Module dependencies
  */
+var path = require('path');
+var dir = require('../lib/util').testPrompt(__dirname)
 var should = require('should');
 var runtime = require('../lib/runtime').createRuntime('gulp');
 
 runtime.onStartup(function(){
+  this.setPrompt(dir)
   this.prompt();
 })
 
@@ -14,6 +17,8 @@ runtime.set('first', function First(){
 
 var command = runtime.get('first');
 var version = command.version;
+
+function makeTests(cb){
 
   command
     .should.have.property('_name', 'first');
@@ -30,8 +35,10 @@ var version = command.version;
     .should.equal('first command')
     .and.be.a.String;
 
-//
-// if we arrived where should.be.ok :)
-// stdin will wait otherwise
-//
-process.stdin.end();
+    cb();
+}
+
+makeTests(function(){
+  process.stdout.write('\n\n');
+  process.stdin.end();
+})
