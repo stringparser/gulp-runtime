@@ -34,4 +34,4 @@ var version = command.version;
 // if we arrived where should.be.ok :)
 // stdin will wait otherwise
 //
-process.exit(0)
+process.stdin.end();
