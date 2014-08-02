@@ -1,5 +1,6 @@
 
-var prettyfy = require('../util/prettyfy');
+var util = require('../lib/util');
+var prettyfy = util.prettyfy
 var runtime = require('../lib/runtime').createRuntime('gulp');
 
 console.log('Runtime');
