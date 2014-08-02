@@ -1,5 +1,6 @@
 var gulp = require('gulp');
-var runtime = require('./lib/gulp-runtime');
+
+process.argv.push('-T')
 
 gulp.task('default', function(){
   console.log('hey!');

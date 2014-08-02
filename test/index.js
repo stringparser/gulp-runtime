@@ -1,6 +1,10 @@
 
 var prettyfy = require('../util/prettyfy');
-var runtime = require('../lib/runtime')('gulp');
+var runtime = require('../lib/runtime').createRuntime('gulp');
+
+console.log('Runtime');
+console.log(runtime);
+console.log()
 
 runtime.onStartup(function(){
   this.prompt();
@@ -8,8 +12,8 @@ runtime.onStartup(function(){
 
 runtime.set('first', function First(){
   console.log('first!')
-}).set('second', function Second(){
-  console.log('hello')
-})
+}).version('0.0.1')
 
-
+console.log('  get:',
+  runtime.get(),
+'\n')
