@@ -1,7 +1,6 @@
 /*
  * Module dependencies
  */
-var util = require('../lib/util').prettyfy;
 var should = require('should');
 var runtime = require('../lib/runtime').createRuntime('gulp');
 
