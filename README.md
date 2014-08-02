@@ -4,12 +4,6 @@
 [![NPM version](https://badge.fury.io/js/gulp-runtime.svg)](http://badge.fury.io/js/gulp-runtime)
 [![LICENSE](http://img.shields.io/packagist/l/doctrine/orm.svg)](http://opensource.org/licenses/MIT)
 
- Want to use gulp whilst is running?
- ```js
- npm install gulp-runtime --save-dev
- ```
-
-<hr>
 <b>Implementation status: young and crazy</b>
 
 See the [todo](#todo) for the complete list of features planned.
@@ -17,6 +11,11 @@ I apologize beforehand for the missing documentation and bugs.
 
 See [screenshot](#example) below for a 'live' example.
 <hr>
+
+ Want to use gulp whilst is running?
+ ```js
+ npm install gulp-runtime --save-dev
+ ```
 
 ## onUse
 
