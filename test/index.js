@@ -19,7 +19,4 @@ runtime.set('-T', function(){
 runtime.set('--require', function(){
 
 })
-
-console.log(' `runtime.get()`:\n',
-  runtime.get()
-)
+process.stdin.end();

@@ -4,7 +4,7 @@
 var path = require('path');
 var dir = require('../lib/util').testPrompt(__dirname)
 var should = require('should');
-var runtime = require('../lib/runtime').createRuntime('gulp');
+var runtime = require('../lib/runtime').createInterface('gulp');
 
 runtime.onStartup(function(){
   this.setPrompt(dir)
@@ -39,6 +39,5 @@ function makeTests(cb){
 }
 
 makeTests(function(){
-  process.stdout.write('\n\n');
   process.stdin.end();
 })
