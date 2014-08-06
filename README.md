@@ -78,6 +78,13 @@ Start dancing!
 
 ```
 
+Oh, I forgot, command completion is provided
+
+![greypants/gulp-starter repo](https://raw.githubusercontent.com/stringparser/gulp-runtime/master/img/completion.png)
+
+Screenshot using the [greypant's gulp-starter](https://github.com/greypants/gulp-starter) repo
+
+
 ## TODO
 
  - [X] Use gulp cli at runtime.
@@ -88,7 +95,7 @@ Start dancing!
     * [`readline`](http://nodejs.org/api/readline.html) to the rescue. It even provides completion options!
  - [ ] Include all taks inside a folder.
  - [X] Register custom runtime commands.
- - [ ] Command completion.
+ - [X] Command completion.
  - [ ] API documentation.
  - [ ] Write tests.
  - [ ] Provide `real life` examples.
