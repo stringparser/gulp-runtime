@@ -2,12 +2,10 @@
  * Module dependencies
  */
 var path = require('path');
-var dir = require('../lib/util').testPrompt(__dirname)
 var should = require('should');
-var runtime = require('../lib/runtime').createInterface('gulp');
+var runtime = require('../lib/runtime').Runtime('gulp');
 
 runtime.onStartup(function(){
-  this.setPrompt(dir)
   this.prompt();
 })
 
@@ -18,12 +16,14 @@ runtime.set('first', function First(){
 var command = runtime.get('first');
 var version = command.version;
 
+console.log(runtime.get())
+
 function makeTests(cb){
 
   command
     .should.have.property('_name', 'first');
 
-  (command.fn()[0])
+  (command.handle()[0])
     .should.be.exactly('first!!')
     .and.be.a.String;
 

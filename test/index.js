@@ -2,8 +2,8 @@
 var env = process.env;
     env.NODE_ENV = env.NODE_ENV || 'dev-test';
 
-var runtime = require('../lib/runtime').createInterface('terminal');
-var terminal = require('../lib/runtime').createInterface('terminal');
+var runtime = require('../lib/runtime').Runtime('terminal');
+var terminal = require('../lib/runtime').Runtime('terminal2');
 
 runtime.set('first', function(){
   return 'first!'
@@ -21,5 +21,4 @@ runtime.set('--require', function(){
 
 })
 
-runtime.on('line', function(){
-})
+process.stdin.end();
