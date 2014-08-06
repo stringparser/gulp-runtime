@@ -4,37 +4,39 @@
 [![NPM version](https://badge.fury.io/js/gulp-runtime.svg)](http://badge.fury.io/js/gulp-runtime)
 [![LICENSE](http://img.shields.io/packagist/l/doctrine/orm.svg)](http://opensource.org/licenses/MIT)
 
-<b>Implementation status: young and crazy</b>
-
-See the [todo](#todo) for a list of features planned.
-
-I apologize beforehand for the missing documentation and bugs.
-
-<hr>
-
  Want to use gulp whilst is running?
  ```js
  npm install gulp-runtime --save-dev
  ```
 
+<hr>
+<b>Implementation status: chubby</b>
+
+See the [todo](#todo) for a list of features planned.
+
+At this point the main area for this to work properly is done. What is left is debugging and fitting so I'll be doing the docs now in order to get going.
+
 ## onUse
 
-Pass a `gulp` instance to the plugin.
+Just require the module
 
 ```js
  // Your favourite gulpfile.js
- var gulp = require('gulp');
- var runtime = require('gulp-runtime')(gulp);
+ var runtime = require('gulp-runtime');
 ```
 
-After all tasks are done, a prompt is displayed
+At runtime, when you want to see the prompt, press `enter`.
+
 ```bash
 [13:07:50] Starting 'default'...
 [13:07:50]  > default
 [13:07:50] Finished 'default' after 800 μs
  > gulp
 ```
-See the current task tree (or other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
+At the moment you can use the `gulp` cli without exiting the process.
+
+For example, the task tree (or other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
+
 ```bash
  > gulp -T
 [13:07:51] Tasks for ~/code/gulp/runtime/gulpfile.js
@@ -46,6 +48,7 @@ See the current task tree (or other [`gulp` cli commands](https://github.com/gul
 [13:07:51]   └── js
 ```
 Start a given task
+
 ```bash
  > gulp process
 [13:50:56] Starting 'css'...
@@ -57,18 +60,29 @@ Start a given task
  > gulp
 ```
 
-Show task function
-``` bash
- > gulp show process
-gulp.task('process',["css","js"],function () {});
- > gulp
+Define a custom command before hand:
+
+```
+var runtime = require('gulp-runtime');
+
+runtime.set('yeeeha', function(){
+  console.log('Start dancing!')
+})
+```
+
+And use it afterwards while you are shooting gulp tasks.
+
+```
+> gulp yeeeha
+Start dancing!
+
 ```
 
 ## TODO
 
  - [X] Use gulp cli at runtime.
- - [X] Display task code directly on the terminal.
- - [X] Highlight task code accordingly.
+ - [ ] Display task code directly on the terminal.
+ - [ ] Highlight task code accordingly.
     * Thanks to the awesome [dominic tarr's `ansi-higlight`](https://github.com/dominictarr/ansi-highlight).
  - [X] Support standard shell behavior (Ctrl+L, Ctrl+C, history, etc.).
     * [`readline`](http://nodejs.org/api/readline.html) to the rescue. It even provides completion options!
@@ -81,13 +95,6 @@ gulp.task('process',["css","js"],function () {});
 
 <hr>
 [![NPM](https://nodei.co/npm/gulp-runtime.png?downloads=true)](https://nodei.co/npm/gulp-runtime/)
-
-## Example
-
-Screenshot using the [greypant's gulp-starter](https://github.com/greypants/gulp-starter) repo
-
-![greypants/gulp-starter repo](https://raw.githubusercontent.com/stringparser/gulp-runtime/master/img/syntax-higlight.png)
-
 
 ## License
 
