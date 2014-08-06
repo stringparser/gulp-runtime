@@ -1,6 +1,6 @@
 {
-  "devDependencies": {
-    "should": "^4.0.4",
-    "gulp-runtime": "^0.1.0"
+  "dependencies": {
+    "gulp-runtime": "^0.2.1",
+    "should": "^4.0.4"
   }
 }

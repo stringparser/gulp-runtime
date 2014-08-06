@@ -6,6 +6,7 @@ var should = require('should');
 var runtime = require('../lib/runtime').Runtime('gulp');
 
 runtime.onStartup(function(){
+  this.setPrompt(' > onStartup test')
   this.prompt();
 })
 
