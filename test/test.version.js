@@ -5,17 +5,12 @@ var path = require('path');
 var should = require('should');
 var runtime = require('../lib/runtime').Runtime('gulp');
 
-runtime.onStartup(function(){
-  this.setPrompt(' > onStartup test')
-  this.prompt();
-})
-
 runtime.set('first', function First(){
   return ['first!!'];
 }).version('0.0.1', 'first command');
 
 var command = runtime.get('first');
-var version = runtime.get().version;
+var version = command.version;
 
 function makeTests(cb){
 
@@ -38,6 +33,5 @@ function makeTests(cb){
 }
 
 makeTests(function(){
-  process.stdout.write('\n')
   process.stdin.end();
 })
