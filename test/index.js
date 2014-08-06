@@ -2,8 +2,7 @@
 var env = process.env;
     env.NODE_ENV = env.NODE_ENV || 'dev-test';
 
-var runtime = require('gulp-runtime').Runtime('terminal');
-var terminal = require('../lib/runtime').Runtime('terminal2');
+var runtime = require('../lib/runtime').Runtime('terminal2');
 
 runtime.set('first', function(){
   return 'first!'
@@ -13,12 +12,5 @@ runtime.set('first', function(){
   return 'whatever'
 })
 
-runtime.set('-T', function(){
-
-})
-
-runtime.set('--require', function(){
-
-})
 
 process.stdin.end();
