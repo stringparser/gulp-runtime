@@ -14,9 +14,7 @@ runtime.set('first', function First(){
 }).version('0.0.1', 'first command');
 
 var command = runtime.get('first');
-var version = command.version;
-
-console.log(runtime.get())
+var version = runtime.get().version;
 
 function makeTests(cb){
 
@@ -39,5 +37,6 @@ function makeTests(cb){
 }
 
 makeTests(function(){
+  process.stdout.write('\n')
   process.stdin.end();
 })
