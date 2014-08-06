@@ -87,17 +87,17 @@ Screenshot using the [greypant's gulp-starter](https://github.com/greypants/gulp
 
 ## TODO
 
- - [X] Use gulp cli at runtime.
+ - [X] `gulp` cli at runtime.
+ - [X] Command completion.
+ - [X] Register custom runtime commands.
+ - [ ] Include all taks inside a folder.
+ - [X] Support standard shell behavior (Ctrl+L, Ctrl+C, history, etc.).
+    * [`readline`](http://nodejs.org/api/readline.html) to the rescue. It even provides completion options!
  - [ ] Display task code directly on the terminal.
  - [ ] Highlight task code accordingly.
     * Thanks to the awesome [dominic tarr's `ansi-higlight`](https://github.com/dominictarr/ansi-highlight).
- - [X] Support standard shell behavior (Ctrl+L, Ctrl+C, history, etc.).
-    * [`readline`](http://nodejs.org/api/readline.html) to the rescue. It even provides completion options!
- - [ ] Include all taks inside a folder.
- - [X] Register custom runtime commands.
- - [X] Command completion.
- - [ ] API documentation.
  - [ ] Write tests.
+ - [ ] API documentation.
  - [ ] Provide `real life` examples.
 
 <hr>
