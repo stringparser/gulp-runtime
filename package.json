@@ -1,15 +1,15 @@
 {
   "name": "gulp-runtime",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "gulp runtime interface",
   "author": "Javier Carrillo <stringparser@gmail.com> (http://www.stringparser.com)",
   "repository": {
     "type": "git",
     "url": "https://github.com/stringparser/gulp-runtime"
   },
-  "main": "./lib/runtime",
+  "main": "./lib/gulp-runtime",
   "scripts": {
-    "start": "gulp",
+    "start": "node index.js",
     "test" : "make test"
   },
   "keywords": [
