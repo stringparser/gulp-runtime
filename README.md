@@ -5,18 +5,18 @@
 [![LICENSE](http://img.shields.io/packagist/l/doctrine/orm.svg)](http://opensource.org/licenses/MIT)
 
  Want to use gulp whilst is running?
- ```js
+
+ ```
  npm install gulp-runtime --save-dev
  ```
 
-<hr>
 <b>Implementation status: chubby</b>
 
 See the [todo](#todo) for a list of features planned.
 
 At this point the main area for this to work properly is done. What is left is debugging and fitting so I'll be doing the docs now in order to get going.
 
-## onUse
+## Usage
 
 Just require the module
 
