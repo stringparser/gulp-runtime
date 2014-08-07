@@ -12,7 +12,7 @@
     - [Instance's](#Instance's) (instance props and methods)
     - [Runtime.prototype](#Runtime.prototype)
 
-
+[=====>.......] 42.9^%
 # Overview
 
 The aim of the project is to provide a simple way to hook into the runtime of your code, in this case `gulp`, by meanings of writing *custom commands*. A repl or cli, if you will. That is: instead of ending after the process has begun, it keeps waiting for `stdin` after it's start.
