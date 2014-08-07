@@ -131,6 +131,11 @@ Well, was there other way? If you know, please [issue that bullet](https://githu
 
   Provide the completion that will be displayed at runtime for that node of the `command` object.
 
-  - `stems` : can be an `array` with *only* `string` content or a `function` returning an `array` instance with *only* `string` content. The elements of the array will be added to the node's completion, *if* they are not already there.
+  - `stems` : can be
+    - `array` with *only* `string` content.
+    - a `function` returning an `array` instance with *only* `string` content.
 
- - #### Example: making all the gulp tasks avaliable for completion.
+  The elements of the array will be added to the node's completion, *if* they are not already there.
+
+ - #### Example: gulp task avaliable for `onTab` completion
+
