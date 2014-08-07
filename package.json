@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test" : "make test"
+    "test": "make test"
   },
   "keywords": [
     "gulp",
@@ -22,6 +22,8 @@
     "tool"
   ],
   "dependencies": {
+    "callsite": "^1.0.0",
+    "chalk": "^0.5.1",
     "gulp": "~3.8.6",
     "gulp-util": "~2.2.20",
     "minimist": "~0.2.0",
