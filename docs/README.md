@@ -1,7 +1,7 @@
 # Thy `gulp-runtime` docs
 
-  - [Overview](#Overview)
-  - [Define your commands](#Command)
+  - [Overview](#overview)
+  - [Define your commands](#command)
   - [Built-in commands](#Built-ins)
   - [Runtime interface methods](#Interface-methods)
   - [Events](#Events)
