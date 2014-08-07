@@ -40,7 +40,7 @@ In fact is very simple. I've spent some time to make it as simple and fast as I 
 
 > Show me the code.
 
-All right. This is how one would write the *whole* gulp cli namespace
+...all right. This is how one would write the *whole* gulp cli namespace
 
 ```js
 var runtime = require('gulp-runtime');
