@@ -32,7 +32,7 @@ If you don't like it, you can [change it](#Interface-methods).
 
 # Command
 
-So, how do you write *your own commands*? Since, otherwise, thats the only interest on keeping process open or editing your `gulpfile` anyway (at least for now).
+So, how do you write *your own commands*? Since, otherwise, thats the only interest on keeping process open (at least for now).
 
 A `command` object is maintained for **all runtime instances** of the same **name**.
 
