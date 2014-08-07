@@ -132,7 +132,7 @@ In that special case the method will return the `root` node of the `gulp` namesp
 
 As you can see only the first element of the array created an `aliases` key-value pair so we don't have too much overhead.
 
-One more thing: changes on that object will have *no* effect on the actual object. What you get back of the `runtime.get()` method is a *copy* of the object with no reference attached.
+One more thing: changes on that object will have *no* effect on the actual object that is used. What you get back of the `runtime.get()` method is a *copy* of the object with no reference attached.
 
 If you want to know why, [ask](https://github.com/stringparser/gulp-runtime/issues/new).
 
