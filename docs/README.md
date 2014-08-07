@@ -54,7 +54,7 @@ Supported types:
  The above can change with time because I don't know if can be a better way to do things. In any case, how this looks like? This is how the `file` flags of `gulp` where implemented.
 
 
- ```js
+```js
 //
 // For brevity all `requires` were omitted here
 //
@@ -84,8 +84,8 @@ runtime.set(['-v', '--version'], function(){
    gutil.log('CLI version', cliPackage.version);
    gutil.log('Local version', modulePackage.version);
   }
-
 });
+
 ```
 
 *OMG why you reimplemented that?*
