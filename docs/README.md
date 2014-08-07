@@ -38,7 +38,9 @@ A `command` object is maintained for **all runtime instances** of the same **nam
 
 ## runtime.set(name, handle)
 
-Assigns `name`(s) to a `function`. Supported types:
+Assigns `name`(s) to a `function`.
+
+Supported types:
 
  -   `name` : `string` or an `array` instance.
  - `handle` : only a function.
