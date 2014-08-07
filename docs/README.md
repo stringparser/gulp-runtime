@@ -1,7 +1,10 @@
 # Thy docs
 
+  <img align="right" src="./gulp-runtime.png"/>
   - [Overview](#overview)
   - [Define your commands](#command)
+    - [`runtime.set(name, handle)`](#runtimesetname-handle)
+    - [`runtime.get([, arguments])`](#runtimeget-arguments)
   - [Built-in commands](#Built-ins)
   - [Runtime interface methods](#Interface-methods)
   - [Events](#Events)
