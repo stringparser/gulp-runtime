@@ -19,7 +19,7 @@ Time to make the documentation? === Now.
 *Want some coffee?* I loove coffee.
 
 ## Usage
- - Full [documentation](./docs)
+ - Full, on progress, [documentation](./docs)
 
 Just require the module
 
