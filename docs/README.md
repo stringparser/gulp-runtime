@@ -47,8 +47,8 @@ Assigns command `name` to a `function`.
 
 Supported types:
 
- -   `name` : `string` or an `array` instance.
- - `handle` : only a function.
+ -   `name` : a `string` or an `array` instance.
+ - `handle` : a function.
 
  If `name` is a string, a `key` - `value` pair is created.
  If `name` is an array, only the first value of the array is used to create a `key` - `value` pair and the rest is put on an `aliases` object.
