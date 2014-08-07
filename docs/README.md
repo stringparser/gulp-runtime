@@ -198,11 +198,11 @@ runtime.set(['-v', '--version'], function(){
 
 ```
 
-*OMG why you reimplemented that?*
+> *OMG* why you reimplemented that?
 
-Well, first I just copy-pasted most of it.
+Well, I just copy-pasted most of it.
 
-First just to see how easy would it be to do a cli with this.
+First, just to see how easy would it be to do a cli with this.
 
 Second, was there other way to make it work? If you know, please [issue that bullet](https://github.com/stringparser/gulp-runtime/issues).
 
