@@ -62,7 +62,7 @@ Start a given task
 
 Define a custom command before hand:
 
-```
+```js
 var runtime = require('gulp-runtime');
 
 runtime.set('yeeeha', function(){
@@ -72,7 +72,7 @@ runtime.set('yeeeha', function(){
 
 And use it afterwards while you are shooting gulp tasks.
 
-```
+```shell
 > gulp yeeeha
 Start dancing!
 
