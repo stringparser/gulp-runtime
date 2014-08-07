@@ -32,7 +32,11 @@ If you don't like it, you can [change it](#Interface-methods).
 
 # Command
 
-How do you write *your own commands*? Since, otherwise, thats the only interest on keeping process open (at least for now).
+> How do I write *your own commands*?
+
+In fact is very simple. I've spent some time to make it as simple and fast as I can.
+
+Since, otherwise, what would be the aim of keeping the process idle?
 
 ## runtime.set(name, handle)
 
