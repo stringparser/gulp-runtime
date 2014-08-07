@@ -133,4 +133,4 @@ Well, was there other way? If you know, please [issue that bullet](https://githu
 
   - `stems` : can be an `array` with *only* `string` content or a `function` returning an `array` instance with *only* `string` content. The elements of the array will be added to the node's completion, *if* they are not already there.
 
-### Example: making all the gulp tasks avaliable for completion.
+ - #### Example: making all the gulp tasks avaliable for completion.
