@@ -63,7 +63,7 @@ runtime({ nested : false })
 
 and you are on `<command0>` it would take you to `<command1>`.
 
-One thing, all the code above, has generated this object:
+One thing, all the code above, has generated this object.
 
 ```js
 { _name: 'gulp',
