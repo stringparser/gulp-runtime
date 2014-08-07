@@ -59,9 +59,9 @@ runtime({ nested : false })
  * `args` : the parsed `argv` of what you actually wrote (in this case I've chosen [minimist](https://github.com/substack/minimist), you can use whichever you want, more on that later)
  * `next` : its under development, but you can imagine its use would be to go to the next command, if you wrote
 
- > <command0> <command1> <command2>
+ > command0 command1 command2
 
-and you are on `<command0>` it would take you to `<command1>`.
+and you are on `command0` it would take you to `command1`.
 
 One thing, all the code above, has generated this object.
 
