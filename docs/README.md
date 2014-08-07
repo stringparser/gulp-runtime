@@ -50,12 +50,102 @@ runtime({ nested : false })
   .set('--silent', function(argv, args, next){ /*...*/ })
   .set('--require', function(argv, args, next){ /*...*/ })
   .set('--gulfile', function(argv, args, next){ /*...*/ })
-  .set(['--color', '--no-color'], function(argv, args, next){ /*...*/ })
   .set(['-v', '--version'], function(argv, args, next){ /*...*/ })
+  .set(['--color', '--no-color'], function(argv, args, next){ /*...*/ })
   .set(['-T','--tasks', '--tasks-simple'], function(argv, args, next){ /*...*/ })
-
 ```
 
+ * `argv` : `array` of the things you wrote on the terminal minus all the parameters (numbers, etc).
+ * `args` : the parsed `argv` you actually wrote (in this case I taked minimist, you can use whichever you want)
+ * `next` : its under development, but you can imagine its use would be to go to the next command, if you wrote
+
+ > <command0> <command1> <command2>
+
+and you are on `<command0>` it would take you to `<command1>`.
+
+One thing, all the code above, has generated this object:
+
+```js
+{ _name: 'gulp',
+  _depth: 0,
+  _parent: 'gulp',
+  aliases:
+   { '--version': '-v',
+     '--no-color': '--color',
+     '--tasks': '-T',
+     '--tasks-simple': '-T' },
+  children:
+   { '--cwd':
+      { handle: [Function],
+        _name: '--cwd',
+        _depth: 1,
+        _parent: 'gulp',
+        aliases: {},
+        children: {},
+        completion: [] },
+     '--silent':
+      { handle: [Function],
+        _name: '--silent',
+        _depth: 1,
+        _parent: 'gulp',
+        aliases: {},
+        children: {},
+        completion: [] },
+     '--require':
+      { handle: [Function],
+        _name: '--require',
+        _depth: 1,
+        _parent: 'gulp',
+        aliases: {},
+        children: {},
+        completion: [] },
+     '--gulfile':
+      { handle: [Function],
+        _name: '--gulfile',
+        _depth: 1,
+        _parent: 'gulp',
+        aliases: {},
+        children: {},
+        completion: [] },
+     '-v':
+      { handle: [Function],
+        _name: '-v',
+        _depth: 1,
+        _parent: 'gulp',
+        aliases: {},
+        children: {},
+        completion: [] },
+     '--color':
+      { handle: [Function],
+        _name: '--color',
+        _depth: 1,
+        _parent: 'gulp',
+        aliases: {},
+        children: {},
+        completion: [] },
+     '-T':
+      { handle: [Function],
+        _name: '-T',
+        _depth: 1,
+        _parent: 'gulp',
+        aliases: {},
+        children: {},
+        completion: [] } },
+  completion:
+   [ '--cwd',
+     '--silent',
+     '--require',
+     '--gulfile',
+     '-v',
+     '--version',
+     '--color',
+     '--no-color',
+     '-T',
+     '--tasks',
+     '--tasks-simple' ] }
+```
+
+Now to the actual API.
 
 ## runtime.set(name, handle)
 
