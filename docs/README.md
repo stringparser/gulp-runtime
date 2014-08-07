@@ -45,8 +45,8 @@ Supported types:
  -   `name` : `string` or an `array` instance.
  - `handle` : only a function.
 
- If `name` is a string `key` - `value` pair is created.
- If `name` is an array only the first value of the array is used to create a `key` - `value` pair and the rest is put on an `aliases` object.
+ If `name` is a string, a `key` - `value` pair is created.
+ If `name` is an array, only the first value of the array is used to create a `key` - `value` pair and the rest is put on an `aliases` object.
 
  The above can change with time because I don't know if can be a better way to do things. In any case, how this looks like? This is how the `file` flags of `gulp` where implemented.
 
