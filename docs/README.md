@@ -108,7 +108,7 @@ Example: `runtime.get('-v')` (or `--version') would log
   completion: [] }
 ```
 
-To see the whole "namespace" of the `runtime.set(['-v', '--version'], function(){ ... }` above you can log `runtime.get()` with *no* arguments.
+So, now of course you want to see the the whole picture of what the above `runtime.set(['-v', '--version'], function(){ ... }` did. For that log `runtime.get()` with *no* arguments.
 
 In that special case the method will return the `root` node of the `gulp` namespace.
 
@@ -130,7 +130,11 @@ In that special case the method will return the `root` node of the `gulp` namesp
 
 ```
 
-  As you can see only the first element of the array created an `aliases` key-value pair so we don't have too much overhead.
+As you can see only the first element of the array created an `aliases` key-value pair so we don't have too much overhead.
+
+One more thing: changes on that object will have *no* effect on the actual object. What you get back of the `runtime.get()` method is a *copy* of the object with no reference attached.
+
+If you want to know why, [ask](https://github.com/stringparser/gulp-runtime/issues/new).
 
 ## runtime.completion(stems)
 
