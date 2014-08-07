@@ -10,11 +10,12 @@
  npm install gulp-runtime --save-dev
  ```
 
-<b>Implementation status: chubby</b>
+<b>Implementation status: making the docs</b>
 
 See the [todo](#todo) for a list of features planned.
 
-At this point the main area for this to work properly is done. What is left is debugging and fitting so I'll be doing the docs now in order to get going.
+Time to make the documentation? === Now.
+*Want some coffee?* I loove coffee.
 
 ## Usage
 
