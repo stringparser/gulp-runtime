@@ -32,7 +32,7 @@ If you don't like it, you can [change it](#Interface-methods).
 
 # Command
 
-> How do I write *your own commands*?
+> Ok, ok, enough!! How do I write *my own commands*?
 
 In fact is very simple. I've spent some time to make it as simple and fast as I can.
 
