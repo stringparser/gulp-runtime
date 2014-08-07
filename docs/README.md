@@ -36,7 +36,7 @@ How do you write *your own commands*? Since, otherwise, thats the only interest 
 
 ## runtime.set(name, handle)
 
-Assigns `name`(s) to a `function`.
+Assigns command `name` to a `function`.
 
 Supported types:
 
