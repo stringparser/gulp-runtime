@@ -90,7 +90,7 @@ runtime.set(['-v', '--version'], function(){
 
 *OMG why you reimplemented that?*
 
-Well, was there other way? If you know, please [issue that bullet](https://github.com/stringparser/gulp-runtime/issues).
+Well, first I just copy pasted most of it, plus: was there other way? If you know, please [issue that bullet](https://github.com/stringparser/gulp-runtime/issues).
 
 
 ## runtime.get([, *arguments*])
