@@ -89,6 +89,38 @@ Well, was there other way? If you know, please [issue that bullet](https://githu
 
 ## runtime.get([, *arguments*])
 
-  Get the value of the command you setted previously
+  Get the `object` that represents the command you setted previously.
 
-  - `arguments` can be: `string` or `array` with *only* string content.
+  - `arguments` can be: `string` or `array` with *only* string content. If no arguments where given it will output the whole object representing the "namespace" of the runtime.
+
+  Following the example above, `runtime.get('-v')` (or `--version') would log
+
+```js
+{ handle: [Function],
+  _name: '-v',
+  _depth: 1,
+  _parent: 'gulp',
+  aliases: {},
+  children: {},
+  completion: [] }
+```
+
+  Se the whole picture of the `runtime.set(['-v', '--version'], function(){ ... }` above you can log `runtime.get()`
+
+```js
+{ _name: 'gulp',
+  _depth: 0,
+  _parent: 'gulp',
+  aliases: { '--version': '-v' },
+  children:
+   { '-v':
+      { handle: [Function],
+        _name: '-v',
+        _depth: 1,
+        _parent: 'gulp',
+        aliases: {},
+        children: {},
+        completion: [] } },
+  completion: [ '-v', '--version' ] }
+
+```
