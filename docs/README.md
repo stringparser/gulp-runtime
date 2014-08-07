@@ -46,13 +46,13 @@ All right. This is how one would write the *whole* gulp cli namespace
 var runtime = require('gulp-runtime');
 
 runtime({ nested : false })
-  .set(['-v', '--version'], function(argv, args, next){ ... })
-  .set('--require', function(argv, args, next){ ... })
-  .set('--gulfile', function(argv, args, next){ ... })
-  .set('--cwd', function(argv, args, next){ ... })
-  .set(['-T','--tasks', '--tasks-simple'], function(argv, args, next){ ... })
-  .set(['--color', '--no-color'], function(argv, args, next){ ... })
-  .set('--silent', function(argv, args, next){ ... })
+  .set('--cwd', function(argv, args, next){ /*...*/ })
+  .set('--silent', function(argv, args, next){ /*...*/ })
+  .set('--require', function(argv, args, next){ /*...*/ })
+  .set('--gulfile', function(argv, args, next){ /*...*/ })
+  .set(['--color', '--no-color'], function(argv, args, next){ /*...*/ })
+  .set(['-v', '--version'], function(argv, args, next){ /*...*/ })
+  .set(['-T','--tasks', '--tasks-simple'], function(argv, args, next){ /*...*/ })
 
 ```
 
