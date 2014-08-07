@@ -89,11 +89,14 @@ Well, was there other way? If you know, please [issue that bullet](https://githu
 
 ## runtime.get([, *arguments*])
 
-  Get the `object` that represents the command you setted previously.
+Get the `object` that represents the command you setted previously.
 
-  - `arguments` can be: `string` or `array` with *only* string content. If no arguments where given it will output the whole object representing the "namespace" of the runtime.
+`arguments` can be:
+  - `string` or `array` with *only* string content.
 
-  Following the example above, `runtime.get('-v')` (or `--version') would log
+If no arguments where given it will output the whole object representing the "namespace" of the runtime.
+
+Example: `runtime.get('-v')` (or `--version') would log
 
 ```js
 { handle: [Function],
@@ -105,7 +108,9 @@ Well, was there other way? If you know, please [issue that bullet](https://githu
   completion: [] }
 ```
 
-  Se the whole picture of the `runtime.set(['-v', '--version'], function(){ ... }` above you can log `runtime.get()` with *no* arguments given returning the `root` node of the `gulp` namespace
+To see the whole "namespace" of the `runtime.set(['-v', '--version'], function(){ ... }` above you can log `runtime.get()` with *no* arguments.
+
+In that special case the method will return the `root` node of the `gulp` namespace.
 
 ```js
 { _name: 'gulp',
@@ -135,7 +140,7 @@ Provide the completion that will be displayed at runtime for that node of the `c
   - An `array` with *only* `string` content.
   - A `function` returning an `array` instance with *only* `string` content.
 
-  The elements of the array will be added to the node's completion, *if* they are not already there.
+The elements of the array will be added to the node's completion, *if* they are not already there.
 
  - #### Example: gulp task avaliable for `onTab` completion
 
