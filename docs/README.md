@@ -15,7 +15,7 @@
 
 # Overview
 
-The aim of the project is to provide a simple way to hook into the runtime of your code, in this case `gulp`, by meanings of writing *custom commands*. A repl or cli, if you will. But instead of ending after the process has begun, it keeps waiting for `stdin` after it's start.
+The aim of the project is to provide a simple way to hook into the runtime of your code, in this case `gulp`, by meanings of writing *custom commands*. A repl or cli, if you will. That is: instead of ending after the process has begun, it keeps waiting for `stdin` after it's start.
 
 This is achieved using the [`readline`](nodejs.org/api/readline.html) module (it also could have been done with the [`repl`](nodejs.org/api/repl.html)) and some sugar on top.
 
