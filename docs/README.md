@@ -1,4 +1,4 @@
-# Thy `gulp-runtime` docs
+# Thy docs
 
   - [Overview](#overview)
   - [Define your commands](#command)
