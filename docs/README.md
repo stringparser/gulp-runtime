@@ -99,7 +99,7 @@ Second, was there other way to make it work? If you know, please [issue that bul
 
 ## runtime.get([, *arguments*])
 
-Get the `object` that represents the command you setted previously.
+Get the `object` that represents the command you set previously.
 
 `arguments` can be:
   - `string` or `array` with *only* string content.
