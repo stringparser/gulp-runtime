@@ -40,7 +40,22 @@ In fact is very simple. I've spent some time to make it as simple and fast as I 
 
 > Show me the code.
 
-All right.
+All right. This is how one would write the *whole* gulp cli namespace
+
+```js
+var runtime = require('gulp-runtime');
+
+runtime({ nested : false })
+  .set(['-v', '--version'], function(argv, args, next){ ... })
+  .set('--require', function(argv, args, next){ ... })
+  .set('--gulfile', function(argv, args, next){ ... })
+  .set('--cwd', function(argv, args, next){ ... })
+  .set(['-T','--tasks', '--tasks-simple'], function(argv, args, next){ ... })
+  .set(['--color', '--no-color'], function(argv, args, next){ ... })
+  .set('--silent', function(argv, args, next){ ... })
+
+```
+
 
 ## runtime.set(name, handle)
 
