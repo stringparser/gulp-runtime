@@ -50,13 +50,9 @@ Supported types:
 
 
  ```js
-  var gulp = require('gulp');
-  var gutil = require('gulp-util');
-  var runtime = require('gulp-runtime');
-  var semver = require('gulp/node_modules/semver');
-  var tildify = require('gulp/node_modules/tildify');
-  var cliPackage = require('/usr/lib/node_modules/gulp/package');
-
+  //
+  // For brevity all `requires` were omitted here
+  //
   runtime.set(['-v', '--version'], function(){
 
    var chalk = gutil.colors;
