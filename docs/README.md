@@ -61,7 +61,9 @@ runtime({ nested : false })
 
  > command0 command1 command2
 
-and you are on `command0` it would take you to `command1`.
+and you are on `command0`, it would take you to `command1`.
+
+But I insist: *it will change*.
 
 One thing, all the code above, has generated this object.
 
