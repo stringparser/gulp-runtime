@@ -104,7 +104,7 @@ Get the `object` that represents the command you set previously.
 `arguments` can be:
   - `string` or `array` with *only* string content.
 
-If no arguments where given it will output the whole object representing the "namespace" of the runtime.
+If no arguments where given it will output the whole object representing the "namespace" of the runtime in this case, the object representing what commands you wrote for your `gulp` day.
 
 Example: `runtime.get('-v')` (or `--version') would log
 
