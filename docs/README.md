@@ -129,11 +129,11 @@ Well, was there other way? If you know, please [issue that bullet](https://githu
 
 ## runtime.completion(stems)
 
-  Provide the completion that will be displayed at runtime for that node of the `command` object.
+Provide the completion that will be displayed at runtime for that node of the `command` object.
 
-  `stems` could be:
-    - `array` with *only* `string` content.
-    - a `function` returning an `array` instance with *only* `string` content.
+`stems` could be:
+  - `array` with *only* `string` content.
+  - a `function` returning an `array` instance with *only* `string` content.
 
   The elements of the array will be added to the node's completion, *if* they are not already there.
 
