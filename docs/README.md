@@ -151,7 +151,7 @@ Now to the actual API.
 
 ## runtime.set(name, handle)
 
-Assigns command `name` to a `function`.
+Assigns command(s) `name` to a `function`.
 
 Supported types:
 
