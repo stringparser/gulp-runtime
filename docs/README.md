@@ -105,7 +105,7 @@ Well, was there other way? If you know, please [issue that bullet](https://githu
   completion: [] }
 ```
 
-  Se the whole picture of the `runtime.set(['-v', '--version'], function(){ ... }` above you can log `runtime.get()`
+  Se the whole picture of the `runtime.set(['-v', '--version'], function(){ ... }` above you can log `runtime.get()` with *no* arguments given returning the `root` node of the `gulp` namespace
 
 ```js
 { _name: 'gulp',
