@@ -37,7 +37,9 @@ If you don't like it, you can [change it](#Interface-methods).
 
 In fact is very simple. I've spent some time to make it as simple and fast as I can.
 
-Since, otherwise, what would be the aim of keeping the process idle?
+> - Show me the code.
+
+All right.
 
 ## runtime.set(name, handle)
 
@@ -142,7 +144,7 @@ In that special case the method will return the `root` node of the `gulp` namesp
 
 ```
 
-As you can see only the second element of the array created an `aliases` key-value pair so we don't have too much overhead.
+There you can see only the second element of the array created an `aliases` key-value pair so we don't have too much overhead.
 
 One more thing: changes on that object will have *no* effect on the actual object that is used. What you get back of the `runtime.get()` method is a *copy* of the object with no reference attached.
 
