@@ -19,6 +19,7 @@ Time to make the documentation? === Now.
 *Want some coffee?* I loove coffee.
 
 ## Usage
+ - Full [documentation](./docs)
 
 Just require the module
 
@@ -92,14 +93,15 @@ Screenshot using the [greypant's gulp-starter](https://github.com/greypants/gulp
  - [X] `gulp` cli at runtime.
  - [X] Command completion.
  - [X] Register custom runtime commands.
- - [ ] Include all taks inside a folder.
  - [X] Support standard shell behavior (Ctrl+L, Ctrl+C, history, etc.).
     * [`readline`](http://nodejs.org/api/readline.html) to the rescue. It even provides completion options!
+ - [ ] API documentation.
+ - [ ] Follow `gulp` plugin integration (log, errors, etc.)
+ - [ ] Include all taks inside a folder.
  - [ ] Display task code directly on the terminal.
  - [ ] Highlight task code accordingly.
     * Thanks to the awesome [dominic tarr's `ansi-higlight`](https://github.com/dominictarr/ansi-highlight).
  - [ ] Write tests.
- - [ ] API documentation.
  - [ ] Provide `real life` examples.
 
 <hr>
