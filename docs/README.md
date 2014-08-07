@@ -56,7 +56,7 @@ runtime({ nested : false })
 ```
 
  * `argv` : `array` of the things you wrote on the terminal minus all the parameters (numbers, etc).
- * `args` : the parsed `argv` of what you actually wrote (in this case I taked [minimist](https://github.com/substack/minimist), you can use whichever you want, more on that later)
+ * `args` : the parsed `argv` of what you actually wrote (in this case I've chosen [minimist](https://github.com/substack/minimist), you can use whichever you want, more on that later)
  * `next` : its under development, but you can imagine its use would be to go to the next command, if you wrote
 
  > <command0> <command1> <command2>
