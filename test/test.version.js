@@ -3,7 +3,7 @@
  */
 var path = require('path');
 var should = require('should');
-var runtime = require('../lib/runtime').Runtime('gulp');
+var runtime = require('runtime').Runtime('gulp');
 
 runtime.set('first', function First(){
   return ['first!!'];
