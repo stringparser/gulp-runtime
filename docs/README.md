@@ -500,7 +500,7 @@ From that above you can see that the reason for the `runtime.completion` method 
 
 # Chaining methods
 
-I have mentioned it on the above but its better to be clear and not to create more confusion.
+I have mentioned it above but just slightly so its better to be clear and not to create more confusion.
 
 Some methods are visible to chain all the time and others aren't.
 
@@ -545,6 +545,6 @@ runtime
 
 will throw an error.
 
-The reason for this is that one will want to have different instances of the runtime but the commands setted and getted, completed and handled of course you want to share accross instances with the same "name" (or namespace) so thats the reason why.
+The reason for this is that one will want to have different instances of the runtime but the commands setted and getted, completed and handled for the *same runtime_name* you want to share of course accross instances. The solution for this was to create a separate *Command* constructor that will handle how commands are defined and accessed but I wanted to keep the same interface for the code so even though it looks like the same object those 4 methods `set`, `get`, `handle` & `completion` come from a different constructor.
 
 # Built ins
