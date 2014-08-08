@@ -363,18 +363,18 @@ Well, I just copy-pasted most of it.
 
 ## runtime.get([, *arguments*])
 
-This `method` represents the command you set previously.
+This `method` will give you back the command you set previously.
 
 `arguments` can be:
   - A `string`.
   - An `array`.
   - Or an `arguments` object.
 
-All of the above with *only* string content.
+All of the above with *only* `string` content.
 
 If no arguments given it will output the whole object representing the "namespace" of the runtime. That is, the `object` representing what commands you wrote for your `gulp` day.
 
-Example: `runtime.get('-v')` of the previous section (or `--version') would log
+Example: `runtime.get('-v')` of the previous section (or `--version`) would log
 
 ```js
 { handle: [Function],
@@ -408,7 +408,7 @@ So now, of course, you want to see the the whole picture of what the above `runt
 
 Changes on that object will have *no* effect on the actual object that is used. What you get back of the `runtime.get()` method is a *copy* of the object with no reference attached.
 
-If you want to know why, [ask](https://github.com/stringparser/gulp-runtime/issues/new).
+> If you want to know why, [ask](https://github.com/stringparser/gulp-runtime/issues/new).
 
 ## runtime.completion(stems)
 
@@ -420,8 +420,24 @@ Provide the completion that will be displayed at runtime for that node of the `c
 
 The elements of the array will be added to the node's completion, *if* they are not already there.
 
+Completion will be present when you press `tab` during the execution of your program. For each command, you'll get that `command` completion plus the `flags` of the `root` (in this case, `gulp`).
 
-#### Example: gulp task avaliable for `onTab` completion
+The method is provided because sometimes you don't know exactly what commands you'll have, but still want to call that node command's handle.
+
+An example for this will be given in the next subsection.
+
+## runtime.handle(function handle(argv, args, next))
+
+Assign a function to a command in the current node of the runtime namespace.
+
+`handle` is, and only can be, a `function` (maybe a generator in the future?)
+
+The arguments of the `handle` are:
+  * `argv` : `array` of the things you wrote on the terminal minus all the parameters (numbers, etc).
+  * `args` : the parsed `argv` of what you actually wrote (in this case I've chosen [minimist](https://github.com/substack/minimist), you can use whichever you want, more on that later)
+  * `next` : its under development, but you can imagine its use would be to go to the next command, if you wrote
+
+### Example: gulp tasks avaliable on <kbd>Tab</kbd> completion
 
 
 ## Chaining methods
