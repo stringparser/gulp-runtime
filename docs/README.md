@@ -1,10 +1,14 @@
-# [![progressed.io](http://progressed.io/bar/53)](http://progressed.io/bar/33) Thy docs
+# Thy docs [![progressed.io](http://progressed.io/bar/53)](http://progressed.io/bar/33)
 
   <img align="right" src="./gulp-runtime.png"/>
   - [Overview](#overview)
-  - [Define your commands](#command)
+  - [Fast forward (no jibber jabber, just code)](#fast-forward)
+  - [Define your commands](#the-command-object)
     - [`runtime.set(name, handle)`](#runtimesetname-handle)
     - [`runtime.get([, arguments])`](#runtimeget-arguments)
+    - [`runtime.completion(stems)`](#runtimecompletion-stems)
+    - [`runtime.handle(handle)`](#runtimehandle-handle)
+    - [Chaining `set`, `get`, `handle` and `completion` methods](#chaining-methods)
   - [Built-in commands](#Built-ins)
   - [Runtime interface methods](#Interface-methods)
   - [Events](#Events)
@@ -68,7 +72,7 @@ and you are on `command0`, it would take you to `command1`.
 
 But I insist: *it will change*.
 
-One thing, all the code above, has generated this object.
+One thing, all the code above, has generated this `command object`.
 
 ```js
 { _name: 'gulp',
@@ -150,7 +154,101 @@ One thing, all the code above, has generated this object.
      '--tasks-simple' ] }
 ```
 
+The structure of the object above can change with time because I don't know if there could be a better way to do things.
+
+What will be kept as is right now: `handle` and `completion`.
+
+Before the actual API, a *fast forward* section for those like me with no patience for the developer's ego.
+
+# Fast-forward
+
+A null-documented section: just use cases.
+
+On progress: [![progressed.io](http://progressed.io/bar/53)](http://progressed.io/bar/0)
+
+[Fire questions](../issues/new) on what you want to have included here.
+
 Now to the actual API.
+
+# The `Command` object
+
+The object above has its own [constructor](../lib/command/constructor.js) but is not exposed directly. Instead is used through the methods below which, are chainable:
+
+    - [`runtime.set(name, handle)`](#runtimesetname-handle)
+    - [`runtime.get([, arguments])`](#runtimeget-arguments)
+    - [`runtime.completion(stems)`](#runtimecompletion-stems)
+    - [`runtime.handle(handle)`](#runtimehandle-handle)
+
+By default each use of the `set` method will nest the command one step after the last written command. That means, writting this:
+
+```js
+runtime.set('hello', function(argv, args, next){ /*...*/ })
+       .set('world', function(argv, args, next){ /*...*/ })
+```
+
+will result on this `command object`
+
+```js
+{ _name: 'gulp',
+  _depth: 0,
+  _parent: 'gulp',
+  aliases: {},
+  children:
+   { hello:
+      { handle: [Function],
+        _name: 'hello',
+        _depth: 1,
+        _parent: 'gulp',
+        aliases: {},
+        children:
+         { world:
+            { handle: [Function],
+              _name: 'world',
+              _depth: 2,
+              _parent: 'hello',
+              aliases: {},
+              children: {},
+              completion: [] } },
+        completion: [ 'world' ] } },
+  completion: [ 'hello' ] }
+```
+
+The `hello` handle will only be run if you write `hello` and the `world` handle will be run if you write `hello world`. As you also can see the completion of that command was also filled in. If you like to unnest just write.
+
+```js
+runtime({ nested : false})
+  .set('hello', function(argv, args, next){ /*...*/ })
+  .set('world', function(argv, args, next){ /*...*/ })
+```
+
+will results in
+
+```js
+{ _name: 'gulp',
+  _depth: 0,
+  _parent: 'gulp',
+  aliases: {},
+  children:
+   { hello:
+      { handle: [Function],
+        _name: 'hello',
+        _depth: 1,
+        _parent: 'gulp',
+        aliases: {},
+        children: {},
+        completion: [] },
+     world:
+      { handle: [Function],
+        _name: 'world',
+        _depth: 1,
+        _parent: 'gulp',
+        aliases: {},
+        children: {},
+        completion: [] } },
+  completion: [ 'hello', 'world' ] }
+```
+
+Simple, right?
 
 ## runtime.set(name, handle)
 
@@ -164,7 +262,7 @@ Supported types:
  If `name` is a string, a `key` - `value` pair is created.
  If `name` is an array, only the first value of the array is used to create a `key` - `value` pair and the rest is put on an `aliases` object.
 
- The above can change with time because I don't know if there could be a better way to do things. In any case, how this looks like? This is how the `version` flags of `gulp` were implemented.
+How this looks like? This is how the `version` flags of `gulp` were implemented.
 
 
 ```js
@@ -205,23 +303,24 @@ runtime.set(['-v', '--version'], function(){
 
 Well, I just copy-pasted most of it.
 
-First, just to see how easy would it be to do a cli with this.
-
-Second, was there other way to make it work? If you know how, please [issue that bullet](https://github.com/stringparser/gulp-runtime/issues).
+- First, just to see how easy would it be to do a cli with this.
+- Second, was there other way to make it work? If you know how, please [issue that bullet](https://github.com/stringparser/gulp-runtime/issues).
 
 
 ## runtime.get([, *arguments*])
 
-Get the `object` that represents the command you set previously.
+This `method` represents the command you set previously.
 
 `arguments` can be:
-  - `string` or `array` with *only* string content.
+  - A `string`.
+  - An `array`.
+  - Or an `arguments` object.
 
-If no arguments where given it will output the whole object representing the "namespace" of the runtime.
+All of the above with *only* string content.
 
-In this case, the object representing what commands you wrote for your `gulp` day.
+If no arguments given it will output the whole object representing the "namespace" of the runtime. That is, the `object` representing what commands you wrote for your `gulp` day.
 
-Example: `runtime.get('-v')` (or `--version') would log
+Example: `runtime.get('-v')` of the previous section (or `--version') would log
 
 ```js
 { handle: [Function],
@@ -233,9 +332,7 @@ Example: `runtime.get('-v')` (or `--version') would log
   completion: [] }
 ```
 
-So, now of course you want to see the the whole picture of what the above `runtime.set(['-v', '--version'], function(){ ... }` did. For that log `runtime.get()` with *no* arguments.
-
-In that special case the method will return the `root` node of the `gulp` namespace.
+So now, of course, you want to see the the whole picture of what the above `runtime.set(['-v', '--version'], function(){ ... }` did. For that, log `runtime.get()` with *no* arguments.
 
 ```js
 { _name: 'gulp',
@@ -255,9 +352,7 @@ In that special case the method will return the `root` node of the `gulp` namesp
 
 ```
 
-There you can see only the second element of the array created an `aliases` key-value pair so we don't have too much overhead.
-
-One more thing: changes on that object will have *no* effect on the actual object that is used. What you get back of the `runtime.get()` method is a *copy* of the object with no reference attached.
+Changes on that object will have *no* effect on the actual object that is used. What you get back of the `runtime.get()` method is a *copy* of the object with no reference attached.
 
 If you want to know why, [ask](https://github.com/stringparser/gulp-runtime/issues/new).
 
@@ -271,5 +366,8 @@ Provide the completion that will be displayed at runtime for that node of the `c
 
 The elements of the array will be added to the node's completion, *if* they are not already there.
 
- - #### Example: gulp task avaliable for `onTab` completion
 
+#### Example: gulp task avaliable for `onTab` completion
+
+
+## Chaining methods
