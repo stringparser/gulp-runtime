@@ -48,7 +48,7 @@ A null-documented section: just use cases.
 
 Now to the actual API.
 
-## Command [![progressed.io](http://progressed.io/bar/80)](https://github.com/fehmicansaglam/progressed.io)
+## Command
 
 > Ok, ok, enough!!
 
@@ -169,7 +169,7 @@ The structure of the object above can change with time because I don't know if t
 
 What will be kept as is right now: `handle` and `completion`.
 
-# Thy Command `object`
+# Thy command `object` [![progressed.io](http://progressed.io/bar/77)](https://github.com/fehmicansaglam/progressed.io)
 
 The object above has its own [constructor](../lib/command/constructor.js) but is not exposed directly. Instead is used through the methods below which, are chainable:
 
