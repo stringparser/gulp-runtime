@@ -2,7 +2,7 @@
 
   <img align="right" src="./gulp-runtime.png"/>
   - [Overview](#overview)
-    - [Fast forward (no jibber jabber, just code)](#fast-forward)
+    - [Fast forward (no jibber jabber, just code)](#fast-forward-)
     - [Define your commands](#command)
   - [Thy Command object](#thy-command-object)
     - [`runtime.set(name, handle)`](#runtimesetname-handle)
