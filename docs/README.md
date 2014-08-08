@@ -45,9 +45,7 @@ Before the actual API, a *fast forward* section for those like me with no patien
 
 An approaching `null` documented section, just use cases:
 
-  - [Define your commands](#define-your-commands)
-
-<hr>
+- [Define your commands](#define-your-commands)
 
   ## Define your commands
 
