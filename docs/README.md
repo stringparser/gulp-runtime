@@ -498,7 +498,7 @@ runtime.completion(function(){
 
 From that above you can see that the reason for the `runtime.completion` method to exists is so you are able to register dynamic commands for a given handle of your namespace.
 
-# Built ins
+# Built ins[<img alt="progressed.io" src="http://progressed.io/bar/27" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
 > Hey! I'm here for less work! Reading this its feeling quite *boooring*
 
