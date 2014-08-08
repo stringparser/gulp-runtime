@@ -173,7 +173,7 @@ What will be kept as is right now: `handle` and `completion`.
 
 # Thy command `object`
 
-[![progressed.io](http://progressed.io/bar/77)](https://github.com/fehmicansaglam/progressed.io)
+[<img alt="progressed.io" src="http://progressed.io/bar/77" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
 The object above has its own [constructor](../lib/command/constructor.js) but is not exposed directly. Instead is used through the methods below which, are chainable:
 
