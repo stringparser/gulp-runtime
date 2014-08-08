@@ -377,7 +377,7 @@ All of the above with *only* `string` content.
 
 If no arguments given it will output the whole object representing the "namespace" of the runtime. That is, the `object` representing what commands you wrote for your `gulp` day.
 
-<div align="right">
+<p align="right">
 Example: `runtime.get('-v')` of the previous section (or `--version`) would log
 
 ```js
@@ -389,7 +389,7 @@ Example: `runtime.get('-v')` of the previous section (or `--version`) would log
   children: {},
   completion: [] }
 ```
-</div>
+</p>
 
 So now, of course, you want to see the the whole picture of what the above `runtime.set(['-v', '--version'], function(){ ... }` did. For that, log `runtime.get()` with *no* arguments.
 
