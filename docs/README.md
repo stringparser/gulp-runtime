@@ -439,7 +439,57 @@ The arguments of the `handle` are:
   * `args` : the parsed `argv` of what you actually wrote (in this case I've chosen [minimist](https://github.com/substack/minimist), you can use whichever you want, more on that later)
   * `next` : its under development, but you can imagine its use would be to go to the next command, if you wrote
 
-### Example: gulp tasks avaliable on <kbd>Tab</kbd> completion
+**Example**: implementing thy gulp tasks
 
+You don't have to do this, because I already did, but just so you have something to look at here you go:
+
+```js
+
+var gulp = require('gulp');
+var runtime = require('gulp-runtime');
+
+runtime.completion(function(){
+
+  var tasks = Object.keys(gulp.tasks);
+
+  if(tasks.indexOf('default') !== -1)
+    tasks.splice(tasks.indexOf('default'), 1);
+
+  return tasks;
+
+}).handle(function (argv, args, next){
+
+  // the tasks must be on the argv
+  var tasks = argv;
+
+  // nope, the default is forbidden
+  if( tasks.indexOf('default') !== -1){
+    console.log(
+      '[gulp-runtime] '+
+      '"'+chalk.cyan('default')+'" task is not avaliable at runtime.'
+    );
+    tasks.splice(tasks.indexOf('default'), 1);
+  }
+
+  // filter those!
+  tasks = tasks.filter(function(name){
+    return gulp.tasks[name];
+  });
+
+  // are there any?
+  if(tasks[0]){
+
+    tasks.push(function(){
+      // make the prompt reapear
+      runtime.prompt();
+      // clean up!
+      gulp.doneCallback = undefined;
+    });
+
+    // lets go
+    gulp.start.apply(gulp, tasks);
+  }
+
+});
 
 ## Chaining methods
