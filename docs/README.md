@@ -181,14 +181,14 @@ The object above has its own [constructor](../lib/command/constructor.js) but is
   - [`runtime.completion(stems)`](#runtimecompletion-stems)
   - [`runtime.handle(handle)`](#runtimehandle-handle)
 
-By default each use of the `set` method will nest the command one step after the last written command. That means, writting this:
+By default each use of the `set` method will nest the command one step after the last written command. Which means that writting
 
 ```js
 runtime.set('hello', function(argv, args, next){ /*...*/ })
        .set('world', function(argv, args, next){ /*...*/ })
 ```
 
-will result on this `command object`
+results on this `command object`
 
 ```js
 { _name: 'gulp',
