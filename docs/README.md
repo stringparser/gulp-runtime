@@ -3,7 +3,6 @@
   <img align="right" src="./gulp-runtime.png"/>
   - [Overview](#overview)
     - [Fast forward (no jibber jabber, just code)](#fast-forward-)
-      - [Define your commands](#define-your-commands)
   - [Thy Command object](#thy-command-object)
     - [`runtime.set(name, handle)`](#runtimesetname-handle)
     - [`runtime.get([, arguments])`](#runtimeget-arguments)
@@ -40,9 +39,11 @@ If you don't like it, you can [change it](#Interface-methods).
 
 Before the actual API, a *fast forward* section for those like me with no patience for the developer's ego.
 
-## Fast-forward[<img alt="progressed.io" src="http://progressed.io/bar/0" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
+## Fast-forward[<img alt="progressed.io" src="http://progressed.io/bar/2" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
 A null-documented section: just use cases.
+
+  - [Define your commands](#define-your-commands)
 
 - [Fire questions](https://github.com/stringparser/gulp-runtime/issues/new) on what you want to have included here.
 
