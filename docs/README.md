@@ -502,7 +502,7 @@ From that above you can see that the reason for the `runtime.completion` method 
 
 > Hey! I'm here for less work! Reading this its feeling quite *boooring*
 
-As you can see from the above text (who reads documentation? :dance:) at this point you will be wondering what is here already built in for you.
+As you can see from the above text (who reads documentation? :dancer:) at this point you will be wondering what is here already built in for you.
 
 # Chaining methods
 
