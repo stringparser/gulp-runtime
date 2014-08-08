@@ -41,7 +41,7 @@ Before the actual API, a *fast forward* section for those like me with no patien
 
 # Fast-forward[<img alt="progressed.io" src="http://progressed.io/bar/2" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
-> [Fire questions](https://github.com/stringparser/gulp-runtime/issues/new) on what you want to have included here.
+> [Fire questions](https://github.com/stringparser/gulp-runtime/issues/new) for what you want to see here.
 
 An approaching `null` documented section, just use cases:
 
