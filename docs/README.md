@@ -173,10 +173,10 @@ What will be kept as is right now: `handle` and `completion`.
 
 The object above has its own [constructor](../lib/command/constructor.js) but is not exposed directly. Instead is used through the methods below which, are chainable:
 
-    - [`runtime.set(name, handle)`](#runtimesetname-handle)
-    - [`runtime.get([, arguments])`](#runtimeget-arguments)
-    - [`runtime.completion(stems)`](#runtimecompletion-stems)
-    - [`runtime.handle(handle)`](#runtimehandle-handle)
+  - [`runtime.set(name, handle)`](#runtimesetname-handle)
+  - [`runtime.get([, arguments])`](#runtimeget-arguments)
+  - [`runtime.completion(stems)`](#runtimecompletion-stems)
+  - [`runtime.handle(handle)`](#runtimehandle-handle)
 
 By default each use of the `set` method will nest the command one step after the last written command. That means, writting this:
 
