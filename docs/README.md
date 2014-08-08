@@ -3,7 +3,7 @@
   <img align="right" src="./gulp-runtime.png"/>
   - [Overview](#overview)
     - [Fast forward (no jibber jabber, just code)](#fast-forward-)
-    - [Define your commands](#command)
+    - [Define your commands](#define-your-commands)
   - [Thy Command object](#thy-command-object)
     - [`runtime.set(name, handle)`](#runtimesetname-handle)
     - [`runtime.get([, arguments])`](#runtimeget-arguments)
@@ -48,7 +48,7 @@ A null-documented section: just use cases.
 
 Now to the actual API.
 
-## Command
+## Define your commands
 
 > Ok, ok, enough!!
 
