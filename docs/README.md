@@ -43,7 +43,7 @@ Before the actual API, a *fast forward* section for those like me with no patien
 
 A null-documented section: just use cases.
 
-[Fire questions](../issues/new) on what you want to have included here.
+[Fire questions](https://github.com/stringparser/gulp-runtime/issues/new) on what you want to have included here.
 
 Now to the actual API.
 
