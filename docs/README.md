@@ -47,6 +47,8 @@ An approaching `null` documented section, just use cases:
 
   - [Define your commands](#define-your-commands)
 
+<hr>
+
   ## Define your commands
 
   > Ok, ok, enough!!
@@ -167,6 +169,8 @@ An approaching `null` documented section, just use cases:
   The structure of the object above can change with time because I don't know if there could be a better way to do things.
 
   What will be kept as is right now: `handle` and `completion`.
+
+<hr>
 
 Ok, now to the actual API.
 
