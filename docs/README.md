@@ -253,7 +253,7 @@ Simple, right?
 
 Either of the above uses will nest/unnest all commands *forever* on that instance. I want to change that to the case when only it will happen when you chain methods, but not on the next chained method calls.
 
-What I have found a way at the moment, which I like, but its a little verbose for me.
+The workaround I have found at the moment, which I like, is:
 
 ```js
 // Remember, by default all commands will be chained after the first `set` call
