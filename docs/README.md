@@ -493,5 +493,6 @@ runtime.completion(function(){
   }
 
 });
+```
 
 ## Chaining methods
