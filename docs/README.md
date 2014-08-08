@@ -530,7 +530,7 @@ runtime
   .completion('blah')
   .handle(function(){})
   .set('...', function(){});
-  // ohne end... with `set`, `get`, `handle`, `completion`
+  // ohne end... with `set`, `get`, `handle` & `completion`
 ```
 
 Will have no problem, while
