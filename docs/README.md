@@ -212,15 +212,17 @@ will result on this `command object`
   completion: [ 'hello' ] }
 ```
 
-The `hello` handle will only be run if you write `hello` and the `world` handle will be run if you write `hello world`. As you also can see the completion of that command was also filled in. If you like to unnest just write.
+The `hello` handle will only be called if you write `hello` and the `world` handle will be invoked if you write `hello world`. As you also can see the completion is already there.
+
+How to unnest?
 
 ```js
-runtime({ nested : false})
+runtime({ nested : false })
   .set('hello', function(argv, args, next){ /*...*/ })
   .set('world', function(argv, args, next){ /*...*/ })
 ```
 
-will results in
+will result in
 
 ```js
 { _name: 'gulp',
@@ -249,6 +251,24 @@ will results in
 
 Simple, right?
 
+Either of the above uses will nest/unnest all commands *forever* on that instance. I want to change that to the case when only it will happen when you chain methods, but not on the next chained method calls.
+
+What I have found a way at the moment, which I like, but its a little verbose for me.
+
+```js
+// Remember, by default all commands will be chained after the first `set` call
+
+runtime.set('hello', function(argv, args, next){ /*...*/ })
+       .set('world', function(argv, args, next){ /*...*/ })
+       .get('hello')  // goes to the first command again
+       .set('mundo', function(argv, args, next){ /*...*/ })
+```
+
+with that you'll get
+
+```js
+
+```
 ## runtime.set(name, handle)
 
 Assigns command(s) `name` to a `function`.
