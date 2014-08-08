@@ -2,7 +2,7 @@
 
   <img align="right" src="./gulp-runtime.png"/>
   - [Overview](#overview)
-    - [Fast forward (no jibber jabber, just code)](#fast-forward-)
+  - [Fast forward (no jibber jabber, just code)](#fast-forward)
   - [Thy Command object](#thy-command-object)
     - [`runtime.set(name, handle)`](#runtimesetname-handle)
     - [`runtime.get([, arguments])`](#runtimeget-arguments)
@@ -39,7 +39,7 @@ If you don't like it, you can [change it](#Interface-methods).
 
 Before the actual API, a *fast forward* section for those like me with no patience for the developer's ego.
 
-## Fast-forward[<img alt="progressed.io" src="http://progressed.io/bar/2" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
+# Fast-forward[<img alt="progressed.io" src="http://progressed.io/bar/2" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
 An approaching `null` documented section: just use cases.
 
@@ -51,7 +51,7 @@ An approaching `null` documented section: just use cases.
 
 > ... how do I write *my own* commands?
 
-### Define your commands
+## Define your commands
 
 In fact is very simple. I've spent some time to make it as simple and fast as I can.
 
