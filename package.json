@@ -22,13 +22,9 @@
     "tool"
   ],
   "dependencies": {
-
-    "chalk": "^0.5.1",
     "gulp": "~3.8.6",
     "gulp-util": "~2.2.20",
-    "minimist": "~0.2.0",
     "runtime": "^0.1.0",
-    "utils-merge": "~1.0.0"
   },
   "devDependencies": {
     "should": "~4.0.4"
