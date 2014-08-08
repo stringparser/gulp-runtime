@@ -267,8 +267,40 @@ runtime.set('hello', function(argv, args, next){ /*...*/ })
 with that you'll get
 
 ```js
-
+{ _name: 'gulp',
+  _depth: 0,
+  _parent: 'gulp',
+  aliases: {},
+  children:
+   { hello:
+      { handle: [Function],
+        _name: 'hello',
+        _depth: 1,
+        _parent: 'gulp',
+        aliases: {},
+        children:
+         { world:
+            { handle: [Function],
+              _name: 'world',
+              _depth: 2,
+              _parent: 'hello',
+              aliases: {},
+              children: {},
+              completion: [] },
+           mundo:
+            { handle: [Function],
+              _name: 'mundo',
+              _depth: 2,
+              _parent: 'hello',
+              aliases: {},
+              children: {},
+              completion: [] } },
+        completion: [ 'world', 'mundo' ] } },
+  completion: [ 'hello' ] }
 ```
+
+Nice, right? :)
+
 ## runtime.set(name, handle)
 
 Assigns command(s) `name` to a `function`.
