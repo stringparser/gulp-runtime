@@ -8,13 +8,14 @@
     - [`runtime.get([, arguments])`](#runtimeget-arguments)
     - [`runtime.completion(stems)`](#runtimecompletion-stems)
     - [`runtime.handle(handle)`](#runtimehandle-handle)
-    - [Chaining `set`, `get`, `completion` and `handle` methods](#chaining-methods)
+  - [Chaining methods](#chaining-methods)
   - [Built-in commands](#Built-ins)
   - [Runtime interface methods](#Interface-methods)
-  - [Events](#Events)
   - [`Runtime` constructor](#Review)
     - [Instance's](#Instance's) (instance props and methods)
-    - [Runtime.prototype](#Runtime.prototype)
+    - [Runtime.prototype](#runtimeprototype)
+    - [Events](#Events)
+  - [The gut](#the-gut)
 
 
 # Overview
@@ -172,7 +173,7 @@ An approaching `null` documented section, just use cases:
 
 Ok, now to the actual API.
 
-# Thy command `object`[<img alt="progressed.io" src="http://progressed.io/bar/77" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
+# Thy command `object`[<img alt="progressed.io" src="http://progressed.io/bar/88" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
 The object above has its own [constructor](../lib/command/constructor.js) but is not exposed directly. Instead is used through the methods below which, are chainable:
 
@@ -304,7 +305,7 @@ with that you'll get
 
 Nice, right? :)
 
-Now the description of these `methods`.
+Now the description of these Command `methods`.
 
 ## runtime.set(name, handle)
 
@@ -432,7 +433,7 @@ An example for this will be given in the next subsection.
 
 Assign a function to a command in the current node of the runtime namespace.
 
-`handle` is, and only can be, a `function` (maybe a generator in the future?)
+ - `handle` is, and only can be, a `function` (maybe a generator in the future?)
 
 The arguments of the `handle` are:
   * `argv` : `array` of the things you wrote on the terminal minus all the parameters (numbers, etc).
@@ -497,4 +498,51 @@ runtime.completion(function(){
 
 From that above you can see that the reason for the `runtime.completion` method to exists is so you are able to register dynamic commands for a given handle of your namespace.
 
-## Chaining methods
+# Chaining methods
+
+I have mentioned it on the above but its better to be clear and not to create more confusion.
+
+Some methods are visible to chain all the time and others aren't.
+
+All the time:
+ - `runtime.set`
+ - `runtime.get`
+ - `runtime.handle`
+ - `runtime.completion`
+
+If none of the above was used on the previous step of the chain:
+ - `runtime.config` or its alias the `runtime` function
+ - `runtime.require`
+ - `runtime.setPrompt`
+ - `runtime.prompt`
+ - `runtime.lexer`
+ - `runtime.parser`
+ - `runtime.consumer`
+ - `runtime.completer`
+ - `runtime.waiting`
+ - `runtime.onStartup`
+
+That is:
+```js
+runtime
+  .set('blah', fuction(){}
+  .get('blah')
+  .completion('blah')
+  .handle(function(){})
+  .set('...', function(){})
+  // ohne end...
+```
+
+Will have no problem, while
+
+```js
+runtime
+  .onStart(function(){})
+  .set('grog', function(){ console.log('yargs!') })
+  // error will be thrown here
+  .waiting('event', function())
+```
+
+will throw an error.
+
+The reason for this is that one will want to have different instances of the runtime but the commands setted and getted, completed and handled of course you want to share accross instances with the same "name" (or namespace) so thats the reason why.
