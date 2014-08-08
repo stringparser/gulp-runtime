@@ -47,126 +47,126 @@ An approaching `null` documented section, just use cases:
 
   - [Define your commands](#define-your-commands)
 
-## Define your commands
+  ## Define your commands
 
-> Ok, ok, enough!!
+  > Ok, ok, enough!!
 
-> ... how do I write *my own* commands?
+  > ... how do I write *my own* commands?
 
-In fact is very simple. I've spent some time to make it as simple and fast as I can.
+  In fact is very simple. I've spent some time to make it as simple and fast as I can.
 
-> Show me the code.
+  > Show me the code.
 
-...all right. This is how one would write the *whole* gulp cli namespace
+  ...all right. This is how one would write the *whole* gulp cli namespace
 
-```js
-var runtime = require('gulp-runtime');
+  ```js
+  var runtime = require('gulp-runtime');
 
-runtime({ nested : false })
-  .set('--cwd', function(argv, args, next){ /*...*/ })
-  .set('--silent', function(argv, args, next){ /*...*/ })
-  .set('--require', function(argv, args, next){ /*...*/ })
-  .set('--gulfile', function(argv, args, next){ /*...*/ })
-  .set(['-v', '--version'], function(argv, args, next){ /*...*/ })
-  .set(['--color', '--no-color'], function(argv, args, next){ /*...*/ })
-  .set(['-T','--tasks', '--tasks-simple'], function(argv, args, next){ /*...*/ })
-```
+  runtime({ nested : false })
+    .set('--cwd', function(argv, args, next){ /*...*/ })
+    .set('--silent', function(argv, args, next){ /*...*/ })
+    .set('--require', function(argv, args, next){ /*...*/ })
+    .set('--gulfile', function(argv, args, next){ /*...*/ })
+    .set(['-v', '--version'], function(argv, args, next){ /*...*/ })
+    .set(['--color', '--no-color'], function(argv, args, next){ /*...*/ })
+    .set(['-T','--tasks', '--tasks-simple'], function(argv, args, next){ /*...*/ })
+  ```
 
- * `argv` : `array` of the things you wrote on the terminal minus all the parameters (numbers, etc).
- * `args` : the parsed `argv` of what you actually wrote (in this case I've chosen [minimist](https://github.com/substack/minimist), you can use whichever you want, more on that later)
- * `next` : its under development, but you can imagine its use would be to go to the next command, if you wrote
+   * `argv` : `array` of the things you wrote on the terminal minus all the parameters (numbers, etc).
+   * `args` : the parsed `argv` of what you actually wrote (in this case I've chosen [minimist](https://github.com/substack/minimist), you can use whichever you want, more on that later)
+   * `next` : its under development, but you can imagine its use would be to go to the next command, if you wrote
 
- > command0 command1 command2
+   > command0 command1 command2
 
-and you are on `command0`, it would take you to `command1`.
+  and you are on `command0`, it would take you to `command1`.
 
-But I insist: *it will change*.
+  But I insist: *it will change*.
 
-One thing, all the code above, has generated this `command object`.
+  One thing, all the code above, has generated this `command object`.
 
-```js
-{ _name: 'gulp',
-  _depth: 0,
-  _parent: 'gulp',
-  aliases:
-   { '--version': '-v',
-     '--no-color': '--color',
-     '--tasks': '-T',
-     '--tasks-simple': '-T' },
-  children:
-   { '--cwd':
-      { handle: [Function],
-        _name: '--cwd',
-        _depth: 1,
-        _parent: 'gulp',
-        aliases: {},
-        children: {},
-        completion: [] },
-     '--silent':
-      { handle: [Function],
-        _name: '--silent',
-        _depth: 1,
-        _parent: 'gulp',
-        aliases: {},
-        children: {},
-        completion: [] },
-     '--require':
-      { handle: [Function],
-        _name: '--require',
-        _depth: 1,
-        _parent: 'gulp',
-        aliases: {},
-        children: {},
-        completion: [] },
-     '--gulfile':
-      { handle: [Function],
-        _name: '--gulfile',
-        _depth: 1,
-        _parent: 'gulp',
-        aliases: {},
-        children: {},
-        completion: [] },
-     '-v':
-      { handle: [Function],
-        _name: '-v',
-        _depth: 1,
-        _parent: 'gulp',
-        aliases: {},
-        children: {},
-        completion: [] },
-     '--color':
-      { handle: [Function],
-        _name: '--color',
-        _depth: 1,
-        _parent: 'gulp',
-        aliases: {},
-        children: {},
-        completion: [] },
-     '-T':
-      { handle: [Function],
-        _name: '-T',
-        _depth: 1,
-        _parent: 'gulp',
-        aliases: {},
-        children: {},
-        completion: [] } },
-  completion:
-   [ '--cwd',
-     '--silent',
-     '--require',
-     '--gulfile',
-     '-v',
-     '--version',
-     '--color',
-     '--no-color',
-     '-T',
-     '--tasks',
-     '--tasks-simple' ] }
-```
+  ```js
+  { _name: 'gulp',
+    _depth: 0,
+    _parent: 'gulp',
+    aliases:
+     { '--version': '-v',
+       '--no-color': '--color',
+       '--tasks': '-T',
+       '--tasks-simple': '-T' },
+    children:
+     { '--cwd':
+        { handle: [Function],
+          _name: '--cwd',
+          _depth: 1,
+          _parent: 'gulp',
+          aliases: {},
+          children: {},
+          completion: [] },
+       '--silent':
+        { handle: [Function],
+          _name: '--silent',
+          _depth: 1,
+          _parent: 'gulp',
+          aliases: {},
+          children: {},
+          completion: [] },
+       '--require':
+        { handle: [Function],
+          _name: '--require',
+          _depth: 1,
+          _parent: 'gulp',
+          aliases: {},
+          children: {},
+          completion: [] },
+       '--gulfile':
+        { handle: [Function],
+          _name: '--gulfile',
+          _depth: 1,
+          _parent: 'gulp',
+          aliases: {},
+          children: {},
+          completion: [] },
+       '-v':
+        { handle: [Function],
+          _name: '-v',
+          _depth: 1,
+          _parent: 'gulp',
+          aliases: {},
+          children: {},
+          completion: [] },
+       '--color':
+        { handle: [Function],
+          _name: '--color',
+          _depth: 1,
+          _parent: 'gulp',
+          aliases: {},
+          children: {},
+          completion: [] },
+       '-T':
+        { handle: [Function],
+          _name: '-T',
+          _depth: 1,
+          _parent: 'gulp',
+          aliases: {},
+          children: {},
+          completion: [] } },
+    completion:
+     [ '--cwd',
+       '--silent',
+       '--require',
+       '--gulfile',
+       '-v',
+       '--version',
+       '--color',
+       '--no-color',
+       '-T',
+       '--tasks',
+       '--tasks-simple' ] }
+  ```
 
-The structure of the object above can change with time because I don't know if there could be a better way to do things.
+  The structure of the object above can change with time because I don't know if there could be a better way to do things.
 
-What will be kept as is right now: `handle` and `completion`.
+  What will be kept as is right now: `handle` and `completion`.
 
 Ok, now to the actual API.
 
