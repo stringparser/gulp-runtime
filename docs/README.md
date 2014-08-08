@@ -3,7 +3,7 @@
   <img align="right" src="./gulp-runtime.png"/>
   - [Overview](#overview)
     - [Fast forward (no jibber jabber, just code)](#fast-forward-)
-    - [Define your commands](#define-your-commands)
+      - [Define your commands](#define-your-commands)
   - [Thy Command object](#thy-command-object)
     - [`runtime.set(name, handle)`](#runtimesetname-handle)
     - [`runtime.get([, arguments])`](#runtimeget-arguments)
@@ -44,13 +44,13 @@ Before the actual API, a *fast forward* section for those like me with no patien
 
 A null-documented section: just use cases.
 
-[Fire questions](https://github.com/stringparser/gulp-runtime/issues/new) on what you want to have included here.
-
-### Define your commands
+- [Fire questions](https://github.com/stringparser/gulp-runtime/issues/new) on what you want to have included here.
 
 > Ok, ok, enough!!
 
 > ... how do I write *my own* commands?
+
+### Define your commands
 
 In fact is very simple. I've spent some time to make it as simple and fast as I can.
 
