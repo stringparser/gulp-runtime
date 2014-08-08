@@ -46,7 +46,7 @@ A null-documented section: just use cases.
 
 [Fire questions](https://github.com/stringparser/gulp-runtime/issues/new) on what you want to have included here.
 
-## Define your commands
+### Define your commands
 
 > Ok, ok, enough!!
 
