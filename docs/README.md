@@ -498,6 +498,12 @@ runtime.completion(function(){
 
 From that above you can see that the reason for the `runtime.completion` method to exists is so you are able to register dynamic commands for a given handle of your namespace.
 
+# Built ins
+
+> Hey! I'm here for less work! Reading this its feeling quite *boooring*
+
+As you can see from the above text (who reads documentation? :dance:) at this point you will be wondering what is here already built in for you.
+
 # Chaining methods
 
 I have mentioned it above but just slightly so its better to be clear and not to create more confusion.
@@ -546,5 +552,3 @@ runtime
 will throw an error.
 
 The reason for this is that one will want to have different instances of the runtime but the commands setted and getted, completed and handled for the *same runtime_name* you want to share of course accross instances. The solution for this was to create a separate *Command* constructor that will handle how commands are defined and accessed but I wanted to keep the same interface for the code so even though it looks like the same object those 4 methods `set`, `get`, `handle` & `completion` come from a different constructor.
-
-# Built ins
