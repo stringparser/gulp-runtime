@@ -495,4 +495,6 @@ runtime.completion(function(){
 });
 ```
 
+From that above you can see that the reason for the `runtime.completion` method to exists is so you are able to register dynamic commands for a given handle of your namespace.
+
 ## Chaining methods
