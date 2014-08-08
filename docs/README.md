@@ -47,11 +47,11 @@ An approaching `null` documented section, just use cases:
 
   - [Define your commands](#define-your-commands)
 
+## Define your commands
+
 > Ok, ok, enough!!
 
 > ... how do I write *my own* commands?
-
-## Define your commands
 
 In fact is very simple. I've spent some time to make it as simple and fast as I can.
 
