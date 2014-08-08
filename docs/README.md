@@ -1,4 +1,4 @@
-# Thy docs [![progressed.io](http://progressed.io/bar/53)](http://progressed.io/bar/33)
+# Thy docs [![progressed.io](http://progressed.io/bar/53)](https://github.com/fehmicansaglam/progressed.io)
 
   <img align="right" src="./gulp-runtime.png"/>
   - [Overview](#overview)
@@ -8,7 +8,7 @@
     - [`runtime.get([, arguments])`](#runtimeget-arguments)
     - [`runtime.completion(stems)`](#runtimecompletion-stems)
     - [`runtime.handle(handle)`](#runtimehandle-handle)
-    - [Chaining `set`, `get`, `handle` and `completion` methods](#chaining-methods)
+    - [Chaining `set`, `get`, `completion` and `handle` methods](#chaining-methods)
   - [Built-in commands](#Built-ins)
   - [Runtime interface methods](#Interface-methods)
   - [Events](#Events)
@@ -36,6 +36,18 @@ And that's it for now. When you run `gulp` the runtime interface will run and *w
 ```
 
 If you don't like it, you can [change it](#Interface-methods).
+
+Before the actual API, a *fast forward* section for those like me with no patience for the developer's ego.
+
+# Fast-forward
+
+A null-documented section: just use cases.
+
+On progress: [![progressed.io](http://progressed.io/bar/0)](https://github.com/fehmicansaglam/progressed.io)
+
+[Fire questions](../issues/new) on what you want to have included here.
+
+Now to the actual API.
 
 # Command
 
@@ -157,18 +169,6 @@ One thing, all the code above, has generated this `command object`.
 The structure of the object above can change with time because I don't know if there could be a better way to do things.
 
 What will be kept as is right now: `handle` and `completion`.
-
-Before the actual API, a *fast forward* section for those like me with no patience for the developer's ego.
-
-# Fast-forward
-
-A null-documented section: just use cases.
-
-On progress: [![progressed.io](http://progressed.io/bar/53)](http://progressed.io/bar/0)
-
-[Fire questions](../issues/new) on what you want to have included here.
-
-Now to the actual API.
 
 # The `Command` object
 
