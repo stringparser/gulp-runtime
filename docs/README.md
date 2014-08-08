@@ -40,9 +40,7 @@ If you don't like it, you can [change it](#Interface-methods).
 
 Before the actual API, a *fast forward* section for those like me with no patience for the developer's ego.
 
-## Fast-forward
-
-[![progressed.io](http://progressed.io/bar/0)](https://github.com/fehmicansaglam/progressed.io)
+## Fast-forward[<img alt="progressed.io" src="http://progressed.io/bar/0" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
 A null-documented section: just use cases.
 
@@ -171,9 +169,7 @@ The structure of the object above can change with time because I don't know if t
 
 What will be kept as is right now: `handle` and `completion`.
 
-# Thy command `object`
-
-[<img alt="progressed.io" src="http://progressed.io/bar/77" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
+# Thy command `object`[<img alt="progressed.io" src="http://progressed.io/bar/77" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
 The object above has its own [constructor](../lib/command/constructor.js) but is not exposed directly. Instead is used through the methods below which, are chainable:
 
