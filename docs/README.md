@@ -1,4 +1,4 @@
-# Thy docs
+# Thy docs[<img alt="progressed.io" src="http://progressed.io/bar/33" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
   <img align="right" src="./gulp-runtime.png"/>
   - [Overview](#overview)
