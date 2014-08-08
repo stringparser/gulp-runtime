@@ -4,7 +4,7 @@
 [![NPM version](https://badge.fury.io/js/gulp-runtime.svg)](http://badge.fury.io/js/gulp-runtime)
 [![LICENSE](http://img.shields.io/packagist/l/doctrine/orm.svg)](http://opensource.org/licenses/MIT)
 
- Want to use gulp whilst is running?
+Use gulp whilst is running
 
  ```
  npm install gulp-runtime --save-dev
