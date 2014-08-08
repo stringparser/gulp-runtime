@@ -304,6 +304,8 @@ with that you'll get
 
 Nice, right? :)
 
+Now the description of these `methods`.
+
 ## runtime.set(name, handle)
 
 Assigns command(s) `name` to a `function`.
