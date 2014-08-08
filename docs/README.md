@@ -46,8 +46,6 @@ A null-documented section: just use cases.
 
 [Fire questions](https://github.com/stringparser/gulp-runtime/issues/new) on what you want to have included here.
 
-Now to the actual API.
-
 ## Define your commands
 
 > Ok, ok, enough!!
@@ -168,6 +166,8 @@ One thing, all the code above, has generated this `command object`.
 The structure of the object above can change with time because I don't know if there could be a better way to do things.
 
 What will be kept as is right now: `handle` and `completion`.
+
+Ok, now to the actual API.
 
 # Thy command `object`[<img alt="progressed.io" src="http://progressed.io/bar/77" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
