@@ -445,13 +445,15 @@ You don't have to do this, because I already did, but just so you have something
 
 ```js
 
-var gulp = require('gulp');
-var runtime = require('gulp-runtime');
+var gulp = require('gulp'),
+    chalk = require('gulp-util').colors,
+    runtime = require('gulp-runtime');
 
 runtime.completion(function(){
 
   var tasks = Object.keys(gulp.tasks);
 
+  // respect
   if(tasks.indexOf('default') !== -1)
     tasks.splice(tasks.indexOf('default'), 1);
 
@@ -462,7 +464,7 @@ runtime.completion(function(){
   // the tasks must be on the argv
   var tasks = argv;
 
-  // nope, the default is forbidden
+  // nope, the `default` is forbidden
   if( tasks.indexOf('default') !== -1){
     console.log(
       '[gulp-runtime] '+
