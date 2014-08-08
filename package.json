@@ -27,6 +27,7 @@
     "gulp": "~3.8.6",
     "gulp-util": "~2.2.20",
     "minimist": "~0.2.0",
+    "spin-off": "0.0.10",
     "utils-merge": "~1.0.0"
   },
   "devDependencies": {
