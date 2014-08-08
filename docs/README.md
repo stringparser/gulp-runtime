@@ -6,8 +6,8 @@
   - [Thy Command object](#thy-command-object)
     - [`runtime.set(name, handle)`](#runtimesetname-handle)
     - [`runtime.get([, arguments])`](#runtimeget-arguments)
-    - [`runtime.completion(stems)`](#runtimecompletion-stems)
-    - [`runtime.handle(handle)`](#runtimehandle-handle)
+    - [`runtime.completion(stems)`](#runtimecompletionstems)
+    - [`runtime.handle(handle)`](#runtimehandlefunction-handleargv-args-next)
   - [Chaining methods](#chaining-methods)
   - [Built-in commands](#Built-ins)
   - [Runtime interface methods](#Interface-methods)
@@ -529,8 +529,8 @@ runtime
   .get('blah')
   .completion('blah')
   .handle(function(){})
-  .set('...', function(){})
-  // ohne end...
+  .set('...', function(){});
+  // ohne end... with `set`, `get`, `handle`, `completion`
 ```
 
 Will have no problem, while
@@ -540,9 +540,11 @@ runtime
   .onStart(function(){})
   .set('grog', function(){ console.log('yargs!') })
   // error will be thrown here
-  .waiting('event', function())
+  .waiting('event', function());
 ```
 
 will throw an error.
 
 The reason for this is that one will want to have different instances of the runtime but the commands setted and getted, completed and handled of course you want to share accross instances with the same "name" (or namespace) so thats the reason why.
+
+# Built ins
