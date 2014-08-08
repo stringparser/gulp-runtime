@@ -188,7 +188,7 @@ runtime.set('hello', function(argv, args, next){ /*...*/ })
        .set('world', function(argv, args, next){ /*...*/ })
 ```
 
-results on this `command object`
+results on this `command`
 
 ```js
 { _name: 'gulp',
