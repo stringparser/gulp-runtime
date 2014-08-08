@@ -17,7 +17,7 @@
     - [Runtime.prototype](#Runtime.prototype)
 
 
-# Overview
+# Overview [![progressed.io](http://progressed.io/bar/100)](https://github.com/fehmicansaglam/progressed.io)
 
 The aim of the project is to provide a simple way to hook into the runtime of your code, in this case `gulp`, by meanings of writing *custom commands*. A repl or cli, if you will. That is: instead of ending after the process has begun, it keeps waiting for `stdin` after it's start.
 
@@ -39,11 +39,9 @@ If you don't like it, you can [change it](#Interface-methods).
 
 Before the actual API, a *fast forward* section for those like me with no patience for the developer's ego.
 
-# Fast-forward
+# Fast-forward [![progressed.io](http://progressed.io/bar/0)](https://github.com/fehmicansaglam/progressed.io)
 
 A null-documented section: just use cases.
-
-On progress: [![progressed.io](http://progressed.io/bar/0)](https://github.com/fehmicansaglam/progressed.io)
 
 [Fire questions](../issues/new) on what you want to have included here.
 
