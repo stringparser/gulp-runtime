@@ -2,8 +2,9 @@
 
   <img align="right" src="./gulp-runtime.png"/>
   - [Overview](#overview)
-  - [Fast forward (no jibber jabber, just code)](#fast-forward)
-  - [Define your commands](#the-command-object)
+    - [Fast forward (no jibber jabber, just code)](#fast-forward)
+    - [Define your commands](#command)
+  - [Thy Command object](#thy-command-object)
     - [`runtime.set(name, handle)`](#runtimesetname-handle)
     - [`runtime.get([, arguments])`](#runtimeget-arguments)
     - [`runtime.completion(stems)`](#runtimecompletion-stems)
@@ -39,7 +40,7 @@ If you don't like it, you can [change it](#Interface-methods).
 
 Before the actual API, a *fast forward* section for those like me with no patience for the developer's ego.
 
-# Fast-forward [![progressed.io](http://progressed.io/bar/0)](https://github.com/fehmicansaglam/progressed.io)
+## Fast-forward [![progressed.io](http://progressed.io/bar/0)](https://github.com/fehmicansaglam/progressed.io)
 
 A null-documented section: just use cases.
 
@@ -47,7 +48,7 @@ A null-documented section: just use cases.
 
 Now to the actual API.
 
-# Command [![progressed.io](http://progressed.io/bar/80)](https://github.com/fehmicansaglam/progressed.io)
+## Command [![progressed.io](http://progressed.io/bar/80)](https://github.com/fehmicansaglam/progressed.io)
 
 > Ok, ok, enough!!
 
@@ -168,7 +169,7 @@ The structure of the object above can change with time because I don't know if t
 
 What will be kept as is right now: `handle` and `completion`.
 
-# The `Command` object
+# Thy Command `object`
 
 The object above has its own [constructor](../lib/command/constructor.js) but is not exposed directly. Instead is used through the methods below which, are chainable:
 
