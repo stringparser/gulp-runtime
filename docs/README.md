@@ -504,6 +504,13 @@ From that above you can see that the reason for the `runtime.completion` method 
 
 As you can see from the above text (who reads documentation? :dancer:) at this point you will be wondering what is here already built in for you.
 
+ - The gulp runtime cli (review pending).
+ - All the tasks you set on your gulpfile.
+
+Completion for the above is also there automaticly for ya.
+
+And *yes*, I had to "rewrite" the cli of `gulp`. They were two solutions: spawn a child process or copy-paste/reimplement it. So I did the latter.
+
 # Chaining methods
 
 I have mentioned it above but just slightly so its better to be clear and not to create more confusion.
