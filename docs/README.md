@@ -41,11 +41,11 @@ Before the actual API, a *fast forward* section for those like me with no patien
 
 # Fast-forward[<img alt="progressed.io" src="http://progressed.io/bar/2" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
-An approaching `null` documented section: just use cases.
+> [Fire questions](https://github.com/stringparser/gulp-runtime/issues/new) on what you want to have included here.
+
+An approaching `null` documented section, just use cases:
 
   - [Define your commands](#define-your-commands)
-
-- [Fire questions](https://github.com/stringparser/gulp-runtime/issues/new) on what you want to have included here.
 
 > Ok, ok, enough!!
 
