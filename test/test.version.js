@@ -10,7 +10,7 @@ runtime.set('first', function First(){
 }).version('0.0.1', 'first command');
 
 var command = runtime.get('first');
-var version = command.version;
+var version = runtime.get().version;
 
 function makeTests(cb){
 
