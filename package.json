@@ -24,7 +24,7 @@
   "dependencies": {
     "gulp": "~3.8.6",
     "gulp-util": "~2.2.20",
-    "runtime": "^0.1.7"
+    "runtime": "^0.1.8"
   },
   "devDependencies": {
     "should": "~4.0.4"
