@@ -9,14 +9,17 @@ Use gulp whilst is running
  ```
  npm install gulp-runtime --save-dev
  ```
-
-<b>Implementation status: making the docs</b>
-
 See the [todo](#todo) for a list of features planned.
 
-Time to make the documentation? === Now.
+<hr>
 
-*Want some coffee?* I loove coffee.
+<b>Implementation status: refactor</b>
+
+I've decided to move the main functionality to another repo since the package can be used as a runtime interface, not only `gulp`, but for whatever package one would like to use.
+
+Check out the [runtime](http://github.com/stringparser/runtime) repo for that.
+
+I keep making the docs after some testing, since the API feels to be a little more solid now.
 
 ## Usage
  - On progress [documentation](./docs)
