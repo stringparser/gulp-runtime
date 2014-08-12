@@ -2,7 +2,7 @@
 [![Travis status](https://travis-ci.org/stringparser/gulp-runtime.svg?branch=master)](https://travis-ci.org/stringparser/gulp-runtime/builds)
 [![Code Climate](https://codeclimate.com/github/stringparser/gulp-runtime.png)](https://codeclimate.com/github/stringparser/gulp-runtime)
 [![NPM version](https://badge.fury.io/js/gulp-runtime.svg)](http://badge.fury.io/js/gulp-runtime)
-[![LICENSE](http://img.shields.io/packagist/l/doctrine/orm.svg)](http://opensource.org/licenses/MIT)
+[<img alt="LICENSE" src="http://img.shields.io/packagist/l/doctrine/orm.svg" align="right"/>)](http://opensource.org/licenses/MIT)
 
 Use gulp whilst is running
 
