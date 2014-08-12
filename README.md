@@ -110,9 +110,9 @@ Start dancing!
     * [`readline`](http://nodejs.org/api/readline.html) to the rescue. It even provides completion options!
  - [ ] API documentation.
  - [ ] Follow `gulp` plugin integration (log, errors, etc.)
- - [ ] Include all taks inside a folder.
- - [ ] Display task code directly on the terminal.
- - [ ] Highlight task code accordingly.
+ - [X] Include all taks inside a folder.
+ - [X] Display task code directly on the terminal.
+ - [X] Highlight task code accordingly.
     * Thanks to the awesome [dominic tarr's `ansi-higlight`](https://github.com/dominictarr/ansi-highlight).
  - [ ] Write tests.
  - [ ] Provide `real life` examples.
