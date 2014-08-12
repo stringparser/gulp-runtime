@@ -8,8 +8,7 @@
     "url": "https://github.com/stringparser/gulp-runtime"
   },
   "scripts": {
-    "start": "node index.js",
-    "test": "make test"
+    "start": "node index.js"
   },
   "keywords": [
     "gulp",
