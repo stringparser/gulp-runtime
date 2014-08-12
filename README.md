@@ -9,20 +9,30 @@ Use gulp whilst is running
  ```
  npm install gulp-runtime --save-dev
  ```
-See the [todo](#todo) for a list of features planned.
+
+[Go straight to usage](#usage) or see the [todo](#todo) for a list of features planned.
+
+> On progress [documentation](./docs)
 
 <hr>
 
-<b>Implementation status: refactor</b>
+<b>Implementation status: before testing</b>
 
-I've decided to move the main functionality to another repo since the package can be used as a runtime interface, not only `gulp`, but for whatever package one would like to use.
+I'll be adding the last features of the [todo](#todo) to start stabilizing the project and wait for more bugs to come.
+
+Also, I want to add that I've decided to move the main functionality to another repo since the package can be used as a runtime interface not only `gulp`, but for whatever package one would like to use or none, thats your decision *:)*.
 
 Check out the [runtime](http://github.com/stringparser/runtime) repo for that.
 
-I keep making the docs after some testing, since the API feels to be a little more solid now.
+I've started with the tests there and will be back and forth between here and there.
 
-## Usage
- - On progress [documentation](./docs)
+What is left? The features (not much at the moment) tests and better docs.
+
+> No more wording: *go code already :D*.
+
+# Usage
+
+> Features at the moment: runtime `gulp` cli/repl, command completion and nice task logging right there on your terminal (with and without color).
 
 Just require the module
 
@@ -31,7 +41,7 @@ Just require the module
  var runtime = require('gulp-runtime');
 ```
 
-At runtime, when you want to see the prompt, press `enter`.
+At runtime, after the `default` tasks has finished a prompt will appear.
 
 ```bash
 [13:07:50] Starting 'default'...
@@ -39,6 +49,8 @@ At runtime, when you want to see the prompt, press `enter`.
 [13:07:50] Finished 'default' after 800 μs
  > gulp
 ```
+Or also, when you want to see the prompt, press `enter`.
+
 At the moment you can use the `gulp` cli without exiting the process.
 
 For example, the task tree (or other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
@@ -53,7 +65,14 @@ For example, the task tree (or other [`gulp` cli commands](https://github.com/gu
 [13:07:51]   ├── css
 [13:07:51]   └── js
 ```
-Start a given task
+
+All tasks are there for command completion
+
+![greypants/gulp-starter repo](https://raw.githubusercontent.com/stringparser/gulp-runtime/master/img/completion.png)
+
+> Screenshot using the [greypant's gulp-starter](https://github.com/greypants/gulp-starter) repo
+
+And do other gulp things such as, start a given task (or many)
 
 ```bash
  > gulp process
@@ -66,7 +85,7 @@ Start a given task
  > gulp
 ```
 
-Define a custom command before hand:
+Last but not least! You can define a custom commands before hand:
 
 ```js
 var runtime = require('gulp-runtime');
@@ -83,13 +102,6 @@ And use it afterwards while you are shooting gulp tasks.
 Start dancing!
 
 ```
-
-Oh, I forgot, command completion is provided
-
-![greypants/gulp-starter repo](https://raw.githubusercontent.com/stringparser/gulp-runtime/master/img/completion.png)
-
-Screenshot using the [greypant's gulp-starter](https://github.com/greypants/gulp-starter) repo
-
 
 ## TODO
 
