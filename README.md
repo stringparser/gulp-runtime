@@ -12,6 +12,8 @@ Use gulp whilst is running
 
 [Go straight to usage](#usage) or see the [todo](#todo) for a list of features planned.
 
+<hr>
+
 <b>Implementation status: before testing</b>
 
 I'll be adding the last features of the [todo](#todo) to start stabilizing the project and wait for more bugs to come.
@@ -44,7 +46,7 @@ Just require the module
  var runtime = require('gulp-runtime');
 ```
 
-At runtime, after the `default` tasks have finished a prompt will appear.
+At runtime, after the running tasks have finished a prompt will appear (alternatively press <kbd>enter</kbd>).
 
 ```bash
 [13:07:50] Starting 'default'...
