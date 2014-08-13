@@ -115,8 +115,8 @@ Start dancing!
  - [ ] API documentation.
  - [ ] Follow `gulp` plugin integration (log, errors, etc.)
  - [X] Include all taks inside a folder.
- - [X] Display task code directly on the terminal.
- - [X] Highlight task code accordingly.
+ - [X] Log task code directly on the terminal.
+ - [X] Highlight the code accordingly.
     * Thanks to the awesome [dominic tarr's `ansi-higlight`](https://github.com/dominictarr/ansi-highlight).
  - [ ] Write tests.
  - [ ] Provide `real life` examples.
