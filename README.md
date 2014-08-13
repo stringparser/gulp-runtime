@@ -24,7 +24,9 @@ I've started with the tests there and will be back and forth between here and th
 
 What is left? The features (not much at the moment) tests and better docs.
 
-> No more wording: *go code already :D*.
+> Hey! No more wording: *go code already*.
+
+... all right.
 
 # Features at the moment
 
