@@ -12,8 +12,6 @@ Use gulp whilst is running
 
 [Go straight to usage](#usage) or see the [todo](#todo) for a list of features planned.
 
-> On progress [documentation](./docs)
-
 <b>Implementation status: before testing</b>
 
 I'll be adding the last features of the [todo](#todo) to start stabilizing the project and wait for more bugs to come.
@@ -28,12 +26,14 @@ What is left? The features (not much at the moment) tests and better docs.
 
 > No more wording: *go code already :D*.
 
-# Usage
+# Features at the moment
 
-> Features at the moment:
 >  - runtime `gulp` cli/repl.
 >  - command completion
 >  - nice task logging right there on your terminal (with and without color).
+
+# Usage
+ - On progress [documentation](./docs)
 
 Just require the module
 
@@ -52,9 +52,7 @@ At runtime, after the `default` tasks has finished a prompt will appear.
 ```
 Or also, when you want to see the prompt, press `enter`.
 
-At the moment you can use the `gulp` cli without exiting the process.
-
-For example, the task tree (or other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
+Use the `gulp` cli without exiting the process. For example, the task tree (or other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
 
 ```bash
  > gulp -T
@@ -67,13 +65,13 @@ For example, the task tree (or other [`gulp` cli commands](https://github.com/gu
 [13:07:51]   └── js
 ```
 
-All tasks are there for command completion
+Tasks are there for command completion
 
 ![greypants/gulp-starter repo](https://raw.githubusercontent.com/stringparser/gulp-runtime/master/img/completion.png)
 
 > Screenshot using the [greypant's gulp-starter](https://github.com/greypants/gulp-starter) repo
 
-And do other gulp things such as, start a given task (or many)
+Do other gulp things such as, start a given task (or many)
 
 ```bash
  > gulp process
@@ -86,7 +84,7 @@ And do other gulp things such as, start a given task (or many)
  > gulp
 ```
 
-Last but not least! You can define a custom commands before hand:
+And last but not least! You can define custom commands before hand:
 
 ```js
 var runtime = require('gulp-runtime');
@@ -96,12 +94,12 @@ runtime.set('yeeeha', function(){
 })
 ```
 
-And use it afterwards while you are shooting gulp tasks.
+And use them afterwards while you are shooting gulp tasks.
 
 ```shell
 > gulp yeeeha
 Start dancing!
-
+> gulp
 ```
 
 ## TODO
