@@ -28,9 +28,9 @@ What is left? The features (not much at the moment) tests and better docs.
 
 # Features at the moment
 
->  - runtime `gulp` cli/repl.
->  - command completion
->  - nice task logging right there on your terminal (with and without color).
+  - runtime `gulp` cli/repl.
+  - command completion
+  - nice task logging right there on your terminal (with and without color).
 
 # Usage
  - On progress [documentation](./docs)
