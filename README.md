@@ -18,7 +18,7 @@ Use gulp whilst is running
 
 I'll be adding the last features of the [todo](#todo) to start stabilizing the project and wait for more bugs to come.
 
-Also, I want to add that I've decided to move the main functionality to another repo since the package can be used as a runtime interface not only `gulp`, but for whatever package one would like to use or none (just to build a cli from scratch), thats your decision *:)*.
+Also, I want to add that I've decided to move the main functionality to another repo since the package can be used as a runtime interface not only [`gulp`](https://github.com/gulpjs/gulp), but for whatever package one would like to use or none (just to build a cli from scratch), thats your decision *:)*.
 
 Check out the [runtime](http://github.com/stringparser/runtime) repo for that.
 
@@ -30,7 +30,10 @@ What is left? The features (not much at the moment) tests and better docs.
 
 # Usage
 
-> Features at the moment: runtime `gulp` cli/repl, command completion and nice task logging right there on your terminal (with and without color).
+> Features at the moment:
+>  - runtime `gulp` cli/repl.
+>  - command completion
+>  - nice task logging right there on your terminal (with and without color).
 
 Just require the module
 
