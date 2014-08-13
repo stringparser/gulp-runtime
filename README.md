@@ -44,7 +44,7 @@ Just require the module
  var runtime = require('gulp-runtime');
 ```
 
-At runtime, after the `default` tasks has finished a prompt will appear.
+At runtime, after the `default` tasks have finished a prompt will appear.
 
 ```bash
 [13:07:50] Starting 'default'...
@@ -52,7 +52,6 @@ At runtime, after the `default` tasks has finished a prompt will appear.
 [13:07:50] Finished 'default' after 800 μs
  > gulp
 ```
-Or also, when you want to see the prompt, press `enter`.
 
 Use the `gulp` cli without exiting the process. For example, the task tree (or other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
 
