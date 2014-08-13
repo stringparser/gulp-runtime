@@ -86,7 +86,7 @@ Do other gulp things such as, start a given task (or many)
  > gulp
 ```
 
-And last but not least! You can define custom commands before hand:
+Last but not least! You can define custom commands before hand
 
 ```js
 var runtime = require('gulp-runtime');
@@ -96,7 +96,7 @@ runtime.set('yeeeha', function(){
 })
 ```
 
-And use them afterwards while you are shooting gulp tasks.
+and use them afterwards while you are shooting gulp tasks.
 
 ```shell
 > gulp yeeeha
