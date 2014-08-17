@@ -121,7 +121,7 @@ Start dancing!
  - [ ] Write tests.
  - [ ] Provide `real life` examples.
 
-## Stats
+### Stats
 
 [<img src="https://nodei.co/npm/gulp-runtime.png?downloads=true&downloadRank=true&stars=true" alt="NPM" align="center"/>](https://nodei.co/npm/gulp-runtime)
 
