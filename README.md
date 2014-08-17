@@ -4,8 +4,6 @@
 
 [<img alt="NPM version" src="http://img.shields.io/npm/v/gulp-runtime.svg?style=flat" align="left"/>](http://www.npmjs.org/package/gulp-runtime)
 
-<br>
-
 [<img alt="npm downloads" src="http://img.shields.io/npm/dm/gulp-runtime.svg?style=flat" align="left"/>](http://img.shields.io/npm/dm/gulp-runtime.svg)
 
 [<img alt="LICENSE" src="http://img.shields.io/npm/l/gulp-runtime.svg?style=flat" align="right"/>](http://opensource.org/licenses/MIT)
