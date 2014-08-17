@@ -1,10 +1,10 @@
 ## gulp-runtime[<img alt="progressed.io" src="http://progressed.io/bar/41" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
-[<img alt="build" src="http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat" align="right"/>](https://travis-ci.org/stringparser/gulp-runtime/builds)
-[<img alt="NPM version" src="http://img.shields.io/npm/v/gulp-runtime.svg?style=flat" align="left" style="margin-right: 10px"/>](http://www.npmjs.org/package/gulp-runtime)
+[<img alt="build" src="http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square" align="right"/>](https://travis-ci.org/stringparser/gulp-runtime/builds)
+[<img alt="NPM version" src="http://img.shields.io/npm/v/gulp-runtime.svg?style=flat-square" align="left"/>](http://www.npmjs.org/package/gulp-runtime)
 
-[<img alt="npm downloads" src="http://img.shields.io/npm/dm/gulp-runtime.svg?style=flat" align="left"/>](http://img.shields.io/npm/dm/gulp-runtime.svg)
-[<img alt="LICENSE" src="http://img.shields.io/npm/l/gulp-runtime.svg?style=flat" align="right"/>](http://opensource.org/licenses/MIT)
+[<img alt="npm downloads" src="http://img.shields.io/npm/dm/gulp-runtime.svg?style=flat-square" align="left"/>](http://img.shields.io/npm/dm/gulp-runtime.svg)
+[<img alt="LICENSE" src="http://img.shields.io/npm/l/gulp-runtime.svg?style=flat-square" align="right"/>](http://opensource.org/licenses/MIT)
 <br>
 
 Use gulp whilst is running
