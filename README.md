@@ -1,12 +1,13 @@
 ## gulp-runtime[<img alt="progressed.io" src="http://progressed.io/bar/41" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
-[<img alt="build" src="https://travis-ci.org/stringparser/gulp-runtime.svg?branch=master" align="right"/>](https://travis-ci.org/stringparser/gulp-runtime/builds)
+[<img alt="build" src="http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat" align="right"/>](https://travis-ci.org/stringparser/gulp-runtime/builds)
+<br>
+[<img alt="LICENSE" src="http://img.shields.io/npm/l/gulp-runtime.svg?style=flat" align="right"/>](http://opensource.org/licenses/MIT)
 <br>
 [<img alt="NPM version" src="http://img.shields.io/npm/v/gulp-runtime.svg?style=flat" align="right"/>](http://www.npmjs.org/package/gulp-runtime)
 <br>
 [<img alt="npm downloads" src="http://img.shields.io/npm/dm/gulp-runtime.svg?style=flat" align="right"/>](http://img.shields.io/npm/dm/gulp-runtime.svg)
 <br>
-[<img alt="LICENSE" src="http://img.shields.io/npm/l/gulp-runtime.svg?style=flat" align="right"/>](http://opensource.org/licenses/MIT)
 
 
 Use gulp whilst is running
