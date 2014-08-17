@@ -34,7 +34,7 @@ What is left? The features (not much at the moment) tests and better docs.
 
 ... all right.
 
-# Usage
+## Usage
 > At the moment you can use `gulp` at runtime, command completion for your tasks and gulp flags is provided and nice task logging right there on your terminal (with and without color).
 
  - On progress [documentation](./docs)
@@ -105,7 +105,7 @@ Start dancing!
 > gulp
 ```
 
-## some things missing
+### some things missing
 
  - [X] `gulp` cli at runtime.
  - [X] Command completion.
