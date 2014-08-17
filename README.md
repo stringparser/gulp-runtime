@@ -123,7 +123,9 @@ Start dancing!
 
 ## Stats
 
-[![NPM](https://nodei.co/npm/gulp-runtime.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/gulp-runtime/)
+[<img src="https://nodei.co/npm/gulp-runtime.png?downloads=true&downloadRank=true&stars=true" alt="NPM" align="center"/>](https://nodei.co/npm/gulp-runtime)
+
+[<img src="https://nodei.co/npm-dl/gulp-runtime.png" alt="NPM" align="center"/>](https://nodei.co/npm/gulp-runtime/)
 
 ## License
 
