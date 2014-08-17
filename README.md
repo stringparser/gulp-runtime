@@ -121,10 +121,6 @@ Start dancing!
  - [ ] Write tests.
  - [ ] Provide `real life` examples.
 
-<hr>
-
-[![NPM](https://nodei.co/npm/gulp-runtime.png?downloads=true)](https://nodei.co/npm/gulp-runtime/)
-
 ## License
 
 [<img alt="LICENSE" src="http://img.shields.io/npm/l/gulp-runtime.svg?style=flat-square"/>](http://opensource.org/licenses/MIT)
