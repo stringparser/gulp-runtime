@@ -1,8 +1,13 @@
 ## gulp-runtime[<img alt="progressed.io" src="http://progressed.io/bar/41" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
-[![Travis status](https://travis-ci.org/stringparser/gulp-runtime.svg?branch=master)](https://travis-ci.org/stringparser/gulp-runtime/builds)
-[![Code Climate](https://codeclimate.com/github/stringparser/gulp-runtime.png)](https://codeclimate.com/github/stringparser/gulp-runtime)
-[![NPM version](https://badge.fury.io/js/gulp-runtime.svg)](http://badge.fury.io/js/gulp-runtime)
-[<img alt="LICENSE" src="http://img.shields.io/packagist/l/doctrine/orm.svg" align="right"/>](http://opensource.org/licenses/MIT)
+
+[<img alt="build" src="https://travis-ci.org/stringparser/gulp-runtime.svg?branch=master" align="right"/>](https://travis-ci.org/stringparser/gulp-runtime/builds)
+<br>
+[<img alt="NPM version" src="http://img.shields.io/npm/v/gulp-runtime.svg?style=flat" align="right"/>](http://www.npmjs.org/package/gulp-runtime)
+<br>
+[<img alt="npm downloads" src="http://img.shields.io/npm/dm/gulp-runtime.svg?style=flat" align="right"/>](http://img.shields.io/npm/dm/gulp-runtime.svg)
+<br>
+[<img alt="LICENSE" src="http://img.shields.io/npm/l/gulp-runtime.svg?style=flat" align="right"/>](http://opensource.org/licenses/MIT)
+
 
 Use gulp whilst is running
 
