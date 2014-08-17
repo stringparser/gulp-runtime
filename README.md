@@ -34,7 +34,7 @@ What is left? The features (not much at the moment) tests and better docs.
 
 ... all right.
 
-## Usage
+## usage
 > At the moment you can use `gulp` at runtime, command completion for your tasks and gulp flags is provided and nice task logging right there on your terminal (with and without color).
 
  - On progress [documentation](./docs)
@@ -121,12 +121,12 @@ Start dancing!
  - [ ] Write tests.
  - [ ] Provide `real life` examples.
 
-### Stats
+### stats
 
 [<img src="https://nodei.co/npm/gulp-runtime.png?downloads=true&downloadRank=true&stars=true" alt="NPM" align="center"/>](https://nodei.co/npm/gulp-runtime)
 
 [<img src="https://nodei.co/npm-dl/gulp-runtime.png" alt="NPM" align="center"/>](https://nodei.co/npm/gulp-runtime/)
 
-## License
+## license
 
 [<img alt="LICENSE" src="http://img.shields.io/npm/l/gulp-runtime.svg?style=flat-square"/>](http://opensource.org/licenses/MIT)
