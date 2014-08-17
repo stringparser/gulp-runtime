@@ -20,7 +20,7 @@ Use gulp whilst is running
 
 <b>Implementation status: before testing</b>
 
-I'll be adding the last features of the [todo](#todo) to start stabilizing the project and wait for more bugs to come.
+I'll be adding the last features of the [todo](#some-things-missing) to start stabilizing the project and wait for more bugs to come.
 
 Also, I want to add that I've decided to move the main functionality to another repo since the package can be used as a runtime interface not only [`gulp`](https://github.com/gulpjs/gulp), but for whatever package one would like to use or none (just to build a cli from scratch), thats your decision *:)*.
 
@@ -105,7 +105,7 @@ Start dancing!
 > gulp
 ```
 
-## TODO
+## some things missing
 
  - [X] `gulp` cli at runtime.
  - [X] Command completion.
