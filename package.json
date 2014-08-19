@@ -24,7 +24,7 @@
     "ansi-highlight": "^1.0.2",
     "gulp": "~3.8.6",
     "gulp-util": "~2.2.20",
-    "runtime": "^0.1.29"
+    "runtime": "^0.1.31"
   },
   "devDependencies": {
     "should": "~4.0.4"
