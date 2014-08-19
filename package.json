@@ -1,6 +1,6 @@
 {
   "name": "gulp-runtime",
-  "version": "0.2.40-docs-2",
+  "version": "0.2.41",
   "description": "gulp runtime interface",
   "author": "Javier Carrillo <stringparser@gmail.com> (http://www.stringparser.com)",
   "repository": {
@@ -24,7 +24,7 @@
     "ansi-highlight": "^1.0.2",
     "gulp": "~3.8.6",
     "gulp-util": "~2.2.20",
-    "runtime": "^0.1.28"
+    "runtime": "^0.1.29"
   },
   "devDependencies": {
     "should": "~4.0.4"
