@@ -21,11 +21,14 @@
     "tool"
   ],
   "dependencies": {
-    "runtime": "^0.1.47",
-    "utils-type": "^0.1.26",
+    "ansi-highlight": "^1.0.2",
+    "archy": "0.0.2",
     "gulp": "~3.8.6",
     "gulp-util": "~2.2.20",
-    "ansi-highlight": "^1.0.2"
+    "runtime": "^0.1.47",
+    "semver": "^3.0.1",
+    "tildify": "^1.0.0",
+    "utils-type": "^0.1.26"
   },
   "devDependencies": {
     "should": "~4.0.4"
