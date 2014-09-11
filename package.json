@@ -21,11 +21,11 @@
     "tool"
   ],
   "dependencies": {
-    "ansi-highlight": "^1.0.2",
+    "runtime": "^0.1.47",
+    "utils-type": "^0.1.26",
     "gulp": "~3.8.6",
     "gulp-util": "~2.2.20",
-    "runtime": "^0.1.42",
-    "utils-type": "^0.1.26"
+    "ansi-highlight": "^1.0.2"
   },
   "devDependencies": {
     "should": "~4.0.4"
