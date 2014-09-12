@@ -1,6 +1,6 @@
 {
   "name": "gulp-runtime",
-  "version": "0.2.48",
+  "version": "0.2.49",
   "description": "gulp runtime interface",
   "author": "Javier Carrillo <stringparser@gmail.com> (http://www.stringparser.com)",
   "repository": {
