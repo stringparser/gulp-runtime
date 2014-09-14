@@ -25,11 +25,8 @@
     "ansi-highlight": "^1.0.2",
     "archy": "0.0.2",
     "gulp-util": "~2.2.20",
-    "herro": "^0.1.38",
     "runtime": "^0.1.57",
-    "semver": "^3.0.1",
-    "tildify": "^1.0.0",
-    "utils-type": "^0.1.26"
+    "semver": "^3.0.1"
   },
   "devDependencies": {
     "jshint": "^2.5.5",
