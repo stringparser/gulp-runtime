@@ -35,8 +35,8 @@
     "should": "~4.0.4"
   },
   "scripts": {
-    "start": "node index.js",
-    "lint": "jshint lib index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules"
+    "lint": "jshint lib index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules",
+    "test" : "npm run-script lint && mocha --reporter spec"
   },
   "license": "MIT"
 }
