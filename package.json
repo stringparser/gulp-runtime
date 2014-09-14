@@ -3,10 +3,10 @@
   "version": "0.2.54",
   "description": "gulp runtime interface",
   "author": "Javier Carrillo <stringparser@gmail.com> (http://www.stringparser.com)",
-  "engines" : {
-    "node" : " >= 0.9"
+  "engines": {
+    "node": " >= 0.9"
   },
-  "engineStrict" : true,
+  "engineStrict": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/stringparser/gulp-runtime"
@@ -22,22 +22,23 @@
     "tool"
   ],
   "dependencies": {
-    "ansi-highlight": "^1.0.2",
-    "archy": "0.0.2",
-    "gulp-util": "~2.2.20",
     "runtime": "^0.1.57",
+    "archy": "0.0.2",
     "semver": "^3.0.1",
     "tildify": "^1.0.0",
-    "utils-type": "^0.1.26"
+    "gulp-util": "~2.2.20",
+    "utils-type": "^0.1.26",
+    "ansi-highlight": "^1.0.2"
   },
   "devDependencies": {
     "jshint": "^2.5.5",
     "jshint-stylish": "^0.4.0",
+    "mocha": "^1.21.4",
     "should": "~4.0.4"
   },
   "scripts": {
     "start": "node index.js",
-    "lint" : "jshint lib index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules"
+    "lint": "jshint lib index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules"
   },
   "license": "MIT"
 }
