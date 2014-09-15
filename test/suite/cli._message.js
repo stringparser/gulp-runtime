@@ -5,60 +5,67 @@ var chalk = gutil.colors;
 
 module.exports = function(runtime, stdout){
 
+  describe('[notFound]', function(){
 
-  it('a command doesn\'t exists', function(){
+    it('a command doesn\'t exists', function(){
 
-    stdout.reset();
-      runtime.emit('wire', 'this command doesn\'t exists');
-    stdout.enable();
+      stdout.reset();
+        runtime.emit('wire', 'this command doesn\'t exists');
+      stdout.enable();
 
-    stdout.output().should
-      .containEql(chalk.cyan('this'))
-      .and
-      .containEql('not found');
+      stdout.output().should
+        .containEql(chalk.cyan('this'))
+        .and
+        .containEql('not found');
+    });
+
+    it('should be after and have prompted', function(){
+
+      var noCommand = 'notRegisteredCommand';
+
+      stdout.reset();
+      runtime.emit('wire', noCommand);
+      stdout.enable();
+
+      stdout.output().should
+        .containEql(chalk.cyan(noCommand))
+        .and
+        .containEql('not found')
+        .and
+        .containEql(' > gulp ');
+    });
   });
 
-  it('[notFound] a should be after and have prompted', function(){
+  describe('[Error] with/without opts.throw', function(){
 
-    stdout.reset();
-      runtime.emit('wire', 'not found command');
-    stdout.enable();
+    it('for !opts.throw does not throw', function(){
 
-    stdout.output().should
-      .containEql(' > gulp ')
-      .and
-      .containEql(chalk.cyan('not'))
-      .and
-      .containEql('not found');
-  });
+      var errorMessage = 'I\'m only here to inform you sir';
 
-  it('[Error]+!opts.throw message does not throw', function(){
+      stdout.reset();
+      (function(){
+        runtime.emit('message', {
+          error : new Error(errorMessage)
+        });
+      }).should.not.throw();
+      stdout.enable();
 
-    var errorMessage = 'I\'m only here to inform you sir';
-    stdout.reset();
-      runtime.emit('message', {
-        error : new Error(errorMessage)
-      });
-    stdout.enable();
+      stdout.output().should
+        .containEql(errorMessage);
 
-    stdout.output().should
-      .containEql(errorMessage);
-  });
+    });
 
-  it('[Error]+!opts.throw message is formatted with gutil.log', function(){
-    stdout.output().should.match(/\d{2}:\d{2}:\d{2}/g);
-  });
+    it('opts.throw actually... throws!', function(){
 
-  it('[Error]+opts.throw actually... throws!', function(){
-
-    var errorMessage = 'Hey! I\'m talking';
-    stdout.reset().enable();
-    (function(){
-      runtime.emit('message', {
-        error : new Error(errorMessage),
-        throw : true
-      });
-    }).should.throw(new RegExp(errorMessage+'$'));
+      var errorMessage = 'Hey! I\'m talking';
+      stdout.reset().enable();
+      (function(){
+        runtime.emit('message', {
+          error : new Error(errorMessage),
+          throw : true
+        });
+      }).should.throw(new RegExp(errorMessage+'$'));
+    });
   });
 
   stdout.restore();
