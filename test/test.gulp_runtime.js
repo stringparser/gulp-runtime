@@ -1,5 +1,7 @@
 'use strict';
 
+var hook = require('./stdoutHook');
+
 describe('gulp-runtime', function(){
 
   var fs = require('fs');
@@ -9,33 +11,13 @@ describe('gulp-runtime', function(){
     return a.length - b.length;
   });
 
-  function hookStdout(cb){
-    var oldWrite = process.stdout.write;
-    process.stdout.write = (function(write){
-      return function(str, enc, fd){
-        write.apply(process.stdout, arguments);
-        cb(str, enc, fd);
-      };
-    })(process.stdout.write);
-
-    return function(){
-      process.stdout.write = oldWrite;
-    };
-  }
-
-  var stdout, unhook = hookStdout(function(str){
-    stdout = str;
-  });
-
   testFiles.forEach(function(testFile){
 
     var name = testFile.replace('.', '/').match(/\S+(?!\.js)/);
 
     describe('- '+name, function(){
-      require('./suite/'+testFile)(runtime, stdout);
+      require('./suite/'+testFile)(runtime, hook);
     });
 
   });
-
-  unhook();
 });

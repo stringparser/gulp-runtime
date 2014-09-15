@@ -3,9 +3,7 @@
 module.exports = function(runtime){
 
   var path = require('path');
-  var plumber = require('sculpt');
   var config = runtime();
-  var output;
 
   it('config props [env, argv, parse, timer, name]', function(){
 
@@ -30,9 +28,4 @@ module.exports = function(runtime){
       );
   });
 
-  it('hello', function(){
-    (process.stdout).pipe(plumber.map(function(){
-      console.log(output);
-    }));
-  });
 };
