@@ -32,11 +32,12 @@
     "jshint": "^2.5.5",
     "jshint-stylish": "^0.4.0",
     "mocha": "^1.21.4",
+    "sculpt": "^0.1.5",
     "should": "~4.0.4"
   },
   "scripts": {
     "lint": "jshint lib index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules",
-    "test" : "npm run-script lint && mocha --reporter spec"
+    "test": "npm run-script lint && mocha --reporter spec"
   },
   "license": "MIT"
 }
