@@ -3,18 +3,18 @@
 module.exports = function(runtime, stdout){
 
   var path = require('path');
-  var config = runtime.config();
 
   stdout.enable();
   it('config props [env, argv, parse, timer, name]', function(){
 
-    config.should.have
+    console.log(runtime.config())
+    runtime.config().should.have
       .properties('env', 'parse', 'timer', 'name');
   });
 
   it('env props [cwd, gulpfile, cliPackage, modulePackage]', function(){
 
-    config.env.should.have
+    runtime.config().env.should.have
       .properties('INIT_CWD', 'gulpfile', 'cliPackage', 'modulePackage');
   });
 
@@ -23,7 +23,7 @@ module.exports = function(runtime, stdout){
    */
   it('env.gulpfile if is defined, matches the required file', function(){
 
-    var gulpfile = config.argv;
+    var gulpfile = runtime.config().argv;
 
     if( gulpfile ){
       gulpfile.should.be
