@@ -9,13 +9,13 @@ module.exports = function(runtime, stdout){
   it('config props [env, argv, parse, timer, name]', function(){
 
     config.should.have
-      .properties('env', 'argv', 'parse', 'timer', 'name');
+      .properties('env', 'parse', 'timer', 'name');
   });
 
   it('env props [cwd, gulpfile, cliPackage, modulePackage]', function(){
 
     config.env.should.have
-      .properties('cwd', 'gulpfile', 'cliPackage', 'modulePackage');
+      .properties('INIT_CWD', 'gulpfile', 'cliPackage', 'modulePackage');
   });
 
   /*
