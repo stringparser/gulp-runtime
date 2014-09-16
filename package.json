@@ -38,7 +38,7 @@
   },
   "scripts": {
     "lint": "jshint lib index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules",
-    "test": "npm run-script lint && mocha --reporter spec"
+    "test": "npm run-script lint && make test"
   },
   "license": "MIT"
 }
