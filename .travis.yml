@@ -1,6 +1,6 @@
 language: node_js
 before_scripts:
-  'npm install gulp'
+  - "npm install gulp"
 node_js:
   - "0.10"
   - "0.11"
