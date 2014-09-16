@@ -58,14 +58,17 @@ module.exports = function(runtime, stdout){
     it('opts.throw actually... throws!', function(){
 
       var errorMessage = 'Hey! I\'m talking';
-      stdout.reset().enable();
+
       (function(){
         runtime.emit('message', {
           error : new Error(errorMessage),
           throw : true
         });
-      }).should.throw(new RegExp(errorMessage+'$'));
+      }).should.throw();
+      stdout.enable();
+
     });
+
   });
 
   stdout.restore();

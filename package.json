@@ -24,7 +24,9 @@
   "dependencies": {
     "ansi-highlight": "^1.0.2",
     "archy": "0.0.2",
+    "debug": "^2.0.0",
     "gulp-util": "~2.2.20",
+    "pretty-hrtime": "^0.2.1",
     "runtime": "^0.1.60",
     "semver": "^3.0.1"
   },
