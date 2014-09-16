@@ -17,9 +17,8 @@ describe('gulp-runtime', function(){
   testFiles.forEach(function(testFile){
 
     var stdout = hook(function(str){ return str; });
-    var name = testFile.replace('.', '/').match(/\S+(?!\.js)/);
 
-    describe('- '+name, function(){
+    describe(testFile, function(){
       require('./suite/'+testFile)(runtime, stdout);
     });
 
