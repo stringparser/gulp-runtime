@@ -21,12 +21,16 @@ module.exports = function(runtime, stdout){
   /*
    * Note: make better tests for this
    */
-  it('env.gulpfile matches the required file', function(){
+  it('env.gulpfile if is defined, matches the required file', function(){
 
-    config.env.gulpfile.should.be
-      .a.String.and.be.exactly(
-        require.resolve(path.resolve('.', 'gulpfile'))
-      );
+    if( config.env.gulpfile ){
+      config.env.gulpfile.should.be
+        .a.String.and.be.exactly(
+          require.resolve(path.resolve('.', 'gulpfile'))
+        );
+    } else {
+      (config.env.gulpfile === void 0).should.be.ok;
+    }
   });
 
 };
