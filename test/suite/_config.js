@@ -7,7 +7,6 @@ module.exports = function(runtime, stdout){
   stdout.enable();
   it('config props [env, argv, parse, timer, name]', function(){
 
-    console.log(runtime.config())
     runtime.config().should.have
       .properties('env', 'parse', 'timer', 'name');
   });
