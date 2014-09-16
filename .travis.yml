@@ -1,5 +1,5 @@
 language: node_js
-before_scripts:
+before_script:
   - npm install gulp
 node_js:
   - "0.10"
