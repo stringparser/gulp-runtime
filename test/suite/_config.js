@@ -23,13 +23,15 @@ module.exports = function(runtime, stdout){
    */
   it('env.gulpfile if is defined, matches the required file', function(){
 
-    if( config.env.gulpfile ){
-      config.env.gulpfile.should.be
+    var gulpfile = config.argv;
+
+    if( gulpfile ){
+      gulpfile.should.be
         .a.String.and.be.exactly(
           require.resolve(path.resolve('.', 'gulpfile'))
         );
     } else {
-      (config.env.gulpfile === void 0).should.be.true;
+      (gulpfile === void 0).should.be.true;
     }
 
   });
