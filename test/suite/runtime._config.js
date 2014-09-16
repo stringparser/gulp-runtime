@@ -1,10 +1,11 @@
 'use strict';
 
-module.exports = function(runtime){
+module.exports = function(runtime, stdout){
 
   var path = require('path');
-  var config = runtime();
+  var config = runtime.config();
 
+  stdout.enable();
   it('config props [env, argv, parse, timer, name]', function(){
 
     config.should.have

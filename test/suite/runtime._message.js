@@ -1,7 +1,7 @@
 'use strict';
 
-var gutil = require('gulp-util');
-var chalk = gutil.colors;
+var util = require('runtime/lib/utils');
+var chalk = util.colors;
 
 module.exports = function(runtime, stdout){
 
