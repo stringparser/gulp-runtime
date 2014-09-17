@@ -4,6 +4,8 @@ module.exports = function hook(cb){
   var oldWrite = process.stdout.write;
   var output = '';
 
+  cb = cb || function(){}
+
   process.stdout.write = (function(write){
     return function(str, enc, fd){
       write.apply(process.stdout, arguments);
