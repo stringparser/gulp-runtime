@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp');
 var runtime = require('./lib/gulp-runtime');
 
@@ -5,31 +7,19 @@ console.log(process.execArgv);
 console.log(process.argv);
 console.log(runtime.config('env'));
 
-gulp.task('develop', function () {
+var testTasks = ['lint', 'jade', 'stylus', 'js', 'jsx'];
+testTasks.forEach(function(name){
+  gulp.task(name, function(){
 
+  });
 });
 
-gulp.task('lint', function(){
+var browdeps = ['js', 'jsx'];
+gulp.task('browserify', browdeps, function(){
+
 
 });
-
-gulp.task('another', function(){
-
-});
-
-gulp.task('anotherOne', function(){
-
-});
-
-gulp.task('anotherMore', function(){
-
-});
-
-gulp.task('andAnotherOneMore', function(){
-
-});
-
 // build everything and open main entry page
-gulp.task('default', ['develop', 'lint', 'another', 'anotherOne', 'anotherMore', 'andAnotherOneMore'], function () {
+gulp.task('default', testTasks.slice(0, 3).concat('browserify'), function () {
     // ...
 });

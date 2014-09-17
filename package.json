@@ -28,7 +28,8 @@
     "gulp-util": "~2.2.20",
     "pretty-hrtime": "^0.2.1",
     "runtime": "^0.1.64",
-    "semver": "^3.0.1"
+    "semver": "^3.0.1",
+    "tildify": "^1.0.0"
   },
   "devDependencies": {
     "jshint": "^2.5.5",
