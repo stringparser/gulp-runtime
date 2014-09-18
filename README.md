@@ -1,6 +1,6 @@
 
+[<img alt="build" src="http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square" align="left"/>](https://travis-ci.org/stringparser/gulp-runtime/builds)
 [<img alt="npm downloads" src="http://img.shields.io/npm/dm/gulp-runtime.svg?style=flat-square" align="left"/>](http://img.shields.io/npm/dm/gulp-runtime.svg)
-[<img alt="build" src="http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square" align="center"/>](https://travis-ci.org/stringparser/gulp-runtime/builds)
 [<img alt="NPM version" src="http://img.shields.io/npm/v/gulp-runtime.svg?style=flat-square" align="right"/>](http://www.npmjs.org/package/gulp-runtime)
 
 ## [gulp](https://github.com/gulpjs/gulp)-runtime[<img alt="progressed.io" src="http://progressed.io/bar/50" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
