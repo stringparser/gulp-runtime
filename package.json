@@ -1,6 +1,6 @@
 {
   "name": "gulp-runtime",
-  "version": "0.2.61",
+  "version": "0.2.62",
   "description": "gulp runtime interface",
   "author": "Javier Carrillo <stringparser@gmail.com> (http://www.stringparser.com)",
   "engineStrict": true,
@@ -27,7 +27,7 @@
     "debug": "^2.0.0",
     "gulp-util": "~2.2.20",
     "pretty-hrtime": "^0.2.1",
-    "runtime": "^0.1.65",
+    "runtime": "^0.1.66",
     "semver": "^3.0.1",
     "tildify": "^1.0.0"
   },
