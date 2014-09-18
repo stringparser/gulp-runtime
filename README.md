@@ -1,4 +1,4 @@
-## gulp-runtime[<img alt="progressed.io" src="http://progressed.io/bar/41" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
+## [gulp](https://github.com/gulpjs/gulp)-runtime[<img alt="progressed.io" src="http://progressed.io/bar/41" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
 [<img alt="build" src="http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square" align="left"/>](https://travis-ci.org/stringparser/gulp-runtime/builds)
 
@@ -10,116 +10,106 @@
 
 Use gulp whilst is running
 
- ```
- npm install gulp-runtime --save-dev
- ```
-
-[Go straight to usage](#usage) or see the [todo](#todo) for a list of features planned.
-
 <hr>
 
-<b>Implementation status: before testing</b>
+<b>Implementation status: testing</b>
 
-I'll be adding the last features of the [todo](#some-things-missing) to start stabilizing the project and wait for more bugs to come.
+I've started the tests and hopefully soon there will be a stable release.
 
-Also, I want to add that I've decided to move the main functionality to another repo since the package can be used as a runtime interface not only [`gulp`](https://github.com/gulpjs/gulp), but for whatever package one would like to use or none (just to build a cli from scratch), thats your decision *:)*.
+## install
 
-Check out the [runtime](http://github.com/stringparser/runtime) repo for that.
-
-I've started with the tests there and will be back and forth between here and there.
-
-What is left? The features (not much at the moment) tests and better docs.
-
-> Hey! No more wording: *go code already*.
-
-... all right.
+```
+npm install gulp-runtime --save-dev
+```
 
 ## usage
-> At the moment you can use `gulp` at runtime, command completion for your tasks and gulp flags is provided and nice task logging right there on your terminal (with and without color).
-
- - On progress [documentation](./docs)
-
-Just require the module
 
 ```js
- // Your favourite gulpfile.js
  var runtime = require('gulp-runtime');
 ```
 
-At runtime, after the running tasks have finished a prompt will appear (alternatively press <kbd>enter</kbd>).
+Press <kbd>enter</kbd> to see the prompt
 
-```bash
+````bash
 [13:07:50] Starting 'default'...
 [13:07:50]  > default
 [13:07:50] Finished 'default' after 800 μs
+(Enter)
  > gulp
-```
+````
 
-Use the `gulp` cli without exiting the process. For example, the task tree (or other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
+Use the `gulp` cli without exiting the process.
 
-```bash
+For example, the task tree (or other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
+
+````bash
  > gulp -T
-[13:07:51] Tasks for ~/code/gulp/runtime/gulpfile.js
-[13:07:51] ├── default
-[13:07:51] ├── css
-[13:07:51] ├── js
-[13:07:51] └─┬ process
-[13:07:51]   ├── css
-[13:07:51]   └── js
-```
+[14:25:14] Tasks for ~/code/gulp-runtime/gulpfile.js
+[14:25:14] ├── lint
+[14:25:14] ├── jade
+[14:25:14] ├── stylus
+[14:25:14] ├── js
+[14:25:14] ├── jsx
+[14:25:14] ├─┬ browserify
+[14:25:14] │ ├── js
+[14:25:14] │ └── jsx
+[14:25:14] └─┬ default
+[14:25:14]   ├── lint
+[14:25:14]   ├── jade
+[14:25:14]   ├── stylus
+[14:25:14]   └── browserify
+````
 
-Tasks are there for command completion
-
-![greypants/gulp-starter repo](https://raw.githubusercontent.com/stringparser/gulp-runtime/master/img/completion.png)
-
-> Screenshot using the [greypant's gulp-starter](https://github.com/greypants/gulp-starter) repo
-
-Do other gulp things such as, start a given task (or many)
-
-```bash
- > gulp process
-[13:50:56] Starting 'css'...
-[13:50:56] Finished 'css' after 14 μs
-[13:50:56] Starting 'js'...
-[13:50:56] Finished 'js' after 11 μs
-[13:50:56] Starting 'process'...
-[13:50:56] Finished 'process' after 11 μs
+Run a task
+````bash
+(Tab)
  > gulp
-```
+--silent        --tasks         -T              --tasks-simple  -v              --version       --require
+--gulpfile      -l              --log           lint            jade            stylus          js
+jsx             browserify      default
 
-Last but not least! You can define custom commands before hand
+ > gulp browserify
+[14:28:53] Starting 'js', 'jsx', 'browserify' ...
+[14:28:53] Finished 'js' after 17 μs, 'jsx' after 21 μs, 'browserify' after 27 μs
+````
 
-```js
+Define custom commands
+
+````js
 var runtime = require('gulp-runtime');
 
 runtime.set('yeeeha', function(){
   console.log('Start dancing!')
 })
-```
+````
 
-and use them afterwards while you are shooting gulp tasks.
+Use them while you are shooting tasks.
 
-```shell
+````shell
 > gulp yeeeha
 Start dancing!
 > gulp
-```
+````
 
-### some things missing
+### api documentation
 
- - [X] `gulp` cli at runtime.
- - [X] Command completion.
- - [X] Register custom runtime commands.
- - [X] Support standard shell behavior (Ctrl+L, Ctrl+C, history, etc.).
-    * [`readline`](http://nodejs.org/api/readline.html) to the rescue. It even provides completion options!
+Soon.
+
+### features
+- [X] Command completion.
+- [X] `gulp` cli at runtime.
+- [X] Register custom runtime commands.
+- [X] Support standard shell behavior (Ctrl+L, Ctrl+C, history, etc.).
+   * Using [`readline`](http://nodejs.org/api/readline.html).
+- [X] Include all taks inside a folder.
+- [X] Log task code directly on the terminal and highlight them.
+   * Using [dominic tarr\'s `ansi-higlight`]
+    (https://github.com/dominictarr/ansi-highlight).
+
+### todo
+
  - [ ] API documentation.
- - [ ] Follow `gulp` plugin integration (log, errors, etc.)
- - [X] Include all taks inside a folder.
- - [X] Log task code directly on the terminal.
- - [X] Highlight the code accordingly.
-    * Thanks to the awesome [dominic tarr's `ansi-higlight`](https://github.com/dominictarr/ansi-highlight).
  - [ ] Write tests.
- - [ ] Provide `real life` examples.
 
 ### stats
 
