@@ -36,7 +36,7 @@ module.exports = function(runtime, stdout){
     });
   });
 
-  describe('[Error] with/without opts.throw', function(){
+  describe('[Error]', function(){
 
     it('for !opts.throw does not throw', function(){
 
