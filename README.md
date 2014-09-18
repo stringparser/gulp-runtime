@@ -1,4 +1,4 @@
-## [gulp](https://github.com/gulpjs/gulp)-runtime[<img alt="progressed.io" src="http://progressed.io/bar/41" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
+## [gulp](https://github.com/gulpjs/gulp)-runtime[<img alt="progressed.io" src="http://progressed.io/bar/50" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
 [<img alt="build" src="http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square" align="left"/>](https://travis-ci.org/stringparser/gulp-runtime/builds)
 
@@ -26,12 +26,11 @@ I've started the tests and hopefully soon there will be a stable release.
  var runtime = require('gulp-runtime');
 ```
 
-Press <kbd>enter</kbd> to see the prompt
+When all tasks are fished a prompt will appear (or press enter).
 
 ```bash
 [13:07:50] Starting 'default'...
 [13:07:50] Finished 'default' after 800 μs
-(Enter)
  >
 ```
 
