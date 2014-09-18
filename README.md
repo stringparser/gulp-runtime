@@ -30,10 +30,9 @@ Press <kbd>enter</kbd> to see the prompt
 
 ```bash
 [13:07:50] Starting 'default'...
-[13:07:50]  > default
 [13:07:50] Finished 'default' after 800 μs
 (Enter)
- > gulp
+ >
 ```
 
 Use the `gulp` cli without exiting the process.
@@ -41,7 +40,7 @@ Use the `gulp` cli without exiting the process.
 For example, the task tree (or other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
 
 ```bash
- > gulp -T
+ > -T
 [14:25:14] Tasks for ~/code/gulp-runtime/gulpfile.js
 [14:25:14] ├── lint
 [14:25:14] ├── jade
@@ -56,51 +55,54 @@ For example, the task tree (or other [`gulp` cli commands](https://github.com/gu
 [14:25:14]   ├── jade
 [14:25:14]   ├── stylus
 [14:25:14]   └── browserify
-````
+```
 
 Run a task
-````bash
-(Tab)
- > gulp
+
+```bash
+ > (press tab)
 --silent        --tasks         -T              --tasks-simple  -v              --version       --require
 --gulpfile      -l              --log           lint            jade            stylus          js
 jsx             browserify      default
 
- > gulp browserify
+
+ > browserify
 [14:28:53] Starting 'js', 'jsx', 'browserify' ...
 [14:28:53] Finished 'js' after 17 μs, 'jsx' after 21 μs, 'browserify' after 27 μs
-````
+```
 
 Define custom commands
 
-````js
+```js
 var runtime = require('gulp-runtime');
 
 runtime.set('yeeeha', function(){
   console.log('Start dancing!')
 })
-````
+```
 
 Use them while you are shooting tasks.
 
-````bash
-> gulp yeeeha
+```bash
+ > jsx
+[14:56:08] Starting 'jsx' ...
+[14:56:08] Finished 'jsx' after 7.31 μs
+ > yeeeha
 Start dancing!
-> gulp
-````
+```
 
 ### api documentation
 
 Soon.
 
 ### features
-- [X] Command completion.
 - [X] `gulp` cli at runtime.
-- [X] Register custom runtime commands.
-- [X] Support standard shell behavior (Ctrl+L, Ctrl+C, history, etc.).
+- [X] Custom commands.
+- [X] Completion for tasks and commands.
+- [X] Standard shell behavior (Ctrl+L, Ctrl+C, history, etc.).
    * Using [`readline`](http://nodejs.org/api/readline.html).
 - [X] Include all taks inside a folder.
-- [X] Log task code directly on the terminal and highlight them.
+- [X] Log task code directly on the terminal and highlight it (yep, I'm  that lazy).
    * Using [dominic tarr\'s `ansi-higlight`]
     (https://github.com/dominictarr/ansi-highlight).
 
