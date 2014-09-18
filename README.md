@@ -100,7 +100,7 @@ Soon.
 - [X] Standard shell behavior (Ctrl+L, Ctrl+C, history, etc.).
    * Using [`readline`](http://nodejs.org/api/readline.html).
 - [X] Log task code directly on the terminal and highlight it (yep, I'm  that lazy).
-   * Using [dominic tarr\'s `ansi-higlight`]
+   * Using [dominic tarr's `ansi-higlight`]
     (https://github.com/dominictarr/ansi-highlight).
 
 ### todo
