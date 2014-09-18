@@ -27,7 +27,7 @@
     "debug": "^2.0.0",
     "gulp-util": "~2.2.20",
     "pretty-hrtime": "^0.2.1",
-    "runtime": "^0.1.64",
+    "runtime": "^0.1.65",
     "semver": "^3.0.1",
     "tildify": "^1.0.0"
   },

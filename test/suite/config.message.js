@@ -14,7 +14,7 @@ module.exports = function(runtime, stdout){
       stdout.enable();
 
       stdout.output().should
-        .containEql(chalk.cyan('this'))
+        .containEql(chalk.yellow('this'))
         .and
         .containEql('not found');
     });
@@ -28,7 +28,7 @@ module.exports = function(runtime, stdout){
       stdout.enable();
 
       stdout.output().should
-        .containEql(chalk.cyan(noCommand))
+        .containEql(chalk.yellow(noCommand))
         .and
         .containEql('not found')
         .and
