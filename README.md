@@ -18,9 +18,7 @@ I've started the tests and hopefully soon there will be a stable release.
 
 ## install
 
-```
-npm install gulp-runtime --save-dev
-```
+    mpm install gulp-runtime --save-dev
 
 ## usage
 
@@ -30,19 +28,19 @@ npm install gulp-runtime --save-dev
 
 Press <kbd>enter</kbd> to see the prompt
 
-````bash
+```bash
 [13:07:50] Starting 'default'...
 [13:07:50]  > default
 [13:07:50] Finished 'default' after 800 μs
 (Enter)
  > gulp
-````
+```
 
 Use the `gulp` cli without exiting the process.
 
 For example, the task tree (or other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
 
-````bash
+```bash
  > gulp -T
 [14:25:14] Tasks for ~/code/gulp-runtime/gulpfile.js
 [14:25:14] ├── lint
@@ -85,7 +83,7 @@ runtime.set('yeeeha', function(){
 
 Use them while you are shooting tasks.
 
-````shell
+````bash
 > gulp yeeeha
 Start dancing!
 > gulp
