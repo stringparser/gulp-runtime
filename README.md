@@ -25,7 +25,7 @@ I've started the tests and hopefully soon there will be a more stable release.
  var runtime = require('gulp-runtime');
 ```
 
-When all tasks are fished a prompt will appear (or press enter).
+When all tasks are done a prompt will appear (or press enter).
 
 ```bash
 [13:07:50] Starting 'default'...
