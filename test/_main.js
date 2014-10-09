@@ -1,6 +1,6 @@
 'use strict';
 
-var hookStdout = require('./hookStdout');
+var monkey = require('stdout-monkey');
 
 describe('gulp-runtime', function(){
 
