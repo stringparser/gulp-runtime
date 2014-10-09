@@ -27,7 +27,7 @@
     "batch-these": "^0.8.0",
     "gulp-util": "^2.2.20",
     "pretty-hrtime": "^0.2.2",
-    "runtime": "^0.1.66",
+    "runtime": "^0.2.1",
     "semver": "^3.0.1",
     "tildify": "^1.0.0",
     "utils-debug": "^0.5.18"
