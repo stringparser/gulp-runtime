@@ -36,11 +36,12 @@
     "jshint": "*",
     "jshint-stylish": "*",
     "mocha": "*",
-    "should": "*"
+    "should": "*",
+    "stdout-monkey" : "*"
   },
   "scripts": {
     "lint": "jshint lib index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules",
-    "test": "npm run-script lint && mocha test/test.gulp_runtime.js"
+    "test": "npm run-script lint && mocha test/_main.js"
   },
   "license": "MIT"
 }
