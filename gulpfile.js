@@ -22,11 +22,3 @@ gulp.task('browserify', browdeps, function(){
 gulp.task('default', testTasks.slice(0, 3).concat('browserify'), function () {
     // ...
 });
-
-gulp.watch(__filename).on('change', function(){
-  delete require.cache[__filename];
-  require(__filename);
-  process.nextTick(function(){
-    gulp.start('default');
-  });
-});
