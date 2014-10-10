@@ -1,24 +1,14 @@
 'use strict';
 
-var gulp = require('gulp');
 var runtime = require('./.');
+var gulp = require('gulp');
 
-console.log(process.execArgv);
-console.log(process.argv);
-
-var testTasks = ['lint', 'jade', 'stylus', 'js', 'jsx'];
-testTasks.forEach(function(name){
-  gulp.task(name, function(){
-
-  });
+runtime.startup(function startupChange(){
+  this.setPrompt(' dev > ');
 });
 
-var browdeps = ['js', 'jsx'];
-gulp.task('browserify', browdeps, function(){
+gulp.task('less', function(){ });
+gulp.task('css', function(){ });
+gulp.task('compress', function(){ });
 
-  console.log('updated!')
-});
-// build everything and open main entry page
-gulp.task('default', testTasks.slice(0, 3).concat('browserify'), function () {
-    // ...
-});
+gulp.task('default', ['less', 'css', 'compress']);
