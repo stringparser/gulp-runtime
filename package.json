@@ -29,15 +29,14 @@
     "pretty-hrtime": "^0.2.2",
     "runtime": "^0.2.3",
     "semver": "^3.0.1",
-    "tildify": "^1.0.0",
-    "utils-debug": "^0.5.18"
+    "tildify": "^1.0.0"
   },
   "devDependencies": {
     "jshint": "*",
     "jshint-stylish": "*",
     "mocha": "*",
     "should": "*",
-    "stdout-monkey" : "*"
+    "stdout-monkey": "*"
   },
   "scripts": {
     "lint": "jshint lib index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules",
