@@ -1,11 +1,8 @@
 'use strict';
 
 var runtime = require('./.');
+var util = require('runtime/lib/utils');
 var gulp = require('gulp');
-
-runtime.startup(function startupChange(){
-  this.setPrompt(' dev > ');
-});
 
 gulp.task('less', function(){ });
 gulp.task('css', function(){ });
