@@ -1,7 +1,7 @@
 'use strict';
 
 var runtime = require('./.');
-    runtime.setPrompt('');
+    runtime.config({ prompt : '', repl : true });
 var gulp = require('gulp');
 
 gulp.task('less', function(){ });
