@@ -1,19 +1,18 @@
 'use strict';
 
-var monkey = require('stdout-monkey')();
+var path = require('path');
+var packageName = require('../package').name;
+var pack = require('../');
 
-describe('gulp-runtime', function(){
+var util = require('./_util.js');
 
-  var fs = require('fs');
-  var runtime = require('../.');
-      runtime.config('repl', false);
+describe(packageName, function(){
 
-/*  var testFiles = fs.readdirSync('./test/suite');
-
-  testFiles.forEach(function(testFile){
-    describe(testFile.replace('.','/'), function(){
-      require('./suite/'+testFile)(runtime, monkey);
+  util.testSuite().forEach(function(file){
+    var suite = path.basename(file, path.extname(file));
+    describe(suite, function(){
+      // the actual suite code
+      require('./'+file)(pack, util);
     });
-  });*/
-
+  });
 });
