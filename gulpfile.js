@@ -4,7 +4,7 @@ var Q = require('q');
 var runtime = require('./.');
 var gulp = require('gulp');
 
-gulp.task('less', function(){
+gulp.task('less', ['css'], function(){
   var deferred = Q.defer();
 
   // do async stuff
@@ -31,4 +31,4 @@ gulp.task('compress', function(){
   return deferred.promise;
 });
 
-gulp.task('default', ['less', 'css', 'compress']);
+gulp.task('default', ['less', 'compress']);
