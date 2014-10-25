@@ -1,5 +1,10 @@
 'use strict';
 
+// prevent gulp-runtime on making a repl
+process.argv = process.argv.join(' ')
+  .replace(/--repl|--repl=\S+/g, '')
+  .split(/[ ]+/);
+
 var path = require('path');
 var packageName = require('../package').name;
 var pack = require('../');
