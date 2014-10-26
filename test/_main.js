@@ -10,8 +10,6 @@ var packageName = require('../package').name;
 var runtime = require('../');
 
 var util = require('./_util');
-// turn off logging
-runtime.emit('next', '--silent');
 
 describe(packageName, function(){
   before(function(done){
