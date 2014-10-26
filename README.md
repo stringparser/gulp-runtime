@@ -11,9 +11,9 @@
 
 Use gulp whilst is running
 
-**Implementation status: testing**
+**Implementation status: documentation**
 
-I've started the tests and hopefully soon there will be a more stable release.
+Soon new docs. Something simple.
 
 ## install
 
@@ -69,7 +69,7 @@ jsx             browserify      default
 [14:28:53] Finished 'js' after 17 μs, 'jsx' after 21 μs, 'browserify' after 27 μs
 ```
 
-Define custom commands
+Or define custom commands
 
 ```js
 var runtime = require('gulp-runtime');
@@ -79,7 +79,7 @@ runtime.set('yeeeha', function(){
 })
 ```
 
-Use them while you are shooting tasks.
+and use them while you are shooting tasks
 
 ```bash
  > jsx
@@ -105,9 +105,8 @@ Soon.
 
 ### todo
 
- - [ ] Write tests (doing).
  - [ ] API documentation.
- - [ ] Require all gulpfiles inside a folder.
+ - [X] Write tests (doing).
 
 ### stats
 
