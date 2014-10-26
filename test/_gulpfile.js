@@ -2,7 +2,7 @@
 
 var runtime = require('../');
 var gulp = require('gulp');
-console.log(runtime.config());
+
 gulp.task('one', function(){ });
 gulp.task('two', function(){ });
 gulp.task('three', function(){ });
