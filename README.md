@@ -12,7 +12,7 @@
 Use gulp whilst is running
 
 <p align="center">
-    <img height="700" src="https://raw.githubusercontent.com/stringparser/gulp-runtime/master/img/gulp-runtime.gif" />
+    <img height="800" src="https://raw.githubusercontent.com/stringparser/gulp-runtime/master/img/gulp-runtime.gif" />
 </p>
 
 **Implementation status: documentation**
