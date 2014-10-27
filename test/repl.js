@@ -10,7 +10,6 @@ module.exports = function(runtime, util){
         [
           '--gulpfile',
           '--require',
-          '-l',
           '--log',
           '--tasks',
           '--tasks-simple',
