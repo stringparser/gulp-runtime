@@ -22,21 +22,4 @@ module.exports = function(runtime, util){
     });
     runtime.emit('next', '--gulpfile _gulpfile.js');
   });
-  it('--gulpfile should load gulpfile', function(done){
-    var timer;
-    var fileName = path.resolve(process.cwd(), '../gulpfile.js');
-    should.not.exists(require.cache[fileName]);
-    var output = '';
-    runtime.output.on('data', function(buf){
-      var self = this;
-      output += buf;
-      if(timer){ clearTimeout(timer); }
-      timer = setTimeout(function(){
-        self.removeAllListeners('data');
-        output.should.match(/Load/);
-        done();
-      });
-    });
-    runtime.emit('next', '--gulpfile ../gulpfile.js');
-  });
 };
