@@ -10,7 +10,7 @@ module.exports = function(runtime, util){
       .be.eql('test');
   });
   it('gulpfile should be the one specified', function(done){
-    should(runtime.config('env').gulpfile)
+    should(path.resolve(runtime.config('env').gulpfile))
       .be.eql(path.join(process.cwd(), '_gulpfile.js'));
     done();
   });
