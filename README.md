@@ -11,14 +11,6 @@
 
 Use gulp whilst is running
 
-<p align="center">
-    <img height="500" src="https://raw.githubusercontent.com/stringparser/gulp-runtime/master/img/gulp-runtime.gif" />
-</p>
-
-**Implementation status: documentation**
-
-Soon new docs. Something simple.
-
 ## install
 
     mpm install gulp-runtime --save-dev
