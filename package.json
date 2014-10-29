@@ -24,9 +24,7 @@
   "dependencies": {
     "ansi-highlight": "^1.0.2",
     "archy": "0.0.2",
-    "batch-these": "^0.8.0",
     "gulp-util": "^2.2.20",
-    "pretty-hrtime": "^0.2.2",
     "runtime": "^0.5.3",
     "semver": "^3.0.1",
     "tildify": "^1.0.0"
@@ -35,8 +33,7 @@
     "jshint": "*",
     "jshint-stylish": "*",
     "mocha": "*",
-    "should": "*",
-    "stdout-monkey": "*"
+    "should": "*"
   },
   "scripts": {
     "lint": "jshint lib index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules",

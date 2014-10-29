@@ -1,8 +1,11 @@
 'use strict';
 
-require('../');
+var runtime = require('../');
 var Q = require('q');
 var gulp = require('gulp');
+
+console.log(process.env._);
+console.log(runtime.config());
 
 gulp.task('one', function(){
   var deferred = Q.defer();
