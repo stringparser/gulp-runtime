@@ -1,6 +1,6 @@
 'use strict';
 
-var runtime = require('../');
+require('../');
 var Q = require('q');
 var gulp = require('gulp');
 

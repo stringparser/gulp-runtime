@@ -18,8 +18,4 @@ module.exports = function(runtime, util){
     runtime.get().completion.should
       .containDeep(Object.keys(require('gulp').tasks));
   });
-  it('history should be prewarmed with the tasks', function(){
-    runtime.history.should
-      .containDeep(Object.keys(require('gulp').tasks));
-  });
 };
