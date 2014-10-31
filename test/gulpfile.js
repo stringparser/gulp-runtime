@@ -11,8 +11,7 @@ module.exports = function(runtime, util){
   it('--gulpfile should reload if file was in cache', function(done){
     var timer, output = '';
     runtime.output.on('data', function(buf){
-      var self = this;
-      output += buf;
+      var self = this; output += buf;
       if(timer){ clearTimeout(timer); }
       timer = setTimeout(function(){
         self.removeAllListeners('data');

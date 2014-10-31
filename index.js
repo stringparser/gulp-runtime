@@ -1,6 +1,5 @@
 'use strict';
 
-var runtime = require('runtime');
 var util = require('runtime/lib/utils');
 
 // <~> - <~>
@@ -8,19 +7,22 @@ var util = require('runtime/lib/utils');
 // if not input and output will be through streams
 // <~> - <~>
 
-var instance;
 var argv = util.argv(process.argv);
-if( argv.repl === 'false' ){
-  instance = runtime.create('gulp');
-} else {
-  instance = runtime.create('gulp', {
+var runtime =  require('runtime')
+  .create('gulp', argv.silent || {
      input : process.stdin,
     output : process.stdout
   });
-}
 
-instance.require('./lib/utils');
-instance.require('./lib/init');
-instance.require('./lib/repl');
 
-module.exports = instance;
+//
+// ## save environment before init
+//
+var env = util.whech.sync('gulp');
+runtime.config('env', util.merge(env, argv));
+
+runtime.require('./lib/utils');
+runtime.require('./lib/init');
+runtime.require('./lib/repl');
+
+module.exports = runtime;
