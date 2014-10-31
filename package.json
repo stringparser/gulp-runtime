@@ -1,6 +1,6 @@
 {
   "name": "gulp-runtime",
-  "version": "0.4.16",
+  "version": "0.4.17",
   "description": "gulp runtime interface",
   "author": "Javier Carrillo <stringparser@gmail.com> (http://www.stringparser.com)",
   "engineStrict": true,
@@ -25,7 +25,7 @@
     "ansi-highlight": "^1.0.2",
     "archy": "0.0.2",
     "gulp-util": "^2.2.20",
-    "runtime": "^0.5.6",
+    "runtime": "^0.5.7",
     "tildify": "^1.0.0"
   },
   "devDependencies": {
