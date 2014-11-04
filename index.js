@@ -11,15 +11,7 @@ var runtime =  require('runtime')
     output : process.stdout
   });
 
-//
-// ## do not wait for startup to do the checks
-//
-
-require('./lib/util/startupChecks')(runtime);
-
-//
-// ## save environment before init
-//
+runtime.require('./lib/util');
 runtime.require('./lib/init');
 runtime.require('./lib/repl');
 
