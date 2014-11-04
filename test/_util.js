@@ -6,7 +6,9 @@ module.exports = {
   testSuite : function(){
     var testSuite = fs.readdirSync(__dirname);
     // in case there is priority
-    var testFirst = ['startup.js'];
+    var testFirst = [
+      'startup.js'
+    ];
 
     // omit things starting with underscore
     testSuite = testSuite.filter(function(thing){

@@ -10,9 +10,9 @@ module.exports = function(runtime, util){
   });
 
   it('--gulpfile should reload if file was in cache', function(done){
-    runtime.output.once('data', function(data){
-      data.should.match(/Reload/);
-      done();
+    runtime.once('test', function(output){
+      output.should.match(/Reload/);
+      runtime.emit('test done', done);
     });
     runtime.emit('next', '--gulpfile _gulpfile.js');
   });
