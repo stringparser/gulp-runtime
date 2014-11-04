@@ -1,12 +1,13 @@
 'use strict';
 
 var util = require('runtime/lib/utils');
-var chalk = util.colors;
+util.requirem('./lib/utils');
 
 //
 // ## do not wait for startup
 //    to stop everything
 
+var chalk = util.colors;
 var env = util.whech.sync('gulp');
 if( !env.localPackage.version && !env.globalPackage.version ){
   util.log(chalk.red('gulp is not installed locally or globally'));
@@ -30,7 +31,6 @@ runtime.config('env',
   util.merge(env, runtime.parser(argv)) );
 
 // startup
-runtime.require('./lib/utils');
 runtime.require('./lib/init');
 runtime.require('./lib/repl');
 
