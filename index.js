@@ -33,5 +33,6 @@ runtime.config('env',
 // startup
 runtime.require('./lib/init');
 runtime.require('./lib/repl');
+runtime.require('./lib/log-utils');
 
 module.exports = runtime;
