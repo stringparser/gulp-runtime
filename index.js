@@ -1,26 +1,35 @@
 'use strict';
 
 var util = require('runtime/lib/utils');
+var chalk = util.colors;
+
+//
+// ## do not wait for startup
+//    to stop everything
+
+var env = util.whech.sync('gulp');
+if( !env.localPackage.version && !env.globalPackage.version ){
+  util.log(chalk.red('gulp is not installed locally or globally'));
+  util.log('Try running: npm install gulp');
+  process.exit(1);
+}
 
 // <~> - <~>
 // make a repl by default
 // if not input and output will be through streams
 // <~> - <~>
-
-var argv = util.argv(process.argv);
+var argv = process.argv.slice(2);
 var runtime =  require('runtime')
-  .create('gulp', argv.silent || {
+  .create('gulp', argv.indexOf('--silent') > -1 || {
      input : process.stdin,
     output : process.stdout
   });
 
+// save environment before init
+runtime.config('env',
+  util.merge(env, runtime.parser(argv)) );
 
-//
-// ## save environment before init
-//
-var env = util.whech.sync('gulp');
-runtime.config('env', util.merge(env, argv));
-
+// startup
 runtime.require('./lib/utils');
 runtime.require('./lib/init');
 runtime.require('./lib/repl');

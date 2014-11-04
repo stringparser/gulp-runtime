@@ -4,20 +4,12 @@ var should = require('should');
 
 module.exports = function(runtime, util){
   should.exists(util);
-  it('-l or --log should log task code', function(done){
-    var timer;
-    var output = '';
-    runtime.output.on('data', function(buf){
-      var self = this;  output += buf;
-      if(timer){ clearTimeout(timer); }
-      timer = setTimeout(function(){
-        output.match(/gulp|default|function/g)
-          .should.have.property('length', 3);
-        self.removeAllListeners('data');
-        done();
-      });
+  it('-l or --log should log task code with --no-color', function(done){
+    runtime.output.once('data', function(data){
+      data.should.match(/gulp|task|default/);
+      done();
     });
-    runtime.emit('next', '--log default');
+    runtime.emit('next', '--log default --no-color');
   });
 
 };

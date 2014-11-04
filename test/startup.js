@@ -5,6 +5,7 @@ var should = require('should');
 
 module.exports = function(runtime, util){
   should.exists(util);
+  console.log(' startup env\n\n', runtime.config('env'));
   it('cwd should be ./test', function(){
     should(path.basename(process.cwd()))
       .be.eql('test');
