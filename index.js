@@ -15,4 +15,4 @@ runtime.require('./lib/util');
 runtime.require('./lib/init');
 runtime.require('./lib/repl');
 
-module.exports = runtime;
+module.exports = runtime.get('gulp');
