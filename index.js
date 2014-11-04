@@ -21,10 +21,23 @@ runtime.require('./lib/utils');
 
 var chalk = util.colors;
 var env = util.whech.sync('gulp');
-if( !env.localPackage.version && !env.globalPackage.version ){
-  util.log(chalk.red('gulp is not installed locally or globally'));
+
+if( !env.globalPackage.version ){
+  runtime.config('env', { failed : true });
+  util.log(util.badge);
+  util.log(chalk.red('gulp is not installed globally'));
   util.log('Try running: npm install gulp');
-  process.exit(1);
+  return process.exit(1);
+}
+
+if( !env.localPackage.version ){
+  runtime.config('env', { failed : true });
+  util.log(util.badge);
+  util.log(chalk.red('gulp is not installed locally'));
+  util.log('Try running: npm install gulp');
+  util.log('If you have gulp installed globally');
+  util.log('you can also run: npm link gulp');
+  return process.exit(1);
 }
 
 //
