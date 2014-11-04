@@ -4,7 +4,7 @@
 process.argv[1] = './test/_gulpfile.js';
 process.argv.splice(process.argv.indexOf('--repl'), 1);
 process.argv.push('--gulpfile', '_gulpfile.js');
-process.argv.push('--silent');
+process.argv.push('--silent', '--no-color');
 
 var path = require('path');
 var packageName = require('../package').name;
