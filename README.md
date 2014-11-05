@@ -118,7 +118,7 @@ and to wrap up, a gulpfile can be runned directly
 
 If you just want the repl requiring the package will be enough for you.
 
-If you want to see what's beneath this madness and/or are interested in using input and output streams to the runtime interface [look at the documentation](https://github.com/stringparser/gulp-runtime/blob/master/README.md) is not that long.
+If you want to change the prompt text or want to see what's beneath this madness and/or are interested in using input and output streams to the runtime interface [look at the documentation](https://github.com/stringparser/gulp-runtime/blob/master/README.md) is not that long.
 
 ### features
 - `gulp` cli at runtime.
