@@ -1,6 +1,6 @@
 
 
-## [gulp](https://github.com/gulpjs/gulp)-runtime [<img alt="progressed.io" src="http://progressed.io/bar/65" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
+## [gulp][gulpjs]-runtime [<img alt="progressed.io" src="http://progressed.io/bar/65" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
 [<img alt="build" src="http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square" align="left"/>](https://travis-ci.org/stringparser/gulp-runtime/builds)
 [<img alt="NPM version" src="http://img.shields.io/npm/v/gulp-runtime.svg?style=flat-square" align="right"/>](http://www.npmjs.org/package/gulp-runtime)
@@ -8,7 +8,7 @@
 <p align="center">Child project of <a href="https://github.com/stringparser/runtime">runtime</a></p>
 
 
-A runtime interface for [gulp]()
+use gulp whilst is running [gulp][gulpjs]
 
 ## usage
 
@@ -86,3 +86,5 @@ If you want learn more about this thing, i.e. want to change the prompt text, se
 ## license
 
 [<img alt="LICENSE" src="http://img.shields.io/npm/l/gulp-runtime.svg?style=flat-square"/>](http://opensource.org/licenses/MIT)
+
+[gulpjs]: https://github.com/gulpjs/gulp
