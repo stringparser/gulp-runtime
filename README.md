@@ -7,7 +7,7 @@
 [<img alt="NPM version" src="http://img.shields.io/npm/v/gulp-runtime.svg?style=flat-square" align="right"/>](http://www.npmjs.org/package/gulp-runtime)
 <p align="center">Child project of <a href="https://github.com/stringparser/runtime">runtime</a></p>
 
-<br><br>
+<br>
 use [gulp][gulpjs] whilst is running
 
 ## usage
