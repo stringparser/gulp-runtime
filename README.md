@@ -1,23 +1,21 @@
 
 
-## [gulp][gulpjs]-runtime [<img alt="progressed.io" src="http://progressed.io/bar/65" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
+## gulp-runtime [<img alt="progressed.io" src="http://progressed.io/bar/65" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
 [<img alt="build" src="http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square" align="left"/>](https://travis-ci.org/stringparser/gulp-runtime/builds)
 [<img alt="NPM version" src="http://img.shields.io/npm/v/gulp-runtime.svg?style=flat-square" align="right"/>](http://www.npmjs.org/package/gulp-runtime)
 
-<p align="center">Child project of <a href="https://github.com/stringparser/runtime">runtime</a></p>
-
-
+<br><br>
 use [gulp][gulpjs] whilst is running
 
 ## usage
 
-Just require the module
+Require the module
 
 ```js
  var runtime = require('gulp-runtime');
 ```
-when you want to see the prompt, press enter
+and when you want to see the prompt, press enter
 
 ```bash
 [13:07:50] Starting 'default'...
@@ -36,7 +34,7 @@ jsx             browserify      default
 [14:28:53] Finished 'js' after 17 μs, 'jsx' after 21 μs, 'browserify' after 27 μs
 ```
 
-use [`gulp` cli](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md) without exiting the process
+use [`gulp` cli][gulpCLI] without exiting the process
 
 ```
  > --tasks
@@ -55,11 +53,21 @@ use [`gulp` cli](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md) without
 [14:25:14]   ├── stylus
 [14:25:14]   └── browserify
 ```
+
+run gulpfiles directly
+
+```sh
+$ node project/gulpfile.js browserify
+[14:28:53] Starting 'js', 'jsx', 'browserify' ...
+[14:28:53] Finished 'js' after 17 μs, 'jsx' after 21 μs, 'browserify' after 27 μs  
+ >
+```
+
 ### whats in
-- REPL standard shell behavior (Ctrl+L, Ctrl+C, history, command and path completion).
+- A REPL with standard shell behavior (Ctrl+L, Ctrl+C, history, command and path completion).
 - Custom commands definition and flow control.
 - Run gulp directly from a `gulpfile`.
-- Log task code directly on the terminal (yep, I'm  that lazy).
+- Log task code directly on the terminal using `--log` (yep, I'm  that lazy).
 
 ### install
 
@@ -88,3 +96,4 @@ If you want learn more about this thing, i.e. want to change the prompt text, se
 [<img alt="LICENSE" src="http://img.shields.io/npm/l/gulp-runtime.svg?style=flat-square"/>](http://opensource.org/licenses/MIT)
 
 [gulpjs]: https://github.com/gulpjs/gulp
+[gulpCLI]: https://github.com/gulpjs/gulp/blob/master/docs/CLI.md
