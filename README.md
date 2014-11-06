@@ -29,8 +29,21 @@ and when you want to see the prompt, press enter
 [13:07:50] Finished 'default' after 800 μs
  >
 ```
+run your tasks
 
-Out of the box you can use `gulp` cli without exiting the process, for example, the task tree (or other [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md))
+```bash
+ > (press tab)
+--silent        --tasks         -T              --tasks-simple  -v              --version       --require
+--gulpfile      -l              --log           lint            jade            stylus          js
+jsx             browserify      default
+
+
+ > browserify
+[14:28:53] Starting 'js', 'jsx', 'browserify' ...
+[14:28:53] Finished 'js' after 17 μs, 'jsx' after 21 μs, 'browserify' after 27 μs
+```
+
+use [`gulp` cli commands](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md) without exiting the process
 
 ```bash
  > -T
@@ -50,21 +63,7 @@ Out of the box you can use `gulp` cli without exiting the process, for example, 
 [14:25:14]   └── browserify
 ```
 
-or run your tasks
-
-```bash
- > (press tab)
---silent        --tasks         -T              --tasks-simple  -v              --version       --require
---gulpfile      -l              --log           lint            jade            stylus          js
-jsx             browserify      default
-
-
- > browserify
-[14:28:53] Starting 'js', 'jsx', 'browserify' ...
-[14:28:53] Finished 'js' after 17 μs, 'jsx' after 21 μs, 'browserify' after 27 μs
-```
-
-Likewise you can define your own commands
+define your own commands
 
 ```js
 var runtime = require('gulp-runtime');
@@ -106,7 +105,7 @@ runtime.output.pipe(process.stdout);
 runtime.input.write('aTask\n'); // \n is needed
 ```
 
-and to wrap up, a gulpfile can be runned directly 
+and to wrap up, a gulpfile can be runned directly
 
 ```bash
  $ node someDir/someGulpfile.js
@@ -118,7 +117,7 @@ and to wrap up, a gulpfile can be runned directly
 
 If you just want the repl requiring the package will be enough for you.
 
-If you want to change the prompt text or want to see what's beneath this madness and/or are interested in using input and output streams to the runtime interface [look at the documentation](https://github.com/stringparser/gulp-runtime/blob/master/README.md) is not that long.
+If you want learn more about this thing, i.e. want to change the prompt text, see want can be done with commands or you are interested in using input and output streams to the runtime interface [look at the documentation](docs/readme.md).
 
 ### features
 - `gulp` cli at runtime.
