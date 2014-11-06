@@ -8,11 +8,11 @@
 <p align="center">Child project of <a href="https://github.com/stringparser/runtime">runtime</a></p>
 
 
-use [gulp][gulpjs] whilst is running 
+use [gulp][gulpjs] whilst is running
 
 ## usage
 
-For a REPL, just require the module
+Just require the module
 
 ```js
  var runtime = require('gulp-runtime');
@@ -58,7 +58,7 @@ use [`gulp` cli](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md) without
 ### whats in
 - REPL standard shell behavior (Ctrl+L, Ctrl+C, history, command and path completion).
 - Custom commands definition and flow control.
-- Run gulp locally and/or directly from a `gulpfile`.
+- Run gulp directly from a `gulpfile`.
 - Log task code directly on the terminal (yep, I'm  that lazy).
 
 ### install
