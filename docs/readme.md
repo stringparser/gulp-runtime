@@ -1,5 +1,5 @@
 
-# gulp-runtime documentation[<img alt="progressed.io" src="http://progressed.io/bar/75" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
+### gulp-runtime docs[<img alt="progressed.io" src="http://progressed.io/bar/75" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 <p align="center">
   <img height="300" src="./gulp-runtime.png"/>
 </p>
@@ -9,13 +9,13 @@
   | <a href="#gulp-runtime">gulp runtime</a>
 </p>
 
-## Motivation
+### Motivation
 
 The idea for this module is to use `gulp` at runtime. In order to do that a REPL should be implemented and, for that, some kind of API language has to be at hand so "commands" can be run.
 
 As you can see that deserves a module on its own so I splat that to [runtime](https://github.com/stringparser/runtime) were the above is implemented. Here we implement the commands from the [`gulp cli`](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md) and as a bonus the posibility to run gulp locally using just your gulpfile.
 
-## a runtime interface
+### a runtime interface
 
 If to CLI we add Loop we have REPL. Fantastic. If from REPL we have control over the Read, Print and Loop parts, deciding when to do what and leaving the Eval part to javascript itself (though there is no string evaluated here, but a function call), we end up with what I've end up calling *a runtime interface* for a lack of a better name.
 
@@ -25,7 +25,7 @@ To achieve Read you have to be able to write *commands* that will be interpreted
 
 Great, lets do that.
 
-## commands
+### commands
 
 Defining commands we can call them and associate any input to them by their name. You don't have to do that, of course. Just define them. After they are defined, if they have a `handle` they can be run.
 

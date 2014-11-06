@@ -1,6 +1,6 @@
 
 
-## [gulp](https://github.com/gulpjs/gulp)-runtime [<img alt="progressed.io" src="http://progressed.io/bar/50" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
+## [gulp](https://github.com/gulpjs/gulp)-runtime [<img alt="progressed.io" src="http://progressed.io/bar/65" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
 [<img alt="build" src="http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square" align="left"/>](https://travis-ci.org/stringparser/gulp-runtime/builds)
 [<img alt="NPM version" src="http://img.shields.io/npm/v/gulp-runtime.svg?style=flat-square" align="right"/>](http://www.npmjs.org/package/gulp-runtime)
@@ -8,17 +8,7 @@
 <p align="center">Child project of <a href="https://github.com/stringparser/runtime">runtime</a></p>
 
 
-A runtime interface for gulp
-
-## install
-
-    mpm install --save-dev gulp-runtime
-
-### whats in
-- REPL standard shell behavior (Ctrl+L, Ctrl+C, history, command and path completion).
-- Custom commands definition and flow control.
-- Run gulp locally and/or directly from a `gulpfile`.
-- Log task code directly on the terminal (yep, I'm  that lazy).
+A runtime interface for [gulp]()
 
 ## usage
 
@@ -65,8 +55,19 @@ use [`gulp` cli](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md) without
 [14:25:14]   ├── stylus
 [14:25:14]   └── browserify
 ```
+### whats in
+- REPL standard shell behavior (Ctrl+L, Ctrl+C, history, command and path completion).
+- Custom commands definition and flow control.
+- Run gulp locally and/or directly from a `gulpfile`.
+- Log task code directly on the terminal (yep, I'm  that lazy).
 
-## api documentation
+### install
+
+With [npm](https://www.npmjs.org)
+
+    mpm install --save-dev gulp-runtime
+
+### api documentation
 
 If you just want the REPL requiring the package will be enough for you.
 
