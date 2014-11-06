@@ -12,21 +12,21 @@ use [gulp][gulpjs] whilst is running
 
 ## usage
 
-Require the module
+Require the module to have a REPL
 
 ```js
  var runtime = require('gulp-runtime');
 ```
-and when you want to see the prompt, press enter
+When you want to see the prompt, press enter
 
-```bash
+```sh
 [13:07:50] Starting 'default'...
 [13:07:50] Finished 'default' after 800 μs
  >
 ```
 run tasks
 
-```
+```sh
 > (press tab)
 --silent        --tasks         -T              --tasks-simple  -v              --version       --require
 --gulpfile      lint            jade            stylus          js
@@ -38,7 +38,7 @@ jsx             browserify      default
 
 use [`gulp` cli][gulpCLI] without exiting the process
 
-```
+````sh
  > --tasks
 [14:25:14] Tasks for ~/code/gulp-runtime/gulpfile.js
 [14:25:14] ├── lint
@@ -54,16 +54,16 @@ use [`gulp` cli][gulpCLI] without exiting the process
 [14:25:14]   ├── jade
 [14:25:14]   ├── stylus
 [14:25:14]   └── browserify
-```
+````
 
 run gulpfiles directly
 
-```sh
+````sh
 $ node project/gulpfile.js browserify
 [14:28:53] Starting 'js', 'jsx', 'browserify' ...
 [14:28:53] Finished 'js' after 17 μs, 'jsx' after 21 μs, 'browserify' after 27 μs  
  >
-```
+````
 
 ### whats in
 - A REPL with standard shell behavior (Ctrl+L, Ctrl+C, history, command and path completion).
