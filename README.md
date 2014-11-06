@@ -8,7 +8,7 @@
 <p align="center">Child project of <a href="https://github.com/stringparser/runtime">runtime</a></p>
 
 
-use gulp whilst is running [gulp][gulpjs]
+use [gulp][gulpjs] whilst is running 
 
 ## usage
 
