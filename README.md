@@ -67,11 +67,11 @@ With [npm](https://www.npmjs.org)
 
     mpm install --save-dev gulp-runtime
 
-### api documentation
+### documentation
 
 If you just want the REPL requiring the package will be enough for you.
 
-If you want learn more about this thing, i.e. want to change the prompt text, see want can be done with commands or you are interested in using input and output streams to the runtime interface [look at the documentation](docs/readme.md).
+If you want learn more about this thing, i.e. want to change the prompt text, see what can be done with commands or you are interested in using input and output streams to the runtime interface [go to the docs](docs/readme.md).
 
 ### pending
 
