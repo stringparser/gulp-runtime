@@ -1,9 +1,11 @@
 
 
-## gulp-runtime [<img alt="progressed.io" src="http://progressed.io/bar/65" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
+## gulp-runtime [<img alt="Gitter" align="right" src="https://badges.gitter.im/Join Chat.svg"/>](https://gitter.im/stringparser/gulp-runtime?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
 
 [<img alt="build" src="http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square" align="left"/>](https://travis-ci.org/stringparser/gulp-runtime/builds)
+
 [<img alt="NPM version" src="http://img.shields.io/npm/v/gulp-runtime.svg?style=flat-square" align="right"/>](http://www.npmjs.org/package/gulp-runtime)
+<p align="center">Child project of <a href="https://github.com/stringparser/runtime">runtime</a></p>
 
 <br><br>
 use [gulp][gulpjs] whilst is running
