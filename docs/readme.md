@@ -3,11 +3,11 @@
 <p align="center">
   <img height="300" src="./gulp-runtime.png"/>
 </p>
-<ul align="center">
-[a runtime interface](#a-runtime-interface)
-| [commands](#commands)
-| [gulp-runtime](#gulp-runtime)
-</ul>
+<p align="center">
+  <a href="#a-runtime-interface">a runtime interface</a>
+  | <a href="#commands">commands</a>
+  | <a href="#gulp-runtime">gulp runtime</a>
+</p>
 
 ## Motivation
 
