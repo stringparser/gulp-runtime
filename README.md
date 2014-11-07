@@ -5,10 +5,20 @@
 [<img alt="build" src="http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square" align="left"/>](https://travis-ci.org/stringparser/gulp-runtime/builds)
 
 [<img alt="NPM version" src="http://img.shields.io/npm/v/gulp-runtime.svg?style=flat-square" align="right"/>](http://www.npmjs.org/package/gulp-runtime)
-<p align="center">Child project of <a href="https://github.com/stringparser/runtime">runtime</a></p>
 
-<br>
-use [gulp][gulpjs] whilst is running
+<p align="center">
+  use
+  <a href="https://github.com/gulpjs/gulp">
+    <b style="color:#D32929;">gulp</b>
+  </a>
+  whilst is running
+</p>
+<p align="center">
+  <img height=350 src="./docs/gulp-runtime.png"/>
+</p>
+<h3 align="center" style="border-bottom:0; font-weight:normal;">
+  <a href="./docs"><b>documentation</b></a>
+</h3>
 
 ## usage
 
@@ -36,7 +46,7 @@ jsx             browserify      default
 [14:28:53] Finished 'js' after 17 μs, 'jsx' after 21 μs, 'browserify' after 27 μs
 ```
 
-use [`gulp` cli][gulpCLI] without exiting the process
+use the [gulp cli][x-gulp-cli] without exiting the process
 
 ````sh
  > --tasks
@@ -76,13 +86,6 @@ $ node project/gulpfile.js browserify
 With [npm](https://www.npmjs.org)
 
     mpm install --save-dev gulp-runtime
-
-### documentation
-
-If you just want the REPL requiring the package will be enough for you.
-
-If you want learn more about this thing, i.e. want to change the prompt text, see what can be done with commands or you are interested in using input and output streams to the runtime interface [go to the docs](docs/readme.md).
-
 ### pending
 
  - [ ] Unicorn approval.
@@ -97,5 +100,6 @@ If you want learn more about this thing, i.e. want to change the prompt text, se
 
 [<img alt="LICENSE" src="http://img.shields.io/npm/l/gulp-runtime.svg?style=flat-square"/>](http://opensource.org/licenses/MIT)
 
-[gulpjs]: https://github.com/gulpjs/gulp
-[gulpCLI]: https://github.com/gulpjs/gulp/blob/master/docs/CLI.md
+
+
+[x-gulp-cli]: https://github.com/gulpjs/gulp/blob/master/docs/CLI.md
