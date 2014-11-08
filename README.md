@@ -8,26 +8,26 @@
 
 <p align="center">
   use
-  <a href="https://github.com/gulpjs/gulp">
-    <b style="color:#D32929;">gulp</b>
+  <a href="https://github.com/gulpjs/gulp" style="color:#D32929;">
+    <b>gulp</b>
   </a>
   whilst is running
 </p>
-<p align="center">
+<p align="center"><a href="https://github.com/gulpjs/gulp">
   <img height=350 src="./docs/gulp-runtime.png"/>
-</p>
-<h3 align="center" style="border-bottom:0; font-weight:normal;">
-  <a href="./docs"><b>documentation</b></a>
+</a></p>
+<h3 align="center" style="border-bottom:0;">
+  <a href="./docs">documentation</a>
 </h3>
 
 ## usage
 
-Require the module to have a REPL
+For a REPL just require the module
 
 ```js
  var runtime = require('gulp-runtime');
 ```
-When you want to see the prompt, press enter
+press enter to see the prompt
 
 ```sh
 [13:07:50] Starting 'default'...
@@ -50,7 +50,7 @@ use the [gulp cli][x-gulp-cli] without exiting the process
 
 ````sh
  > --tasks
-[14:25:14] Tasks for ~/code/gulp-runtime/gulpfile.js
+[14:25:14] Tasks for ~/code/project/gulpfile.js
 [14:25:14] ├── lint
 [14:25:14] ├── jade
 [14:25:14] ├── stylus
@@ -66,40 +66,50 @@ use the [gulp cli][x-gulp-cli] without exiting the process
 [14:25:14]   └── browserify
 ````
 
-run gulpfiles directly
+or run gulpfiles directly
 
 ````sh
 $ node project/gulpfile.js browserify
+[13:35:56] From plugin `gulp-runtime`
+[13:35:56] Working directory changed to ~/code/project
+[13:35:56] Using gulpfile ~/code/project/gulpfile.js
 [14:28:53] Starting 'js', 'jsx', 'browserify' ...
 [14:28:53] Finished 'js' after 17 μs, 'jsx' after 21 μs, 'browserify' after 27 μs  
  >
 ````
 
-### whats in
-- A REPL with standard shell behavior (Ctrl+L, Ctrl+C, history, command and path completion).
-- Custom commands definition and flow control.
-- Run gulp directly from a `gulpfile`.
-- Log task code directly on the terminal using `--log` (yep, I'm  that lazy).
+### what's in
+- A hackable CLI/REPL with standard shell behavior.
+- A [runtime interface][x-runtime]: communicate with the REPL using code.
+- Extras:
+   + Run [gulp][x-gulp] directly from a `gulpfile`.
+   + Log task code to the terminal using `--log-task` (yep, I am  that lazy).
+
+Read the [documentation](#documentation) for more information about all the above.
 
 ### install
 
-With [npm](https://www.npmjs.org)
+With [npm][x-npm]
 
-    mpm install --save-dev gulp-runtime
-### pending
+    npm install --save-dev gulp-runtime
 
- - [ ] Unicorn approval.
+<div align="center">
+  <img src="https://nodei.co/npm/gulp-runtime.png?downloads=true&downloadRank=true&stars=true" alt="NPM"/>
+</div>
 
-### stats
+## todo
 
-[<img src="https://nodei.co/npm/gulp-runtime.png?downloads=true&downloadRank=true&stars=true" alt="NPM" align="center"/>](https://nodei.co/npm/gulp-runtime)
-
-[<img src="https://nodei.co/npm-dl/gulp-runtime.png" alt="NPM" align="center"/>](https://nodei.co/npm/gulp-runtime/)
+ - [ ] review the documentation
+ - [ ] review the CLI (`--cwd` is missing at the moment)
 
 ## license
 
 [<img alt="LICENSE" src="http://img.shields.io/npm/l/gulp-runtime.svg?style=flat-square"/>](http://opensource.org/licenses/MIT)
 
 
-
+[x-npm]: https://www.npmjs.org
+[x-gulp]: https://github.com/gulpjs/gulp
 [x-gulp-cli]: https://github.com/gulpjs/gulp/blob/master/docs/CLI.md
+
+[x-runtime]: https://github.com/stringparser/runtime
+[x-through2]: https://www.npmjs.org/package/through2
