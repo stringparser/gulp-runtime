@@ -85,7 +85,7 @@ $ node project/gulpfile.js browserify
    + Run [gulp][x-gulp] directly from a `gulpfile`.
    + Log task code to the terminal using `--log-task` (yep, I am  that lazy).
 
-Read the [documentation](#documentation) for more information about all the above.
+Read the [documentation](docs) for more information about all the above.
 
 ### install
 

@@ -2,7 +2,7 @@
 ### gulp-runtime [<img alt="progressed.io" src="http://progressed.io/bar/75" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
  - [Your CLI/REPL](cli-repl.md) - every task, every command
- - [API](runtime-api.md) - write commands, communicate with the REPL using code
+ - [API](api.md) - write commands, communicate with the REPL using code
  - [Extras](extras.md) - some times: enough is not enough
 
 Going back and forth between editor and terminal is not that fun when you are trying things out for the first time. That's what happened when I met [gulp][x-gulp] and for some reason it had to stop.
