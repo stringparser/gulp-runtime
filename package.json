@@ -1,0 +1,41 @@
+{
+  "name": "gulp-runtime",
+  "version": "0.9.0",
+  "description": "A gulp runtime interface",
+  "author": "Javier Carrillo <stringparser@gmail.com> (http://www.stringparser.com)",
+  "engines": {
+    "node": " >= 0.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stringparser/gulp-runtime"
+  },
+  "keywords": [
+    "gulp",
+    "gulpplugin",
+    "runtime",
+    "stdin",
+    "readline",
+    "terminal",
+    "interface",
+    "tool"
+  ],
+  "dependencies": {
+    "ansi-highlight": "^1.0.2",
+    "archy": "0.0.2",
+    "gulp-util": "^2.2.20",
+    "runtime": "0.7.2",
+    "tildify": "^1.0.0"
+  },
+  "devDependencies": {
+    "jshint": "*",
+    "jshint-stylish": "*",
+    "mocha": "*",
+    "should": "*"
+  },
+  "scripts": {
+    "lint": "jshint lib index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules",
+    "test": "npm run-script lint && mocha test/_main.js"
+  },
+  "license": "MIT"
+}
