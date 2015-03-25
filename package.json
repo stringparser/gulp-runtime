@@ -21,11 +21,8 @@
     "tool"
   ],
   "dependencies": {
-    "ansi-highlight": "^1.0.2",
-    "archy": "0.0.2",
     "gulp-util": "^2.2.20",
-    "runtime": "0.7.2",
-    "tildify": "^1.0.0"
+    "runtime": "^0.x.x",
   },
   "devDependencies": {
     "jshint": "*",
