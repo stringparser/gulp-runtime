@@ -62,8 +62,8 @@ runtime.Runtime.prototype.task = function(name, dep, handle){
 runtime.Stack.prototype.onHandleError = function(error, next){
   if(this.errorFound){ throw this.errorFound; }
 
-  util.log(util.color.yellow('gulp-runtime'),
-    'found an error in', '\'' + util.color.cyan(next.match) + '\''
+  util.log(util.color.yellow('gulp-runtime')+':',
+    'error coming from', '\'' + util.color.cyan(next.match) + '\''
   );
 
   if(error.plugin){
@@ -121,13 +121,14 @@ runtime.Stack.prototype.onHandle = function(next){
     );
   }
 
-  if(!next.time){ next.time = util.hrtime(); }
   if(!this.time){ this.time = util.hrtime(); }
+  if(!next.time){ next.time = util.hrtime(); }
 
   var self = this;
   while(len && self && !self.queue){
     time = util.prettyTime(process.hrtime(self.time));
-    util.log('Finished', '\'' + util.color.cyan(self.path) + '\'',
+    util.log(
+      'Finished', '\'' + util.color.cyan(self.path) + '\'',
       (host ? 'from '+ util.color.green(host) + ' ' : '') +
       'in ' +  util.color.magenta(time)
     );
