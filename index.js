@@ -32,7 +32,8 @@ runtime.Runtime.prototype.task = function(name, dep, handle){
       message: 'task(name, [deps, handle]).' +
       'Tasks need at least one more argument\n'+
       ' - handle: function for the task\n'+
-      ' - deps: array of task dependencies to run before this one'
+      ' - deps: array of task dependencies to run before this one'+
+      '\n'
     });
   }
 
@@ -61,8 +62,8 @@ runtime.Runtime.prototype.task = function(name, dep, handle){
 runtime.Stack.prototype.onHandleError = function(error, next){
   if(this.errorFound){ throw this.errorFound; }
 
-  util.log('`' + util.color.yellow('gulp-runtime') + '`',
-    'found error in', '\'' + util.color.cyan(next.match) + '\''
+  util.log(util.color.yellow('gulp-runtime'),
+    'found an error in', '\'' + util.color.cyan(next.match) + '\''
   );
 
   if(error.plugin){
@@ -97,44 +98,44 @@ runtime.Stack.prototype.onHandleNotFound = function(next){
 */
 
 runtime.Stack.prototype.onHandle = function(next){
+  var len = this.argv.length > 1;
   var path = next.match || next.path;
   var host = this.host ? this.host.path : '';
   var mode = this.wait ? 'series' : 'parallel';
   var time, status = next.time ? 'Finished' : 'Wait for';
 
-  if(!this.time){
+  if(!this.time && host){
     util.log('Started',
       '\'' + util.color.cyan(this.path) + '\'',
-      'in',
-      util.color.bold(mode),
-      host ? 'from ' + util.color.green(host) : ''
+      'from ' + util.color.green(host), 'in',
+      util.color.bold(mode)
     );
-    this.time = util.hrtime();
-  } else if(next.time && this.argv.length > 1){
+  } else {
+    time = next.time
+      ? util.prettyTime(process.hrtime(next.time))
+      : '';
 
-    time = util.prettyTime(process.hrtime(next.time));
-
-    util.log('-', status,
-      '\'' + util.color.cyan(path) + '\'',
-      'in ' + util.color.magenta(time)
+    util.log((len ? '- ' : '') + status,
+      '\'' + util.color.cyan(path) + '\'' +
+      (time ? ' in ' + util.color.magenta(time) : '')
     );
   }
 
-  if(!next.time){
-    next.time = util.hrtime();
-  }
+  if(!next.time){ next.time = util.hrtime(); }
+  if(!this.time){ this.time = util.hrtime(); }
 
   var self = this;
-  while(self && !self.queue){
+  while(len && self && !self.queue){
     time = util.prettyTime(process.hrtime(self.time));
     util.log('Finished', '\'' + util.color.cyan(self.path) + '\'',
-      host ? 'from '+util.color.green(host) : '' +
-      'in', util.color.magenta(time)
+      (host ? 'from '+ util.color.green(host) + ' ' : '') +
+      'in ' +  util.color.magenta(time)
     );
+
     self = self.host;
   }
 
-  if(this.repl && self && !self.queue){
+  if(this.repl && !this.queue){
     this.repl.prompt();
   }
 };
