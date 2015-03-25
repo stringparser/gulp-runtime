@@ -22,7 +22,7 @@
   ],
   "dependencies": {
     "gulp-util": "^2.2.20",
-    "runtime": "^0.x.x",
+    "runtime": "^0.9.3"
   },
   "devDependencies": {
     "jshint": "*",
