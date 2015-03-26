@@ -22,7 +22,10 @@
   ],
   "dependencies": {
     "gulp-util": "^2.2.20",
-    "runtime": "^0.9.3"
+    "runtime": "^0.9.3",
+    "semver": "^4.3.1",
+    "tildify": "^1.0.0",
+    "whech": "^0.6.1"
   },
   "devDependencies": {
     "jshint": "*",
