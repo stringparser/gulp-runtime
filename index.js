@@ -101,6 +101,8 @@ runtime.Stack.prototype.onHandleNotFound = function(next){
 */
 
 runtime.Stack.prototype.onHandle = function(next){
+  if(/^-/.test(next.match)){ return ; }
+
   var len = this.argv.length > 1;
   var path = next.match || next.path;
   var host = this.host ? this.host.path : '';
@@ -228,7 +230,7 @@ app.set('--silent', function(next){
 /*
  --require, --gulpfile is the same but changing the cwd
  */
-app.set('(--require|--gulpfile) :filename', function (next){
+app.set(':flag(--require|--gulpfile) :filename', function (next){
   if(!util.tildify){ util.lazy('require-flags'); }
 
   var cwd = process.cwd();
@@ -243,11 +245,15 @@ app.set('(--require|--gulpfile) :filename', function (next){
   try {
     require(filename);
   } catch(err){
-    var message = 'Could not find ' +
-      (isGulpfile ? 'gulpfile' : 'module') +
-      util.tildify(filename);
+    var message = 'Could not load ' +
+      (isGulpfile ? 'gulpfile' : 'module') + ' ' +
+      util.color.magenta(util.tildify(filename));
 
-    if(this.repl){ console.log(message); } else {
+    if(this.repl){
+      util.log(message); util.log(err.stack);
+      if(this.repl && !this.queue){ this.repl.prompt(); }
+      return next();
+    } else {
       throw new util.PluginError({
         plugin: util.color.yellow('gulp-runtime'),
         message: message
@@ -260,15 +266,13 @@ app.set('(--require|--gulpfile) :filename', function (next){
     util.color.magenta(util.tildify(filename))
   );
 
-  if(!isGulpfile){ next(); }
-  if(this.repl && !this.queue){
-    this.repl.prompt();
+  if(!isGulpfile){ return next(); }
+  else if(path.dirname(filename) !== process.cwd()){
+    process.cwd(path.dirname(filename));
+    util.log('Working directory changed to',
+      util.color.magenta(util.tildify(process.cwd()))
+    );
   }
-
-  process.cwd(path.dirname(filename));
-  util.log('Working directory changed to',
-    util.color.magenta(util.tildify(process.cwd()))
-  );
 
   process.nextTick(function(){
     var gulp = require('gulp');
