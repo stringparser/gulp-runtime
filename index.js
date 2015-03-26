@@ -39,7 +39,7 @@ runtime.Runtime.prototype.task = function(name, dep, handle){
   }
 
   require('gulp').task(name, dep, handle);
-  
+
   var depType = util.type(dep);
   var handleType = util.type(handle);
 
@@ -273,6 +273,8 @@ app.set('(--require|--gulpfile) :filename', function (next){
   process.nextTick(function(){
     var gulp = require('gulp');
     Object.keys(gulp.tasks).forEach(function(task){
+      // this is a little defensive
+      // for now its ok, but it should not be the case
       app.task(task, task.dep, task.fn);
     });
     next();
