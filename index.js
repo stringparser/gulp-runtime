@@ -1,5 +1,6 @@
 'use strict';
 
+var path = require('path');
 var util = require('./lib/util');
 var runtime = require('runtime');
 
@@ -37,13 +38,13 @@ runtime.Runtime.prototype.task = function(name, dep, handle){
     });
   }
 
-  var depsType = util.type(dep);
+  var depType = util.type(dep);
   var handleType = util.type(handle);
 
-  handle = handleType.function || depsType.function
+  handle = handleType.function || depType.function
    || function(next){ next(); };
 
-  if(!depsType.array){
+  if(!depType.array || !dep.length){
     return this.set(name, handle);
   } else if(!handle.name && !handle.displayName){
     handle.displayName = name;
@@ -141,4 +142,143 @@ runtime.Stack.prototype.onHandle = function(next){
   }
 };
 
-exports = module.exports = runtime.create();
+/*
+ Lets do the gulp CLI
+*/
+
+var runtime = runtime.create();
+
+/*
+ -v or --version
+ */
+runtime.set(':version(-v|--version)', function(next){
+  if(!process.env.GULP.ENV){ util.lazy(); }
+
+  var chalk = util.color;
+  var semver = util.semver;
+  var env = process.env.GULP_ENV;
+  var cliPackage = env.cliPackage;
+  var modulePackage = env.modulePackage;
+
+  if( env.cliPackage.version === void 0 ){
+    util.log('Working locally with gulp@' + modulePackage.version );
+  } else if(semver.gt(cliPackage.version, modulePackage.version)){
+
+    util.log(chalk.red('Warning: gulp version mismatch:'));
+    util.log(chalk.red('Global gulp is', cliPackage.version));
+    util.log(chalk.red('Local gulp is', modulePackage.version));
+
+  } else {
+    util.log('CLI version', cliPackage.version);
+    util.log('Local version', modulePackage.version);
+  }
+
+  next();
+  if(this.repl && !this.queue){
+    this.repl.prompt();
+  }
+});
+
+/*
+ --tasks, -T or --tasks-simple
+ */
+runtime.set(':tasks(--tasks|-T|--tasks-simple)', function taskLog(next){
+  if(!process.env.GULP.ENV){ util.lazy(); }
+  if(!util.logTasks){ util.lazy('tasks-flags'); }
+
+  var gulp = require('gulp');
+  var flag = next.params.tasks;
+  var env = process.env.GULP_ENV;
+
+  if(flag.tasksSimple){
+    util.logTasksSimple(env, gulp);
+  } else {
+    util.logTasks(env, gulp);
+  }
+
+  next();
+  if(this.repl && !this.queue){
+    this.repl.prompt();
+  }
+});
+
+/*
+ --silent
+ */
+runtime.set('--silent', function(next){
+  var silent = process.env.GULP_ENV.silent;
+
+  runtime.emit('message', {
+    message : silent ? 'logging enabled' : 'logging silent',
+      stamp : true,
+     prompt : true
+  });
+
+  if(process.argv.indexOf('--tasks-simple') > 0){
+    silent = true;
+  } else {
+    silent = false;
+  }
+
+  process.env.GULP_ENV.silent = silent;
+  next();
+  if(this.repl && !this.queue){
+    this.repl.prompt();
+  }
+});
+
+/*
+ --require, --gulpfile is the same but changing the cwd
+ */
+runtime.set('(--require|--gulpfile) :filename', function (next){
+  if(!util.tildify){ util.lazy('require-flags'); }
+
+  var cwd = process.cwd();
+  var filename = next.params.filename;
+  filename = path.resolve(cwd, filename);
+  var cached = Boolean(require.cache[filename]);
+  var isGulpfile = /--gulpfile/.test(this.queue);
+
+  util.log(util.color.yellow('gulp-runtime'));
+  if(cached){ delete require.cache[filename]; }
+
+  try {
+    require(filename);
+  } catch(err){
+    var message = 'Could not find ' +
+      (isGulpfile ? 'gulpfile' : 'module') +
+      util.tildify(filename);
+
+    if(this.repl){ console.log(message); } else {
+      throw new util.PluginError({
+        plugin: util.color.yellow('gulp-runtime'),
+        message: message
+      });
+    }
+  }
+
+  util.log(
+    (cached ? util.color.cyan('Reloaded') : 'Loaded'),
+    util.color.magenta(util.tildify(filename))
+  );
+
+  if(!isGulpfile){ next(); }
+  if(this.repl && !this.queue){
+    this.repl.prompt();
+  }
+
+  process.cwd(path.dirname(filename));
+  util.log('Working directory changed to',
+    util.color.magenta(util.tildify(process.cwd()))
+  );
+
+  process.nextTick(function(){
+    var gulp = require('gulp');
+    Object.keys(gulp.tasks).forEach(function(task){
+      runtime.task(task, task.dep, task.fn);
+    });
+    next();
+  });
+});
+
+exports = module.exports = runtime;
