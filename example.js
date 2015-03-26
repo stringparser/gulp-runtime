@@ -2,7 +2,11 @@
 
 var gulp = require('gulp');
 var util = require('./lib/util');
-var runtime = require('./.').repl();
+var runtime = require('./.');
+
+if(typeof runtime.repl === 'function'){
+  runtime.repl();
+}
 
 runtime.task(':handle(\\w+)', function(next){
   if(next.match === 'jsx'){
@@ -18,5 +22,3 @@ runtime.stack('default')();
 gulp.task('hello', function(){
 
 });
-
-console.log(gulp);
