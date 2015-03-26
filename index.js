@@ -190,7 +190,7 @@ app.set(':tasks(--tasks|-T|--tasks-simple)', function (next){
   var flag = next.params.tasks;
   var env = app.get().GULP_ENV;
 
-  if(flag.tasksSimple){
+  if(flag === '--tasks-simple'){
     util.logTasksSimple(env, gulp);
   } else {
     util.logTasks(env, gulp);
