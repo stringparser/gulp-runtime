@@ -21,6 +21,7 @@
     "tool"
   ],
   "dependencies": {
+    "archy": "^1.0.0",
     "gulp-util": "^2.2.20",
     "runtime": "^0.9.3",
     "semver": "^4.3.1",
