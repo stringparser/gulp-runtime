@@ -152,25 +152,23 @@ var runtime = runtime.create();
  -v or --version
  */
 runtime.set(':version(-v|--version)', function(next){
-  if(!process.env.GULP.ENV){ util.lazy(); }
+  if(!runtime.get().GULP_ENV){ util.lazy(null, runtime); }
 
   var chalk = util.color;
   var semver = util.semver;
-  var env = process.env.GULP_ENV;
-  var cliPackage = env.cliPackage;
-  var modulePackage = env.modulePackage;
+  var env = runtime.get().GULP_ENV;
+  var localPackage = env.localPackage;
+  var globalPackage = env.globalPackage;
 
-  if( env.cliPackage.version === void 0 ){
-    util.log('Working locally with gulp@' + modulePackage.version );
-  } else if(semver.gt(cliPackage.version, modulePackage.version)){
-
+  if( env.globalPackage.version === void 0 ){
+    util.log('Working locally with gulp@' + localPackage.version );
+  } else if(semver.gt(globalPackage.version, localPackage.version)){
     util.log(chalk.red('Warning: gulp version mismatch:'));
-    util.log(chalk.red('Global gulp is', cliPackage.version));
-    util.log(chalk.red('Local gulp is', modulePackage.version));
-
+    util.log(chalk.red('Global gulp is', globalPackage.version));
+    util.log(chalk.red('Local gulp is', localPackage.version));
   } else {
-    util.log('CLI version', cliPackage.version);
-    util.log('Local version', modulePackage.version);
+    util.log('CLI version', globalPackage.version);
+    util.log('Local version', localPackage.version);
   }
 
   next();
@@ -183,12 +181,12 @@ runtime.set(':version(-v|--version)', function(next){
  --tasks, -T or --tasks-simple
  */
 runtime.set(':tasks(--tasks|-T|--tasks-simple)', function taskLog(next){
-  if(!process.env.GULP.ENV){ util.lazy(); }
+  if(!runtime.get().GULP_ENV){ util.lazy(null, runtime); }
   if(!util.logTasks){ util.lazy('tasks-flags'); }
 
   var gulp = require('gulp');
   var flag = next.params.tasks;
-  var env = process.env.GULP_ENV;
+  var env = runtime.get().GULP_ENV;
 
   if(flag.tasksSimple){
     util.logTasksSimple(env, gulp);
@@ -206,7 +204,7 @@ runtime.set(':tasks(--tasks|-T|--tasks-simple)', function taskLog(next){
  --silent
  */
 runtime.set('--silent', function(next){
-  var silent = process.env.GULP_ENV.silent;
+  var silent = runtime.get().silent;
 
   runtime.emit('message', {
     message : silent ? 'logging enabled' : 'logging silent',
@@ -220,8 +218,9 @@ runtime.set('--silent', function(next){
     silent = false;
   }
 
-  process.env.GULP_ENV.silent = silent;
   next();
+  runtime.set({silent: silent});
+
   if(this.repl && !this.queue){
     this.repl.prompt();
   }
