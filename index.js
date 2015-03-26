@@ -38,6 +38,8 @@ runtime.Runtime.prototype.task = function(name, dep, handle){
     });
   }
 
+  require('gulp').task(name, dep, handle);
+  
   var depType = util.type(dep);
   var handleType = util.type(handle);
 
@@ -122,8 +124,8 @@ runtime.Stack.prototype.onHandle = function(next){
     );
   }
 
-  if(!this.time){ this.time = util.hrtime(); }
-  if(!next.time){ next.time = util.hrtime(); }
+  if(!this.time){ this.time = process.hrtime(); }
+  if(!next.time){ next.time = process.hrtime(); }
 
   var self = this;
   while(len && self && !self.queue){
@@ -146,17 +148,17 @@ runtime.Stack.prototype.onHandle = function(next){
  Lets do the gulp CLI
 */
 
-var runtime = runtime.create();
+var app = runtime.create();
 
 /*
  -v or --version
  */
-runtime.set(':version(-v|--version)', function(next){
-  if(!runtime.get().GULP_ENV){ util.lazy(null, runtime); }
+app.set(':version(-v|--version)', function(next){
+  if(!app.get().GULP_ENV){ util.lazy(null, app); }
 
   var chalk = util.color;
   var semver = util.semver;
-  var env = runtime.get().GULP_ENV;
+  var env = app.get().GULP_ENV;
   var localPackage = env.localPackage;
   var globalPackage = env.globalPackage;
 
@@ -180,13 +182,13 @@ runtime.set(':version(-v|--version)', function(next){
 /*
  --tasks, -T or --tasks-simple
  */
-runtime.set(':tasks(--tasks|-T|--tasks-simple)', function taskLog(next){
-  if(!runtime.get().GULP_ENV){ util.lazy(null, runtime); }
+app.set(':tasks(--tasks|-T|--tasks-simple)', function (next){
+  if(!app.get().GULP_ENV){ util.lazy(null, app); }
   if(!util.logTasks){ util.lazy('tasks-flags'); }
 
   var gulp = require('gulp');
   var flag = next.params.tasks;
-  var env = runtime.get().GULP_ENV;
+  var env = app.get().GULP_ENV;
 
   if(flag.tasksSimple){
     util.logTasksSimple(env, gulp);
@@ -203,14 +205,12 @@ runtime.set(':tasks(--tasks|-T|--tasks-simple)', function taskLog(next){
 /*
  --silent
  */
-runtime.set('--silent', function(next){
-  var silent = runtime.get().silent;
+app.set('--silent', function(next){
+  var silent = app.get().silent;
 
-  runtime.emit('message', {
-    message : silent ? 'logging enabled' : 'logging silent',
-      stamp : true,
-     prompt : true
-  });
+  if(silent){
+    util.log('logging enabled');
+  }
 
   if(process.argv.indexOf('--tasks-simple') > 0){
     silent = true;
@@ -219,8 +219,7 @@ runtime.set('--silent', function(next){
   }
 
   next();
-  runtime.set({silent: silent});
-
+  app.set({silent: silent});
   if(this.repl && !this.queue){
     this.repl.prompt();
   }
@@ -229,7 +228,7 @@ runtime.set('--silent', function(next){
 /*
  --require, --gulpfile is the same but changing the cwd
  */
-runtime.set('(--require|--gulpfile) :filename', function (next){
+app.set('(--require|--gulpfile) :filename', function (next){
   if(!util.tildify){ util.lazy('require-flags'); }
 
   var cwd = process.cwd();
@@ -274,10 +273,10 @@ runtime.set('(--require|--gulpfile) :filename', function (next){
   process.nextTick(function(){
     var gulp = require('gulp');
     Object.keys(gulp.tasks).forEach(function(task){
-      runtime.task(task, task.dep, task.fn);
+      app.task(task, task.dep, task.fn);
     });
     next();
   });
 });
 
-exports = module.exports = runtime;
+exports = module.exports = app;
