@@ -14,3 +14,9 @@ runtime.task(':handle', function(next){
 runtime.task('default', ['css', 'jsx', 'img']);
 
 runtime.stack('default')();
+
+gulp.task('hello', function(){
+
+});
+
+console.log(gulp);
