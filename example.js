@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var util = require('./lib/util');
 var runtime = require('./.').repl();
 
-runtime.task(':handle', function(next){
+runtime.task(':handle(\\w+)', function(next){
   if(next.match === 'jsx'){
     throw new Error('Parse Error: Unespected Identifier');
   }
