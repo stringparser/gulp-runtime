@@ -2,11 +2,7 @@
 
 var gulp = require('gulp');
 var util = require('./lib/util');
-var runtime = require('./.');
-
-if(typeof runtime.repl === 'function'){
-  runtime.repl();
-}
+var runtime = require('./.').readline();
 
 runtime.task(':handle(\\w+)', function(next){
   if(next.match === 'jsx'){
@@ -17,8 +13,5 @@ runtime.task(':handle(\\w+)', function(next){
 
 runtime.task('default', ['css', 'jsx', 'img']);
 
-runtime.stack('default')();
-
-gulp.task('hello', function(){
-
-});
+var defaultHandle = runtime.stack('whatever', runtime.stack('css jsx img', {wait: true}), {wait: true});
+gulp.task('default', defaultHandle);
