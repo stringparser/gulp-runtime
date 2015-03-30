@@ -63,7 +63,6 @@ runtime.Runtime.prototype.task = function(name, dep, handle){
 */
 
 runtime.Stack.prototype.onHandleError = function(error, next){
-  if(this.errorFound){ throw this.errorFound; }
 
   util.log(util.color.yellow('gulp-runtime')+':',
     'error coming from', '\'' + util.color.cyan(next.match) + '\''
@@ -72,8 +71,6 @@ runtime.Stack.prototype.onHandleError = function(error, next){
   if(error.plugin){
     process.stdout.write('from plugin', error.plugin);
   }
-
-  this.errorFound = error;
 
   if(!this.repl){ throw error; }
   util.log(error.stack);
@@ -109,16 +106,14 @@ runtime.Stack.prototype.onHandle = function(next){
   var mode = this.wait ? 'series' : 'parallel';
   var time, status = next.time ? 'Finished' : 'Wait for';
 
-  if(!this.time && host){
+  if(!this.time){
     util.log('Started',
       '\'' + util.color.cyan(this.path) + '\'',
-      'from ' + util.color.green(host), 'in',
+      host ? ('from ' + util.color.green(host)) : 'in',
       util.color.bold(mode)
     );
-  } else {
-    time = next.time
-      ? util.prettyTime(process.hrtime(next.time))
-      : '';
+  } else if(next.time){
+    time = util.prettyTime(process.hrtime(next.time));
 
     util.log((len ? '- ' : '') + status,
       '\'' + util.color.cyan(path) + '\'' +
