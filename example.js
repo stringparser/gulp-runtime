@@ -2,16 +2,17 @@
 
 var gulp = require('gulp');
 var util = require('./lib/util');
-var runtime = require('./.').readline();
+var app = require('./.').readline();
 
-runtime.task(':handle(\\w+)', function(next){
+app.set(':handle(\\w+)', function(next){
   if(next.match === 'jsx'){
     throw new Error('Parse Error: Unespected Identifier');
   }
  setTimeout(next, Math.random()*10);
 });
 
-runtime.task('default', ['css', 'jsx', 'img']);
+var defaultHandle = app.stack('whatever',
+  app.stack('css jsx img', {wait: true}), {wait: true}
+);
 
-var defaultHandle = runtime.stack('whatever', runtime.stack('css jsx img', {wait: true}), {wait: true});
 gulp.task('default', defaultHandle);

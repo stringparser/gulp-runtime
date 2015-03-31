@@ -18,47 +18,6 @@ catch(err){
 }
 
 /*
- Give a task method that behaves like gulp does
-*/
-
-runtime.Runtime.prototype.task = function(name, dep, handle){
-  if(typeof name !== 'string'){
-    throw new util.PluginError({
-      plugin: 'gulp-runtime',
-      message: 'task(name, handle). Tasks require a string `name`'
-    });
-  } else if(arguments.length < 2){
-    throw new util.PluginError({
-      plugin: 'gulp-runtime',
-      message: 'task(name, [deps, handle]).' +
-      'Tasks need at least one more argument\n'+
-      ' - handle: function for the task\n'+
-      ' - deps: array of task dependencies to run before this one'+
-      '\n'
-    });
-  }
-
-  require('gulp').task(name, dep, handle);
-
-  var depType = util.type(dep);
-  var handleType = util.type(handle);
-
-  handle = handleType.function || depType.function
-   || function(next){ next(); };
-
-  if(!depType.array || !dep.length){
-    return this.set(name, handle);
-  } else if(!handle.name && !handle.displayName){
-    handle.displayName = name;
-  }
-
-  this.set(name, {
-    dep: dep,
-    handle: this.stack(dep.join(' '), handle, {wait: true})
-  });
-};
-
-/*
  For errors anywhere in the stack
 */
 
