@@ -1,8 +1,8 @@
 {
   "name": "gulp-runtime",
-  "version": "0.9.0",
-  "description": "A gulp runtime interface",
-  "author": "Javier Carrillo <stringparser@gmail.com> (http://www.stringparser.com)",
+  "version": "0.10.0",
+  "description": "alternative interface for vinly-fs",
+  "author": "Javier Carrillo",
   "engines": {
     "node": " >= 0.9"
   },
@@ -11,22 +11,20 @@
     "url": "https://github.com/stringparser/gulp-runtime"
   },
   "keywords": [
-    "gulp",
-    "gulpplugin",
+    "tool",
+    "repl",
     "runtime",
-    "stdin",
     "readline",
     "terminal",
     "interface",
-    "tool"
+    "gulpplugin",
   ],
   "dependencies": {
     "archy": "^1.0.0",
-    "gulp-util": "^2.2.20",
-    "runtime": "^0.9.3",
-    "semver": "^4.3.1",
+    "whech": "^0.6.1",
     "tildify": "^1.0.0",
-    "whech": "^0.6.1"
+    "gulp-util": "^2.2.20",
+    "tornado-repl": "^0.11.x"
   },
   "devDependencies": {
     "jshint": "*",
