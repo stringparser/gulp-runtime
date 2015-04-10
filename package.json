@@ -17,20 +17,22 @@
     "readline",
     "terminal",
     "interface",
-    "gulpplugin",
+    "gulpplugin"
   ],
   "dependencies": {
     "archy": "^1.0.0",
-    "whech": "^0.6.1",
-    "tildify": "^1.0.0",
     "gulp-util": "^2.2.20",
-    "tornado-repl": "^0.11.x"
+    "pretty-hrtime": "^1.0.0",
+    "tildify": "^1.0.0",
+    "tornado-repl": "^0.11.x",
+    "vinyl-fs": "^1.0.0",
+    "whech": "^0.6.1"
   },
   "devDependencies": {
-    "jshint": "*",
-    "jshint-stylish": "*",
     "mocha": "*",
-    "should": "*"
+    "should": "*",
+    "jshint": "*",
+    "jshint-stylish": "*"
   },
   "scripts": {
     "lint": "jshint lib index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules",
