@@ -87,6 +87,14 @@ $ node project/gulpfile.js browserify
 
 Read the [documentation](docs) for more information about all the above.
 
+### Documentation
+
+# runtime.src
+```js
+function src(String|Array glob[, Array opt, Function handle])
+```
+Same method as [vi]
+
 ### install
 
 With [npm][x-npm]
@@ -96,6 +104,29 @@ With [npm][x-npm]
 <div align="center">
   <img src="https://nodei.co/npm/gulp-runtime.png?downloads=true&downloadRank=true&stars=true" alt="NPM"/>
 </div>
+
+# runtime.stalk
+```js
+function stalk(string|array globs[, array opt, function callback])
+```
+Same as [runtime.watch][t-runtime-watch], but files are
+ reloaded on the `require.cache` as they change. A callback is
+  provided if further processing is needed.
+
+_arguments_
+ - same as [runtime.watch][t-runtime-watch] aside of `callback`
+ - `callback` type function that will be called after file is reloaded
+
+_returns_
+ - a watcher, same as [runtime.watch][t-runtime-watch]
+
+> Notes:
+ - The arguments of the callback are the same as
+ [runtime.watch][t-runtime-watch] (a gaze event)
+ - The context of the callback is the runtime instance
+ - When a file is deleted the reload will be skipped but the
+callback is still invoked
+
 
 ## todo
 
