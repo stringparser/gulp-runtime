@@ -234,11 +234,12 @@ tornado.repl = function (name, o){
   // --cwd
   //
   app.set('--cwd :dirname([^ ]+)', function(next){
-    var dirname = path.resolve(next.params.dirname);
-    if(dirname !== process.cwd()){
+    var cwd = process.cwd();
+    var dirname = path.resolve(cwd, next.params.dirname);
+    if(dirname !== cwd){
       process.chdir(dirname);
       util.log('Working directory changed to',
-        util.color.file(process.cwd())
+        util.color.file(dirname)
       );
     }
     next();
@@ -292,7 +293,7 @@ tornado.repl = function (name, o){
     );
 
     var dirname = path.dirname(filename);
-    if(isGulpfile && dirname !== process.cwd()){
+    if(isGulpfile && dirname !== cwd){
       process.chdir(dirname);
       util.log('Working directory changed to',
         util.color.file(dirname)
