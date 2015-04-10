@@ -5,27 +5,11 @@ var util = require('./lib/util');
 var runtime = require('runtime');
 
 /*
- ¿Do we have gulp installed?
-*/
-
-try { require('gulp'); }
-catch(err){
-  throw new util.PluginError({
-    plugin: 'gulp-runtime',
-    message: 'gulp is not installed locally.'+
-     'Try:\n    `npm install gulp`'
-  });
-}
-
-/*
  For errors anywhere in the stack
 */
 
 runtime.Stack.prototype.onHandleError = function(error, next){
-
-  util.log(util.color.yellow('gulp-runtime')+':',
-    'error coming from', '\'' + util.color.cyan(next.match) + '\''
-  );
+  util.log('error coming from', '\'' + util.color.cyan(next.match) + '\'');
 
   if(error.plugin){
     process.stdout.write('from plugin', error.plugin);
@@ -107,35 +91,6 @@ runtime.Stack.prototype.onHandle = function(next){
 var app = runtime.create();
 
 /*
- -v or --version
- */
-app.set(':version(-v|--version)', function(next){
-  if(!app.get().GULP_ENV){ util.lazy(null, app); }
-
-  var chalk = util.color;
-  var semver = util.semver;
-  var env = app.get().GULP_ENV;
-  var localPackage = env.localPackage;
-  var globalPackage = env.globalPackage;
-
-  if( env.globalPackage.version === void 0 ){
-    util.log('Working locally with gulp@' + localPackage.version );
-  } else if(semver.gt(globalPackage.version, localPackage.version)){
-    util.log(chalk.red('Warning: gulp version mismatch:'));
-    util.log(chalk.red('Global gulp is', globalPackage.version));
-    util.log(chalk.red('Local gulp is', localPackage.version));
-  } else {
-    util.log('CLI version', globalPackage.version);
-    util.log('Local version', localPackage.version);
-  }
-
-  next();
-  if(this.repl && !this.queue){
-    this.repl.prompt();
-  }
-});
-
-/*
  --tasks, -T or --tasks-simple
  */
 app.set(':tasks(--tasks|-T|--tasks-simple)', function (next){
@@ -153,9 +108,6 @@ app.set(':tasks(--tasks|-T|--tasks-simple)', function (next){
   }
 
   next();
-  if(this.repl && !this.queue){
-    this.repl.prompt();
-  }
 });
 
 /*
@@ -176,9 +128,6 @@ app.set('--silent', function(next){
 
   next();
   app.set({silent: silent});
-  if(this.repl && !this.queue){
-    this.repl.prompt();
-  }
 });
 
 /*
