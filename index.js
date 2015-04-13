@@ -151,7 +151,7 @@ tornado.Runtime.prototype.task = function(name, dep, handle){
 
   dep = depType.string || dep.join(' ');
   return this.set(name, {
-    dep: dep,
+    dep: dep.split(/[ ]+/),
     handle: this.stack(dep, handle, {wait: true})
   });
 };
