@@ -106,23 +106,29 @@ tornado.Runtime.prototype.watch = function(glob, opt, fn){
 ```js
 function task(string name[, array deps, function handle])
 ```
-Same as [gulp.task][m-gulp-task]
+_arguments_
+ - are same as [gulp.task][m-gulp-task]
 
+_returns_ differences with [gulp.task][m-gulp-task]
+ - if `name` was set before, the handle matching the task `name`
 */
 
 tornado.Runtime.prototype.task = function(name, dep, handle){
+  var task = this.store.children[name];
+  if(task && task.handle){ return task.handle; }
+
   if(typeof name !== 'string'){
     throw new util.PluginError({
       plugin: 'gulp-runtime',
       message: 'task(name, handle). Tasks require a string `name`'
     });
-  } else if(arguments.length < 2){
+  } else if(arguments.length < 2 && !task && !task.handle){
     throw new util.PluginError({
       plugin: 'gulp-runtime',
       message: 'task(name, [deps, handle]).' +
-      'Tasks need at least one more argument\n'+
+      'New tasks need at least one more argument\n'+
       ' - handle: function for the task\n'+
-      ' - deps: array of task dependencies to run before this one'+
+      ' - deps: optional array of task dependencies to run before it'+
       '\n'
     });
   }
@@ -134,15 +140,15 @@ tornado.Runtime.prototype.task = function(name, dep, handle){
    || function(next){ next(); };
 
   if(!depType.array || !dep.length){
-    this.set(name, handle);
-    return handle;
+    return this.set(name, handle);
   } else if(!handle.name && !handle.displayName){
     handle.displayName = name;
   }
 
-  var tick = this.stack(dep.join(' '), handle, {wait: true});
-  this.set(name, {dep: dep, handle: tick});
-  return tick;
+  return this.set(name, {
+    dep: depType.string || dep.join(' '),
+    handle: this.stack(dep, handle, {wait: true})
+  });
 };
 
 /*
