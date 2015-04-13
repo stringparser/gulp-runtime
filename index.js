@@ -77,7 +77,7 @@ tornado.Runtime.prototype.watch = function(glob, opt, fn){
   var cb = util.type(opt).function || util.type(fn).function;
   var o = (!cb && util.type(fn).plainObject)
     || (opt && util.type(opt).plainObject)
-    || {tasks: cb ? opt : null, wait: true};
+    || {tasks: cb ? opt : fn, wait: true};
 
   var reload = o.reload && function reloadHandle(ev){
     if(ev.type !== 'delete' && require.extension[path.extname(ev.path)]){
@@ -96,7 +96,7 @@ tornado.Runtime.prototype.watch = function(glob, opt, fn){
     );
   }
 
-  return vinylFS.watch(glob, opt, reload || function onChange(ev){
+  return vinylFS.watch(glob, o, reload || function onChange(ev){
     if(cb){ cb(ev, o); }
   });
 };
