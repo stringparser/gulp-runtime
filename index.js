@@ -136,21 +136,6 @@ tornado.Runtime.prototype.task = function(name, dep, handle){
  Now we customize the Stack prototype
 */
 
-// Errors anywhere in the stack
-//
-tornado.Stack.prototype.onHandleError = function(error, next){
-
-  util.log(
-    '\'' + util.color.cyan(next.match) + '\'',
-    'has thrown an error'
-  );
-
-  if(!this.runtime.repl || !this.runtime.store.log){
-    throw error;
-  }
-  util.log(error.stack);
-};
-
 // String to function mapping failed, handle it
 //
 tornado.Stack.prototype.onHandleNotFound = function(next){
@@ -160,6 +145,7 @@ tornado.Stack.prototype.onHandleNotFound = function(next){
 
   if(this.runtime.repl){
     console.log('Warning:', message);
+    this.log = false;
     return next();
   }
 
@@ -169,30 +155,43 @@ tornado.Stack.prototype.onHandleNotFound = function(next){
   });
 };
 
+// Errors anywhere in the stack
+//
+tornado.Stack.prototype.onHandleError = function(error, next){
+  util.log(
+    '\'' + util.color.cyan(next.match) + '\'',
+    'has thrown an error after',
+    util.color.time(next.time)
+  );
+
+  if(!this.runtime.repl){ throw error; }
+  this.log(error.stack);
+  next.error = error;
+  next();
+};
 
 // Make a logger that looks like gulp's
 //
 tornado.Stack.prototype.onHandle = function(next){
-  if(!this.runtime.store.log || /^-/.test(next.match)){
-    return ; // skip if logging disabled or a flag
+  if(next.error || !this.log || /^-/.test(next.match)){
+    return ; // skip logging for errors, log or flags
   }
 
-  var len = this.argv.length > 1;
+  var len = this.path.split(/[ ]+/).length > 1;
   var path = next.match || next.path;
   var host = this.host ? this.host.path : '';
   var mode = this.wait ? 'series' : 'parallel';
   var time, status = next.time ? 'Finished' : 'Wait for';
 
   if(!this.time && len){
-    util.log('Started', '\'' + util.color.cyan(this.path) + '\'',
+    util.log('Started %s', '\'' + util.color.cyan(this.path) + '\'',
       host ? ('from ' + util.color.green(host)) : 'in',
       util.color.bold(mode)
     );
   } else if(next.time){
-    time = util.prettyTime(process.hrtime(next.time));
     util.log((len ? '- ' : '') + status,
       '\'' + util.color.cyan(path) + '\'' +
-      (time ? ' in ' + util.color.magenta(time) : '')
+      (time ? ' in ' + util.color.time(time) : '')
     );
   }
 
@@ -200,10 +199,10 @@ tornado.Stack.prototype.onHandle = function(next){
   if(!next.time){ next.time = process.hrtime(); }
   if(this.queue || this.time.end){ return ; }
 
-  this.time.end = util.prettyTime(process.hrtime(this.time));
+  this.time.end = util.color.time(this.time);
   util.log('Finished', '\'' + util.color.cyan(this.path) + '\'',
     (host ? 'from '+ util.color.green(host) + ' ' : '') +
-    'in ' +  util.color.magenta(this.time.end)
+    'in ' + this.time.end
   );
 };
 
@@ -219,15 +218,12 @@ tornado.repl = function (name, o){
   // --silent
   //
   app.set('--silent', function(next){
-    var silent = app.store.silent;
-    if(silent){ util.log('logging enabled'); }
 
-    if(process.argv.indexOf('--tasks-simple') > 0){
-      silent = true;
-    } else {
-      silent = !silent;
+    if(process.argv.indexOf('--tasks-simple') < 0){
+      app.store.log = !this.log;
     }
-    app.store.silent = silent;
+
+    console.log('logging %s', app.store.log ? 'enabled' : 'disabled');
     next();
   });
 
