@@ -117,45 +117,47 @@ _returns_ differences with [gulp.task][m-gulp-task]
 */
 
 tornado.Runtime.prototype.task = function(name, dep, handle){
-  var task = this.store.children[name] || '';
-  if(task.handle){ return task.handle; }
+  var task = this.get(name, {ref:true});
+  if(task !== this.store && task.handle){ return task.handle; }
+  var handleType = util.type(handle || dep);
 
   if(typeof name !== 'string'){
     throw new util.PluginError({
       plugin: 'gulp-runtime',
       message: 'task(name, handle). Tasks require a string `name`'
     });
-  } else if(arguments.length < 2){
+  } else if(!handleType.match(/function|array/)){
     throw new util.PluginError({
       plugin: 'gulp-runtime',
       message: 'task(name, [deps, handle]).' +
-      'New tasks need at least one more argument\n'+
-      ' - handle: function for the task\n'+
-      ' - deps: optional array of task dependencies to run before it'+
+      'New tasks need at least a function\n arguments are\n'+
+      ' - deps: array|string of dependencies to run before this one'+
+      ' - handle: function that runs the task\n'+
       '\n'
     });
   }
 
-  var depType = util.type(dep);
-  var handleType = util.type(handle);
-
-  handle = handleType.function || depType.function
-   || function(next){ next(); };
-
-  if(!depType.array || !dep.length){
-    return this.set(name, handle);
-  } else if(!handle.name && !handle.displayName){
+  handle = handleType.function || function(next){ next(); };
+  if(!handle.name && !handle.displayName){
+    // fill in name for unnamed handlers
     handle.displayName = name;
   }
 
+  var depType = util.type(dep);
+  if(!depType.match(/array|string/) || !dep.length){
+    // no dependencies
+    return this.set(name, handle);
+  }
+
+  dep = depType.string || dep.join(' ');
   return this.set(name, {
-    dep: depType.string || dep.join(' '),
+    dep: dep,
     handle: this.stack(dep, handle, {wait: true})
   });
 };
 
 /*
- Now we customize the Stack prototype
+ Now customize the Stack prototype
 */
 
 // String to function mapping failed, handle it
@@ -163,7 +165,7 @@ tornado.Runtime.prototype.task = function(name, dep, handle){
 tornado.Stack.prototype.onHandleNotFound = function(next){
   var path = next.match || next.path;
   var message = 'no task found for `'+path+'`.\n'+
-    'Set one with `task(\''+path+'\', [Function])`';
+    'Set one with `gulp.task(\''+path+'\', [Function])`';
 
   if(this.runtime.repl){
     console.log('Warning:', message);
@@ -200,23 +202,21 @@ tornado.Stack.prototype.onHandle = function(next){
     return ; // skip logging for errors, log or flags
   }
 
-  var host;
+  var host = '';
   if(this.host){
-    host = util.color.green(this.host.path);
+    host = '(' + util.color.green(this.host.path) + ') ';
   }
 
   if(!this.time){
     util.log('%sStarted \'%s\' in %s',
-      host ? ('(' + host + ') ') : '',
+      host,
       util.color.cyan(this.path),
       util.color.bold(this.wait ? 'series' : 'parallel')
     );
     this.time = process.hrtime();
-  } else if(next.time && this.path !== next.path && next.match){
+  } else if(next.time && /[ ]+/.test(this.path)){
     util.log('%sFinished \'%s\' after %s',
-      host ? ('(' + host + ') ') : '',
-      util.color.cyan(next.match),
-      util.color.time(next.time)
+      host, util.color.cyan(next.match), util.color.time(next.time)
     );
   }
 
@@ -225,9 +225,7 @@ tornado.Stack.prototype.onHandle = function(next){
 
   this.time.end = util.color.time(this.time);
   util.log('%sFinished \'%s\' after %s',
-    host ? '('+host+') ' : '',
-    util.color.cyan(this.path),
-    this.time.end
+    host, util.color.cyan(this.path), this.time.end
   );
 };
 
@@ -309,21 +307,22 @@ function create(name, o){
   /*
    --require, --gulpfile is the same but changing the cwd
    */
-  app.set(':flag(--require|--gulpfile) :filename', function (next){
+  app.set(':flag(--require|--gulpfile) :file', function (next){
 
     var cwd = process.cwd();
-    var filename = next.params.filename;
-    filename = path.resolve(cwd, filename);
-    var cached = Boolean(require.cache[filename]);
+    var file = path.resolve(cwd, next.params.file);
+    var cached = Boolean(require.cache[file]);
     var isGulpfile = /--gulpfile/.test(this.queue);
-    if(cached){ delete require.cache[filename]; }
+    if(cached){
+      delete require.cache[file];
+    }
 
     try {
-      require(filename);
+      require(file);
     } catch(err){
       var message = 'Could not load ' +
         (isGulpfile ? 'gulpfile' : 'module') + ' ' +
-        util.color.file(filename);
+        util.color.file(file);
 
       if(this.runtime.repl){
         util.log(message);
@@ -336,10 +335,10 @@ function create(name, o){
 
     util.log(
       (cached ? 'Reloaded' : 'Loaded'),
-      util.color.file(filename)
+      util.color.file(file)
     );
 
-    var dirname = path.dirname(filename);
+    var dirname = path.dirname(file);
     if(isGulpfile && dirname !== cwd){
       process.chdir(dirname);
       util.log('Working directory changed to',
@@ -350,7 +349,7 @@ function create(name, o){
     next();
   });
 
-  if(o.repl || o.input){
+  if(o.repl || util.type(o.input).stream){
     app = tornado.repl(name, o);
   }
 
