@@ -42,6 +42,10 @@ _arguments_ differences with [gulp.watch][m-gulp-watch]
   - `opt.tasks` type array|string, tasks to run after change and before reload
   - `opt.reload` type boolean, wether or not to reload a file
 
+_defaults_
+ - `opt.wait` to `true`
+ - `opt.reload` to `undefined`
+
 _returns_
  - a watcher, same as [gulp.watch][m-gulp-watch]
 
@@ -130,15 +134,15 @@ tornado.Runtime.prototype.task = function(name, dep, handle){
    || function(next){ next(); };
 
   if(!depType.array || !dep.length){
-    return this.set(name, handle);
+    this.set(name, handle);
+    return handle;
   } else if(!handle.name && !handle.displayName){
     handle.displayName = name;
   }
 
-  this.set(name, {
-    dep: dep,
-    handle: this.stack(dep.join(' '), handle, {wait: true})
-  });
+  var tick = this.stack(dep.join(' '), handle, {wait: true});
+  this.set(name, {dep: dep, handle: tick});
+  return tick;
 };
 
 /*
