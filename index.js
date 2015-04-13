@@ -117,15 +117,15 @@ _returns_ differences with [gulp.task][m-gulp-task]
 */
 
 tornado.Runtime.prototype.task = function(name, dep, handle){
-  var task = this.store.children[name];
-  if(task && task.handle){ return task.handle; }
+  var task = this.store.children[name] || '';
+  if(task.handle){ return task.handle; }
 
   if(typeof name !== 'string'){
     throw new util.PluginError({
       plugin: 'gulp-runtime',
       message: 'task(name, handle). Tasks require a string `name`'
     });
-  } else if(arguments.length < 2 && !task && !task.handle){
+  } else if(arguments.length < 2){
     throw new util.PluginError({
       plugin: 'gulp-runtime',
       message: 'task(name, [deps, handle]).' +
