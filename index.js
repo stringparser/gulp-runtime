@@ -186,7 +186,7 @@ tornado.Stack.prototype.onHandleError = function(error, next){
   var file = error.stack.match(/\(?(\S+:\d+:\d+)\)?/);
   file = path.resolve(process.cwd(), file[1]);
 
-  util.log('Error in \'%s\' after %s\n  at %s\n%s',
+  util.log('Error in \'%s\' after %s at %s\n%s',
     util.color.cyan(next.match),
     util.color.time(next.time),
     util.color.file(file),
