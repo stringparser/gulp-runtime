@@ -29,10 +29,11 @@
     "whech": "^0.6.1"
   },
   "devDependencies": {
+    "jshint": "*",
+    "jshint-stylish": "*",
     "mocha": "*",
     "should": "*",
-    "jshint": "*",
-    "jshint-stylish": "*"
+    "through2": "^0.6.5"
   },
   "scripts": {
     "lint": "jshint lib index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules",
