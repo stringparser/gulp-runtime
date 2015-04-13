@@ -188,10 +188,7 @@ tornado.Stack.prototype.onHandleError = function(error, next){
     util.color.time(next.time)
   );
 
-  util.log('  at  %s', util.color.file(file));
-
-  if(!this.runtime.repl){ throw error; }
-  this.log(error.stack);
+  util.log('  at  %s\n%s', util.color.file(file), error.stack);
   next.error = error;
   next();
 };
@@ -203,43 +200,53 @@ tornado.Stack.prototype.onHandle = function(next){
     return ; // skip logging for errors, log or flags
   }
 
-  var len = this.path.split(/[ ]+/).length > 1;
-  var path = next.match || next.path;
-  var host = this.host ? this.host.path : '';
-  var mode = this.wait ? 'series' : 'parallel';
-  var time, status = next.time ? 'Finished' : 'Wait for';
-  var indent = len && mode === 'parallel' ? '- ' : '';
+  var host;
+  if(this.host){
+    host = util.color.green(this.host.path);
+  }
 
-  if(!this.time && len){
-    util.log('Started \'%s\'', util.color.cyan(this.path),
-      host ? ('from ' + util.color.green(host)) : 'in',
-      util.color.bold(mode)
+  if(!this.time){
+    util.log('%sStarted \'%s\' in %s',
+      host ? ('(' + host + ') ') : '',
+      util.color.cyan(this.path),
+      util.color.bold(this.wait ? 'series' : 'parallel')
     );
-  } else if(next.time){
-    util.log('%s \'%s\' %s', indent + status, util.color.cyan(path),
-      (time ? ' in ' + util.color.time(time) : '')
+    this.time = process.hrtime();
+  } else if(next.time && this.path !== next.path && next.match){
+    util.log('%sFinished \'%s\' after %s',
+      host ? ('(' + host + ') ') : '',
+      util.color.cyan(next.match),
+      util.color.time(next.time)
     );
   }
 
-  if(!this.time){ this.time = process.hrtime(); }
   if(!next.time){ next.time = process.hrtime(); }
   if(this.queue || this.time.end){ return ; }
 
   this.time.end = util.color.time(this.time);
-  util.log('Finished \'%s\'%s in %s', util.color.cyan(this.path),
-    (host ? ' from '+ util.color.green(host) + ' ' : ''),
+  util.log('%sFinished \'%s\' after %s',
+    host ? '('+host+') ' : '',
+    util.color.cyan(this.path),
     this.time.end
   );
 };
 
 // modify the repl to have some commands by default
 //
-var createREPL = tornado.repl;
 
-tornado.repl = function (name, o){
-  var app = createREPL(name, o);
-  if(app.store.children['--silent']){ return app; }
-  // we have been here already ^
+function create(name, o){
+  o = util.type(o || name).plainObject || {};
+  var app = tornado.create(name, o);
+
+  // have we been here already?
+  if(app.repl){ return app; }
+  if(app.store.children['--silent'] && !o.repl && !o.input){
+    return app;
+  }
+
+  /**
+   * Provide CLI commands
+   */
 
   // --no-color
   //
@@ -247,7 +254,6 @@ tornado.repl = function (name, o){
     if(process.argv.indexOf('--tasks-simple') < 0){
       app.store.log = !this.log;
     }
-
     console.log('logging %s', app.store.log ? 'enabled' : 'disabled');
     next();
   });
@@ -344,10 +350,13 @@ tornado.repl = function (name, o){
     next();
   });
 
+  if(o.repl || o.input){
+    app = tornado.repl(name, o);
+  }
+
   return app;
-};
+}
 
 exports = module.exports = {
-  repl: tornado.repl,
-  create: tornado.create
+  create: create
 };
