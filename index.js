@@ -151,7 +151,7 @@ tornado.Runtime.prototype.task = function(name, dep, handle){
 
   dep = depType.string || dep.join(' ');
   return this.set(name, {
-    dep: dep.split(/[ ]+/),
+    dep: dep.trim().split(/[ ]+/),
     handle: this.stack(dep, handle, {wait: true})
   });
 };
@@ -185,12 +185,13 @@ tornado.Stack.prototype.onHandleError = function(error, next){
   var file = error.stack.match(/\(?(\S+:\d+:\d+)\)?/);
   file = path.resolve(process.cwd(), file[1] || file[2]);
 
-  util.log('Error in \'%s\' after %s',
+  util.log('Error in \'%s\' after %s\n  at %s\n%s',
     util.color.cyan(next.match),
-    util.color.time(next.time)
+    util.color.time(next.time),
+    util.color.file(file),
+    error.stack
   );
 
-  util.log('  at  %s\n%s', util.color.file(file), error.stack);
   next.error = error;
   next();
 };
