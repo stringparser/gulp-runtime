@@ -110,7 +110,8 @@ _arguments_
  - are same as [gulp.task][m-gulp-task]
 
 _returns_ differences with [gulp.task][m-gulp-task]
- - if `name` was set before, the handle matching the task `name`
+ - the function of the task `name`, if it was set before
+ - this otherwise (just as [gulp.task][m-gulp-task])
 */
 
 tornado.Runtime.prototype.task = function(name, dep, handle){
