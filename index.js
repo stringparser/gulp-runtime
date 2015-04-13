@@ -182,8 +182,9 @@ tornado.Stack.prototype.onHandleNotFound = function(next){
 // Errors anywhere in the stack
 //
 tornado.Stack.prototype.onHandleError = function(error, next){
+  if(!(error instanceof Error)){ return next(); }
   var file = error.stack.match(/\(?(\S+:\d+:\d+)\)?/);
-  file = path.resolve(process.cwd(), file[1] || file[2]);
+  file = path.resolve(process.cwd(), file[1]);
 
   util.log('Error in \'%s\' after %s\n  at %s\n%s',
     util.color.cyan(next.match),
