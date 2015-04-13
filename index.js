@@ -71,7 +71,7 @@ gulp.watch('app/*.*', {
   var reloaded = opt.reload && ev.type !== 'delete';
   console.log('%s was %s', ev.path, ev.type, reloaded ? 'and reloaded' : '');
 });
-
+```
 **/
 tornado.Runtime.prototype.watch = function(glob, opt, fn){
   var cb = util.type(opt).function || util.type(fn).function;
