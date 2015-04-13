@@ -1,6 +1,6 @@
 'use strict';
 
-var gulp = require('./.').repl();
+var gulp = require('./.').create({repl: true});
 
 gulp.task(':handle(css|jsx|img)', function(next){
   if(next.match === 'jsx'){
