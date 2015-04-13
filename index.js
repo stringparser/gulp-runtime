@@ -130,7 +130,7 @@ tornado.Runtime.prototype.task = function(name, dep, handle){
     throw new util.PluginError({
       plugin: 'gulp-runtime',
       message: 'task(name, [deps, handle]).' +
-      'New tasks need at least a function\n arguments are\n'+
+      'New tasks need at lest 2 arguments\n'+
       ' - deps: array|string of dependencies to run before this one'+
       ' - handle: function that runs the task\n'+
       '\n'
