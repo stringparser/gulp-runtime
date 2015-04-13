@@ -104,10 +104,12 @@ tornado.Runtime.prototype.watch = function(glob, opt, fn){
 /*
 # runtime.task
 ```js
-function task(string name[, array deps, function handle])
+function task(string name[, string|array deps, function handle])
 ```
 _arguments_
- - are same as [gulp.task][m-gulp-task]
+ - are same as [gulp.task][m-gulp-task] aside of deps
+ - `deps` type array or string, tasks to run before this one
+ if given as a string they must be space separated
 
 _returns_ differences with [gulp.task][m-gulp-task]
  - the function of the task `name`, if it was set before
