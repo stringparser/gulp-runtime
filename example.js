@@ -1,6 +1,6 @@
 'use strict';
 
-var gulp = require('./.').create({repl: true});
+var gulp = require('./.').create();
 
 gulp.task(':handle(css|jsx|img)', function(next){
   if(next.match === 'jsx'){
@@ -9,4 +9,5 @@ gulp.task(':handle(css|jsx|img)', function(next){
  setTimeout(next, Math.random()*10);
 });
 
-gulp.stack('css jsx img', {wait: true})();
+gulp.stack('css')();
+gulp.stack('jsx img', {wait: true})();
