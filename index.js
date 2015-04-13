@@ -30,8 +30,8 @@ tornado.Runtime.prototype.dest = vinylFS.dest;
 function watch(string|array glob[, string|array|object opt, function cb])
 ```
 
-Same as [gulp.watch][m-gulp-watch] (run tasks after change with an optional
- callback) with some aditional features:
+Same as [gulp.watch][m-gulp-watch] (run tasks when files change).
+Additional features:
   - Files can be reloaded on the `require.cache`
   - Tasks can be run in series directly if so specified
 
