@@ -7,18 +7,19 @@
 [<img alt="NPM version" src="http://img.shields.io/npm/v/gulp-runtime.svg?style=flat-square" align="right"/>](http://www.npmjs.org/package/gulp-runtime)
 
 <p align="center">
-  use
-  <a href="https://github.com/gulpjs/gulp" style="color:#D32929;">
-    <b>gulp</b>
-  </a>
-  whilst is running
+  an alternate interface to
+  <a href="https://github.com/wearefractal/vinyl-fs">
+    <b>vinyl-fs</b>
+  </a>  
 </p>
-<p align="center"><a href="https://github.com/gulpjs/gulp">
-  <img height=275 src="./docs/gulp-runtime.png"/>
-</a></p>
-<h4 align="center" style="border-bottom:0;">
-  <a href="./docs">documentation</a>
-</h4>
+<p align="center">
+  <a href="https://github.com/gulpjs/gulp">
+    <img height=275 src="./docs/gulp-runtime.png"/>
+  </a>
+  <h4 align="center" style="border-bottom:0;">
+    <a href="./docs">documentation</a>
+  </h4>
+</p>
 
 ## usage
 
