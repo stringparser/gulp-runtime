@@ -11,31 +11,33 @@
     "url": "https://github.com/stringparser/gulp-runtime"
   },
   "keywords": [
-    "tool",
     "repl",
+    "gulp",
+    "tornado",
     "runtime",
     "readline",
     "terminal",
+    "alternate",
     "interface",
     "gulpplugin"
   ],
   "dependencies": {
-    "archy": "^1.0.0",
-    "chalk": "^1.0.0",
-    "dateformat": "^1.0.11",
     "pretty-hrtime": "^1.0.0",
-    "tildify": "^1.0.0",
     "tornado-repl": "^0.11.x",
+    "dateformat": "^1.0.11",
     "utils-type": "^0.12.1",
     "vinyl-fs": "^1.0.0",
+    "tildify": "^1.0.0",
+    "archy": "^1.0.0",
+    "chalk": "^1.0.0",
     "whech": "^0.6.1"
   },
   "devDependencies": {
-    "jshint": "*",
     "jshint-stylish": "*",
-    "mocha": "*",
+    "through2": "^0.6.5",
+    "jshint": "*",
     "should": "*",
-    "through2": "^0.6.5"
+    "mocha": "*"
   },
   "scripts": {
     "lint": "jshint lib index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules",
