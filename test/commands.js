@@ -45,7 +45,7 @@ module.exports = function(runtime, util){
 		})();
 	});
 
-	it('--no-color should turn colors of', function(done){
+	it('--no-color should turn colors off', function(done){
 		gulp.stack('--no-color', {
 			log: false,
 			onHandleError: done,
