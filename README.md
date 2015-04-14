@@ -14,7 +14,7 @@
   whilst is running
 </p>
 <p align="center"><a href="https://github.com/gulpjs/gulp">
-  <img height=350 src="./docs/gulp-runtime.png"/>
+  <img height=275 src="./docs/gulp-runtime.png"/>
 </a></p>
 <h3 align="center" style="border-bottom:0;">
   <a href="./docs">documentation</a>
