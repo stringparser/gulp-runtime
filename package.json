@@ -26,6 +26,7 @@
     "pretty-hrtime": "^1.0.0",
     "tildify": "^1.0.0",
     "tornado-repl": "^0.11.x",
+    "utils-type": "^0.12.1",
     "vinyl-fs": "^1.0.0",
     "whech": "^0.6.1"
   },
