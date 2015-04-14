@@ -111,21 +111,17 @@ function create(name, o){
    --require, --gulpfile is the same but changing the cwd
    */
   app.set(':flag(--require|--gulpfile) :file', function (next){
-
     var cwd = process.cwd();
     var file = path.resolve(cwd, next.params.file);
     var cached = Boolean(require.cache[file]);
     var isGulpfile = /--gulpfile/.test(this.queue);
-    if(cached){
-      delete require.cache[file];
-    }
+    if(cached){ delete require.cache[file]; }
 
     try {
       require(file);
     } catch(err){
       var message = 'Could not load ' +
-        (isGulpfile ? 'gulpfile' : 'module') + ' ' +
-        util.color.file(file);
+        (isGulpfile ? 'gulpfile' : 'module') + ' ' + util.color.file(file);
 
       if(this.runtime.repl){
         util.log(message);
@@ -136,10 +132,10 @@ function create(name, o){
       }
     }
 
-    util.log(
-      (cached ? 'Reloaded' : 'Loaded'),
-      util.color.file(file)
-    );
+    if(this.log){
+      util.log((cached ? 'Reloaded' : 'Loaded'), util.color.file(file));
+    }
+
 
     var dirname = path.dirname(file);
     if(isGulpfile && dirname !== cwd){
@@ -147,7 +143,6 @@ function create(name, o){
       util.log('Working directory changed to',
         util.color.file(dirname)
       );
-
       // update "gulpfile"
       process.argv[1] = file;
     }
