@@ -6,7 +6,7 @@ module.exports = function(runtime, util){
 	should.exists(util);
 	var create = runtime.create;
 
-	it('should throw if handle does not use the callback or return', function(){
+	it('should throw if handle does not use a callback or return', function(){
 		var gulp = create('throw');
 
 		(function(){
