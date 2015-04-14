@@ -4,20 +4,46 @@ var path = require('path');
 var util = require('./lib/util');
 var tornado = require('./lib/proto');
 
-// create instances with the CLI built-in
-//
+/*
+# create
+```js
+function create([string name|object options, object options])
+```
+A key value instance store. When there is no instance `name`
+a new one is retrieved, if it already exists that is returned istead.
+
+_arguments_
+ - `name` type string, the name given for the instance
+ - `options` type object, options passed down to the instance
+  - `options.log` type boolean, whether to log or not
+  - `options.repl` type boolean, whether to make a repl with the instance
+  - `options.input` type stream, input stream for the repl
+  - `options.output` type stream, output stream for the repl
+
+_defaults_
+ - when `options.repl` or `options.input` is truthy
+  - if `options.input` is not a stream defaults to `process.stdin`
+  - if `options.output` is not a stream defaults to `process.stdout`
+
+_returns_
+ - an existing instance `name`
+ - a new instance if there wasn't an instance `name` instantiated
+ - a repl `name` if `options.repl` or `options.input` was given
+*/
+
 // Notes:
 //  - app -> [tornado][m-tornado] instance
-//
 // [m-tornado]: https://github.com/stringparser/tornado
 //
 function create(name, o){
   var app = tornado.create(name, o);
-  var children = app.store.children;
 
+  // have we been here already?
+
+  if(app.repl){ return app; }
   o = util.type(o || name).plainObject || {};
-  if(app.repl || (children['--silent'] && !o.repl && !o.input)){
-    return app;
+  if(app.store.children['--silent'] && (o.repl || o.input)){
+    return tornado.repl(name, o);
   }
 
   // --no-color
