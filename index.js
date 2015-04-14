@@ -59,31 +59,14 @@ function create(name, o){
   //
   app.set('--silent', function(next){
     if(process.argv.indexOf('--tasks-simple') < 0){
-      app.store.log = !this.log;
-    }
-    console.log('logging %s', app.store.log ? 'enabled' : 'disabled');
-    next();
-  });
-
-  // --no-color, --color
-  //
-  app.set(':flag(--no-color|--color)', function(next){
-    var wrote = false;
-    if(util.color.enabled && this.params.flag === '--no-color'){
-      util.color.enabled = false;
-    } else if(!util.color.enabled && this.params.flag === '--color'){
-      util.color.enabled = true;
-    } else if(this.log){
-      util.log('color already %s',
-        util.color.enabled ? 'enabled' : 'disabled'
-      );
-      wrote = true;
+      app.store.log = app.store.log === void 0 ? false : !app.store.log;
+      this.log = app.store.log;
     }
 
-    if(!this.log || wrote){ return next(); }
-    util.log('color %s', util.color.enabled
-      ? util.color.bold('enabled') : 'disabled'
-    );
+    if(this.log){
+      console.log('logging enabled');
+    }
+
     next();
   });
 
@@ -92,8 +75,8 @@ function create(name, o){
   app.set('--cwd :dirname([^ ]+)', function(next){
     var cwd = process.cwd();
     var dirname = path.resolve(cwd, next.params.dirname);
-    if(dirname !== cwd){
-      process.chdir(dirname);
+    if(dirname !== cwd){ process.chdir(dirname); }
+    if(this.log){
       util.log('Working directory changed to',
         util.color.file(dirname)
       );
@@ -101,10 +84,21 @@ function create(name, o){
     next();
   });
 
+  // --no-color, --color
+  //
+  app.set(':flag(--no-color|--color)', function(next){
+
+    util.color.enabled = this.params.flag === '--color';
+    if(!this.log){ return next(); }
+    util.log('color %s', util.color.enabled
+      ? util.color.bold('enabled') : 'disabled'
+    );
+    next();
+  });
+
   // --tasks, -T or --tasks-simple
   //
   app.set(':flag(--tasks-simple|--tasks|-T)', function (next){
-    if(!util.logTasks){ util.lazy('tasks-flags'); }
     if(next.params.flag === '--tasks-simple'){
       util.logTasksSimple(this.runtime);
     } else {
@@ -153,6 +147,9 @@ function create(name, o){
       util.log('Working directory changed to',
         util.color.file(dirname)
       );
+
+      // update "gulpfile"
+      process.argv[1] = file;
     }
 
     next();
