@@ -16,9 +16,9 @@
 <p align="center"><a href="https://github.com/gulpjs/gulp">
   <img height=275 src="./docs/gulp-runtime.png"/>
 </a></p>
-<h3 align="center" style="border-bottom:0;">
+<h4 align="center" style="border-bottom:0;">
   <a href="./docs">documentation</a>
-</h3>
+</h4>
 
 ## usage
 
