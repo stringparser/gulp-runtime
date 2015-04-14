@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+var path = require('path');
 
 module.exports = {
   suite : function(){
@@ -8,7 +9,8 @@ module.exports = {
 
     return first.concat(
       fs.readdirSync(__dirname).filter(function(file){
-        return !/^_/.test(file) && first.indexOf(file) < 0;
+        if(/^_/.test(file)){ return false; }
+        return path.extname(file) && first.indexOf(file) < 0;
       })
     );
   },
