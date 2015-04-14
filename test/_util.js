@@ -12,5 +12,6 @@ module.exports = {
       })
     );
   },
+  lib: require('../lib/util'),
   through: require('through2')
 };
