@@ -131,9 +131,11 @@ function create(name, o){
     var dirname = path.dirname(file);
     if(isGulpfile && dirname !== cwd){
       process.chdir(dirname);
-      util.log('Working directory changed to',
-        util.color.file(dirname)
-      );
+      if(this.log){
+        util.log('Working directory changed to',
+          util.color.file(dirname)
+        );
+      }
 
       // update "gulpfile"
       process.argv[1] = file;
