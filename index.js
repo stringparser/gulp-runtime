@@ -4,12 +4,12 @@ var path = require('path');
 var util = require('./lib/util');
 var tornado = require('./lib/proto');
 
-// export instances with the CLI built-in
+// create instances with the CLI built-in
 //
 // Notes:
 //  - app -> [tornado][m-tornado] instance
 //
-// [m-tornado]: (https://github.com/stringparser/tornado)
+// [m-tornado]: https://github.com/stringparser/tornado
 //
 function create(name, o){
   var app = tornado.create(name, o);
@@ -19,10 +19,6 @@ function create(name, o){
   if(app.repl || (children['--silent'] && !o.repl && !o.input)){
     return app;
   }
-
-  /**
-   * Provide CLI commands
-   */
 
   // --no-color
   //
