@@ -4,8 +4,11 @@ var fs = require('fs');
 var path = require('path');
 
 module.exports = {
+  lib: require('../lib/util'),
   suite : function(){
-    var first = ['create.js'];
+    var first = [
+      'create.js'
+    ];
 
     return first.concat(
       fs.readdirSync(__dirname).filter(function(file){
@@ -14,6 +17,5 @@ module.exports = {
       })
     );
   },
-  lib: require('../lib/util'),
   through: require('through2')
 };
