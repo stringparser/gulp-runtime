@@ -87,11 +87,12 @@ function create(name, o){
   // --no-color, --color
   //
   app.set(':flag(--no-color|--color)', function(next){
-
     util.color.enabled = this.params.flag === '--color';
     if(!this.log){ return next(); }
-    util.log('color %s', util.color.enabled
-      ? util.color.bold('enabled') : 'disabled'
+    util.log('color %s',
+      util.color.enabled
+        ? util.color.bold('enabled')
+        : 'disabled'
     );
     next();
   });
