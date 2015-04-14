@@ -158,11 +158,7 @@ function create(name, o){
     next();
   });
 
-  if(repl){
-    app = tornado.repl(name, o);
-  }
-
-  return app;
+  return repl ? tornado.repl(name, o) : app;
 }
 
 exports = module.exports = {
