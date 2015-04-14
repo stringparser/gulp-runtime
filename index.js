@@ -58,15 +58,9 @@ function create(name, o){
   // --no-color
   //
   app.set('--silent', function(next){
-    if(process.argv.indexOf('--tasks-simple') < 0){
-      app.store.log = app.store.log === void 0 ? false : !app.store.log;
-      this.log = app.store.log;
+    if(this.path.indexOf('--tasks-simple') < 0){
+      this.log = app.store.log = !this.log;
     }
-
-    if(this.log){
-      console.log('logging enabled');
-    }
-
     next();
   });
 
@@ -89,10 +83,9 @@ function create(name, o){
   app.set(':flag(--no-color|--color)', function(next){
     util.color.enabled = this.params.flag === '--color';
     if(!this.log){ return next(); }
-    util.log('color %s',
-      util.color.enabled
-        ? util.color.bold('enabled')
-        : 'disabled'
+    util.log('color %s',util.color.enabled
+      ? util.color.bold('enabled')
+      : 'disabled'
     );
     next();
   });
@@ -121,22 +114,19 @@ function create(name, o){
     try {
       require(file);
     } catch(err){
-      var message = 'Could not load ' +
-        (isGulpfile ? 'gulpfile' : 'module') + ' ' + util.color.file(file);
+      util.log('Could not load %s %s', (isGulpfile ? 'gulpfile' : 'module'),
+        util.color.file(file)
+      );
 
       if(this.runtime.repl){
-        util.log(message);
-        util.log(err.stack);
+        console.log(err.stack);
         return next();
-      } else {
-        throw new Error(message);
-      }
+      } else { throw err; }
     }
 
     if(this.log){
       util.log((cached ? 'Reloaded' : 'Loaded'), util.color.file(file));
     }
-
 
     var dirname = path.dirname(file);
     if(isGulpfile && dirname !== cwd){
@@ -144,10 +134,10 @@ function create(name, o){
       util.log('Working directory changed to',
         util.color.file(dirname)
       );
+
       // update "gulpfile"
       process.argv[1] = file;
     }
-
     next();
   });
 
