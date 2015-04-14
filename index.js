@@ -45,14 +45,14 @@ _returns_
 // [m-tornado]: https://github.com/stringparser/tornado
 //
 function create(name, o){
+  o = util.type(o || name).plainObject || {};
   var app = tornado.create(name, o);
+  var repl = o.repl || o.input;
 
   // have we been here already?
-
   if(app.repl){ return app; }
-  o = util.type(o || name).plainObject || {};
-  if(app.store.children['--silent'] && (o.repl || o.input)){
-    return tornado.repl(name, o);
+  if(app.store.children['--silent']){
+    return repl ? tornado.repl(name, o) : app;
   }
 
   // --no-color
@@ -158,7 +158,7 @@ function create(name, o){
     next();
   });
 
-  if(o.repl || util.type(o.input).stream){
+  if(repl){
     app = tornado.repl(name, o);
   }
 
