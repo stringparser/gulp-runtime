@@ -1,9 +1,0 @@
-language: node_js
-before_script:
-  - npm install gulp -g
-  - npm link gulp
-node_js:
-  - "0.10"
-  - "0.11"
-notifications:
-  email: true
