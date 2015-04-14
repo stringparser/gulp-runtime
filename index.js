@@ -2,7 +2,7 @@
 
 var path = require('path');
 var util = require('./lib/util');
-var tornado = require('./proto');
+var tornado = require('./lib/proto');
 
 // export instances with the CLI built-in
 //
@@ -12,12 +12,11 @@ var tornado = require('./proto');
 // [m-tornado]: (https://github.com/stringparser/tornado)
 //
 function create(name, o){
-  o = util.type(o || name).plainObject || {};
   var app = tornado.create(name, o);
+  var children = app.store.children;
 
-  // have we been here already?
-  if(app.repl){ return app; }
-  if(app.store.children['--silent'] && !o.repl && !o.input){
+  o = util.type(o || name).plainObject || {};
+  if(app.repl || (children['--silent'] && !o.repl && !o.input)){
     return app;
   }
 
