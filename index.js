@@ -5,7 +5,9 @@ var util = require('./lib/util');
 var tornado = require('./lib/proto');
 
 /*
-## module.exports
+## documentation
+
+### module.exports
 
 The `module.exports` a function
 
@@ -13,7 +15,7 @@ The `module.exports` a function
 var create = require('gulp-runtime');
 ```
 
-### create
+#### create
 ```js
 function create([string name|object options, object options])
 ```
