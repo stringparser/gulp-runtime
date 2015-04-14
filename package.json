@@ -21,7 +21,8 @@
   ],
   "dependencies": {
     "archy": "^1.0.0",
-    "gulp-util": "^2.2.20",
+    "chalk": "^1.0.0",
+    "dateformat": "^1.0.11",
     "pretty-hrtime": "^1.0.0",
     "tildify": "^1.0.0",
     "tornado-repl": "^0.11.x",
