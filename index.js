@@ -21,9 +21,10 @@ _arguments_
   - `options.output` type stream, output stream for the repl
 
 _defaults_
- - when `options.repl` or `options.input` is truthy
-  - if `options.input` is not a stream defaults to `process.stdin`
-  - if `options.output` is not a stream defaults to `process.stdout`
+ - when `options.repl` or `options.input` is truthy a repl is created
+  at `instance.repl` using the [readline][m-readline] module
+  - if `options.input` is not a stream, to `process.stdin`
+  - if `options.output` is not a stream, to `process.stdout`
 
 _returns_
  - an existing instance `name`
