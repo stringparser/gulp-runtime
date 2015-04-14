@@ -156,12 +156,30 @@ module.exports = function(runtime, util){
 			log: false,
 			onHandleError: done,
 			onHandleCall: function(){
-				require.cache
-					.should.not
-					.have.property(modulePath);
+				require.cache.should.not.have.property(modulePath);
 			},
 			onHandleEnd: function(){
 				require.cache.should.have.property(modulePath);
+				process.cwd().should.be.eql(cwd);
+				done();
+			}
+		})();
+	});
+
+	it('--gulpfile should require file and change cwd', function(done){
+		var cwd = process.cwd();
+		var modulePath = path.join(cwd, 'test/dir/gulpfile.js');
+
+		gulp.stack('--gulpfile test/dir/gulpfile', {
+			log: false,
+			onHandleError: done,
+			onHandleCall: function(){
+				require.cache.should.not.have.property(modulePath);
+			},
+			onHandleEnd: function(){
+				require.cache.should.have.property(modulePath);
+				process.cwd().should.be.eql(path.dirname(modulePath));
+				process.chdir(cwd);
 				done();
 			}
 		})();
