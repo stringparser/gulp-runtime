@@ -49,28 +49,24 @@ module.exports = function(runtime, util){
 	});
 
 	it('deps should run in series and before task', function(done){
-		var gulp = create('run deps');
-		var dep = 'one two';
-
-		gulp.task(':handle(three)', dep, function(next){
-			setTimeout(next, Math.random()*10);
-		});
-
-		gulp.task(':handle(one|two)', function(next){
-			setTimeout(next, Math.random()*10);
-		});
-
 		var stack = [];
+		var dep = 'one two';
+		var gulp = create('run deps');
+		var randomHandle = function(next){
+			setTimeout(next, Math.random()*10);
+		};
+
+		gulp.task('three', dep, randomHandle);
+		gulp.task('one', randomHandle);
+		gulp.task('two', randomHandle);
 
 		gulp.set({
 			log: false,
-			onHandleError: done,
 			onHandleEnd: function(next){
-				if(this.queue){
-					stack.push(next.match);
-					return ;
-				} else if(this.host){
-					stack.push(this.host.path);
+				if(next.match){ stack.push(next.match); }
+				if(this.queue){ return ; }
+				if(this.host){
+					this.wait.should.be.eql(true);
 					stack.should.be.eql(['one', 'two', 'three']);
 					done();
 				}
