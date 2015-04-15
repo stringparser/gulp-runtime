@@ -44,13 +44,15 @@ _returns_
 */
 function create(name, o){
   o = util.type(o || name).plainObject || {};
-  var app = tornado.create(name, o);
-  if(app.repl){ return app; } // <- have we been here already?
+  name = util.type(name).string || '#root';
 
-  var repl = o.repl || o.input;
-  if(app.store.children['--silent']){
-    return repl ? tornado.repl(name, o) : app;
-  }
+  var app = o.repl || o.input
+    ? tornado.repl(name, o)
+    : tornado.create(name, o);
+
+  // default commands were alredy attached
+  //
+  if(app.store.children['--silent']){ return app; }
 
   // --no-color
   //
@@ -141,7 +143,7 @@ function create(name, o){
     next();
   });
 
-  return repl ? tornado.repl(name, o) : app;
+  return app;
 }
 
 exports = module.exports = {
