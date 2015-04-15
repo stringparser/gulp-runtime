@@ -3,7 +3,9 @@
   "version": "0.10.0",
   "description": "alternative interface for vinly-fs",
   "author": "Javier Carrillo",
-  "engines": {"node": " >= 0.10"},
+  "engines": {
+    "node": " >= 0.10"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/stringparser/gulp-runtime"
@@ -31,11 +33,12 @@
     "whech": "^0.7.x"
   },
   "devDependencies": {
-    "jshint-stylish": "*",
-    "through2": "^0.6.5",
     "jshint": "*",
+    "jshint-stylish": "*",
+    "mocha": "*",
+    "rimraf": "^2.3.2",
     "should": "*",
-    "mocha": "*"
+    "through2": "^0.6.5"
   },
   "scripts": {
     "lint": "jshint lib index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules",
