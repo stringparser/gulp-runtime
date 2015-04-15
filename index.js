@@ -39,20 +39,15 @@ _defaults_
 _returns_
  - an existing instance `name`
  - a new instance if there wasn't an instance `name` instantiated
- - a repl `name` if `options.repl` or `options.input` was given
-*/
+ - a repl `name` if `options.repl` or `options.input` is truthy
 
-// Notes:
-//  - app -> [tornado][m-tornado] instance
-// [m-tornado]: https://github.com/stringparser/tornado
-//
+*/
 function create(name, o){
   o = util.type(o || name).plainObject || {};
   var app = tornado.create(name, o);
-  var repl = o.repl || o.input;
+  if(app.repl){ return app; } // <- have we been here already?
 
-  // have we been here already?
-  if(app.repl){ return app; }
+  var repl = o.repl || o.input;
   if(app.store.children['--silent']){
     return repl ? tornado.repl(name, o) : app;
   }
