@@ -1,17 +1,14 @@
 'use strict';
 
-var gulp = require('./.').create();
+var vfs = require('vinyl-fs');
+var gulp = require('./.').create({repl: true});
 
-gulp.task(':handle(css|jsx|img)', 'jsx css', function(next){
+gulp.task(':handle(css|jsx|img)', function(next){
  next();
 });
-console.log(gulp.get('jsx css img'));
 
-var count = 0;
-gulp.stack('jsx css img', {
-  onHandleCall: function(next){
-    if(++count > 2){
-      process.exit(1);
-    }
-  }
-})();
+gulp.stack('jsx css img', {wait: true})();
+
+vfs.watch('test/*.js', null, function(){
+  console.log(arguments);
+});
