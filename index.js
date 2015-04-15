@@ -7,7 +7,7 @@ var tornado = require('./lib/proto');
 /*
 ## documentation
 
-### module.exports
+#### module.exports
 
 The `module.exports` a function
 
