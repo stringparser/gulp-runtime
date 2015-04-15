@@ -37,4 +37,37 @@ module.exports = function(runtime, util){
 		gulp.task('name', handle);
 		gulp.get('name').should.have.property('handle', handle);
 	});
+
+	it('deps should run in series and before task', function(done){
+		var gulp = create('run deps');
+		var dep = 'one two';
+
+		var stack = [];
+		gulp.task(':handle(three)', dep, function(next){
+			setTimeout(next, Math.random()*10);
+		});
+
+		gulp.task(':handle(one|two)', function(next){
+			setTimeout(next, Math.random()*10);
+		});
+
+		var handleThree = gulp.stack('three');
+
+		gulp.set({
+			log: false,
+			onHandleError: done,
+			onHandleEnd: function(next){
+				if(this.queue){
+					stack.push(next.match);
+					return ;
+				} else if(this.host){
+					stack.push(this.host.path);
+					stack.should.be.eql(['one', 'two', 'three']);
+					done();
+				}
+			}
+		});
+
+		handleThree();
+	});
 };
