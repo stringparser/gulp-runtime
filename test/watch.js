@@ -6,67 +6,94 @@ var should = require('should');
 exports = module.exports = function(runtime, util){
   should.exists(util);
   var create = runtime.create;
+  var testFile = 'test/dir/watch.js';
 
-  before(function(done){
-    fs.writeFile('test/dir/watch.js', done);
+  beforeEach(function(done){
+    fs.writeFile(testFile, util.content, done);
   });
 
-  function writeTest(file, cb){
-    setTimeout(function(){
-      var content = Math.random().toString(36)+'\n';
-      fs.writeFile(file, content, cb || function(err){
-        if(err){ throw cb(err); }
-      });
-    }, 200);
-  }
+  after(function(done){
+    util.rimraf('test/dir/*.js', done);
+  });
 
-  function handle(done){
-    done = done || function(){};
-    return function(next){
-      done(); next();
-    };
-  }
+  it('(no opts) on change, should invoke callback', function(done){
+    var gulp = create('watch callback', {log: false});
 
-  it('should accept a string', function(done){
-    var gulp = create('opt string', {log: false});
-    gulp.set({onHandleError: done});
+    var watcher = gulp.watch(testFile, function(){
+      watcher.end();
+      done();
+    });
 
-    gulp.task('opt', handle(done));
-    var watcher = gulp.watch('test/dir/watch.js', 'opt', function(){
+    util.rimraf(testFile, function(err){
+      if(err){ throw err; }
+    });
+  });
+
+  it('(opt string) should run tasks given', function(done){
+    var gulp = create('watch opt string', {log: false});
+
+    var watcher = gulp.watch(testFile, 'string', function(){
       watcher.end();
     });
 
-    writeTest('test/dir/watch.js');
-  });
-
-  it('should accept an array', function(done){
-    var gulp = create('opt array', {log: false});
-    gulp.set({onHandleError: done});
-
-    gulp.task('opt', handle(done));
-    var watcher = gulp.watch('test/dir/*.js',
-      ['opt'], function(){ watcher.end(); }
-    );
-
-    writeTest('test/dir/watch.js');
-  });
-
-  it('should accept an object {tasks: string|array}', function(done){
-    var gulp = create('opt object', {log: false});
-    gulp.set({onHandleError: done});
-
-    var firstWatch = gulp.watch('test/dir/watch.js',
-      {tasks: ['opt']}, function(){ firstWatch.end(); }
-    );
-
-    gulp.task('opt', function(next){
-      var secondWatch = gulp.watch('test/dir/watch.js',
-        {tasks: 'two'}, function(){ secondWatch.end(); }
-      );
-      writeTest('test/dir/watch.js', next);
+    gulp.task('string', function(next){
+      next(); done();
     });
-    gulp.task('two', handle(done));
 
-    writeTest('test/dir/watch.js');
+    util.rimraf(testFile, function(err){
+      if(err){ throw err; }
+    });
+  });
+
+  it('(opt array) should run tasks given', function(done){
+    var gulp = create('opt array', {log: false});
+
+    gulp.task('array', function(next){
+      next(); done();
+    });
+
+    var watcher = gulp.watch(testFile, ['array'], function(){
+      watcher.end();
+    });
+
+    util.rimraf(testFile, function(err){
+      if(err){ throw err; }
+    });
+  });
+
+  it('should reload files if so was said', function(done){
+    var gulp = create('reload file', {log: false});
+
+    // arrange state change
+    gulp.task('reload file', function(next){
+      // assert initial state
+      var testModule = require('./dir/watch');
+      testModule.should.be.eql({content: 'changed'});
+
+      // change exports
+      testModule.prop = 'here';
+
+      testModule.should.have.properties({
+        content: 'changed',
+        prop: 'here'
+      });
+      next();
+    });
+
+    var watcher = gulp.watch(testFile, {
+      reload: true,
+      tasks: 'reload file'
+    }, function(){
+      var reloaded = require('./dir/watch');
+      reloaded.should.be.eql({content: 'changed'});
+      watcher.end();
+      done();
+    });
+
+    setTimeout(function(){
+      fs.writeFile(testFile, util.contentChanged, function(err){
+        if(err){ done(err); }
+      });
+    }, 150);
   });
 };
