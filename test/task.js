@@ -14,12 +14,21 @@ module.exports = function(runtime, util){
 		}).should.throw();
 	});
 
+	it('should throw if handle has circular dependencies', function(){
+		var gulp = create('throw');
+
+		(function(){
+			gulp.task('name', 'name', function(next){ next(); });
+		}).should.throw();
+	});
+
 	it('should register task deps as an array', function(){
 		var gulp = create('array deps');
 		var dep = ['1', '2'];
 
 		gulp.task('name', dep);
-		gulp.get('name').should.have.property('dep', dep);
+		gulp.get('name')
+			.should.have.property('dep', dep);
 	});
 
 	it('should register task deps as a string', function(){
@@ -27,7 +36,8 @@ module.exports = function(runtime, util){
 		var dep = ' 1  2 3';
 
 		gulp.task('name', dep);
-		gulp.get('name').should.have.property('dep', dep.trim().split(/[ ]+/));
+		gulp.get('name')
+			.should.have.property('dep', dep.trim().split(/[ ]+/));
 	});
 
 	it('should register task handle', function(){
@@ -42,7 +52,6 @@ module.exports = function(runtime, util){
 		var gulp = create('run deps');
 		var dep = 'one two';
 
-		var stack = [];
 		gulp.task(':handle(three)', dep, function(next){
 			setTimeout(next, Math.random()*10);
 		});
@@ -51,7 +60,7 @@ module.exports = function(runtime, util){
 			setTimeout(next, Math.random()*10);
 		});
 
-		var handleThree = gulp.stack('three');
+		var stack = [];
 
 		gulp.set({
 			log: false,
@@ -68,6 +77,6 @@ module.exports = function(runtime, util){
 			}
 		});
 
-		handleThree();
+		gulp.stack('three')();
 	});
 };
