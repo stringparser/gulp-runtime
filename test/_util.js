@@ -17,5 +17,8 @@ module.exports = {
       })
     );
   },
-  through: require('through2')
+  rimraf: require('rimraf'),
+  through: require('through2'),
+  content: 'exports = module.exports = {}',
+  contentChanged: 'exports = module.exports = {content: \'changed\'}'
 };
