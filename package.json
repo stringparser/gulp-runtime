@@ -28,7 +28,7 @@
     "tildify": "^1.0.0",
     "archy": "^1.0.0",
     "chalk": "^1.0.0",
-    "whech": "^0.6.1"
+    "whech": "^0.7.x"
   },
   "devDependencies": {
     "jshint-stylish": "*",
