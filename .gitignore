@@ -1,3 +1,4 @@
 node_modules
 test/node_modules
 pool
+test/dir/watch.js
