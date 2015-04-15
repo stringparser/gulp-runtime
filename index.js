@@ -121,6 +121,7 @@ function create(name, o){
       );
 
       if(this.runtime.repl){
+        util.color.callersPath(err.stack);
         console.log(err.stack);
         return next();
       } else { throw err; }
