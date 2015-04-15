@@ -9,17 +9,20 @@ module.exports = function(runtime, util){
   should.exists(util);
 
   before(function(done){
-    fs.writeFile('test/dir/module.js', util.testContent, function(er){
-      if(er){ done(er); }
-      fs.writeFile('test/dir/gulpfile.js', '', function(err){
-        if(err){ done(err); }
-        done();
+    util.mkdirp('test/dir', function(e){
+      if(e){ done(e); }
+      fs.writeFile(util.testModule, util.testContent, function(er){
+        if(er){ done(er); }
+        fs.writeFile('test/dir/gulpfile.js', '', function(err){
+          if(err){ done(err); }
+          done();
+        });
       });
     });
   });
 
   after(function(done){
-    util.rimraf('test/dir/*.js', done);
+    util.rimraf('test/dir', done);
   });
 
   var cliCommands = [

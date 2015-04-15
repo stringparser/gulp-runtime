@@ -8,12 +8,16 @@ exports = module.exports = function(runtime, util){
   var create = runtime.create;
   var testFile = 'test/dir/watch.js';
 
+  before(function(done){
+    util.mkdirp('test/dir', done);
+  });
+
   beforeEach(function(done){
     fs.writeFile(testFile, util.content, done);
   });
 
   after(function(done){
-    util.rimraf('test/dir/*.js', done);
+    util.rimraf('test/dir', done);
   });
 
   it('(no opts) on change, should invoke callback', function(done){
