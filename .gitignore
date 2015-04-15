@@ -1,2 +1,2 @@
 node_modules
-test/dir/watch.js
+test/dir/**
