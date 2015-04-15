@@ -2,8 +2,16 @@
 
 var gulp = require('./.').create();
 
-gulp.task(':handle(css|jsx|img|browserify)', function(next){
- setTimeout(next, Math.random()*10);
+gulp.task(':handle(css|jsx|img)', 'jsx css', function(next){
+ next();
 });
+console.log(gulp.get('jsx css img'));
 
-gulp.stack('css', gulp.stack('jsx img', gulp.stack('browserify')))();
+var count = 0;
+gulp.stack('jsx css img', {
+  onHandleCall: function(next){
+    if(++count > 2){
+      process.exit(1);
+    }
+  }
+})();
