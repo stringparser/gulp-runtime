@@ -1,6 +1,6 @@
 'use strict';
 
-var util = require('./util');
+var util = require('./.');
 
 exports = module.exports = require('chalk');
 

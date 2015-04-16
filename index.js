@@ -1,7 +1,7 @@
 'use strict';
 
 var path = require('path');
-var util = require('./lib/util');
+var util = require('./util');
 var tornado = require('./lib/proto');
 
 /*
