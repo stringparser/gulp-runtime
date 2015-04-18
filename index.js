@@ -52,11 +52,11 @@ function create(name, o){
 
   // default commands were alredy attached
   //
-  if(app.store.children['--silent']){ return app; }
+  if(app.store.children[':flag(--silent)']){ return app; }
 
   // --no-color
   //
-  app.set('--silent', function(next){
+  app.set(':flag(--silent)', function(next){
     if(this.path.indexOf('--tasks-simple') < 0){
       this.log = app.store.log = !this.log;
     }
@@ -65,7 +65,7 @@ function create(name, o){
 
   // --cwd
   //
-  app.set('--cwd :dirname([^ ]+)', function(next){
+  app.set(':flag(--cwd) :dirname', function(next){
     var cwd = process.cwd();
     var dirname = path.resolve(cwd, next.params.dirname);
     if(dirname !== cwd){ process.chdir(dirname); }
@@ -138,7 +138,7 @@ function create(name, o){
       }
 
       // update "gulpfile"
-      process.argv[1] = file;
+      app.set({configFile: file});
     }
     next();
   });
