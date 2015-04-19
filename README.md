@@ -174,8 +174,9 @@ _arguments_
 - `deps` type array or string, tasks to run before this one in series. If tasks are given as a string they must be space separated.
 - `handle` type function to call when `runtime.stack` is used.
 
-_throws_
+**_throws_**
  - if types doesn't match
+ - if `handle` does not return or uses a callback
  - if there is a circular dependency for the task given
 
 _returns_ `this`
@@ -215,7 +216,7 @@ _defaults_
  - `opt.reload` to `undefined`
 
 _returns_
- - a watcher, same as [gulp.watch][p-gulp-watch]
+ - a watcher, [vinylFs.watch][p-vinylFs.watch]
 
 > Notes:
 - callback arguments are (a gaze event, the `opt`s given)
@@ -245,7 +246,7 @@ Returns a function which after call will invoke and give context to its `...argu
 
 _arguments_
 - `...arguments`, type string or function
-- `props`, type object, properties of stack of the [stack API][t-stack]. Look at its documentation for more details
+- `props`, type object, properties for the stack. Look at [the tornado stack API][t-stack].
 
 **_throws_**
  - when no arguments are given
