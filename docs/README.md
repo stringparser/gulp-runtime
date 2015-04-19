@@ -149,9 +149,11 @@ So now the project puts together this things learnt for [vinyl-fs][p-vinylFs] gi
 [x-npm]: https://www.npmjs.org
 [t-stack]: https://github.com/stringparser/tornado/blob/master/docs/stack.md
 [p-parth]: https://github.com/stringparser/parth
+[x-gitter]: https://gitter.im/stringparser/gulp-runtime
 [p-tornado]: https://github.com/stringparser/tornado
 [m-readline]: https://nodejs.org/api/readline.html
 [x-gulp-cli]: https://github.com/gulpjs/gulp/blob/master/docs/CLI.md
+[x-new-issue]: https://github.com/stringparser/gulp-runtime/issues/new
 [p-gulp-runtime]: https://npmjs.com/gulp-runtime
 [p-tornado-repl]: https://github.com/stringparser/tornado-repl
 [x-app-template]: https://github.com/stringparser/app-template
