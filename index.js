@@ -31,15 +31,15 @@ _arguments_
   - `options.output` type stream, output stream for the repl
 
 _defaults_
- - when `options.repl` or `options.input` is truthy a repl is created
+ - `name` defaults to `#root`
+ - if `options.repl` or `options.input` is truthy a repl is created
   at `instance.repl` using the [readline][m-readline] module
   - if `options.input` is not a stream, to `process.stdin`
   - if `options.output` is not a stream, to `process.stdout`
 
 _returns_
- - an existing instance `name`
- - a new instance if there wasn't an instance `name` instantiated
- - a repl `name` if `options.repl` or `options.input` is truthy
+ - an existing instance `name` if `name` is given
+ - a new instance if there wasn't `name` wasn't created before
 
 */
 function create(name, o){
@@ -142,6 +142,18 @@ function create(name, o){
     }
     next();
   });
+
+  if(o.log === void 0 || o.log){
+    var configFile = util.configFile();
+    app.set({configFile: configFile});
+    util.log('Using', util.color.file(configFile));
+    var index = process.argv.indexOf(path.relative(process.cwd(), configFile));
+    if(index > 0 && index < process.argv.length-1){
+      app.stack(process.argv.slice(index+1))();
+    } else if(process.argv.length > 2){
+      app.stack(process.argv.slice(2))();
+    }
+  }
 
   return app;
 }
