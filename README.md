@@ -306,7 +306,7 @@ npm install gulp-runtime
 [x-license]: http://opensource.org/licenses/MIT
 [x-new-issue]: https://github.com/stringparser/gulp-runtime/issues/new
 
-[x-app-template]: https://github.com/stringparser/app-template/master/tree/gulpfile.js
+[x-app-template]: https://github.com/stringparser/app-template
 
 [b-build]: http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square
 [b-gitter]: https://badges.gitter.im/Join%20Chat.svg
