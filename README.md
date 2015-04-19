@@ -149,22 +149,19 @@ npm install gulp-runtime
 -->
 
 [x-npm]: https://www.npmjs.org
+[t-stack]: https://github.com/stringparser/tornado/blob/master/docs/stack.md
+[p-parth]: https://github.com/stringparser/parth
+[p-tornado]: https://github.com/stringparser/tornado
+[m-readline]: https://nodejs.org/api/readline.html
+[x-gulp-cli]: https://github.com/gulpjs/gulp/blob/master/docs/CLI.md
+[p-gulp-runtime]: https://npmjs.com/gulp-runtime
+[p-tornado-repl]: https://github.com/stringparser/tornado-repl
+[x-app-template]: https://github.com/stringparser/app-template
 
 [p-vinylFs]: https://github.com/wearefractal/vinyl-fs
 [p-vinylFs.src]: https://github.com/wearefractal/vinyl-fs#srcglobs-opt
 [p-vinylFs.dest]: https://github.com/wearefractal/vinyl-fs#destfolder-opt
 [p-vinylFs.watch]: https://github.com/wearefractal/vinyl-fs#watchglobs-opt-cb
-[t-stack]: https://github.com/stringparser/tornado/blob/master/docs/stack.md
-
-[p-parth]: https://github.com/stringparser/parth
-[p-tornado]: https://github.com/stringparser/tornado
-[p-tornado-repl]: https://github.com/stringparser/tornado-repl
-[m-readline]: https://nodejs.org/api/readline.html
-[p-gulp-runtime]: https://npmjs.com/gulp-runtime
-
-[x-app-template]: https://github.com/stringparser/app-template
-
-[x-gulp-cli]: https://github.com/gulpjs/gulp/blob/master/docs/CLI.md
 
 [x-gitter]: https://gitter.im/stringparser/gulp-runtime
 [x-travis]: https://travis-ci.org/stringparser/gulp-runtime/builds
