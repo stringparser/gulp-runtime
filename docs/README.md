@@ -138,3 +138,25 @@ This started as repl for gulp with a simple interface (completion and cli comman
  - [tornado-repl][p-tornado-repl] a repl for tornado
 
 So now the project puts together this things learnt for [vinyl-fs][p-vinylFs] giving an alternate interface for it.
+
+<!-- links
+  b-: is for badges
+  p-: is for package
+  t-: is for doc's toc
+  x-: is for just a link
+-->
+
+[x-npm]: https://www.npmjs.org
+[t-stack]: https://github.com/stringparser/tornado/blob/master/docs/stack.md
+[p-parth]: https://github.com/stringparser/parth
+[p-tornado]: https://github.com/stringparser/tornado
+[m-readline]: https://nodejs.org/api/readline.html
+[x-gulp-cli]: https://github.com/gulpjs/gulp/blob/master/docs/CLI.md
+[p-gulp-runtime]: https://npmjs.com/gulp-runtime
+[p-tornado-repl]: https://github.com/stringparser/tornado-repl
+[x-app-template]: https://github.com/stringparser/app-template
+
+[p-vinylFs]: https://github.com/wearefractal/vinyl-fs
+[p-vinylFs.src]: https://github.com/wearefractal/vinyl-fs#srcglobs-opt
+[p-vinylFs.dest]: https://github.com/wearefractal/vinyl-fs#destfolder-opt
+[p-vinylFs.watch]: https://github.com/wearefractal/vinyl-fs#watchglobs-opt-cb
