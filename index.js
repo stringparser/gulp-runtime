@@ -143,18 +143,6 @@ function create(name, o){
     next();
   });
 
-  if(o.log === void 0 || o.log){
-    var configFile = util.configFile();
-    app.set({configFile: configFile});
-    util.log('Using', util.color.file(configFile));
-    var index = process.argv.indexOf(path.relative(process.cwd(), configFile));
-    if(index > 0 && index < process.argv.length-1){
-      app.stack(process.argv.slice(index+1))();
-    } else if(process.argv.length > 2){
-      app.stack(process.argv.slice(2))();
-    }
-  }
-
   return app;
 }
 
