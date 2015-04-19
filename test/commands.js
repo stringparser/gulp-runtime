@@ -26,8 +26,8 @@ module.exports = function(runtime, util){
   });
 
   var cliCommands = [
-    '--silent',
-    '--cwd :dirname([^ ]+)',
+    ':flag(--silent)',
+    ':flag(--cwd) :dirname',
     ':flag(--no-color|--color)',
     ':flag(--tasks-simple|--tasks|-T)',
     ':flag(--require|--gulpfile) :file'
