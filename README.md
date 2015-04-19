@@ -111,7 +111,8 @@ $ node gulpfile.js
 >
 ```
 
-Press
+Press:
+
 1. <kbd>Enter</kbd> to see the prompt
 1. write the tasks you want to run
 1. or <kbd>Tab</kbd> to see completion
@@ -234,7 +235,7 @@ gulp.watch('app/*.*', {
 });
 ```
 
-## runtime.stack
+### runtime.stack
 ```js
 function stack(...arguments[, object props])
 ```
