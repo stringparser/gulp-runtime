@@ -3,10 +3,13 @@
 > an alternate interface to [vinyl-fs][p-vinylFs]
 
 [install](#install) -
-[documentation](#documentation) -
 [examples](#examples) -
 [why](#why) -
 [license](#license)
+
+## documentation
+
+For more information go to the [documentation folder](./docs).
 
 ## sample
 
@@ -126,10 +129,6 @@ for example, the [gulp cli][x-gulp-cli] is available for every instance. To see 
 -T              --require       --gulpfile
 ```
 
-## documentation
-
-For more information about the api and beyond go to the [documentation folder](./docs).
-
 ## install
 
 With [npm][x-npm]
@@ -163,14 +162,14 @@ npm install gulp-runtime
 [m-readline]: https://nodejs.org/api/readline.html
 [p-gulp-runtime]: https://npmjs.com/gulp-runtime
 
+[x-app-template]: https://github.com/stringparser/app-template
+
 [x-gulp-cli]: https://github.com/gulpjs/gulp/blob/master/docs/CLI.md
 
 [x-gitter]: https://gitter.im/stringparser/gulp-runtime
 [x-travis]: https://travis-ci.org/stringparser/gulp-runtime/builds
 [x-license]: http://opensource.org/licenses/MIT
 [x-new-issue]: https://github.com/stringparser/gulp-runtime/issues/new
-
-[x-app-template]: https://github.com/stringparser/app-template
 
 [b-build]: http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square
 [b-gitter]: https://badges.gitter.im/Join%20Chat.svg
