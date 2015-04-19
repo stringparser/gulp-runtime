@@ -234,13 +234,30 @@ gulp.watch('app/*.*', {
 });
 ```
 
+## runtime.stack
+```js
+function stack(...arguments[, object props])
+```
+
+Returns a function which after call will invoke and give context to its `...arguments`.
+
+_arguments_
+- `...arguments`, type string or function
+- `props`, type object, properties of stack of the [stack API][t-stack]. Look at its documentation for more details
+
+**_throws_**
+ - when no arguments are given
+
+_returns_
+- a `tick` callback, which, upon call will execute the stack arguments
+
 ## examples
 
-For now you can look at the code at the [app-template][x-app-template] repo. Do not hesitate to [create a new issue][x-new-issue] with any comments or directly go to [gitter][x-gitter] and ask there directly.
+For now you can look at the code at the [app-template][x-app-template] repo. Do not hesitate to [create a new issue][x-new-issue] with any comments or directly go to [gitter][x-gitter] and ask there directly. I'll be giving more code examples on the comming weeks.
 
 ## why
 
-This started as repl for gulp with a simple interface. But it was somewhat limited by how functions were composed at runtime and how you could run a previously set function. As the project grew I wanted to be able to have more control over task definition and execution so several projects have spawned from this one.
+This started as repl for gulp with a simple interface (completion and cli commands). But it was somewhat limited by how functions were composed at runtime and how you could run a functions previously set. As the project grew I wanted to be able to have more control over task definition and execution. To make this happen:
 
  - [parth][p-parth] path-to-regex madness
  - [tornado][p-tornado] composing asynchronous functions
@@ -273,7 +290,6 @@ npm install gulp-runtime
 [p-vinylFs.src]: https://github.com/wearefractal/vinyl-fs#srcglobs-opt
 [p-vinylFs.dest]: https://github.com/wearefractal/vinyl-fs#destfolder-opt
 [p-vinylFs.watch]: https://github.com/wearefractal/vinyl-fs#watchglobs-opt-cb
-
 
 [p-parth]: https://github.com/stringparser/parth
 [p-tornado]: https://github.com/stringparser/tornado
