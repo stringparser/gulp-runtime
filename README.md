@@ -197,12 +197,13 @@ Same as [vinylFs.dest][p-vinylFs.dest]
 function watch(string|array glob[, string|array|object opt, function cb])
 ```
 
-Similar to [vinylFs.watch][p-vinylFs.watch] (run tasks when files change).
+Uses [vinylFs.watch][p-vinylFs.watch] (run tasks when files change).
+
 Additional features:
   - Files can be reloaded on the `require.cache`
   - Tasks can be run in series directly if so specified
 
-_arguments_ differences with [gulp.watch][m-gulp-watch]
+_arguments_
  - `tasks` can be a string, space separated tasks will be dispatched as written
  - when `opt` is an object, it can have non mandatory properties below
   - `opt.wait` type boolean, if `opt.tasks` should run in series or not
