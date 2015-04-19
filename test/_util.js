@@ -4,7 +4,7 @@ var fs = require('fs');
 var path = require('path');
 
 module.exports = {
-  lib: require('../lib/util'),
+  lib: require('../util'),
   suite : function(){
     var first = [
       'create.js'
