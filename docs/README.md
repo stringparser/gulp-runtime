@@ -125,20 +125,6 @@ _arguments_
 _returns_
 - a `tick` callback, which, upon call will execute the stack arguments
 
-## examples
-
-For now you can look at the code at the [app-template][x-app-template] repo. Do not hesitate to [create a new issue][x-new-issue] with any comments or directly go to [gitter][x-gitter] and ask there directly. I'll be giving more code examples on the comming weeks.
-
-## why
-
-This started as repl for gulp with a simple interface (completion and cli commands). But it was somewhat limited by how functions were composed at runtime and how you could run a functions previously set. As the project grew I wanted to be able to have more control over task definition and execution. To make this happen:
-
- - [parth][p-parth] path-to-regex madness
- - [tornado][p-tornado] composing asynchronous functions
- - [tornado-repl][p-tornado-repl] a repl for tornado
-
-So now the project puts together this things learnt for [vinyl-fs][p-vinylFs] giving an alternate interface for it.
-
 <!-- links
   b-: is for badges
   p-: is for package
