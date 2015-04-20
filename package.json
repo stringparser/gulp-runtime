@@ -1,6 +1,6 @@
 {
   "name": "gulp-runtime",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "alternative interface for vinly-fs",
   "author": "Javier Carrillo",
   "engines": {
@@ -11,15 +11,14 @@
     "url": "https://github.com/stringparser/gulp-runtime"
   },
   "keywords": [
-    "repl",
     "gulp",
+    "repl",
     "tornado",
     "runtime",
     "readline",
     "terminal",
     "alternate",
-    "interface",
-    "gulpplugin"
+    "interface"
   ],
   "dependencies": {
     "pretty-hrtime": "^1.0.0",
