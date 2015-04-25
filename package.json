@@ -1,6 +1,6 @@
 {
   "name": "gulp-runtime",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "alternative interface for vinly-fs",
   "author": "Javier Carrillo",
   "engines": {
