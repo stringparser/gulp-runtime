@@ -22,7 +22,6 @@
   ],
   "dependencies": {
     "pretty-hrtime": "^1.0.0",
-    "tornado-repl": "^0.11.x",
     "dateformat": "^1.0.11",
     "utils-type": "^0.12.1",
     "vinyl-fs": "^1.0.0",
@@ -33,16 +32,15 @@
   },
   "devDependencies": {
     "jshint": "*",
-    "jshint-stylish": "*",
     "mkdirp": "^0.5.0",
     "mocha": "*",
     "rimraf": "^2.3.2",
-    "should": "*",
+    "should": "^8.0.0",
     "through2": "^0.6.5"
   },
   "scripts": {
-    "lint": "jshint lib index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules",
-    "test": "npm run-script lint && mocha test/_main.js"
+    "lint": "jshint lib index.js --exclude node_modules",
+    "test": "npm run lint && mocha test/_main.js"
   },
   "license": "MIT"
 }
