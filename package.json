@@ -27,16 +27,15 @@
     "vinyl-fs": "^1.0.0",
     "tildify": "^1.0.0",
     "archy": "^1.0.0",
-    "chalk": "^1.0.0",
-    "whech": "^0.7.x"
+    "chalk": "^1.0.0"
   },
   "devDependencies": {
     "jshint": "*",
-    "mkdirp": "^0.5.0",
+    "mkdirp": "*",
     "mocha": "*",
-    "rimraf": "^2.3.2",
-    "should": "^8.0.0",
-    "through2": "^0.6.5"
+    "rimraf": "*",
+    "should": "*",
+    "through2": "*"
   },
   "scripts": {
     "lint": "jshint lib index.js --exclude node_modules",
