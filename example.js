@@ -27,17 +27,7 @@ gulp.task('watch', function(next){
 });
 
 gulp.task(['serve'], function webpack(next){
-  setTimeout(function(){
-    if([0, 1][Math.random() > 0.4 ? 1 : 0]){
-      throw new Error('fail!');
-    } else {
-      next();
-    }
-  }, rand());
+  setTimeout(next, rand());
 });
 
-gulp.stack(
-  'less',
-  gulp.stack('webpack', 'jade', {wait: true}),
-  'watch'
-)();
+gulp.start('less', gulp.series('webpack', 'jade'), 'watch');
