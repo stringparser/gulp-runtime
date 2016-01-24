@@ -9,15 +9,14 @@ var vinylFS = require('vinyl-fs');
 var Gulp = module.exports = Runtime.createClass({
   src: vinylFS.src,
   dest: vinylFS.dest,
-  create: function(props, Super){
+  create: function(Super, props){
     Super.call(this, props);
+
+    this.log = this.repl || this.log === void 0 || this.log;
     this.tasks = new Parth();
 
     if(this.repl){
-      this.log = true;
       util.createREPL(this);
-    } else if(this.log === void 0){
-      this.log = true;
     }
   }
 });
@@ -25,26 +24,26 @@ var Gulp = module.exports = Runtime.createClass({
 /**
  * gulp.task
  **/
-Gulp.prototype.task = function(name, tasks, fn){
-  fn = util.type(fn || tasks || name).function || '';
+Gulp.prototype.task = function(name, tasks, handle){
+  handle = util.type(handle || tasks || name).function || false;
   tasks = util.type(tasks).array || util.type(name).array;
-  name = util.type(name).string || util.type(fn.displayName || fn.name).string;
+  name = (util.type(name).string || util.type(handle.name).string || '').trim();
 
-  if(name){ name = name.trim(); }
-  if(name && fn && (!fn.name || !fn.displayName)){
-    fn.displayName = name;
+  if(!handle.name){
+    handle.displayName = name;
   }
 
-  if(name && tasks && fn){
-    var handle = this.stack.apply(this, tasks.concat(fn, {wait: true}));
-    this.tasks.set(name, {handle: handle});
-  } else if(name && fn){
-    this.tasks.set(name, {handle: fn});
-  } else if(!name && fn){
-    throw new TypeError('no name given: we need a named function');
-  } else if(name && !fn){
-    return this.tasks.get(name) || false;
-  } else if(!fn){
+  if(name && tasks && handle){
+    tasks = tasks.concat(handle, {wait: true});
+    var composed = this.stack.apply(this, tasks);
+    this.tasks.set(name, {fn: composed});
+  } else if(name && handle){
+    this.tasks.set(name, {fn: handle});
+  } else if(!name && handle){
+    throw new TypeError('no name given: give a named function');
+  } else if(name && !handle){
+    return this.tasks.get(name);
+  } else if(!handle){
     throw new TypeError('cannot set a task without a function');
   }
 
@@ -59,9 +58,10 @@ Gulp.prototype.watch = function(glob, opt, handle) {
   var tasks = util.type(opt).array;
 
   if(tasks){
-    var self = this;
-    vinylFS.watch(glob, opt, function onChange() {
-      self.stack.apply(self, tasks)();
+    tasks = tasks.concat({wait: true});
+    var composer = this.stack.apply(this, tasks);
+    vinylFS.watch(glob, function(/* arguments */){
+      composer.apply(null, [].slice.call(arguments).concat(fn));
     });
   }
 
@@ -72,65 +72,76 @@ Gulp.prototype.watch = function(glob, opt, handle) {
  maps all the arguments of gulp.stack to functions
 **/
 Gulp.prototype.reduceStack = function(stack, site){
-  var task = typeof site !== 'function'
-    ? this.tasks.get(site)
-    : {path: site.displayName || site.name, handle: site};
+  var task;
+  var type = typeof site;
 
-  if(!task || typeof task.handle !== 'function'){
-    throw new Error('task `' + site + '` is not defined yet');
-  } else if(this.log && stack instanceof this.Stack){
-    if(!stack.labels){ stack.labels = []; }
-    stack.push(task.handle);
-    stack.labels.push(task);
-  } else {
-    stack.push(task.handle);
+  if(type === 'function'){
+    task = {fn: site};
+  } else if(type === 'string'){
+    task = this.tasks.get(site);
+    if(!task){
+      throw new Error('task `' + site + '` is not defined yet');
+    }
   }
 
-  return stack;
+  if(task){ stack.push(task); }
+  if(!this.log || !task || task.label){ return; }
+
+  task.mode = util.color.mode(task.fn.stack && task.fn.stack.wait
+    ? 'series'
+    : 'parallel'
+  );
+
+  task.label = task.fn.stack instanceof Runtime.Stack
+    ? task.mode + util.color.stack('(' + task.fn.stack.tree().label + ')')
+    : util.color.task(task.fn.displayName || task.fn.name);
 };
+
 
 /**
  logging
 **/
-Gulp.prototype.onHandle = function(next, site, stack){
+Gulp.prototype.onHandle = function(site, stack){
   if(!this.log){ return; }
 
-  var task = stack.labels[stack.indexOf(site)];
-  var depth = stack.length > 1;
+  var deep = stack.length > 1;
 
-  if(!stack.time){
+  if(deep && !stack.time && !stack.host){
+    stack.mode = util.color.mode(stack.wait ? 'series' : 'parallel');
+    stack.label = util.color.stack(stack.label = stack.tree().label);
+
+    util.log('%s(%s) started', stack.mode, stack.label);
     stack.time = process.hrtime();
-    stack.label = stack.tree().label;
-    if(depth){
-      util.log('Calling %s',
-        util.color.stack(stack.label)
-      );
-    }
-  } else if(!(task.handle.stack instanceof this.Stack)){
-    console.log('%s %s%s',
-      next.time ? '+ ended' : '- start',
-      util.color.task(task.path),
-      next.time ? ' after ' + util.color.time(next.time) : ''
-    );
-  } else if(!depth && !next.time){
-    console.log('/ now %s', util.color.task(task.path));
   }
 
-  if(!next.time){ next.time = process.hrtime(); }
-  if(!stack.end){ return; }
+  if(site.fn.stack instanceof Runtime.Stack){
+    util.log(!site.time
+      ? site.label + ' started '
+      : site.label + ' took ' + util.color.time(site.time)
+    );
+  } else if(!deep || site.time){
+    var start = !deep && !site.time;
+    util.log(
+      (deep ? ' ' + site.label : site.label) + ' ' +
+      (start ? 'started' : '') +
+      (start ? '' : 'took ' + util.color.time(site.time))
+    );
+  }
 
-  if(depth){
-    util.log('%s took %s',
-      util.color.stack(stack.label),
+  if(!site.time){
+    site.time = site.time || process.hrtime();
+  }
+
+  if(deep && stack.end && !stack.host){
+    util.log('%s(%s) took %s',
+      stack.mode,
+      stack.label,
       util.color.time(stack.time)
     );
   }
 
-  if(!this.repl){ return; }
-  var host = stack.host || stack;
-  while(host && host.end){
-    if(!host.host){ this.repl.prompt(); }
-    host = host.host;
+  if(this.repl && stack.end && !stack.host){
+    this.repl.prompt();
   }
 };
 
@@ -138,19 +149,41 @@ Gulp.prototype.onHandle = function(next, site, stack){
  error handling
 **/
 Gulp.prototype.onHandleError = function(err, next, site, stack){
-  var task = stack.labels[stack.indexOf(site)];
 
   util.log('%s in %s',
-    util.color.red('error'),
+    util.color.error('error'),
     util.color.stack(stack.label || stack.tree().label),
     this.repl ? '\n' + err.stack : ''
   );
 
   console.log('- %s failed after %s',
-    util.color.red(task.path),
-    util.color.time(next.time)
+    util.color.error(site.label),
+    util.color.time(site.time)
   );
 
-  next.error = err;
+  site.error = err;
   if(!this.repl){ throw err; }
+};
+
+/**
+  Now, some sugar on top
+**/
+
+Gulp.prototype.start = function(/* arguments */){
+  var tasks = arguments.length ? arguments : ['default'];
+  return this.stack.apply(this, tasks)();
+};
+
+Gulp.prototype.series = function(/* arguments */){
+  var args = [].slice.call(arguments);
+  var props = util.type(args[args.length - 1]).plainObject && args.pop() || {};
+  var tasks = args.concat(util.merge(props, {wait: true}));
+  return this.stack.apply(this, tasks);
+};
+
+Gulp.prototype.parallel = function(/* arguments */){
+  var args = [].slice.call(arguments);
+  var props = util.type(args[args.length - 1]).plainObject && args.pop() || {};
+  var tasks = args.concat(util.merge(props, {wait: false}));
+  return this.stack.apply(this, tasks);
 };
