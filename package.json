@@ -25,6 +25,7 @@
     "chalk": "^1.0.x",
     "dateformat": "^1.0.x",
     "lodash.merge": "^4.1.0",
+    "parth": "^3.1.2",
     "pretty-hrtime": "^1.0.x",
     "tildify": "^1.0.x",
     "utils-type": "^0.12.1",
