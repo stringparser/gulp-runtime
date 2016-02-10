@@ -1,4 +1,7 @@
-## gulp-runtime [![build][b-build]][x-travis][![NPM version][b-version]][p-gulp-runtime] [![Gitter][b-gitter]][x-gitter]
+## gulp-runtime [![NPM version][badge-version]][x-npm] [![downloads][badge-downloads]][x-npm]
+
+[![build][badge-build]][x-travis]
+[![Gitter][badge-gitter]][x-gitter]
 
 > an alternate interface to [vinyl-fs][p-vinylFs]
 
@@ -145,7 +148,7 @@ So now the project puts together this things learnt for [vinyl-fs][p-vinylFs] gi
 
 ## install
 
-With [npm][x-npm]
+With [npm](http://www.npmjs.com)
 
 ```sh
 npm install gulp-runtime
@@ -153,36 +156,18 @@ npm install gulp-runtime
 
 ## license
 
-[![License][b-license]][x-license]
+[![License][badge-license]][x-license]
 
-<!-- links
-  b-: is for badges
-  p-: is for package
-  t-: is for doc's toc
-  x-: is for just a link
--->
+<!-- links -->
 
-[x-npm]: https://www.npmjs.org
-[t-stack]: https://github.com/stringparser/tornado/blob/master/docs/stack.md
-[p-parth]: https://github.com/stringparser/parth
-[p-tornado]: https://github.com/stringparser/tornado
-[m-readline]: https://nodejs.org/api/readline.html
-[x-gulp-cli]: https://github.com/gulpjs/gulp/blob/master/docs/CLI.md
-[p-gulp-runtime]: https://npmjs.com/gulp-runtime
-[p-tornado-repl]: https://github.com/stringparser/tornado-repl
-[x-app-template]: https://github.com/stringparser/app-template
-
-[p-vinylFs]: https://github.com/wearefractal/vinyl-fs
-[p-vinylFs.src]: https://github.com/wearefractal/vinyl-fs#srcglobs-opt
-[p-vinylFs.dest]: https://github.com/wearefractal/vinyl-fs#destfolder-opt
-[p-vinylFs.watch]: https://github.com/wearefractal/vinyl-fs#watchglobs-opt-cb
-
+[x-npm]: https://npmjs.com/gulp-runtime
 [x-gitter]: https://gitter.im/stringparser/gulp-runtime
 [x-travis]: https://travis-ci.org/stringparser/gulp-runtime/builds
 [x-license]: http://opensource.org/licenses/MIT
 [x-new-issue]: https://github.com/stringparser/gulp-runtime/issues/new
 
-[b-build]: http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square
-[b-gitter]: https://badges.gitter.im/Join%20Chat.svg
-[b-version]: http://img.shields.io/npm/v/gulp-runtime.svg?style=flat-square
-[b-license]: http://img.shields.io/npm/l/gulp-runtime.svg?style=flat-square
+[badge-build]: http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square
+[badge-gitter]: https://badges.gitter.im/Join%20Chat.svg
+[badge-version]: http://img.shields.io/npm/v/gulp-runtime.svg?style=flat-square
+[badge-license]: http://img.shields.io/npm/l/gulp-runtime.svg?style=flat-square
+[badge-downloads]: http://img.shields.io/npm/dm/gulp-repl.svg?style=flat-square
