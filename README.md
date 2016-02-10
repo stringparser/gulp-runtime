@@ -170,4 +170,4 @@ npm install gulp-runtime
 [badge-gitter]: https://badges.gitter.im/Join%20Chat.svg
 [badge-version]: http://img.shields.io/npm/v/gulp-runtime.svg?style=flat-square
 [badge-license]: http://img.shields.io/npm/l/gulp-runtime.svg?style=flat-square
-[badge-downloads]: http://img.shields.io/npm/dm/gulp-repl.svg?style=flat-square
+[badge-downloads]: http://img.shields.io/npm/dm/gulp-runtime.svg?style=flat-square
