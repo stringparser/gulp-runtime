@@ -14,9 +14,13 @@ var Gulp = module.exports = Runtime.createClass({
     Gulp.super_.call(this, props);
 
     this.log = this.log === void 0 || this.log;
+    this.emit = function(){};
     this.tasks = new Parth();
 
-    this.repl = this.repl && repl(this) || {emit: function(){}};
+    if(this.repl){
+      this.repl = repl(this);
+      this.emit = this.repl.emit.bind(this.repl);
+    }
   }
 });
 
@@ -110,18 +114,18 @@ Gulp.prototype.onHandle = function(task, stack){
 
   if(!task.time){
     task.time = process.hrtime();
-    this.repl.emit('task:start', {name: task.match});
+    this.emit('task:start', {name: task.match});
     return;
   }
 
   if(task.fn.stack instanceof Runtime.Stack){
-    this.repl.emit('task:ended', {name: task.match});
+    this.emit('task:ended', {name: task.match});
   } else {
     var time = util.color.time(task.time);
     var space = (deep ? ' ' : '');
 
     util.log('%s ended in %s', space + task.label, time);
-    this.repl.emit('task:ended', {name: task.match});
+    this.emit('task:ended', {name: task.match});
   }
 
   if(deep && stack.time && stack.end){
