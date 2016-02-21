@@ -32,7 +32,7 @@
     "vinyl-fs": "^1.0.x"
   },
   "devDependencies": {
-    "jshint": "*",
+    "eslint": "^2.2.0",
     "mkdirp": "*",
     "mocha": "*",
     "rimraf": "*",
@@ -40,7 +40,7 @@
     "through2": "*"
   },
   "scripts": {
-    "lint": "jshint lib index.js --exclude node_modules",
+    "lint": "eslint lib index.js",
     "test": "npm run lint && mocha test"
   },
   "license": "MIT"
