@@ -2,6 +2,7 @@
 
 var util = require('./lib/util');
 
+var repl = require('gulp-repl');
 var Parth = require('parth');
 var Runtime = require('runtime');
 var vinylFS = require('vinyl-fs');
@@ -9,15 +10,13 @@ var vinylFS = require('vinyl-fs');
 var Gulp = module.exports = Runtime.createClass({
   src: vinylFS.src,
   dest: vinylFS.dest,
-  create: function(props, Super){
-    Super.call(this, props);
+  create: function Gulp(props){
+    Gulp.super_.call(this, props);
 
     this.log = this.log === void 0 || this.log;
     this.tasks = new Parth();
 
-    if(this.repl){
-      util.createREPL(this);
-    }
+    this.repl = this.repl && repl(this) || {emit: function(){}};
   }
 });
 
@@ -58,22 +57,12 @@ Gulp.prototype.watch = function(glob, opt, handle) {
   if(tasks){
     tasks = tasks.concat({wait: true});
     var composer = this.stack.apply(this, tasks);
-    var fsWatcher = vinylFS.watch(glob, function(/* arguments */){
+    return vinylFS.watch(glob, function(/* arguments */){
       composer.apply(null, [].slice.call(arguments).concat(fn));
     });
   }
 
-  fsWatcher = vinylFS.watch(glob, opt, fn);
-
-  if(this.repl){
-    var self = this;
-    this.watching = (this.watching || 0) + 1;
-    fsWatcher.once('end', function(){
-      --self.watching;
-    });
-  }
-
-  return fsWatcher;
+  return vinylFS.watch(glob, opt, fn);
 };
 
 /**
@@ -90,13 +79,17 @@ Gulp.prototype.reduceStack = function(stack, site){
 
   if(!this.log || task.label){ return; }
 
+  var label;
   if(task.fn.stack instanceof Runtime.Stack){
+    label = task.fn.stack.tree().label;
     task.mode = task.fn.stack.wait ? 'series' : 'parallel';
-    task.label = task.fn.stack.tree().label;
-    task.label = task.mode + util.color.stack('(' + task.label + ')');
+    task.label = task.mode + util.color.stack('(' + label + ')');
   } else {
-    task.label = util.color.task(task.fn.displayName || task.fn.name);
+    label = task.fn.displayName || task.fn.name;
+    task.label = util.color.task(label);
   }
+
+  task.match = task.match || label;
 };
 
 
@@ -109,34 +102,35 @@ Gulp.prototype.onHandle = function(task, stack){
   var deep = stack.length > 1;
 
   if(deep && !stack.time){
+    stack.time = process.hrtime();
     stack.mode = util.color.mode(stack.wait ? 'series' : 'parallel');
     stack.label = util.color.stack(stack.tree().label);
     util.log('Started %s(%s)', stack.mode, stack.label);
-    stack.time = process.hrtime();
   }
 
   if(!task.time){
     task.time = process.hrtime();
+    this.repl.emit('task:start', {name: task.match});
     return;
   }
 
-  var time = util.color.time(task.time);
+  if(task.fn.stack instanceof Runtime.Stack){
+    this.repl.emit('task:ended', {name: task.match});
+  } else {
+    var time = util.color.time(task.time);
+    var space = (deep ? ' ' : '');
 
-  util.log('%s after %s',
-    (deep ? ' ' : '') + task.label,
-    time
-  );
-
-  if(deep && stack.end && !stack.host){
-    util.log('Finished %s(%s) after %s',
-      stack.mode,
-      stack.label,
-      util.color.time(stack.time)
-    );
+    util.log('%s ended in %s', space + task.label, time);
+    this.repl.emit('task:ended', {name: task.match});
   }
 
-  if(!this.repl || this.watching){ return; }
-  if(!stack.host && stack.end){ this.repl.prompt(); }
+  if(deep && stack.time && stack.end){
+    util.log('%s took %s(%s)',
+      util.color.time(stack.time),
+      stack.mode,
+      stack.label
+    );
+  }
 };
 
 /**
@@ -155,12 +149,11 @@ Gulp.prototype.onHandleError = function(err, site, stack){
     util.color.time(site.time)
   );
 
-  site.error = err;
   if(!this.repl){ throw err; }
 };
 
 /**
-  Now, some sugar on top
+  With some sugar on top please
 **/
 
 Gulp.prototype.start = function(/* arguments */){
