@@ -87,7 +87,7 @@ Gulp.prototype.reduceStack = function(stack, site){
   if(task.fn.stack instanceof Runtime.Stack){
     label = task.fn.stack.tree().label;
     task.mode = task.fn.stack.wait ? 'series' : 'parallel';
-    task.label = task.mode + util.color.stack('(' + label + ')');
+    task.label = task.mode + '(' + label + ')';
   } else {
     label = task.fn.displayName || task.fn.name;
     task.label = util.color.task(label);
@@ -107,9 +107,12 @@ Gulp.prototype.onHandle = function(task, stack){
 
   if(deep && !stack.time){
     stack.time = process.hrtime();
-    stack.mode = util.color.mode(stack.wait ? 'series' : 'parallel');
-    stack.label = util.color.stack(stack.tree().label);
-    util.log('Started %s(%s)', stack.mode, stack.label);
+    stack.mode = stack.wait ? 'series' : 'parallel';
+    stack.label = stack.tree().label;
+    util.log('Started %s(%s)',
+      util.chalk.bold(stack.mode),
+      stack.label
+    );
   }
 
   if(!task.time){
@@ -129,10 +132,10 @@ Gulp.prototype.onHandle = function(task, stack){
   }
 
   if(deep && stack.time && stack.end){
-    util.log('%s took %s(%s)',
-      util.color.time(stack.time),
+    util.log('%s(%s) took %s',
       stack.mode,
-      stack.label
+      stack.label,
+      util.color.time(stack.time)
     );
   }
 };
@@ -144,7 +147,7 @@ Gulp.prototype.onHandleError = function(err, site, stack){
 
   util.log('%s in %s',
     util.color.error('error'),
-    util.color.stack(stack.label || stack.tree().label),
+    stack.label || stack.tree().label,
     this.repl ? '\n' + err.stack : ''
   );
 
