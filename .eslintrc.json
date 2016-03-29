@@ -1,0 +1,23 @@
+{
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "strict": 2,
+    "quotes": [2, "single", "avoid-escape"],
+    "indent": ["error", 2, {"SwitchCase": 1}],
+    "eol-last": 2,
+    "no-shadow": 2,
+    "dot-notation": 2,
+    "dot-location": [2, "property"],
+    "comma-dangle": [2, "never"],
+    "no-unused-vars": 2,
+    "no-multi-spaces": 2,
+    "no-process-exit": 0,
+    "consistent-return": 2,
+    "no-use-before-define": 0,
+    "no-underscore-dangle": 0,
+    "no-unused-expressions": 2
+  }
+}
