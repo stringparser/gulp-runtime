@@ -3,7 +3,7 @@
 [![build][badge-build]][x-travis]
 [![Gitter][badge-gitter]][x-gitter]
 
-> an alternate interface to [vinyl-fs][p-vinylFs]
+> an alternate interface to [vinyl-fs][x-vinylFs]
 
 [install](#install) -
 [examples](#examples) -
@@ -164,6 +164,7 @@ npm install gulp-runtime
 [x-gitter]: https://gitter.im/stringparser/gulp-runtime
 [x-travis]: https://travis-ci.org/stringparser/gulp-runtime/builds
 [x-license]: http://opensource.org/licenses/MIT
+[x-vinylFs]: https://www.npmjs.com/package/vinyl-fs
 [x-new-issue]: https://github.com/stringparser/gulp-runtime/issues/new
 
 [badge-build]: http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square
