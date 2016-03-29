@@ -4,8 +4,7 @@ before_script:
   - npm link gulp
 node_js:
   - "0.10"
-  - "0.11"
-  - "0.12"
-  - "iojs"
+  - "4"
+  - "stable"
 notifications:
   email: true
