@@ -3,101 +3,69 @@
 var fs = require('fs');
 var should = require('should');
 
-exports = module.exports = function(runtime, util){
+exports = module.exports = function(Gulp, util){
   should.exists(util);
-  var create = runtime.create;
-  var testFile = 'test/dir/watch.js';
 
   before(function(done){
     util.mkdirp('test/dir', done);
-  });
-
-  beforeEach(function(done){
-    fs.writeFile(testFile, util.content, done);
   });
 
   after(function(done){
     util.rimraf('test/dir', done);
   });
 
-  it('(no opts) on change, should invoke callback', function(done){
-    var gulp = create('watch callback', {log: false});
+  function setupTest(onSuccess, onError){
+    fs.writeFile(util.testFile, util.content, function(writeError){
+      if(writeError){ onError(writeError); return; }
 
-    var watcher = gulp.watch(testFile, function(){
-      watcher.end();
-      done();
+      onSuccess();
+
+      setTimeout(function(){
+        util.rimraf(util.testFile, function (deleteError){
+          if(deleteError){ onError(deleteError); }
+        });
+      }, 10);
     });
+  }
 
-    util.rimraf(testFile, function(err){
-      if(err){ throw err; }
-    });
-  });
+  it('watch(glob, [Function]) should call function on change', function(done){
+    var gulp = Gulp.create({log: false});
 
-  it('(opt string) should run tasks given', function(done){
-    var gulp = create('watch opt string', {log: false});
-
-    var watcher = gulp.watch(testFile, 'string', function(){
-      watcher.end();
-    });
-
-    gulp.task('string', function(next){
-      next(); done();
-    });
-
-    util.rimraf(testFile, function(err){
-      if(err){ throw err; }
-    });
-  });
-
-  it('(opt array) should run tasks given', function(done){
-    var gulp = create('opt array', {log: false});
-
-    gulp.task('array', function(next){
-      next(); done();
-    });
-
-    var watcher = gulp.watch(testFile, ['array'], function(){
-      watcher.end();
-    });
-
-    util.rimraf(testFile, function(err){
-      if(err){ throw err; }
-    });
-  });
-
-  it('should reload files if so was said', function(done){
-    var gulp = create('reload file', {log: false});
-
-    // arrange state change
-    gulp.task('reload file', function(next){
-      // assert initial state
-      var testModule = require('./dir/watch');
-      testModule.should.be.eql({content: 'changed'});
-
-      // change exports
-      testModule.prop = 'here';
-
-      testModule.should.have.properties({
-        content: 'changed',
-        prop: 'here'
+    setupTest(function(){
+      var watcher = gulp.watch(util.testFile, function(){
+        watcher.end();
+        done();
       });
-      next();
+    }, done);
+  });
+
+  it('watch(glob, tasks) runs `tasks` in parallel after change', function(done){
+    var pile = [];
+    var gulp = Gulp.create({
+      log: false,
+      onHandleError: done
     });
 
-    var watcher = gulp.watch(testFile, {
-      reload: true,
-      tasks: 'reload file'
-    }, function(){
-      var reloaded = require('./dir/watch');
-      reloaded.should.be.eql({content: 'changed'});
-      watcher.end();
-      done();
+    gulp.task('one', function(next){
+      setTimeout(function(){
+        pile.push('one');
+        next();
+      }, Math.random() * 10);
     });
 
-    setTimeout(function(){
-      fs.writeFile(testFile, util.contentChanged, function(err){
-        if(err){ done(err); }
+    gulp.task('two', function(next){
+      setTimeout(function(){
+        pile.push('two');
+        next();
+      }, Math.random() * 10);
+    });
+
+    setupTest(function(){
+      var watcher = gulp.watch(util.testFile, ['one', 'two'], function(){
+        pile.should.containDeep(['one', 'two']);
+        watcher.end();
+        done();
       });
-    }, 150);
+    }, done);
   });
 };
