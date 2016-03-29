@@ -1,10 +1,8 @@
 'use strict';
 
-var should = require('should');
 var readline = require('readline');
 
-module.exports = function(Gulp, util){
-  should.exists(util);
+module.exports = function(Gulp){
 
   it('create() should log by default', function(){
     var gulp = Gulp.create();
