@@ -21,31 +21,43 @@ var Gulp = module.exports = Runtime.createClass({
       this.repl = repl(this);
       this.emit = this.repl.emit.bind(this.repl);
     }
+
+    if(this.log){
+      var replStatus = this.repl ? 'active' : 'inactive';
+      util.log('REPL is %s', util.chalk.bold(replStatus));
+      var file = new Error().stack.match(/\(([^:]+)/g) || {2: ''};
+      file = util.chalk.magenta(util.tildify(file[2].slice(1)));
+      util.log('Using', file);
+    }
   }
 });
 
 /**
  * gulp.task
- **/
-Gulp.prototype.task = function(name, tasks, handle){
-  handle = util.type(handle || tasks || name).function || false;
-  tasks = util.type(tasks).array || util.type(name).array;
+**/
+
+Gulp.prototype.task = function(name, deps, handle){
+  handle = util.type(handle || deps || name).function;
+  deps = util.type(deps).array || util.type(name).array;
   name = (util.type(name).string || util.type(handle.name).string || '').trim();
 
-  if(name && !handle){
-    return (this.tasks.get(name) || {fn: null}).fn;
-  } else if(name && name !== handle.name){
+  if(name && !deps && !handle){
+    return this.tasks.get(name).fn || null;
+  }
+
+  handle = handle || function(next){ next(); };
+  if(name && handle && name !== handle.name){
     handle.displayName = name;
   }
 
-  if(name && tasks && handle){
-    tasks = tasks.concat(handle, {wait: true});
-    var composed = this.stack.apply(this, tasks);
-    this.tasks.set(name, {fn: composed});
-  } else if(name && handle){
-    this.tasks.set(name, {fn: handle});
-  } else if(!name && handle){
-    throw new TypeError('no task name, give a named function');
+  if(name && deps){
+    deps = deps.concat(handle, {wait: true});
+    var composed = this.stack.apply(this, deps);
+    this.tasks.set(name, {name: name, fn: composed});
+  } else if(name){
+    this.tasks.set(name, {name: name, fn: handle});
+  } else if(!name){
+    throw new TypeError('no task name, kgive a named function');
   }
 
   return this;
@@ -59,7 +71,7 @@ Gulp.prototype.watch = function(glob, opt, handle) {
   var tasks = util.type(opt).array;
 
   if(tasks){
-    tasks = tasks.concat({wait: true});
+    fn = fn || function onStackEnd(){ }
     var composer = this.stack.apply(this, tasks);
     return vinylFS.watch(glob, function(/* arguments */){
       composer.apply(null, [].slice.call(arguments).concat(fn));
@@ -92,8 +104,6 @@ Gulp.prototype.reduceStack = function(stack, site){
     label = task.fn.displayName || task.fn.name;
     task.label = util.color.task(label);
   }
-
-  task.match = task.match || label;
 };
 
 
@@ -108,11 +118,13 @@ Gulp.prototype.onHandle = function(task, stack){
   if(deep && !stack.time){
     stack.time = process.hrtime();
     stack.mode = stack.wait ? 'series' : 'parallel';
-    stack.label = stack.tree().label;
+    stack.tree = stack.tree();
     util.log('Started %s(%s)',
       util.chalk.bold(stack.mode),
-      stack.label
+      stack.tree.label
     );
+  } else if(!stack.time && !stack.end){
+    util.log('Starting %s', task.label);
   }
 
   if(!task.time){
@@ -125,18 +137,23 @@ Gulp.prototype.onHandle = function(task, stack){
     this.emit('task:ended', {name: task.match});
   } else {
     var time = util.color.time(task.time);
-    var space = (deep ? ' ' : '');
 
-    util.log('%s ended in %s', space + task.label, time);
+    util.log('%s %s %s',
+      (deep ? ' ' : '') + task.label,
+      deep ? 'took' : 'ended after',
+      time
+    );
     this.emit('task:ended', {name: task.match});
   }
 
   if(deep && stack.time && stack.end){
-    util.log('%s(%s) took %s',
-      stack.mode,
-      stack.label,
+    util.log('Ended %s(%s) after %s',
+      util.chalk.bold(stack.mode),
+      stack.tree.label,
       util.color.time(stack.time)
     );
+  } else if(this.repl && !deep && stack.end){
+    this.repl.prompt();
   }
 };
 
@@ -147,7 +164,7 @@ Gulp.prototype.onHandleError = function(err, site, stack){
 
   util.log('%s in %s',
     util.color.error('error'),
-    stack.label || stack.tree().label,
+    stack.tree ? stack.tree.label : stack.tree().label,
     this.repl ? '\n' + err.stack : ''
   );
 
