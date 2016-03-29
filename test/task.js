@@ -60,30 +60,57 @@ module.exports = function(Gulp, util){
     });
   });
 
-  it('task deps are run in series before the task', function(done){
+  it('task(name, deps, fn) `deps` will run before task', function(done){
     var gulp = Gulp.create({log: false});
-    var deps = ['1', '2', '3'];
 
-    var pile = [];
-    gulp.task('taskName', deps, function(next){
-      pile.push('taskName');
-      next();
+    gulp.task('task', ['one', 'two'], function (next, pile){
+      pile.push('task');
+      next(null, pile);
     });
 
-    deps.forEach(function(dep){
-      gulp.task(dep, function(next){
-        pile.push(dep);
-        next();
-      });
+    gulp.task('one', function(next, pile){
+      pile.push('one');
+      next(null, pile);
     });
 
-    gulp.stack('taskName', {
-      onHandleError: done,
-      onStackEnd: function(err){
-        if(err){ return done(err); }
-        pile.should.be.eql(deps.concat('taskName'));
-        done();
-      }
-    })();
+    gulp.task('two', function(next, pile){
+      pile.push('two');
+      next(null, pile);
+    });
+
+    var task = gulp.tasks.get('task');
+
+    task.fn([], function(err, pile){
+      if(err){ done(err); return; }
+      pile.should.be.eql(['one', 'two', 'task']);
+      done();
+    });
+  });
+
+  it('task(name, deps) bundles `deps` into task `name`', function(done){
+    var gulp = Gulp.create({
+      log: false,
+      onHandleError: done
+    });
+
+    gulp.task('task', ['one', 'two']);
+
+    gulp.task('one', function(next, pile){
+      pile.push('one');
+      next(null, pile);
+    });
+
+    gulp.task('two', function(next, pile){
+      pile.push('two');
+      next(null, pile);
+    });
+
+    var task = gulp.tasks.get('task');
+
+    task.fn([], function(err, pile){
+      if(err){ done(err); return; }
+      pile.should.be.eql(['one', 'two']);
+      done();
+    });
   });
 };
