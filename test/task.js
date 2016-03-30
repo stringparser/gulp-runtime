@@ -5,51 +5,51 @@ var should = require('should');
 module.exports = function(Gulp, util){
   should.exists(util);
 
-  it('task("name", fn) should register `name`', function(){
+  it('task(name, fn) registers task `name`', function(){
     var gulp = Gulp.create();
     var handle = function(){};
     gulp.task('name', handle);
     gulp.tasks.get('name').fn.should.be.eql(handle);
   });
 
-  it('task([Function: name]) should register `name`', function(){
+  it('task([Function: name]) registers task `name`', function(){
     var gulp = Gulp.create();
     function name(){}
     gulp.task(name);
     gulp.tasks.get('name').fn.should.be.eql(name);
   });
 
-  it('task("name", [Function]) should register `name`', function(){
+  it('task(name, [Function]) registers task `name`', function(){
     var gulp = Gulp.create();
     function name(){}
     gulp.task('taskName', name);
     gulp.tasks.get('taskName').fn.should.be.eql(name);
   });
 
-  it('task("taskName") should return the function registered', function(){
+  it('task(name) returns task\'s function', function(){
     var gulp = Gulp.create();
     function name(){}
     gulp.task('taskName', name);
     gulp.task('taskName').should.be.eql(name);
   });
 
-  it('task deps can be defined after task("taskName", deps, fn)', function(){
+  it('task(name, deps, fn) deps can be defined after', function(done){
     var gulp = Gulp.create();
     var deps = ['1', '2', '3'];
 
     gulp.task('taskName', deps, function(){});
-
     deps.forEach(function(dep){
-      (gulp.task(dep) === null).should.be.eql(true);
+      (gulp.tasks.get(dep) === null).should.be.eql(true);
     });
 
     function one(){}
     gulp.task('1', one);
-
     gulp.task('1').should.be.eql(one);
+
+    done();
   });
 
-  it('task deps not defined throw at runtime', function(done){
+  it('task(name, deps, fn) non defined deps throw at runtime', function(done){
     var gulp = Gulp.create({log: false});
     var deps = ['1', '2', '3'];
 
@@ -60,7 +60,7 @@ module.exports = function(Gulp, util){
     });
   });
 
-  it('task(name, deps, fn) `deps` will run before task', function(done){
+  it('task(name, deps, fn) deps will run before task', function(done){
     var gulp = Gulp.create({log: false});
 
     gulp.task('task', ['one', 'two'], function (next, pile){
@@ -87,7 +87,7 @@ module.exports = function(Gulp, util){
     });
   });
 
-  it('task(name, deps) bundles `deps` into task `name`', function(done){
+  it('task(name, deps) bundles deps into task `name`', function(done){
     var gulp = Gulp.create({
       log: false,
       onHandleError: done
