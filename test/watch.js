@@ -39,7 +39,43 @@ exports = module.exports = function(Gulp, util){
     }, done);
   });
 
-  it('watch(glob, tasks) runs `tasks` in parallel after change', function(done){
+  it('watch(glob, tasks) runs tasks in parallel after change', function(done){
+    var pile = [];
+    var gulp = Gulp.create({
+      log: false,
+      onHandleError: done
+    });
+
+    gulp.task('one', function(next){
+      setTimeout(function(){
+        pile.push('one');
+        if(pile.length > 1){
+          pile.should.containDeep(['one', 'two']);
+          done();
+        }
+        next();
+      }, Math.random() * 10);
+    });
+
+    gulp.task('two', function(next){
+      setTimeout(function(){
+        pile.push('two');
+        if(pile.length > 1){
+          pile.should.containDeep(['one', 'two']);
+          done();
+        }
+        next();
+      }, Math.random() * 10);
+    });
+
+    setupTest(function(){
+      var watcher = gulp.watch(util.testFile, ['one', 'two'], function(){
+        watcher.end();
+      });
+    }, done);
+  });
+
+  it('watch(glob, tasks, fn) onChange fn runs after tasks', function(done){
     var pile = [];
     var gulp = Gulp.create({
       log: false,
