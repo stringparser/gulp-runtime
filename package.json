@@ -24,6 +24,7 @@
     "chalk": "^1.0.x",
     "dateformat": "^1.0.x",
     "gulp-repl": "^1.0.x",
+    "gulp-util": "^3.0.7",
     "lodash.merge": "^4.1.x",
     "parth": "^4.0.x",
     "pretty-hrtime": "^1.0.x",
