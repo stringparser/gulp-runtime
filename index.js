@@ -1,34 +1,38 @@
 'use strict';
 
-var util = require('./lib/util');
-
-var repl = require('gulp-repl');
 var Parth = require('parth');
 var Runtime = require('runtime');
-var vinylFS = require('vinyl-fs');
+var vinylFS = require('vinyl-fs')
+
+var util = require('./lib/util');
 
 var Gulp = module.exports = Runtime.createClass({
   src: vinylFS.src,
   dest: vinylFS.dest,
   create: function Gulp(props){
     Gulp.super_.call(this, props);
-
-    this.log = this.log === void 0 || this.log;
-    this.emit = function(){};
     this.tasks = new Parth();
 
+    this.log = this.log === void 0 || this.log;
+    this.argv = util.type(this.argv).array;
+    this.gulpfile = util.getGulpFile();
+
+    // when the gulpfile is passed as argument default to process.argv
+    if(!this.argv && process.argv[1] === this.gulpfile){
+      this.argv = process.argv.slice(2);
+    }
+
     if(this.repl){
-      this.repl = repl(this);
-      this.emit = this.repl.emit.bind(this.repl);
+      this.repl = require('gulp-repl')(this);
+      util.log('REPL %s', util.format.enabled('enabled'));
     }
 
     if(this.log){
-      var replStatus = this.repl ? 'active' : 'inactive';
-      util.log('REPL is %s', util.chalk.bold(replStatus));
-      var file = new Error().stack.match(/\(([^:]+)/g) || {2: ''};
-      file = util.chalk.magenta(util.tildify(file[2].slice(1)));
-      util.log('Using', file);
+      util.log('Using gulpfile %s', util.format.file(this.gulpfile));
     }
+
+    // add cli tasks and run the cli for this instance
+    require('./lib/cli')(this, this.argv);
   }
 });
 
@@ -57,7 +61,7 @@ Gulp.prototype.task = function(name, deps, handle){
   } else if(name){
     this.tasks.set(name, {name: name, fn: handle});
   } else if(!name){
-    throw new TypeError('no task name, kgive a named function');
+    throw new TypeError('no task name, give a named function');
   }
 
   return this;
@@ -90,7 +94,14 @@ Gulp.prototype.reduceStack = function(stack, site){
     : this.tasks.get(site);
 
   if(task){ stack.push(task); } else {
-    throw new Error(site + ' is not defined yet');
+    util.log('Task `%s` is %s',
+      util.format.task(site),
+      util.format.error('not defined yet')
+    );
+    util.log('How to do that? Go to: %s',
+      util.format.link(util.docs.task)
+    );
+    throw new Error('task is not defined yet');
   }
 
   if(!this.log || task.label){ return; }
@@ -102,7 +113,7 @@ Gulp.prototype.reduceStack = function(stack, site){
     task.label = task.mode + '(' + label + ')';
   } else {
     label = task.fn.displayName || task.fn.name;
-    task.label = util.color.task(label);
+    task.label = util.format.task(label);
   }
 };
 
@@ -111,7 +122,9 @@ Gulp.prototype.reduceStack = function(stack, site){
  logging
 **/
 Gulp.prototype.onHandle = function(task, stack){
-  if(!this.log){ return; }
+  if(!this.log || (task.params && task.params.cli)){
+    return;
+  }
 
   var deep = stack.length > 1;
 
@@ -120,7 +133,7 @@ Gulp.prototype.onHandle = function(task, stack){
     stack.mode = stack.wait ? 'series' : 'parallel';
     stack.tree = stack.tree();
     util.log('Started %s(%s)',
-      util.chalk.bold(stack.mode),
+      util.format.mode(stack.mode),
       stack.tree.label
     );
   } else if(!stack.time && !stack.end){
@@ -129,31 +142,28 @@ Gulp.prototype.onHandle = function(task, stack){
 
   if(!task.time){
     task.time = process.hrtime();
-    this.emit('task:start', {name: task.match});
     return;
   }
 
-  if(task.fn.stack instanceof Runtime.Stack){
-    this.emit('task:ended', {name: task.match});
-  } else {
-    var time = util.color.time(task.time);
-
+  if(!(task.fn.stack instanceof Runtime.Stack)){
+    var time = util.format.time(task.time);
     util.log('%s %s %s',
       (deep ? ' ' : '') + task.label,
       deep ? 'took' : 'ended after',
       time
     );
-    this.emit('task:ended', {name: task.match});
   }
 
   if(deep && stack.time && stack.end){
     util.log('Ended %s(%s) after %s',
-      util.chalk.bold(stack.mode),
+      util.format.mode(stack.mode),
       stack.tree.label,
-      util.color.time(stack.time)
+      util.format.time(stack.time)
     );
-  } else if(this.repl && !deep && stack.end){
-    this.repl.prompt();
+  }
+
+  if(stack.end && this.repl){
+    this.repl.waitToPrompt();
   }
 };
 
@@ -161,16 +171,15 @@ Gulp.prototype.onHandle = function(task, stack){
  error handling
 **/
 Gulp.prototype.onHandleError = function(err, site, stack){
-
   util.log('%s in %s',
-    util.color.error('error'),
+    util.format.error('error'),
     stack.tree ? stack.tree.label : stack.tree().label,
     this.repl ? '\n' + err.stack : ''
   );
 
   console.log('- %s failed after %s',
-    util.color.error(site.label),
-    util.color.time(site.time)
+    util.format.error(site.label),
+    util.format.time(site.time)
   );
 
   if(!this.repl){ throw err; }
@@ -181,8 +190,8 @@ Gulp.prototype.onHandleError = function(err, site, stack){
 **/
 
 Gulp.prototype.start = function(/* arguments */){
-  var tasks = arguments.length ? arguments : ['default'];
-  return this.stack.apply(this, tasks)();
+  if(!arguments.length){ return; }
+  this.stack.apply(this, arguments)();
 };
 
 Gulp.prototype.series = function(/* arguments */){
