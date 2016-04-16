@@ -26,4 +26,8 @@ gulp.task('watch', function(next){
   setTimeout(next, rand());
 });
 
+gulp.task('webpack', function(next){
+  setTimeout(next, rand());
+});
+
 gulp.start('less', gulp.series('webpack', 'jade'), 'watch');
