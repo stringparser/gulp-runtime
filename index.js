@@ -15,7 +15,8 @@ var Gulp = module.exports = Runtime.createClass({
     this.tasks = new Parth();
 
     this.log = this.log === void 0 || this.log;
-    this.gulpfile = util.getGulpFile();
+    this.argv = util.type(this.argv).array || [];
+    this.gulpfile = new Error().stack.match(/\/([^:()]+)/g)[2];
 
     if(this.repl && !util.isSilent){
       util.log('REPL', util.format.enabled('enabled'));
@@ -24,7 +25,7 @@ var Gulp = module.exports = Runtime.createClass({
       this.repl = false;
     }
 
-    if(this.log && !util.fromGulpBin){
+    if(this.log && util.logGulpfile){
       util.log('Using gulpfile ' + util.format.path(this.gulpfile));
     }
     // add cli tasks and run the cli for this instance
@@ -43,17 +44,17 @@ Gulp.prototype.task = function(name, deps, handle){
 
   if(name && !deps && !handle){
     return this.tasks.get(name).fn || null;
-  }
-
-  handle = handle || function(next){ next(); };
-  if(name && handle && name !== handle.name){
+  } else if(name && handle && handle.name !== name){
     handle.displayName = name;
   }
+  handle = handle || function(next){ next(); };
 
-  if(name && deps){
-    deps = deps.concat(handle, {wait: true});
-    var composed = this.stack.apply(this, deps);
-    this.tasks.set(name, {label: name, fn: composed});
+  if(name && deps && deps.length){
+    this.tasks.set(name, {
+      fn: this.stack.apply(this, deps.concat(handle, {wait: true})),
+      label: name,
+      hasDeps: true
+    });
   } else if(name){
     this.tasks.set(name, {label: name, fn: handle});
   } else if(!name){
@@ -85,16 +86,18 @@ Gulp.prototype.watch = function(glob, opt, handle) {
 
 **/
 Gulp.prototype.tree = function(options){
+  options = options || {};
+  options.deep = options.deep === void 0 || options.deep;
+
+  var self = this;
+  var tree = {label: options.label || '', nodes: []};
 
   if(!(this instanceof Runtime.Stack)){
-
     if(options.simple){
-      return Object.keys(this.tasks.store);
+      return Object.keys(this.tasks.store).filter(function(task){
+        return !/^\:cli/.test(task);
+      });
     }
-
-    var self = this;
-    var tree = {label: options.label || '', nodes: []};
-    options.deep = options.deep === void 0 || options.deep;
 
     Object.keys(this.tasks.store).forEach(function(name){
       var task = self.tasks.store[name];
@@ -106,26 +109,16 @@ Gulp.prototype.tree = function(options){
     return tree;
   }
 
-  options = options || {deep: true};
-  options.depth = util.type(options.depth).number || 0;
-
-  var tree = {label: '', nodes: []};
-  var sites = [];
-
-  sites = this.length ? this : this.reduce();
+  var sites = this.length ? this : this.reduce();
   for (var index = 0, length = sites.length; index < length; ++index) {
     var site = sites[index];
     if(!site || !site.fn){ continue; }
 
     if(options.deep && site.fn.stack instanceof Runtime.Stack){
-      tree.label = tree.label || site.fn.displayName || '';
-      tree.nodes.push(
-        site.fn.stack.tree(
-          util.merge({}, options, {host: site})
-        )
-      );
+      var opts = util.merge({}, options, {host: site});
+      tree.nodes.push(site.fn.stack.tree(opts));
     } else {
-      tree.nodes.push(site)
+      tree.nodes.push(site);
     }
 
     tree.label += (tree.label && ', ' + site.label) || site.label;
@@ -134,7 +127,7 @@ Gulp.prototype.tree = function(options){
   if(options.host && options.host.label){
     tree.label = options.host.label;
     tree.nodes = tree.nodes.filter(function(node){
-      return node.label !== options.host.label;
+      return node.label !== tree.label;
     });
   }
 
@@ -145,18 +138,11 @@ Gulp.prototype.tree = function(options){
  maps all the arguments of gulp.stack to functions
 **/
 Gulp.prototype.reduceStack = function(stack, site){
-  var task = this.tasks.get(site);
+  var task = this.tasks.get(site) || (
+    typeof site === 'function' && {fn: site}
+  );
 
-  if(!task && typeof site === 'function'){
-    task = {
-      fn: site,
-      label: site.stack instanceof Runtime.Stack
-        ? site.stack.tree().label
-        : site.displayName || site.name || 'anonymous'
-    };
-  }
-
-  if(task){ stack.push(task); } else {
+  if(!task){
     util.log('Task `%s` is %s',
       util.format.task(site),
       util.format.error('not defined yet')
@@ -168,6 +154,14 @@ Gulp.prototype.reduceStack = function(stack, site){
 
     throw new Error('task not defined yet');
   }
+
+  if(!task.label){
+    task.label = task.fn.stack instanceof Runtime.Stack
+      ? task.fn.stack.tree().label
+      : task.fn.displayName || task.fn.name || 'anonymous'
+  }
+
+  stack.push(task);
 };
 
 
@@ -181,41 +175,68 @@ Gulp.prototype.onHandle = function(task, stack){
 
   var deep = stack.length > 1;
 
-  if(deep && !stack.time){
+  if(!stack.time){
     stack.time = process.hrtime();
     stack.mode = stack.wait ? 'series' : 'parallel';
-    stack.tree = stack.tree();
-    util.log('Started %s(%s)',
-      util.format.mode(stack.mode),
-      util.format.task(stack.tree.label)
-    );
-  } else if(!stack.time && !stack.end){
-    util.log('Starting %s', util.format.task(task.label));
+    stack.label = stack.label || stack.tree().label;
+    if(deep && !stack.host){
+      util.log('Start %s(%s)',
+        util.format.mode(stack.mode),
+        util.format.task(stack.label)
+      );
+    }
   }
 
   if(!task.time){
     task.time = process.hrtime();
+
+    if(!deep && !task.hasDeps){
+      util.log('Start %s', util.format.task(task.label));
+    } else if(task.hasDeps){
+      util.log('Start %s:%s(%s)',
+        util.format.task(task.label),
+        util.format.mode('series'),
+        util.format.task(task.fn.stack.tree().label)
+      );
+    } else if(task.fn.stack instanceof Runtime.Stack){
+      util.log('Start %s(%s)',
+        util.format.mode(task.fn.stack.wait ? 'series' : 'parallel'),
+        util.format.task(task.fn.stack.tree().label)
+      );
+    }
     return;
   }
 
-  if(!(task.fn.stack instanceof Runtime.Stack)){
-    var time = util.format.time(task.time);
-    util.log('%s %s %s',
-      (deep ? ' ' : '') + util.format.task(task.label),
-      deep ? 'took' : 'ended after',
-      time
-    );
+  if(deep){
+    if(!(task.fn.stack instanceof Runtime.Stack)){
+      util.log('- %s took %s',
+        util.format.task(task.label),
+        util.format.time(task.time)
+      );
+    } else if(stack.end){
+      util.log('Ended %s(%s) after %s',
+        util.format.mode(stack.mode),
+        util.format.task(stack.label),
+        util.format.time(stack.time)
+      );
+    }
+  } else if(stack.end){
+    if(task.hasDeps){
+      util.log('Ended %s:%s(%s) after %s',
+        util.format.task(task.label),
+        util.format.mode('series'),
+        util.format.task(task.fn.stack.tree().label),
+        util.format.time(task.time)
+      );
+    } else {
+      util.log('Ended %s after %s',
+        util.format.task(task.label),
+        util.format.time(task.time)
+      );
+    }
   }
 
-  if(deep && stack.time && stack.end){
-    util.log('Ended %s(%s) after %s',
-      util.format.mode(stack.mode),
-      util.format.task(stack.tree.label),
-      util.format.time(stack.time)
-    );
-  }
-
-  if(this.repl && !deep && stack.end){
+  if(this.repl && stack.end && !stack.host){
     this.repl.prompt();
   }
 };
@@ -230,7 +251,7 @@ Gulp.prototype.onHandleError = function(err, site, stack){
     this.repl ? '\n' + err.stack : ''
   );
 
-  console.log('- %s failed after %s',
+  console.log('%s failed after %s',
     util.format.error(site.label),
     util.format.time(site.time)
   );
