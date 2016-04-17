@@ -6,8 +6,6 @@ var vinylFS = require('vinyl-fs')
 
 var util = require('./lib/util');
 var __slice = Array.prototype.slice;
-var fromGulpBin = /gulp$/.test(process.argv[1]);
-var taskSimpleFlag = process.argv.indexOf('--tasks-simple') > -1;
 
 var Gulp = module.exports = Runtime.createClass({
   src: vinylFS.src,
@@ -17,26 +15,20 @@ var Gulp = module.exports = Runtime.createClass({
     this.tasks = new Parth();
 
     this.log = this.log === void 0 || this.log;
-    if(this.repl && taskSimpleFlag){ this.repl = false; }
     this.gulpfile = util.getGulpFile();
 
-    // when the gulpfile is passed as argument default to process.argv
-    if(!this.argv && (process.argv[1] === this.gulpfile || fromGulpBin)){
-      this.argv = process.argv.slice(2);
-    } else {
-      this.argv = util.type(this.argv).array;
-    }
-
-    if(this.repl){
+    if(this.repl && !util.isSilent){
       util.log('REPL', util.format.enabled('enabled'));
       this.repl = require('gulp-repl')(this);
+    } else if(this.repl){
+      this.repl = false;
     }
 
-    if(this.log && !fromGulpBin){
+    if(this.log && !util.fromGulpBin){
       util.log('Using gulpfile ' + util.format.path(this.gulpfile));
     }
     // add cli tasks and run the cli for this instance
-    require('./lib/cli')(this, this.argv);
+    require('./lib/cli')(this);
   }
 });
 
@@ -92,7 +84,28 @@ Gulp.prototype.watch = function(glob, opt, handle) {
 /**
 
 **/
-Gulp.prototype.Stack.prototype.tree = function(options){
+Gulp.prototype.tree = function(options){
+
+  if(!(this instanceof Runtime.Stack)){
+
+    if(options.simple){
+      return Object.keys(this.tasks.store);
+    }
+
+    var self = this;
+    var tree = {label: options.label || '', nodes: []};
+    options.deep = options.deep === void 0 || options.deep;
+
+    Object.keys(this.tasks.store).forEach(function(name){
+      var task = self.tasks.store[name];
+      tree.nodes.push(task.fn.stack instanceof Runtime.Stack
+        ? task.fn.stack.tree({deep: options.deep, host: task})
+        : task
+      );
+    });
+    return tree;
+  }
+
   options = options || {deep: true};
   options.depth = util.type(options.depth).number || 0;
 
@@ -143,10 +156,7 @@ Gulp.prototype.reduceStack = function(stack, site){
     };
   }
 
-  if(task){
-    stack.push(task);
-  } else if(typeof site === 'string'){
-
+  if(task){ stack.push(task); } else {
     util.log('Task `%s` is %s',
       util.format.task(site),
       util.format.error('not defined yet')
