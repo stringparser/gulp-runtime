@@ -155,10 +155,12 @@ Gulp.prototype.reduceStack = function(stack, site){
     throw new Error('task not defined yet');
   }
 
-  if(!task.label){
-    task.label = task.fn.stack instanceof Runtime.Stack
+  if(this.log){
+    task.isStack = task.fn.stack instanceof Runtime.Stack;
+    task.label = task.label || (task.isStack
       ? task.fn.stack.tree().label
       : task.fn.displayName || task.fn.name || 'anonymous'
+    );
   }
 
   stack.push(task);
@@ -173,67 +175,44 @@ Gulp.prototype.onHandle = function(task, stack){
     return;
   }
 
-  var deep = stack.length > 1;
-
   if(!stack.time){
+    var mode = util.format.mode(stack.wait ? 'series' : 'parallel');
+    var label = util.format.task(stack.label || stack.tree().label);
     stack.time = process.hrtime();
-    stack.mode = stack.wait ? 'series' : 'parallel';
-    stack.label = stack.label || stack.tree().label;
-    if(deep && !stack.host){
-      util.log('Start %s(%s)',
-        util.format.mode(stack.mode),
-        util.format.task(stack.label)
-      );
+    stack.label = mode + '(' + label + ')';
+    stack.depth = stack.length;
+    if(stack.depth && !stack.host){
+      util.log('Start', stack.label);
     }
   }
 
   if(!task.time){
     task.time = process.hrtime();
-
-    if(!deep && !task.hasDeps){
-      util.log('Start %s', util.format.task(task.label));
-    } else if(task.hasDeps){
-      util.log('Start %s:%s(%s)',
-        util.format.task(task.label),
-        util.format.mode('series'),
-        util.format.task(task.fn.stack.tree().label)
-      );
-    } else if(task.fn.stack instanceof Runtime.Stack){
-      util.log('Start %s(%s)',
-        util.format.mode(task.fn.stack.wait ? 'series' : 'parallel'),
-        util.format.task(task.fn.stack.tree().label)
-      );
+    if(!stack.depth && !task.isStack){
+      task.label = util.format.task(task.label);
+      util.log('Start', task.label);
+    } else if(task.isStack){
+      task.label = (task.hasDeps
+        ? util.format.task(task.label) + ':' + util.format.mode('series')
+        : util.format.mode(task.fn.stack.wait ? 'series' : 'parallel')
+      ) + '(' + util.format.task(task.fn.stack.tree().label) + ')';
+      util.log('Start %s', task.label);
     }
+
     return;
   }
 
-  if(deep){
-    if(!(task.fn.stack instanceof Runtime.Stack)){
-      util.log('- %s took %s',
-        util.format.task(task.label),
-        util.format.time(task.time)
-      );
-    } else if(stack.end){
-      util.log('Ended %s(%s) after %s',
-        util.format.mode(stack.mode),
-        util.format.task(stack.label),
-        util.format.time(stack.time)
-      );
-    }
-  } else if(stack.end){
-    if(task.hasDeps){
-      util.log('Ended %s:%s(%s) after %s',
-        util.format.task(task.label),
-        util.format.mode('series'),
-        util.format.task(task.fn.stack.tree().label),
-        util.format.time(task.time)
-      );
-    } else {
-      util.log('Ended %s after %s',
-        util.format.task(task.label),
-        util.format.time(task.time)
-      );
-    }
+  if(!task.isStack){
+    util.log('- %s took %s',
+      util.format.task(task.label),
+      util.format.time(stack.time)
+    );
+  }
+
+  if(stack.end && !stack.host){
+    util.log('Ended %s after %s', stack.label,
+      util.format.time(stack.time)
+    );
   }
 
   if(this.repl && stack.end && !stack.host){
