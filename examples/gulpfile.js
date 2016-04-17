@@ -1,6 +1,6 @@
 'use strict';
 
-var gulp = require('./.').create({repl: true});
+var gulp = require('../.').create({repl: true});
 
 function rand(){
   return Math.floor((100 - 1) * Math.random());
@@ -34,4 +34,4 @@ gulp.task('webpack', function(next){
   setTimeout(next, rand());
 });
 
-gulp.start('less', gulp.series('webpack', 'jade'), 'watch');
+gulp.start('less', gulp.series('watch', 'serve'), 'jade');
