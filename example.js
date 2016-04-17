@@ -6,11 +6,15 @@ function rand(){
   return Math.floor((100 - 1) * Math.random());
 }
 
-gulp.task('autoprefixer', function(next){
+gulp.task('cssmin', function(next){
   setTimeout(next, rand());
 });
 
-gulp.task('less', ['autoprefixer'], function(next){
+gulp.task('autoprefixer', ['cssmin'], function(next){
+  setTimeout(next, rand());
+});
+
+gulp.task('less', ['autoprefixer', 'webpack'], function(next){
   setTimeout(next, rand());
 });
 
