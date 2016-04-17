@@ -90,12 +90,58 @@ Gulp.prototype.watch = function(glob, opt, handle) {
 };
 
 /**
+
+**/
+Gulp.prototype.Stack.prototype.tree = function(options){
+  options = options || {deep: true};
+  options.depth = util.type(options.depth).number || 0;
+
+  var tree = {label: '', nodes: []};
+  var sites = [];
+
+  sites = this.length ? this : this.reduce();
+  for (var index = 0, length = sites.length; index < length; ++index) {
+    var site = sites[index];
+    if(!site || !site.fn){ continue; }
+
+    if(options.deep && site.fn.stack instanceof Runtime.Stack){
+      tree.label = tree.label || site.fn.displayName || '';
+      tree.nodes.push(
+        site.fn.stack.tree(
+          util.merge({}, options, {host: site})
+        )
+      );
+    } else {
+      tree.nodes.push(site)
+    }
+
+    tree.label += (tree.label && ', ' + site.label) || site.label;
+  }
+
+  if(options.host && options.host.label){
+    tree.label = options.host.label;
+    tree.nodes = tree.nodes.filter(function(node){
+      return node.label !== options.host.label;
+    });
+  }
+
+  return tree;
+};
+
+/**
  maps all the arguments of gulp.stack to functions
 **/
 Gulp.prototype.reduceStack = function(stack, site){
-  var task = typeof site === 'function'
-    ? {fn: site, label: site.displayName || site.name || 'anonymous'}
-    : this.tasks.get(site);
+  var task = this.tasks.get(site);
+
+  if(!task && typeof site === 'function'){
+    task = {
+      fn: site,
+      label: site.stack instanceof Runtime.Stack
+        ? site.stack.tree().label
+        : site.displayName || site.name || 'anonymous'
+    };
+  }
 
   if(task){
     stack.push(task);
@@ -159,7 +205,7 @@ Gulp.prototype.onHandle = function(task, stack){
     );
   }
 
-  if(!deep && stack.end && this.repl){
+  if(this.repl && !deep && stack.end){
     this.repl.prompt();
   }
 };
