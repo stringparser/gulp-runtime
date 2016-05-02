@@ -180,7 +180,7 @@ Gulp.prototype.onHandle = function(task, stack){
     var label = util.format.task(stack.label || stack.tree().label);
     stack.time = process.hrtime();
     stack.label = mode + '(' + label + ')';
-    stack.depth = stack.length;
+    stack.depth = stack.length > 1;
     if(stack.depth && !stack.host){
       util.log('Start', stack.label);
     }
@@ -188,29 +188,32 @@ Gulp.prototype.onHandle = function(task, stack){
 
   if(!task.time){
     task.time = process.hrtime();
-    if(!stack.depth && !task.isStack){
-      task.label = util.format.task(task.label);
-      util.log('Start', task.label);
-    } else if(task.isStack){
+
+    if(task.isStack){
       task.label = (task.hasDeps
         ? util.format.task(task.label) + ':' + util.format.mode('series')
         : util.format.mode(task.fn.stack.wait ? 'series' : 'parallel')
       ) + '(' + util.format.task(task.fn.stack.tree().label) + ')';
-      util.log('Start %s', task.label);
+    } else {
+      task.label = util.format.task(task.label);
+    }
+
+    if(task.isStack || !stack.depth){
+      util.log('Start', task.label);
     }
 
     return;
   }
 
   if(!task.isStack){
-    util.log('- %s took %s',
-      util.format.task(task.label),
+    util.log('- %s took %s', task.label,
       util.format.time(stack.time)
     );
   }
 
   if(stack.end && !stack.host){
-    util.log('Ended %s after %s', stack.label,
+    util.log('Ended %s after %s',
+      stack.depth ? stack.label : task.label,
       util.format.time(stack.time)
     );
   }
