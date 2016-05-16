@@ -9,6 +9,7 @@ var testUtil = require('./util');
 var tests = [
   'create.js',
   'task.js',
+  'cli.js',
   'watch.js'
 ];
 
