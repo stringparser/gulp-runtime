@@ -16,19 +16,15 @@ var Gulp = module.exports = Runtime.createClass({
     this.tasks = new Parth();
 
     this.log = this.log === void 0 || this.log;
-    this.gulpfile = new Error().stack.match(/\/([^:()]+)/g)[2];
+    this.gulpfile = util.getGulpFile();
 
     if(this.repl){
       this.repl = require('gulp-repl')(this);
+      util.log('REPL enabled');
     }
 
-    if(this.log && !util.isSilent){
-      if(this.repl){
-        util.log('REPL enabled');
-      }
-      if(util.logGulpfile){
-        util.log('Using gulpfile', util.format.path(this.gulpfile));
-      }
+    if(this.log){
+      util.log('Using gulpfile', util.format.path(this.gulpfile));
     }
 
     // add cli tasks and run the cli for this instance
@@ -43,18 +39,23 @@ var Gulp = module.exports = Runtime.createClass({
 Gulp.prototype.task = function(name, deps, handle){
   handle = util.type(handle || deps || name).function || '';
   deps = util.type(deps).array || util.type(name).array;
-  name = util.type(name).string || util.type(handle.name).string || '';
+  name = util.type(name).string || util.type(handle.name).string;
 
   if(name && !deps && !handle){
     return (this.tasks.get(name) || {fn: null}).fn;
-  } else if(handle && handle.name !== name){
+  }
+
+  if(handle && handle.name !== name){
     handle.displayName = name;
   }
-  handle = handle || function(cb){ cb(); };
 
-  if(name && deps && deps.length){
-    var series = this.series.apply(this, deps.concat(handle));
-    this.tasks.set(name, {name: name, fn: series});
+  if(name && deps && handle){
+    var tasks = deps.concat(handle);
+    var composer = this.series.apply(this, tasks);
+    this.tasks.set(name, {name: name, fn: composer});
+  } else if(name && deps){
+    var composer = this.stack.apply(this, deps);
+    this.tasks.set(name, {name: name, fn: composer});
   } else if(name){
     this.tasks.set(name, {name: name, fn: handle});
   }
@@ -149,20 +150,26 @@ Gulp.prototype.tree = function(options){
  maps all the arguments of gulp.stack to functions
 **/
 Gulp.prototype.reduceStack = function(stack, site){
-  var task = this.tasks.get(site) || (
-    typeof site === 'function' && {fn: site}
-  );
+  var task = typeof site === 'function'
+    ? {fn: site}
+    : this.tasks.get(site);
 
   if(!task){
     util.log('Task `%s` is not defined yet',
       util.format.task(site)
     );
 
-    util.log('Not sure how to do that? See: %s',
+    util.log('Not sure how to do that? See %s',
       util.format.link(util.docs.task)
     );
 
-    throw new Error('task ' + site + ' not defined yet');
+    if(util.isFromCLI(this)){
+      return process.exit(1);
+    }
+
+    throw new Error(
+      'task `' + util.format.task(site) + '` is not defined yet'
+    );
   }
 
   stack.push(task);
@@ -184,8 +191,6 @@ Gulp.prototype.onHandleStart = function(task, stack){
     return;
   }
 
-  task.time = process.hrtime();
-
   if(!stack.time){
     stack.time = process.hrtime();
 
@@ -203,20 +208,21 @@ Gulp.prototype.onHandleStart = function(task, stack){
   }
 
   if(task.mode || (!stack.deep && !stack.host)){
-    util.log('Start', util.format.task(task, stack));
+    util.log('Start', util.format.task(task));
   }
+
+  task.time = process.hrtime();
 };
 
 Gulp.prototype.onHandleEnd = function(task, stack){
   if(this.log && !(task.params && task.params.cli)){
-    if(!task.mode && stack.deep){
-      util.log('- %s took %s',
+
+    if(stack.host && !task.mode){
+      util.log(' %s took %s',
         util.format.task(task),
         util.format.time(task.time)
       );
-    }
-
-    if(stack.end && !stack.host){
+    } else if(stack.end){
       util.log('Ended %s after %s',
         util.format.task(stack.deep ? stack : task),
         util.format.time(stack.time)
@@ -224,12 +230,12 @@ Gulp.prototype.onHandleEnd = function(task, stack){
     }
   }
 
-  clearTimeout(stack.timeout);
   if(this.repl && stack.end && !stack.host){
     var self = this;
-    stack.timeout = setTimeout(function(){
+    clearTimeout(this.timeout);
+    this._timeout = setTimeout(function (){
       self.repl.prompt();
-    }, 250);
+    }, 150);
   }
 };
 
@@ -237,11 +243,10 @@ Gulp.prototype.onHandleEnd = function(task, stack){
  error handling
 **/
 Gulp.prototype.onHandleError = function(err, site, stack){
-  console.log('helloo', arguments);
   util.log('%s in %s',
     util.format.error('error'),
     stack.label || stack.tree().label,
-    !this.repl ? '\n' + err.stack : ''
+    this.repl ? '' : '\n' + err.stack
   );
 
   console.log('%s failed after %s',
@@ -257,6 +262,7 @@ Gulp.prototype.onHandleError = function(err, site, stack){
 **/
 
 Gulp.prototype.start = function(/* arguments */){
+  if(!arguments.length){ return; }
   this.stack.apply(this, arguments.length ? arguments : ['default'])();
   return this;
 };
