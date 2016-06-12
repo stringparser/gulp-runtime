@@ -1,10 +1,14 @@
 'use strict';
 
-var path = require('path');
+require('should');
+
 
 var Gulp = require('../');
-var util = require('../lib/util');
-var testUtil = require('./util');
+var util = require('./util');
+
+util.lib.log = function () {
+  // disable logging for tests
+};
 
 var tests = [
   'create.js',
@@ -13,14 +17,13 @@ var tests = [
   'watch.js'
 ];
 
-// disable logging for tests
-util.log = function(){}
-
 describe(require('../package').name, function(){
+  var path = require('path');
+
   tests.forEach(function(file){
     var suite = path.basename(file, path.extname(file));
     describe(suite, function(){
-      require('./' + file)(Gulp, testUtil);
+      require('./' + file)(Gulp, util);
     });
   });
 });
