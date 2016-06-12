@@ -126,7 +126,7 @@ Gulp.prototype.tree = function(options){
     if(task.fn.stack instanceof Runtime.Stack){
       node = task.fn.stack.tree({
         host: task,
-        depth: depth < options.depth ? depth + 1 : false
+        depth: depth < options.depth && (depth + 1) || false
       });
     }
 
