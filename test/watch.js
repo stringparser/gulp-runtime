@@ -1,29 +1,34 @@
 'use strict';
 
 var fs = require('fs');
-var should = require('should');
+var path = require('path');
+
+var test = {
+  file: path.resolve(__dirname, 'dir', 'watchTestFile.js'),
+  content: 'exports = module.exports = { test: "watchTest" };',
+  dirname: path.resolve(__dirname, 'dir')
+};
 
 exports = module.exports = function(Gulp, util){
-  should.exists(util);
 
   before(function(done){
-    util.mkdirp('test/dir', done);
+    util.mkdirp(test.dirname, done);
   });
 
   after(function(done){
-    util.rimraf('test/dir', done);
+    util.rimraf(test.dirname, done);
   });
 
   function setupTest(onSuccess, onError){
-    fs.writeFile(util.testFile, util.content, function(writeError){
-      if(writeError){ onError(writeError); return; }
+    fs.writeFile(test.file, test.content, function(writeError){
+      if(writeError){
+        return onError(writeError);
+      }
 
       onSuccess();
 
       setTimeout(function(){
-        util.rimraf(util.testFile, function (deleteError){
-          if(deleteError){ onError(deleteError); }
-        });
+        fs.writeFile(test.file, '// changed', onError);
       }, 10);
     });
   }
@@ -32,7 +37,7 @@ exports = module.exports = function(Gulp, util){
     var gulp = Gulp.create({log: false});
 
     setupTest(function(){
-      var watcher = gulp.watch(util.testFile, function(){
+      var watcher = gulp.watch(test.file, function(){
         watcher.end();
         done();
       });
@@ -69,7 +74,7 @@ exports = module.exports = function(Gulp, util){
     });
 
     setupTest(function(){
-      var watcher = gulp.watch(util.testFile, ['one', 'two'], function(){
+      var watcher = gulp.watch(test.file, ['one', 'two'], function(){
         watcher.end();
       });
     }, done);
@@ -97,7 +102,7 @@ exports = module.exports = function(Gulp, util){
     });
 
     setupTest(function(){
-      var watcher = gulp.watch(util.testFile, ['one', 'two'], function(){
+      var watcher = gulp.watch(test.file, ['one', 'two'], function(){
         pile.should.containDeep(['one', 'two']);
         watcher.end();
         done();
