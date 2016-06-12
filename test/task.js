@@ -78,17 +78,15 @@ exports = module.exports = function(Gulp){
     var task = gulp.tasks.get('task');
 
     task.fn([], function(err, pile){
-      if(err){ done(err); return; }
-      pile.should.be.eql(['one', 'two', 'task']);
+      if(err){ return done(err); }
+      pile.should.containDeep(['one', 'two', 'task']);
+      pile.pop().should.be.eql('task');
       done();
     });
   });
 
   it('task(name, deps) bundles deps into task `name`', function(done){
-    var gulp = Gulp.create({
-      log: false,
-      onHandleError: done
-    });
+    var gulp = Gulp.create({ log: false });
 
     gulp.task('task', ['one', 'two']);
 
