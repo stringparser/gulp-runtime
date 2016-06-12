@@ -1,9 +1,6 @@
 'use strict';
 
-var should = require('should');
-
-module.exports = function(Gulp, util){
-  should.exists(util);
+exports = module.exports = function(Gulp){
 
   it('task(name, fn) registers task `name`', function(){
     var gulp = Gulp.create();
@@ -108,7 +105,7 @@ module.exports = function(Gulp, util){
     var task = gulp.tasks.get('task');
 
     task.fn([], function(err, pile){
-      if(err){ done(err); return; }
+      if(err){ return done(err); }
       pile.should.be.eql(['one', 'two']);
       done();
     });
