@@ -92,17 +92,7 @@ gulp.task('name', function (){
 
 ## Tasks with parameters
 
-## comose series and parallel tasks
-
-## why
-
-I wanted to do a REPL for gulp.
-
-Why? Because I really love how gulp lets you package asynchronous functions and reuse them while letting you use the tool you prefer (callbacks, promises, streams and later even RxJS observables). So the REPL was the ultimate `define and use as use as you like` paradigm.
-
-Of course, then, more and more stuff had to go in and, more importantly, the REPL had to behave in such a way that it could be used mostly like the terminal does (autocompletion, etc.).
-
-So it got out of hand. Very much so. But well oh well, here we are.
+## compose series and parallel tasks
 
 <!-- links -->
 
