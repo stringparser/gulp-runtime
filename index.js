@@ -217,12 +217,14 @@ Gulp.prototype.onHandleStart = function(task, stack){
 Gulp.prototype.onHandleEnd = function(task, stack){
   if(this.log && !(task.params && task.params.cli)){
 
-    if(stack.host && !task.mode){
+    if(!task.mode){
       util.log(' %s took %s',
         util.format.task(task),
         util.format.time(task.time)
       );
-    } else if(stack.end){
+    }
+
+    if(!stack.host && stack.end){
       util.log('Ended %s after %s',
         util.format.task(stack.deep ? stack : task),
         util.format.time(stack.time)
@@ -235,26 +237,24 @@ Gulp.prototype.onHandleEnd = function(task, stack){
     clearTimeout(this.timeout);
     this._timeout = setTimeout(function (){
       self.repl.prompt();
-    }, 150);
+    }, 250);
   }
 };
 
 /**
  error handling
 **/
-Gulp.prototype.onHandleError = function(err, site, stack){
-  util.log('%s in %s',
-    util.format.error('error'),
-    stack.label || stack.tree().label,
-    this.repl ? '' : '\n' + err.stack
-  );
-
-  console.log('%s failed after %s',
-    util.format.error(site.label),
+Gulp.prototype.onHandleError = function(error, site, stack){
+  util.log('%s threw an error after %s',
+    util.format.error(site.label || stack.tree().label),
     util.format.time(site.time)
   );
 
   if(!this.repl){ throw err; }
+
+  util.log('at %s',
+    util.format.path(error.stack.match(/\/[^)]+/).pop())
+  );
 };
 
 /**
