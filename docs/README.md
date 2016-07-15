@@ -8,43 +8,39 @@ async composers
 
 ## setup
 
-1. gulp what?
+__gulp what?__ - If you don't know gulp [go here first][gulp]
 
-  If you don't know gulp [go here first][gulp]
+__Install with [npm][npm]__ - `npm install --save-dev gulp-runtime`
 
-2. Install with [npm][npm]
+__Then open your favourite editor__
 
-  `npm install --save-dev gulp-runtime`
+Go to that `gulpfile` and change this line
 
-3. Then open your favourite editor
+```js
+var gulp = require('gulp');
+```
 
-  Go to that `gulpfile` and change this line
+with
 
-  ```js
-  var gulp = require('gulp');
-  ```
+```js
+var gulp = require('gulp-runtime').create();
+```
 
-  with
+After that just run `gulpfile` with `node` directly from the command line
 
-  ```js
-  var gulp = require('gulp-runtime').create();
-  ```
+```sh
+node gulpfile.js --tasks default watch serve
+```
 
-  After that just run `gulpfile` with `node` directly from the command line
+If no argument are given the `default` task will run instead (as gulp does).
 
-  ```sh
-  node gulpfile.js --tasks default watch serve
-  ```
+__What about the CLI?__
 
-  If no argument are given the `default` task will run instead (as gulp does).
+Add an alias to your `.bashrc`, `.zshrc`
 
-4. What about the CLI?
-
-  Add an alias to your `.bashrc`, `.zshrc`
-
-  ```sh
-  rulp='node gulpfile.js'
-  ```
+```sh
+rulp='node gulpfile.js'
+```
 
 ## API
 
