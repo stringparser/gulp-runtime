@@ -13,7 +13,7 @@ var Gulp = module.exports = Runtime.createClass({
   dest: vinylFS.dest,
   create: function Gulp(props){
     Gulp.super_.call(this, props);
-    this.tasks = new Parth();
+    this.tasks = new Parth({defaultRE: /\S+/});
 
     this.log = this.log === void 0 || this.log;
     this.gulpfile = util.getGulpFile();
@@ -27,7 +27,7 @@ var Gulp = module.exports = Runtime.createClass({
       util.log('Using gulpfile', util.format.path(this.gulpfile));
     }
 
-    // add cli tasks and run the cli for this instance
+    // adds cli tasks and run the cli for this instance
     cli(this);
   }
 });
@@ -262,8 +262,15 @@ Gulp.prototype.onHandleError = function(error, site, stack){
 **/
 
 Gulp.prototype.start = function(/* arguments */){
-  if(!arguments.length){ return; }
-  this.stack.apply(this, arguments.length ? arguments : ['default'])();
+  var args = null;
+  var tasks = arguments;
+
+  if(util.type(arguments[0]).array){
+    args = __slice.call(arguments, 1);
+    tasks = arguments[0];
+  }
+
+  this.stack.apply(this, tasks.length ? tasks : ['default'])(args);
   return this;
 };
 
