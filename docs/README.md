@@ -8,17 +8,11 @@ async composers
 
 ## setup
 
-_Wait, gulp? What is gulp?_
+_gulp what?_ - If you don't know gulp [go here first][gulp]
 
-If you don't know gulp [go here first][gulp].
+_Install with [npm][npm]_ - `npm install --save-dev gulp-runtime`
 
-_Install the package with [npm][npm]_
-
-```sh
-npm install --save-dev gulp-runtime
-```
-
-_Already using gulp_
+_Then open your favourite editor_
 
 Go to that `gulpfile` and change this line
 
