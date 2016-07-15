@@ -8,15 +8,15 @@ async composers
 
 ## setup
 
-> gulp what?
+1. gulp what?
 
   If you don't know gulp [go here first][gulp]
 
-> Install with [npm][npm]
+2. Install with [npm][npm]
 
   `npm install --save-dev gulp-runtime`
 
-> Then open your favourite editor
+3. Then open your favourite editor
 
   Go to that `gulpfile` and change this line
 
@@ -36,9 +36,9 @@ async composers
   node gulpfile.js --tasks default watch serve
   ```
 
-  If no argument is given the `default` task will run instead (as gulp does).
+  If no argument are given the `default` task will run instead (as gulp does).
 
-> What about the CLI?
+4. What about the CLI?
 
   Add an alias to your `.bashrc`, `.zshrc`
 
