@@ -8,39 +8,43 @@ async composers
 
 ## setup
 
-_gulp what?_ - If you don't know gulp [go here first][gulp]
+> gulp what?
 
-_Install with [npm][npm]_ - `npm install --save-dev gulp-runtime`
+  If you don't know gulp [go here first][gulp]
 
-_Then open your favourite editor_
+> Install with [npm][npm]
 
-Go to that `gulpfile` and change this line
+  `npm install --save-dev gulp-runtime`
 
-```js
-var gulp = require('gulp');
-```
+> Then open your favourite editor
 
-with
+  Go to that `gulpfile` and change this line
 
-```js
-var gulp = require('gulp-runtime').create();
-```
+  ```js
+  var gulp = require('gulp');
+  ```
 
-After that just run `gulpfile` with `node` directly from the command line
+  with
 
-```sh
-node gulpfile.js --tasks default watch serve
-```
+  ```js
+  var gulp = require('gulp-runtime').create();
+  ```
 
-If no argument is given the `default` task will run instead (as gulp does).
+  After that just run `gulpfile` with `node` directly from the command line
 
-__What about the CLI?__
+  ```sh
+  node gulpfile.js --tasks default watch serve
+  ```
 
-Add an alias to your `.bashrc`, `.zshrc`
+  If no argument is given the `default` task will run instead (as gulp does).
 
-```sh
-rulp='node gulpfile.js'
-```
+> What about the CLI?
+
+  Add an alias to your `.bashrc`, `.zshrc`
+
+  ```sh
+  rulp='node gulpfile.js'
+  ```
 
 ## API
 
@@ -93,7 +97,6 @@ For more regex madness on the [parth][parth] module.
 
 ```js
 function start(tasks...)
-function start(array tasks, args...)
 ```
 
 Run any number of `tasks...` given. Tasks can be either a `string`, that matches one of the tasks registered with or without its parameters, or a `function`.
@@ -112,6 +115,11 @@ gulp.task('thing', function (done){
 });
 
 gulp.start(build, 'thing');
+```
+___
+
+```js
+function start(array tasks, args...)
 ```
 
 If the first argument is an array its taken as the tasks to run and the rest of arguments as the arguments to pass to the tasks to run.
