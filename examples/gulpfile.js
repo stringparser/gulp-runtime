@@ -14,7 +14,9 @@ gulp.task('autoprefixer', ['less'], function(next){
   setTimeout(next, rand());
 });
 
-gulp.task('less', function(next){
+gulp.task('less :src :dest', function(next){
+  return gulp.src(this.params.src)
+    .pipe()
   setTimeout(next, rand());
 });
 

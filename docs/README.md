@@ -1,42 +1,74 @@
-# docs
+# documentation
 
-Something missing or points to improve?
+API -
+REPL -
+instances -
+task params -
+async composers
 
-Feel free to open a [new issue][new-issue]
+## setup
+
+_Wait, gulp? What is gulp?_
+
+If you don't know gulp [go here first][gulp].
+
+_Install the package with [npm][npm]_
+
+```sh
+npm install --save-dev gulp-runtime
+```
+
+_Already using gulp_
+
+Go to that `gulpfile` and change this line
+
+```js
+var gulp = require('gulp');
+```
+
+with
+
+```js
+var gulp = require('gulp-runtime').create();
+```
+
+After that just run `gulpfile` with `node` directly from the command line
+
+```sh
+node gulpfile.js --tasks default watch serve
+```
+
+If no argument is given the `default` task will run instead (as gulp does).
+
+__What about the CLI?__
+
+Add an alias to your `.bashrc`, `.zshrc`
+
+```sh
+rulp='node gulpfile.js'
+```
 
 ## API
 
-The api is essentially the same as [gulp API][gulp-api]
+The module comes with the same [gulp API][gulp-api] methods we know and love
 
 - [gulp.src](#gulptask)
 - [gulp.dest](#gulptask)
 - [gulp.task](#gulptask)
 - [gulp.watch](#gulptask)
 
-and 4 additional methods
+and 4 more
 
 - [gulp.start](#gulpstart)
-- [gulp.stack](#gulp.stack)
-- [gulp.series](#gulp.series)
-- [gulp.parallel](#gulp.parallel)
-
-To use a `gulpfile` you would only have to change this line
-
-```js
-var gulp = require('gulp');
-```
-
-with this one
-
-```js
-var gulp = require('gulp-runtime').create();
-```
+- [gulp.stack](#gulpstack)
+- [gulp.series](#gulpseries)
+- [gulp.parallel](#gulpparallel)
 
 ### gulp.task
 
-`gulp.src`, `gulp.dest`, `gulp.watch` and `gulp.task` behave the same as described in the [`gulp` documentation][gulp-docs].
+`gulp.src`, `gulp.dest`, `gulp.watch` and `gulp.task` behave the same as described in the [`gulp` API documentation][gulp-api].
 
-In addition, `gulp.task` can also define task using `:parameters`. These parameters will then pop up at the tasks's function `this.params`.
+In addition `gulp.task` can also define tasks using `:parameters`.
 
 Example:
 
@@ -50,7 +82,7 @@ gulp.task('build:mode', function (done) {
 });
 ```
 
-You could also use a regular expression right after `:mode` or just an regex enclosed in parens as in:
+You could also use a regular expression right after `:mode`
 
 ```js
 var gulp = require('gulp-runtime').create();
@@ -61,15 +93,16 @@ gulp.task('build:mode(-dev|-prod)', function (done){
 });
 ```
 
-More details on what can be a parameter on the [parth][parth] module.
+For more regex madness on the [parth][parth] module.
 
 ### gulp.start
 
 ```js
-function start(tasks...[, options])
+function start(tasks...)
+function start(array tasks, args...)
 ```
 
-Run any number of `task...` given. Tasks can be either a `string` (that matches one of the tasks registered) or a `function`.
+Run any number of `tasks...` given. Tasks can be either a `string`, that matches one of the tasks registered with or without its parameters, or a `function`.
 
 Example:
 
@@ -77,26 +110,51 @@ Example:
 var gulp = require('gulp-runtime').create();
 
 function build(done){
-  // do async things
-  done(); // or return a stream, promise or RxJS observable
+  done(); // or do async things
 }
 
-gulp.task('name', function (){
+gulp.task('thing', function (done){
+ setTimeout(done, 100);
+});
 
+gulp.start(build, 'thing');
+```
+
+If the first argument is an array its taken as the tasks to run and the rest of arguments as the arguments to pass to the tasks to run.
+
+```js
+var gulp = require('gulp-runtime').create();
+
+function build(done, a, b){
+  done(); // or do async things
+}
+
+gulp.task('thing', function (done, a, b){
+ setTimeout(done, 100);
+});
+
+gulp.task('build thing', function (done, a, b){
+  gulp.start([build, 'thing'], a, b, done);
+  // done will be called when all of the tasks have ended or there is an error
+});
+
+gulp.task('default', function () {
+  gulp.start('build things', 'a', 'b');
 });
 ```
 
-## Multiple instances
+## REPL
 
-## REPL with autocomplete
+## instances
 
-## Tasks with parameters
+## task parameters
 
-## compose series and parallel tasks
+## async composers
 
 <!-- links -->
 
 [npm]: https://npmjs.com/gulp-runtime
+[gulp]: https://github.com/gulpjs/gulp
 [parth]: https://github.com/stringparser/parth
 [license]: http://opensource.org/licenses/MIT
 [gulp-api]: https://github.com/gulpjs/gulp/blob/master/docs/API.md
