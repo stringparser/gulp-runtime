@@ -10,13 +10,9 @@ async composers
 
 - _gulp what?_ If you don't know gulp [go here first][gulp]
 
-- _Install with [npm][npm]_
+- _[`npm install --save-dev gulp-runtime`][npm]_
 
-`npm install --save-dev gulp-runtime`
-
-- _Then open your favourite editor_
-
-Go to that `gulpfile` and change this line
+- _Open that `gulpfile`_ and change this line
 
 ```js
 var gulp = require('gulp');
@@ -28,13 +24,13 @@ with
 var gulp = require('gulp-runtime').create();
 ```
 
-After that just run `gulpfile` with `node` directly from the command line
+After that just run the `gulpfile` with `node` directly from the command line
 
 ```sh
 node gulpfile.js --tasks default watch serve
 ```
 
-If no argument are given the `default` task will run instead (as gulp does).
+If no arguments are given the `default` task will run instead (as gulp does).
 
 - _What about the CLI?_
 
