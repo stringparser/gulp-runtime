@@ -2,8 +2,6 @@
 
 [![build][badge-build]][travis-build]
 
-> an alternate interface to [`vinyl-fs`][vinylFs]
-
 [install](#install) -
 [docs](#docs) -
 [why](#why) -

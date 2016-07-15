@@ -50,17 +50,17 @@ async composers
 
 The module comes with the same [gulp API][gulp-api] methods we know and love
 
-- [gulp.src](#gulptask)
-- [gulp.dest](#gulptask)
-- [gulp.task](#gulptask)
-- [gulp.watch](#gulptask)
+[gulp.src](#gulptask) |
+[gulp.dest](#gulptask) |
+[gulp.task](#gulptask) |
+[gulp.watch](#gulptask)
 
 and 4 more
 
-- [gulp.start](#gulpstart)
-- [gulp.stack](#gulpstack)
-- [gulp.series](#gulpseries)
-- [gulp.parallel](#gulpparallel)
+[gulp.start](#gulpstart) |
+[gulp.stack](#gulpstack) |
+[gulp.series](#gulpseries) |
+[gulp.parallel](#gulpparallel)
 
 ### gulp.task
 
