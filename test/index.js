@@ -12,6 +12,7 @@ util.lib.log = function () {
 
 var tests = [
   'create.js',
+  'start.js',
   'task.js',
   'cli.js',
   'watch.js'

@@ -270,8 +270,8 @@ Gulp.prototype.start = function(/* arguments */){
     tasks = arguments[0];
   }
 
-  this.stack.apply(this, tasks.length ? tasks : ['default'])(args);
-  return this;
+  var composer = this.stack.apply(this, tasks.length ? tasks : ['default']);
+  return composer.apply(this, args);
 };
 
 Gulp.prototype.series = function(/* arguments */){
