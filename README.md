@@ -12,7 +12,7 @@
  - [Instances](docs/README.md#multiple-instances)
  - [REPL with autocomplete](docs/README.md#repl-with-autocomplete)
  - [gulp API and some extra methods](docs/README.md#gulp-api-and-more)
- - [Tasks names :can with :parameters](docs/README.md#tasks-with-parameters)
+ - [Tasks :names with :parameters](docs/README.md#tasks-with-parameters)
 
 ### samples
 
@@ -89,6 +89,10 @@ styles.task('less', function (done, sources, dest) {
     .pipe(less(options.less))
     .pipe(gulp.dest(dest));
 });
+
+styles.task('default', ['less']);
+
+module.exports = styles;
 ```
 
 ---
@@ -113,9 +117,7 @@ node gulpfile.js
 
 which will run a REPL with the tasks defined.
 
-> As long as the gulp instance specifies `repl: true`
-> their tasks will be added to the REPL.
-> See more in [gulp-repl][gulp-repl]
+> [See more](./docs/README.md#REPL)
 
 ### install
 
@@ -142,7 +144,6 @@ But well oh well, here we are.
 [npm]: npmjs.com/gulp-runtime
 [license]: opensource.org/licenses/MIT
 [vinylFs]: npmjs.com/package/vinyl-fs
-[gulp-repl]: github.com/stringparser/gulp-repl
 [travis-build]: travis-ci.org/stringparser/gulp-runtime/builds
 
 [badge-build]: http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square

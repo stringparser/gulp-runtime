@@ -8,11 +8,11 @@ async composers
 
 ## setup
 
-_gulp what?_ If you don't know gulp [go here first][gulp]
+`gulp`? If you don't know about gulp [go here first][gulp]
 
-_install the module_ `npm install --save-dev gulp-runtime`
+Install. `npm install --save-dev gulp-runtime`
 
-_Open that `gulpfile` (or [create one][example-gulpfile]_) and change this
+Open that `gulpfile` or [create one][example-gulpfile]) and change this
 
 ```js
 var gulp = require('gulp');
@@ -32,7 +32,7 @@ node gulpfile.js default watch serve
 
 If no arguments are given the `default` task will run instead (as gulp does).
 
-- _What about the CLI?_
+__What about the CLI?__
 
 Add an alias to your `.bashrc`/`.zshrc`
 
@@ -72,9 +72,9 @@ function create(Object options)
 
 `Gulp.create` creates a new `gulp` instance with the given `options`. These options default to:
 
- - `options.log = true`, pass `false` for an instance with no logging
- - `options.repl = false`, by default the REPL is deactivated
- - `options.wait = false`, by default all tasks are run in __parallel__ set to `true` for this instance to run tasks in `series` always
+ - `options.log = true` if `false` the instance will have no logging
+ - `options.repl = false` the REPL is deactivated by default
+ - `options.wait = false` tasks run in __parallel__. Set to `true` to always run tasks in `series`
 
 > Is more convenient to use `create` instead of `new Gulp` but its up to you
 
@@ -167,7 +167,7 @@ ___
 function start(Array tasks, args...)
 ```
 
-If the `tasks` is an array these will be the tasks to run (either `string` or `function`) and the rest of arguments are passed to the tasks that will run.
+If `tasks` is an array it will be taken as the tasks to run (`strings` and/or `functions`). The rest of arguments are passed down.
 
 ```js
 var gulp = require('gulp-runtime').create();
