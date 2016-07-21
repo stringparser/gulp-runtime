@@ -1,44 +1,66 @@
+> Find something missing? [Open an issue](open-an-issue)
+
 # documentation
 
-API -
-REPL -
-instances -
-task params -
-async composers
+[API](#api) -
+[REPL](#repl) -
+[instances](#instances) -
+[task params](#gulptask) -
+[async composers](#async-composers)
 
-## setup
+## Setup
 
-`gulp`? If you don't know about gulp [go here first][gulp]
+1. You don't know gulp? [First go here][gulp-what-is]
 
-Install. `npm install --save-dev gulp-runtime`
+2. Install `npm install --save-dev gulp-runtime`
 
-Open that `gulpfile` or [create one][example-gulpfile]) and change this
+3. Open a `gulpfile` (or [create one][example-gulpfile]) and change this line
 
-```js
-var gulp = require('gulp');
-```
+  ```js
+  var gulp = require('gulp');
+  ```
 
-with
+  with
 
-```js
-var gulp = require('gulp-runtime').create();
-```
+  ```js
+  var gulp = require('gulp-runtime').create();
+  ```
 
-After that just run the `gulpfile` with `node` directly from the command line
+  After that run the `gulpfile` with `node` directly from the command line
 
-```sh
-node gulpfile.js default watch serve
-```
+  ```sh
+  node gulpfile.js default watch serve
+  ```
 
-If no arguments are given the `default` task will run instead (as gulp does).
+  Thats it! If no arguments are given after the gulpfile the `default` task will run instead.
 
-__What about the CLI?__
+4. What about the CLI? Can I run `gulp` from the terminal?
 
-Add an alias to your `.bashrc`/`.zshrc`
+  Yes. Just add an alias to your `.bashrc`/`.zshrc`
 
-```sh
-rulp='node gulpfile.js'
-```
+  ```sh
+  alias gulp-runtime='node $(find . -name "gulpfile.js" -not -path "./node_modules/*" | head -n1)'
+  ```
+
+  (or change it to your preferences). With that you can use
+
+  `gulp-runtime --tasks default watch serve`
+
+  directly from the terminal.
+
+5. And what about CLI commands like `--tasks`, `--version`, etc.?
+
+  Each of the [gulp cli][https://github.com/gulpjs/gulp/blob/master/docs/CLI.md] commands is defined as a task for the instance. So you can use these as you would with normal tasks.
+
+  Example:
+
+  ```js
+  var gulp = require('gulp-runtime').create();
+
+  gulp.task('info', ['--tasks', '--version']);
+  // other tasks...
+  gulp.task('default', ['info']);
+  ```
 
 ## API
 
@@ -72,11 +94,9 @@ function create(Object options)
 
 `Gulp.create` creates a new `gulp` instance with the given `options`. These options default to:
 
- - `options.log = true` if `false` the instance will have no logging
- - `options.repl = false` the REPL is deactivated by default
- - `options.wait = false` tasks run in __parallel__. Set to `true` to always run tasks in `series`
-
-> Is more convenient to use `create` instead of `new Gulp` but its up to you
+- `options.log = true` if `false` the instance will have no logging
+- `options.repl = false` no REPL by default
+- `options.wait = false` tasks run in __parallel__ by default. Pass `wait: true` to run tasks in __series__
 
 ### Gulp.createClass
 
@@ -84,7 +104,7 @@ function create(Object options)
 function createClass(Object mixin)
 ```
 
-`Gulp.createClass` creates a new `Gulp` class with the given `mixin` mixed in with its parent prototype. If you give a `mixin.create` it will be used as constructor instead of using a placeholder function for the constructor.
+`Gulp.createClass` creates a new `Gulp` class with the given `mixin` mixed in with its parent prototype. If `mixin.create` is given it will be used as constructor.
 
 Example:
 
@@ -99,13 +119,11 @@ var Gulp = require('gulp-runtime').createClass({
 })
 ```
 
-> This method was needed to create gulp-runtime from [runtime][runtime]
-
 ### gulp.task
 
 `gulp.src`, `gulp.dest`, `gulp.watch` and `gulp.task` behave the same as described in the [`gulp` API documentation][gulp-api].
 
-In addition, `gulp.task` can also define tasks using `:parameters`.
+In addition `gulp.task` task names can also have `:parameters` (like expressjs routes).
 
 Example:
 
@@ -118,7 +136,7 @@ gulp.task('build:mode', function (done) {
 });
 ```
 
-You could also use a regular expression right after `:mode`
+or even have regular expression right after the parameter
 
 ```js
 var gulp = require('gulp-runtime').create();
@@ -128,11 +146,7 @@ gulp.task('build:mode(-dev|-prod)', function (done){
 });
 ```
 
-Task can be defined in any order.
-
-_What? Regular expressions?_
-
-If you care about this part continue here [parth][parth].
+The parameters are defined using [parth][parth]. There you will find more information about what qualifies as parameter and what not.
 
 ### gulp.start
 
@@ -161,13 +175,13 @@ gulp.task('thing', function (done){
 
 gulp.start(build, 'thing');
 ```
-___
+Or, in order to give arguments to the tasks, you can use
 
 ```js
-function start(Array tasks, args...)
+function start(Array tasks, args...[, onStackEnd])
 ```
 
-If `tasks` is an array it will be taken as the tasks to run (`strings` and/or `functions`). The rest of arguments are passed down.
+If `tasks` is an array it will be taken as the tasks to run and the rest of arguments are passed down. If the last argument is a function it will be called when all of the given `tasks` are finished.
 
 ```js
 var gulp = require('gulp-runtime').create();
@@ -269,6 +283,8 @@ The down side is that the REPL will run the first matching task from those insta
 [parth]: https://github.com/stringparser/parth
 [license]: http://opensource.org/licenses/MIT
 [runtime]: https://github.com/stringparser/runtime
-[gulp-api]: https://github.com/gulpjs/gulp/blob/master/docs/API.md
-[new-issue]: https://github.com/stringparser/gulp-runtime/issues/new
+[open-a-issue]: https://github.com/stringparser/gulp-runtime/issues/new
 [example-gulpfile]: https://github.com/gulpjs/gulp#sample-gulpfilejs
+
+[gulp-api]: https://github.com/gulpjs/gulp/blob/master/docs/API.md
+[gulp-what-is]: https://github.com/gulpjs/gulp#what-is-gulp

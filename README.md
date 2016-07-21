@@ -9,9 +9,9 @@
 
 ### features
 
- - [Instances](docs/README.md#multiple-instances)
- - [REPL with autocomplete](docs/README.md#repl-with-autocomplete)
- - [gulp API and some extra methods](docs/README.md#gulp-api-and-more)
+ - [Instances](docs/README.md#instances)
+ - [REPL with autocomplete](docs/README.md#repl)
+ - [gulp API and some extra methods](docs/README.md#api)
  - [Tasks :names with :parameters](docs/README.md#tasks-with-parameters)
 
 ### samples
