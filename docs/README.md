@@ -1,12 +1,14 @@
 > Find something missing? [Open an issue](open-an-issue)
 
-# documentation
+---
 
 [API](#api) -
 [REPL](#repl) -
 [instances](#instances) -
 [task params](#gulptask) -
 [async composers](#async-composers)
+
+# documentation
 
 ## Setup
 
