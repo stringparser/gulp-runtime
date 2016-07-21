@@ -1,20 +1,15 @@
 > Find something missing? [Open an issue](open-an-issue)
 
-[API](#api):
-
-  [gulp.src](#gulptask) -
-  [gulp.dest](#gulptask) -
-  [gulp.task](#gulptask) -
-  [gulp.watch](#gulptask) -
-  [gulp.start](#gulpstart) -
-  [gulp.stack](#async-composers) -
-  [gulp.series](#async-composers) -
-  [gulp.parallel](#async-composers)
-
-[REPL](#repl) -
-[instances](#instances) -
-[task params](#gulptask) -
-[async composers](#async-composers)
+[Gulp.create](#gulpcreate) -
+[Gulp.createClass](#gulpcreateclass) </br>
+[gulp.src](#gulptask) -
+[gulp.dest](#gulptask) -
+[gulp.task](#gulptask) -
+[gulp.watch](#gulptask) </br>
+[gulp.start](#gulpstart) -
+[gulp.stack](#async-composers) -
+[gulp.series](#async-composers) -
+[gulp.parallel](#async-composers)
 
 # documentation
 
