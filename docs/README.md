@@ -50,7 +50,7 @@
 
 5. And what about CLI commands like `--tasks`, `--version`, etc.?
 
-  Each of the [gulp cli][https://github.com/gulpjs/gulp/blob/master/docs/CLI.md] commands is defined as a task for the instance. So you can use these as you would with normal tasks.
+  Each of the [gulp cli](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md) commands is defined as a task for the instance. So you can use these as you would with normal tasks.
 
   Example:
 
