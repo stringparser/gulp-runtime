@@ -84,9 +84,11 @@ When you require the module
 var Gulp = require('gulp-runtime');
 ```
 
-you get a constructor with 2 static methods
+you get a constructor
 
-### Gulp.create
+### Static methods
+
+#### Gulp.create
 
 ```js
 function create(Object options)
@@ -98,7 +100,7 @@ function create(Object options)
 - `options.repl = false` no REPL by default
 - `options.wait = false` tasks run in __parallel__ by default. Pass `wait: true` to run tasks in __series__
 
-### Gulp.createClass
+#### Gulp.createClass
 
 ```js
 function createClass(Object mixin)
@@ -119,7 +121,9 @@ var Gulp = require('gulp-runtime').createClass({
 })
 ```
 
-### gulp.task
+### Instance methods
+
+#### gulp.task
 
 `gulp.src`, `gulp.dest`, `gulp.watch` and `gulp.task` behave the same as described in the [`gulp` API documentation][gulp-api].
 
@@ -148,7 +152,7 @@ gulp.task('build:mode(-dev|-prod)', function (done){
 
 The parameters are defined using [parth][parth]. There you will find more information about what qualifies as parameter and what not.
 
-### gulp.start
+#### gulp.start
 
 `gulp.start` can be used in two ways
 
@@ -208,25 +212,6 @@ gulp.task('default', function (done) {
 });
 ```
 
-## REPL
-
-```js
-var gulp = require('gulp-runtime').create({repl: true});
-```
-
-When an instance passes `repl: true` the process running will not stop but wait and have a REPL listening on `stdin`. This way you can run tasks in the same way you run commands on the terminal.
-
-```js
-node gulpfile.js
-# some task logging here...
-# when done press enter
-> build less compress png
-```
-
-- If those tasks are defined they will run in __parallel__
-- If there is more than one instance with `repl: true` the REPL will go through them and run the first task that matched one of those tasks
-- If one or more of those tasks is not defined there will be a warning and none of the tasks will run for that instance of any of the other ones
-
 ## async composers
 
 `gulp.start` is not enough when you need to compose tasks since it runs them. If you want to compose tasks, you need another function that will run a set of tasks.
@@ -269,6 +254,25 @@ function stack(tasks...[, Object options])
   - `options.onHandleEnd` if given, will run after a task has ended
   - `options.onHandleError` if given, will run when a task errors
   - `options.onStackEnd` if given, will run when all of the stacked functions have ended (including error)
+
+## REPL
+
+```js
+var gulp = require('gulp-runtime').create({repl: true});
+```
+
+When an instance passes `repl: true` the process running will not stop but wait and have a REPL listening on `stdin`. This way you can run tasks in the same way you run commands on the terminal.
+
+```js
+node gulpfile.js
+# some task logging here...
+# when done press enter
+> build less compress png
+```
+
+- If those tasks are defined they will run in __parallel__
+- If there is more than one instance with `repl: true` the REPL will go through them and run the first task that matched one of those tasks
+- If one or more of those tasks is not defined there will be a warning and none of the tasks will run for that instance of any of the other ones
 
 ## instances
 
