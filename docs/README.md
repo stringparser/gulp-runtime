@@ -123,6 +123,8 @@ var Gulp = require('gulp-runtime').createClass({
 
 ### Instance methods
 
+Exactly, instances. You can split builds into instances within the same process and run them separately.
+
 #### gulp.task
 
 `gulp.src`, `gulp.dest`, `gulp.watch` and `gulp.task` behave the same as described in the [`gulp` API documentation][gulp-api].
@@ -212,13 +214,13 @@ gulp.task('default', function (done) {
 });
 ```
 
-## async composers
+### async composers
 
 `gulp.start` is not enough when you need to compose tasks since it runs them. If you want to compose tasks, you need another function that will run a set of tasks.
 
 So, just as tasks dependencies bundle in one task others, we have 3 async composer functions to help with this (in fact there is only one function and two others are sugar on top).
 
-### gulp.series
+#### gulp.series
 
 ```js
 function series(tasks...[, Object options])
@@ -228,7 +230,7 @@ function series(tasks...[, Object options])
 
 Its sugar on top of [`gulp.stack`][#gulpstack] to force the tasks to be run in series.
 
-### gulp.parallel
+#### gulp.parallel
 
 ```js
 function parallel(tasks...[, Object options])
@@ -238,7 +240,7 @@ function parallel(tasks...[, Object options])
 
 Its sugar on top of [`gulp.stack`][#gulpstack] to force the tasks to be run in series.
 
-### gulp.stack
+#### gulp.stack
 
 ```js
 function stack(tasks...[, Object options])
@@ -272,13 +274,7 @@ node gulpfile.js
 
 - If those tasks are defined they will run in __parallel__
 - If there is more than one instance with `repl: true` the REPL will go through them and run the first task that matched one of those tasks
-- If one or more of those tasks is not defined there will be a warning and none of the tasks will run for that instance of any of the other ones
-
-## instances
-
-Exactly, instances. That means that you can split builds into instances within the same process and run them separately. Which is a bit better than taking care of naming or spin another process to run them separated. This is also better for performance since all of the modules that may be used by other build can be reused.
-
-The down side is that the REPL will run the first matching task from those instances that use a REPL.
+- If one or more of those tasks is not defined there will be a warning and none of the tasks will run for that instance of any of the other ones.
 
 <!-- links -->
 
