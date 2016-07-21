@@ -1,11 +1,11 @@
 > Find something missing? [Open an issue](open-an-issue)
 
 [Gulp.create](#gulpcreate) -
-[Gulp.createClass](#gulpcreateclass) </br>
+[Gulp.createClass](#gulpcreateclass) |
 [gulp.src](#gulptask) -
 [gulp.dest](#gulptask) -
 [gulp.task](#gulptask) -
-[gulp.watch](#gulptask) </br>
+[gulp.watch](#gulptask) |
 [gulp.start](#gulpstart) -
 [gulp.stack](#async-composers) -
 [gulp.series](#async-composers) -
