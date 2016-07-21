@@ -10,10 +10,10 @@ exports = module.exports = function(Gulp){
       onStackEnd: check
     });
 
-    gulp.task(':number', function(next){
+    gulp.task(':taskName', function(next){
       var self = this;
       setTimeout(function(){
-        result.push(self.match);
+        result.push(self.params.taskName);
         next();
       }, Math.random() * 10);
     });
@@ -31,10 +31,10 @@ exports = module.exports = function(Gulp){
     var gulp = Gulp.create({ onHandleError: done });
     var values = ['one', 'two', 'three', 'four'];
 
-    gulp.task(':number', function(next, pile){
+    gulp.task(':taskName', function(next, pile){
       var self = this;
       setTimeout(function(){
-        pile.push(self.match);
+        pile.push(self.params.taskName);
         next(pile);
       }, Math.random() * 20);
     });
