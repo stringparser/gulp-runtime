@@ -9,7 +9,7 @@
 
 ### features
 
- - [Instances](docs/README.md#instances)
+ - [CLI as tasks](docs/README.md#cli)
  - [REPL with autocomplete](docs/README.md#repl)
  - [gulp API and some extra methods](docs/README.md#api)
  - [Tasks :names with :parameters](docs/README.md#tasks-with-parameters)
@@ -129,9 +129,15 @@ npm install --save-dev gulp-runtime
 
 ### why
 
-I wanted to do a REPL for gulp because it was missing for me and on its own way, is the ultimate `define and use as use as you like` kind of thing. Of course, then, more and more stuff had to go in and, more importantly, the REPL had to behave in such a way that it could be used mostly like the terminal does (autocompletion, etc.).
+When I started to use `gulp` it soon came to mind `I want a REPL`. Mainly because a REPL is the closest to `define and use as you like` kind of thing. But there is a CLI and the tasks should also go in which lead to figure out how tasks can be composed which quickly needed for more and more things to go in.
 
-So it got out of hand :D.
+- How would it look like to have a REPL that runs tasks?
+- If so, the REPL should have completion, right?
+- What would happen if there are several instances trying to have a REPL?
+- What if we could add parameters to the task names as in expressjs routes?
+- What if I want to compose tasks made of other tasks or just functions not only give dependencies as an array of strings to bundle with the task defined?
+
+So yeah, it got out of hand :D.
 
 But well oh well, here we are.
 
