@@ -1,26 +1,31 @@
 > Find something missing? [Open an issue](open-an-issue)
 
-#### index
-
-create: [Gulp.create](#gulpcreate) - [Gulp.createClass](#gulpcreateclass) <br>
-definition: [gulp.task](#gulptask) -
-[gulp.src](#gulptask) -
-[gulp.dest](#gulptask) -
-[gulp.watch](#gulptask) <br>
-composition: [gulp.start](#gulpstart) -
-[gulp.stack](#async-composers) -
-[gulp.series](#async-composers) -
-[gulp.parallel](#async-composers)
-
 # documentation
+
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
+
+- [Setup](#setup)
+- [API](#api)
+  - [Static methods](#static-methods)
+    - [Gulp.create](#gulpcreate)
+    - [Gulp.createClass](#gulpcreateclass)
+  - [Instance methods](#instance-methods)
+    - [gulp.task](#gulptask)
+    - [gulp.start](#gulpstart)
+  - [async composers](#async-composers)
+    - [gulp.series](#gulpseries)
+    - [gulp.parallel](#gulpparallel)
+    - [gulp.stack](#gulpstack)
+- [CLI](#cli)
+- [REPL](#repl)
+
+<!-- /TOC -->
 
 ## Setup
 
-1. You don't know gulp? [First go here][gulp-what-is]
+1. Install `npm install --save-dev gulp-runtime`
 
-2. Install `npm install --save-dev gulp-runtime`
-
-3. Open a `gulpfile` (or [create one][example-gulpfile]) and change this line
+2. Open a `gulpfile`, or [create one][example-gulpfile], and change this line
 
   ```js
   var gulp = require('gulp');
@@ -38,35 +43,19 @@ composition: [gulp.start](#gulpstart) -
   node gulpfile.js default watch serve
   ```
 
-  Thats it! If no arguments are given after the gulpfile the `default` task will run instead.
+  Thats it! When no arguments are given after `gulpfile` the `default` task will run instead.
 
-4. What about the CLI? Can I run `gulp` from the terminal?
+3. What about the CLI? Can I run `gulp` from the terminal?
 
-  Yes. Just add an alias to your `.bashrc`/`.zshrc`
+  Yes. Just add an alias line to your `.bashrc`/`.zshrc`
 
   ```sh
   alias gulp-runtime='node $(find . -name "gulpfile.js" -not -path "./node_modules/*" | head -n1)'
   ```
 
-  (or change it to your preferences). With that you can use
+  which will run the first `gulpfile.js` found excluding `node_moduldes`. Open a new terminal tab and then you can do
 
   `gulp-runtime --tasks default watch serve`
-
-  directly from the terminal.
-
-5. And what about CLI commands like `--tasks`, `--version`, etc.?
-
-  Each of the [gulp cli](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md) commands is defined as a task for the instance. So you can use these as you would with normal tasks.
-
-  Example:
-
-  ```js
-  var gulp = require('gulp-runtime').create();
-
-  gulp.task('info', ['--tasks', '--version']);
-  // other tasks...
-  gulp.task('default', ['info']);
-  ```
 
 ## API
 
@@ -80,9 +69,11 @@ The module comes with the same [gulp API][gulp-api] methods we know and love
 and 4 more
 
 [gulp.start](#gulpstart) -
-[gulp.stack](#async-composers) -
-[gulp.series](#async-composers) -
-[gulp.parallel](#async-composers)
+[gulp.stack](#gulpstack) -
+[gulp.series](#gulpseries) -
+[gulp.parallel](#gulpparallel)
+
+### Static methods
 
 When you require the module
 
@@ -90,9 +81,7 @@ When you require the module
 var Gulp = require('gulp-runtime');
 ```
 
-you get a constructor
-
-### Static methods
+you get a constructor with two methods `Gulp.create` and `Gulp.createClass`.
 
 #### Gulp.create
 
@@ -100,11 +89,11 @@ you get a constructor
 function create(Object options)
 ```
 
-`Gulp.create` creates a new `gulp` instance with the given `options`. These options default to:
+`Gulp.create` creates a new instance with the given `options`. These options default to:
 
 - `options.log = true` if `false` the instance will have no logging
 - `options.repl = false` no REPL by default
-- `options.wait = false` tasks run in __parallel__ by default. Pass `wait: true` to run tasks in __series__
+- `options.wait = false` tasks run in __parallel__ by default. Pass `wait: true` to run tasks in __series__ by default
 
 #### Gulp.createClass
 
@@ -112,11 +101,15 @@ function create(Object options)
 function createClass(Object mixin)
 ```
 
-`Gulp.createClass` creates a new `Gulp` class with the given `mixin` mixed in with its parent prototype. If `mixin.create` is given it will be used as constructor.
+`Gulp.createClass` creates a new class. `mixin` is mixed in with its parent prototype. If `mixin.create` is given it will be used as constructor.
 
 Example:
 
+Say we always want to create instances that log and have a REPL.
+
 ```js
+// myGulpConstructor.js
+
 var Gulp = require('gulp-runtime').createClass({
   create: function Gulp (options) {
     options = options || {};
@@ -125,17 +118,19 @@ var Gulp = require('gulp-runtime').createClass({
     Gulp.super_.call(this, options);
   }
 })
+
+module.exports = Gulp;
 ```
 
 ### Instance methods
 
-Exactly, instances. You can split builds into instances within the same process and run them separately.
+You can split builds into instances within the same process and run them separately.
 
 #### gulp.task
 
-`gulp.src`, `gulp.dest`, `gulp.watch` and `gulp.task` behave the same as described in the [`gulp` API documentation][gulp-api].
+`gulp.src`, `gulp.dest`, `gulp.watch` and `gulp.task` behaves the same as described in the [`gulp` API documentation][gulp-api].
 
-In addition `gulp.task` task names can also have `:parameters` (like expressjs routes).
+In addition `gulp.task` names can also have `:parameters` (like expressjs routes).
 
 Example:
 
@@ -148,7 +143,9 @@ gulp.task('build:mode', function (done) {
 });
 ```
 
-or even have regular expression right after the parameter
+`done` will be always passed as first argument to the task. It should be used if the task does not return a stream, promise or [RxJS][RxJS] observable.
+
+Tasks parameters can also contain use regular expressions
 
 ```js
 var gulp = require('gulp-runtime').create();
@@ -158,7 +155,7 @@ gulp.task('build:mode(-dev|-prod)', function (done){
 });
 ```
 
-The parameters are defined using [parth][parth]. There you will find more information about what qualifies as parameter and what not.
+Task names are set using [parth][parth]. If you want to know more there you will find more information about how far these can go.
 
 #### gulp.start
 
@@ -168,7 +165,7 @@ The parameters are defined using [parth][parth]. There you will find more inform
 function start(tasks...)
 ```
 
-Runs any number of `tasks...` given in __parallel__.
+Runs any number of `tasks...` given. They will run __parallel__ by default. If the gulp instance was created with `wait: true` they will in __series__ instead.
 
 `tasks...` can be either a `string` (matching one of the tasks registered) or a `function`.
 
@@ -182,18 +179,19 @@ function build(done){
 }
 
 gulp.task('thing', function (done){
- setTimeout(done, 100);
+ setTimeout(done, Math.random()*10);
 });
 
 gulp.start(build, 'thing');
 ```
-Or, in order to give arguments to the tasks, you can use
+
+Which is good, but still limits `gulp.start` to the way the tasks were defined. For this reason you can also pass arguments in a more functional way.
 
 ```js
 function start(Array tasks, args...[, onStackEnd])
 ```
 
-If `tasks` is an array it will be taken as the tasks to run and the rest of arguments are passed down. If the last argument is a function it will be called when all of the given `tasks` are finished.
+If `tasks` is an array, these will run with the given `args...`. The last argument may not be a function. If the last argument is a function it will be called when all of the given `tasks` are finished.
 
 ```js
 var gulp = require('gulp-runtime').create();
@@ -222,9 +220,9 @@ gulp.task('default', function (done) {
 
 ### async composers
 
-`gulp.start` is not enough when you need to compose tasks since it runs them. If you want to compose tasks, you need another function that will run a set of tasks.
+`gulp.start` just runs tasks which is not enough when you only need to compose them. For this reason we need another function that will bundle and run a set of tasks only when called.
 
-So, just as tasks dependencies bundle in one task others, we have 3 async composer functions to help with this (in fact there is only one function and two others are sugar on top).
+Just as tasks dependencies bundles into one task others, we have 3 async composer functions to help with this (in fact there is only one function and two others are sugar on top).
 
 #### gulp.series
 
@@ -263,20 +261,42 @@ function stack(tasks...[, Object options])
   - `options.onHandleError` if given, will run when a task errors
   - `options.onStackEnd` if given, will run when all of the stacked functions have ended (including error)
 
+## CLI
+
+The initial aim of this project was to be able to run gulp tasks directly from a  REPL. But when that was then possible, one also wants to be able to run the CLI while using the REPL, right?
+
+For this reason each of the [gulp cli](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md) commands is defined as a task for the instance. This way you can use these as you would with normal tasks.
+
+Example:
+
+```js
+var gulp = require('gulp-runtime').create();
+
+gulp.task('info', ['--tasks', '--version']);
+// other tasks...
+gulp.task('default', ['info']);
+```
+
 ## REPL
 
 ```js
 var gulp = require('gulp-runtime').create({repl: true});
 ```
 
-When an instance passes `repl: true` the process running will not stop but wait and have a REPL listening on `stdin`. This way you can run tasks in the same way you run commands on the terminal.
+When an instance passes `repl: true` the process running will not exit when all tasks are done, instead it will wait and have a REPL listening on `stdin`. This way you can run tasks in the same way you run commands on the terminal.
 
-```js
-node gulpfile.js
-# some task logging here...
-# when done press enter
+```sh
+$ node gulpfile.js
+```
+
+press enter and you will see a prompt `>` that will run the tasks defined in the gulpfile
+
+```sh
+>
 > build less compress png
 ```
+
+How will tasks run with the REPL?
 
 - If those tasks are defined they will run in __parallel__
 - If there is more than one instance with `repl: true` the REPL will go through them and run the first task that matched one of those tasks
@@ -286,6 +306,7 @@ node gulpfile.js
 
 [npm]: https://npmjs.com/gulp-runtime
 [gulp]: https://github.com/gulpjs/gulp
+[RxJs]: https://github.com/Reactive-Extensions/RxJS
 [parth]: https://github.com/stringparser/parth
 [license]: http://opensource.org/licenses/MIT
 [runtime]: https://github.com/stringparser/runtime
