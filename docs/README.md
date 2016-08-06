@@ -1,37 +1,41 @@
 > Found something wrong or missing? [Open an issue!](open-an-issue)
 
-# documentation
+<h1>documentation</h1>
 
-The module comes with 2 static methods: [Gulp.create](#gulpcreate) -
+<h4>Table of contents</h4>
+
+<!-- TOC depthFrom:1 depthTo:4 withLinks:1 updateOnSave:0 orderedList:0 -->
+
+- [Setup](#setup)
+- [API](#api)
+	- [Gulp.create](#gulpcreate)
+	- [Gulp.createClass](#gulpcreateclass)
+	- [gulp.task](#gulptask)
+	- [gulp.series](#gulpseries)
+	- [gulp.parallel](#gulpparallel)
+	- [gulp.stack](#gulpstack)
+- [CLI](#cli)
+- [REPL](#repl)
+
+<h2>Introduction</h2>
+
+The module has 2 static methods
+
+[Gulp.create](#gulpcreate) -
 [Gulp.createClass](#gulpcreateclass)
 
-The same [gulp API][gulp-api] methods we know and love: [gulp.src](#gulptask) -
+the same [gulp API][gulp-api] methods we know and love
+
+[gulp.src](#gulptask) -
 [gulp.dest](#gulptask) -
 [gulp.task](#gulptask) -
 [gulp.watch](#gulptask)
 
-And 4 more to bundle/run tasks: [gulp.start](#gulpstart) -
-[gulp.stack](#gulpstack) -
+and 3 more to bundle/run tasks
+
 [gulp.series](#gulpseries) -
-[gulp.parallel](#gulpparallel)
-
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
-
-Table of contents:
-
-- [Setup](#setup)
-- [API](#api)
-  - [Static methods](#static-methods)
-    - [Gulp.create](#gulpcreate)
-    - [Gulp.createClass](#gulpcreateclass)
-  - [Instance methods](#instance-methods)
-    - [gulp.task](#gulptask)
-    - [gulp.start](#gulpstart)
-    - [gulp.series](#gulpseries)
-    - [gulp.parallel](#gulpparallel)
-    - [gulp.stack](#gulpstack)
-- [CLI](#cli)
-- [REPL](#repl)
+[gulp.parallel](#gulpparallel) -
+[gulp.stack](#gulpstack)
 
 <!-- /TOC -->
 
@@ -59,82 +63,91 @@ Table of contents:
   node gulpfile.js default watch serve
   ```
 
-  Thats it! When no arguments are given after `gulpfile` the `default` task will run instead.
+  Thats it! When no arguments are given the `default` task will run instead.
 
 3. What about the CLI? Can I just run `gulp-runtime` from the terminal?
 
-  Yes. Just add an alias to your `.bashrc`/`.zshrc`
+  Yes. For this add an alias to your `.bashrc`/`.zshrc`
 
   ```sh
   alias gulp-runtime='node $(find . -name "gulpfile.js" -not -path "./node_modules/*" | head -n1)'
   ```
 
-  which will use the first `gulpfile.js` found excluding `node_modules`.
+  which will use the first `gulpfile.js` found in the current working directory excluding `node_modules`.
 
-  Open a new terminal tab and then
+  Right after this open a new terminal tab and write
 
   `gulp-runtime --tasks default watch serve`
 
 ## API
 
-### Static methods
+<h3> Static methods </h3>
 
-When you require the module
+The module exports a constructor function
 
 ```js
 var Gulp = require('gulp-runtime');
 ```
 
-you get a constructor with two methods `Gulp.create` and `Gulp.createClass`.
+which has two static methods: `Gulp.create` and `Gulp.createClass`.
 
 #### Gulp.create
 
 ```js
-function create(Object options)
+function create([Object props])
 ```
 
-`Gulp.create` creates a new instance with the given `options`. These options default to:
+`Gulp.create` returns a new instance with the given `props`.
 
-- `options.log = true` if `false` the instance will have no logging
-- `options.repl = false` no REPL by default
-- `options.wait = false` tasks run in __parallel__ by default. Pass `wait: true` to make __series__ the default when running tasks
+Defaults are:
+
+- `props.log = true` task logging is enabled, pass `false` to disable it
+- `props.repl = false` the REPL is disabled, pass `true` to enable it
+- `props.wait = false` tasks will run in **parallel** by default. Pass `wait: true` to make **series** the default when running tasks
+
+- `props.onStackEnd` called when a stack has ended, defaults to empty function
+- `props.onHandleEnd` called after a task has ended, defaults to empty function
+- `props.onHandleStart` called before a task starts, defaults to empty function
+- `props.onHandleError` called when a task throws, defaults to empty function
+
+These callbacks can be overridden [`gulp.series`](#gulpseries), [`gulp.parallel`](#gulpparallel) and [`gulp.stack`](#gulpstack).
 
 #### Gulp.createClass
 
 ```js
-function createClass(Object mixin)
+function createClass([Object mixin])
 ```
 
-`Gulp.createClass` creates a new class. `mixin` is mixed in with its parent prototype. If `mixin.create` is given it will be used as constructor.
+`Gulp.createClass` returns a new constructor function that inherits from its parent prototype.
+
+- When `mixin` is given it overrides its parent prototype.
+- When `mixin.create` is given it will be used as the instance constructor.
 
 Example:
 
-Say we always want to create instances that log and have a REPL.
+Say we always want to make instances that log and have a REPL.
 
 ```js
-// myGulpConstructor.js
-
 var Gulp = require('gulp-runtime').createClass({
-  create: function Gulp (options) {
-    options = options || {};
-    options.log = true;
-    options.repl = true;
-    Gulp.super_.call(this, options);
+  create: function Gulp (props) {
+    props = props || {};
+    props.log = props.repl = true;
+    Gulp.super_.call(this, props);
   }
-})
+});
 
 exports = module.exports = Gulp;
 ```
 
-### Instance methods
+<h3>Instance methods</h3>
 
 #### gulp.task
 
-`gulp.src`, `gulp.dest`, `gulp.watch` and `gulp.task` behaves the same as described in the [`gulp` API documentation][gulp-api].
+`gulp.src`, `gulp.dest`, `gulp.watch` and `gulp.task` behave the same as described in the [`gulp` API documentation][gulp-api].
 
-In addition `gulp.task` names can also have `:parameters` (like expressjs routes).
+In addition task names can use `:parameters` (like expressjs routes) and have `arguments` passed from other task or task runner.
 
-Example:
+`:parameters` example:
 
 ```js
 var gulp = require('gulp-runtime').create();
@@ -147,7 +160,7 @@ gulp.task('build:mode', function (done) {
 
 `done` will be always passed as first argument to the task. It should be used if the task does not return a stream, promise or [RxJS][RxJS] observable.
 
-Tasks parameters can also contain use regular expressions
+Tasks parameters can also use regular expressions using parens right after the parameter
 
 ```js
 var gulp = require('gulp-runtime').create();
@@ -157,117 +170,71 @@ gulp.task('build:mode(-dev|-prod)', function (done){
 });
 ```
 
-Task names are set using [parth][parth]. If you want to know more there you will find more information about how far these can go.
+To know more about how this tasks names can be set see [parth][parth].
 
-#### gulp.start
-
-`gulp.start` can be used in two ways
-
-```js
-function start(tasks...)
-```
-
-Runs any number of `tasks...` given. They will run __parallel__ by default. If the gulp instance was created with `wait: true` they will in __series__ instead.
-
-`tasks...` can be either a `string` (matching one of the tasks registered) or a `function`.
-
-Example:
+`arguments` example:
 
 ```js
 var gulp = require('gulp-runtime').create();
 
-function build(done){
-  done(); // or do async things
-}
+gulp.task('build', function (done, sources, dest) {
+  var stream = gulp.src(sources)
+    // some build steps here
 
-gulp.task('thing', function (done){
- setTimeout(done, Math.random()*10);
+  stream.on('end', function () {
+    // pass stream to next task
+    done(stream);
+  });
 });
 
-gulp.start(build, 'thing');
-```
-
-Which is good, but still limits `gulp.start` to the way the tasks were defined. For this reason you can also pass arguments in a more functional way.
-
-```js
-function start(Array tasks, args...[, onStackEnd])
-```
-
-If `tasks` is an array, these will run with the given `args...`. The last argument may not be a function. If the last argument is a function it will be called when all of the given `tasks` are finished.
-
-```js
-var gulp = require('gulp-runtime').create();
-
-function build(done, a, b){
-  done(); // or do async things
-}
-
-gulp.task('watch-serve', function (done, a, b){
- done(); // or do async things
+gulp.task('minify', function (done, stream) {
+  return stream
+    // minify
+    .pipe(gulp.dest(dest));
 });
 
-gulp.task('build dev', function (done, a, b){
-  gulp.start([build, 'watch-serve'], a, b, done);
-  // done will be called when all of the tasks have ended or there is an error
-});
-
-gulp.task('default', function (done) {
-  gulp.start(['build dev'], 'a', 'b', done);
-  // or
-  // gulp.series('build dev')('a', 'b', done);
-  // or
-  // gulp.parallel('build dev')('a', 'b', done);
+gulp.task('build and min', function (done) {
+  gulp.series('build', 'minify')('src/**/*.js', 'dest/source.min.js', done);
 });
 ```
 
-#### async composers
-
-`gulp.start` just runs tasks which is not enough when you only need to compose them. For this reason we need another function that will bundle and run a set of tasks only when called.
-
-Just as tasks dependencies bundles into one task others, we have 3 async composer functions to help with this (in fact there is only one function and two others are sugar on top).
-
-##### gulp.series
+#### gulp.series
 
 ```js
 function series(tasks...[, Object options])
 ```
 
-`gulp.series` stacks the given `tasks...` into one function and returns it. This function __always__ runs all of the defined `tasks...` in __series__.
+`series` bundles the given `tasks...` into one async function and returns it. This function will **always** run the `tasks...` in **series**.
 
-Its sugar on top of [`gulp.stack`][#gulpstack] to force the tasks to be run in series.
+Its sugar on top of [`gulp.stack`][#gulpstack]. See [`gulp.stack`][#gulpstack] for more information about `options`.
 
-##### gulp.parallel
+#### gulp.parallel
 
 ```js
 function parallel(tasks...[, Object options])
 ```
 
-`gulp.series` stacks the given `tasks...` into one function and returns it. This function __always__ runs all of the defined `tasks...` in __parallel__.
+`parallel` bundles the given `tasks...` into one async function and returns it. This function will **always** run the `tasks...` in **parallel**.
 
-Its sugar on top of [`gulp.stack`][#gulpstack] to force the tasks to be run in series.
+Its sugar on top of [`gulp.stack`][#gulpstack]. See [`gulp.stack`][#gulpstack] for more information about `options`.
 
-##### gulp.stack
+#### gulp.stack
 
 ```js
 function stack(tasks...[, Object options])
 ```
 
-`gulp.stack` stacks the given `tasks...` into one function and returns it. A function which by default runs them in __parallel__.
+`stack` bundles the given `tasks...` into one async function and returns it.
 
-`tasks...` can be either `strings` or `functions`
-`options` determines how logging and errors are handled or tasks can be run
+Each `tasks...` can be either a `string` or a `function`.
 
-  - `options.wait`, default `false` for parallel, `true` if tasks should run in series
-  - `options.onHandleStart` if given, will run before a task is run
-  - `options.onHandleEnd` if given, will run after a task has ended
-  - `options.onHandleError` if given, will run when a task errors
-  - `options.onStackEnd` if given, will run when all of the stacked functions have ended (including error)
+If given, `options` will override the instance `props` for this `stack`.
 
 ## CLI
 
 The initial aim of this project was to be able to run gulp tasks directly from a  REPL. But when that was then possible, one also wants to be able to run the CLI while using the REPL, right?
 
-For this reason each of the [gulp cli](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md) commands is defined as a task for the instance. This way you can use these as you would with normal tasks.
+For this reason the [gulp cli](https://github.com/gulpjs/gulp/blob/master/docs/CLI.md) commands are set as tasks for each instance. Which lets one use them as tasks.
 
 Example:
 
@@ -285,7 +252,7 @@ gulp.task('default', ['info']);
 var gulp = require('gulp-runtime').create({repl: true});
 ```
 
-When an instance passes `repl: true` the process running will not exit when all tasks are done, instead it will wait and have a REPL listening on `stdin`. This way you can run tasks in the same way you run commands on the terminal.
+When an instance passes `repl: true` the process running does not exit when all tasks are done. What happens then its that the process will have a REPL listening on `stdin`.
 
 ```sh
 $ node gulpfile.js
@@ -298,11 +265,15 @@ press enter and you will see a prompt `>` that will run the tasks defined in the
 > build less compress png
 ```
 
+This way you can run tasks in the same way you run commands on the terminal.
+
 How will tasks run with the REPL?
 
-- If those tasks are defined they will run in __parallel__
+- If those tasks are defined they will run in **parallel**
 - If there is more than one instance with `repl: true` the REPL will go through them and run the first task that matched one of those tasks
 - If one or more of those tasks is not defined there will be a warning and none of the tasks will run for that instance of any of the other ones.
+
+For more information see [gulp-repl][gulp-repl].
 
 <!-- links -->
 
@@ -312,8 +283,8 @@ How will tasks run with the REPL?
 [parth]: https://github.com/stringparser/parth
 [license]: http://opensource.org/licenses/MIT
 [runtime]: https://github.com/stringparser/runtime
+[gulp-repl]: https://github.com/stringparser/gulp-repl
 [open-a-issue]: https://github.com/stringparser/gulp-runtime/issues/new
 [example-gulpfile]: https://github.com/gulpjs/gulp#sample-gulpfilejs
 
 [gulp-api]: https://github.com/gulpjs/gulp/blob/master/docs/API.md
-[gulp-what-is]: https://github.com/gulpjs/gulp#what-is-gulp
