@@ -1,12 +1,16 @@
 'use strict';
 
+var __slice = Array.prototype.slice;
+
+// deps
 var Parth = require('parth');
 var Runtime = require('runtime');
-var vinylFS = require('vinyl-fs')
+var vinylFS = require('vinyl-fs');
+var gulpREPL = require('gulp-repl');
 
-var cli = require('./lib/cli');
+// local modules
 var util = require('./lib/util');
-var __slice = Array.prototype.slice;
+var gulpCLI = require('./lib/cli');
 
 var Gulp = module.exports = Runtime.createClass({
   src: vinylFS.src,
@@ -18,17 +22,17 @@ var Gulp = module.exports = Runtime.createClass({
     this.log = this.log === void 0 || this.log;
     this.gulpfile = util.getGulpFile();
 
-    if (this.repl) {
-      this.repl = require('gulp-repl')(this);
-      util.log('REPL enabled');
-    }
-
     if (this.log) {
       util.log('Using gulpfile', util.format.path(this.gulpfile));
     }
 
-    // adds cli tasks and run the cli for this instance
-    cli(this);
+    if (this.repl) {
+      this.repl = gulpREPL(this);
+      util.log('REPL enabled');
+    }
+
+    // adds the CLI for this instance and runs it for this
+    gulpCLI(this);
   }
 });
 
