@@ -1,27 +1,23 @@
 > Found something wrong or missing? [Open an issue!](open-an-issue)
 
-The module comes with two static methods
+# documentation
 
-[Gulp.create](#gulpcreate) -
+The module comes with 2 static methods: [Gulp.create](#gulpcreate) -
 [Gulp.createClass](#gulpcreateclass)
 
-and the same [gulp API][gulp-api] methods we know and love
-
-[gulp.src](#gulptask) -
+The same [gulp API][gulp-api] methods we know and love: [gulp.src](#gulptask) -
 [gulp.dest](#gulptask) -
 [gulp.task](#gulptask) -
 [gulp.watch](#gulptask)
 
-and 4 more to bundle/run tasks
-
-[gulp.start](#gulpstart) -
+And 4 more to bundle/run tasks: [gulp.start](#gulpstart) -
 [gulp.stack](#gulpstack) -
 [gulp.series](#gulpseries) -
 [gulp.parallel](#gulpparallel)
 
-# documentation
-
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
+
+Table of contents:
 
 - [Setup](#setup)
 - [API](#api)
@@ -31,10 +27,9 @@ and 4 more to bundle/run tasks
   - [Instance methods](#instance-methods)
     - [gulp.task](#gulptask)
     - [gulp.start](#gulpstart)
-    - [async composers](#async-composers)
-      - [gulp.series](#gulpseries)
-      - [gulp.parallel](#gulpparallel)
-      - [gulp.stack](#gulpstack)
+    - [gulp.series](#gulpseries)
+    - [gulp.parallel](#gulpparallel)
+    - [gulp.stack](#gulpstack)
 - [CLI](#cli)
 - [REPL](#repl)
 
