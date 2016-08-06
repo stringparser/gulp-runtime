@@ -37,7 +37,7 @@ gulp.task('build :src :dest', function () {
 });
 
 gulp.task('build:dev', function (done){
-  gulp.start(["build src/**/*.js public"], done);
+  gulp.parallel("build src/**/*.js public")(done);
 });
 ```
 
@@ -49,9 +49,10 @@ var gulp = require('gulp-runtime').create();
 gulp.task('build', function (done, sources, dest) {
   var stream = gulp.src(sources)
     // some build steps here
-    .pipe(function () {
-      done(stream);
-    });
+
+  stream.on('end', function () {
+    done(stream);
+  });
 });
 
 gulp.task('minify', function (done, stream) {
