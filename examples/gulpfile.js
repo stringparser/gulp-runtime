@@ -2,37 +2,37 @@
 
 var gulp = require('../.').create({repl: true});
 
-function rand(){
+function rand () {
   return Math.floor((1000 - 100) * Math.random());
 }
 
-gulp.task('cssmin', ['autoprefixer'], function(next){
+gulp.task('cssmin', ['autoprefixer'], function (next) {
   setTimeout(next, rand());
 });
 
-gulp.task('autoprefixer', ['less'], function(next){
+gulp.task('autoprefixer', ['less'], function (next) {
   setTimeout(next, rand());
 });
 
-gulp.task('less :src :dest', function(next){
+gulp.task('less :src :dest', function (next) {
   return gulp.src(this.params.src)
     .pipe()
   setTimeout(next, rand());
 });
 
-gulp.task('jade', function(next){
+gulp.task('jade', function (next) {
   setTimeout(next, rand());
 });
 
-gulp.task('serve', function(next){
+gulp.task('serve', function (next) {
   setTimeout(next, rand());
 });
 
-gulp.task('watch', function(next){
+gulp.task('watch', function (next) {
   setTimeout(next, rand());
 });
 
-gulp.task('webpack', function(next){
+gulp.task('webpack', function (next) {
   setTimeout(next, rand());
 });
 
