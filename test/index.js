@@ -12,18 +12,17 @@ util.lib.log = function () {
 
 var tests = [
   'create.js',
-  'start.js',
   'task.js',
   'cli.js',
   'watch.js'
 ];
 
-describe(require('../package').name, function(){
+describe(require('../package').name, function () {
   var path = require('path');
 
-  tests.forEach(function(file){
+  tests.forEach(function (file) {
     var suite = path.basename(file, path.extname(file));
-    describe(suite, function(){
+    describe(suite, function () {
       require('./' + file)(Gulp, util);
     });
   });

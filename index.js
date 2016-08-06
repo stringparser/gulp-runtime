@@ -265,19 +265,6 @@ Gulp.prototype.onHandleError = function (error, site, stack) {
   With some sugar on top please
 **/
 
-Gulp.prototype.start = function (/* arguments */) {
-  var args = null;
-  var tasks = arguments;
-
-  if (util.type(arguments[0]).array) {
-    args = __slice.call(arguments, 1);
-    tasks = arguments[0];
-  }
-
-  var composer = this.stack.apply(this, tasks.length ? tasks : ['default']);
-  return composer.apply(this, args);
-};
-
 Gulp.prototype.series = function (/* arguments */) {
   var args = __slice.call(arguments);
   var props = util.type(args[args.length - 1]).plainObject && args.pop() || {};
