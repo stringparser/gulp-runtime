@@ -2,7 +2,7 @@
   "name": "gulp-runtime",
   "version": "1.0.3",
   "description": "an alternate interface to vinly-fs",
-  "author": "Javier Carrillo",
+  "author": "Javier Carrillo Milla",
   "engines": {
     "node": " >= 0.10"
   },
@@ -42,7 +42,7 @@
     "through2": "*"
   },
   "scripts": {
-    "lint": "eslint lib examples index.js",
+    "lint": "eslint lib examples test *.js",
     "test": "npm run lint && mocha test"
   },
   "license": "MIT"
