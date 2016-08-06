@@ -42,7 +42,7 @@
     "through2": "*"
   },
   "scripts": {
-    "lint": "eslint lib index.js",
+    "lint": "eslint lib examples index.js",
     "test": "npm run lint && mocha test"
   },
   "license": "MIT"
