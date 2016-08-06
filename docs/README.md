@@ -1,4 +1,23 @@
-> Find something missing? [Open an issue](open-an-issue)
+> Found something wrong or missing? [Open an issue!](open-an-issue)
+
+The module comes with two static methods
+
+[Gulp.create](#gulpcreate) -
+[Gulp.createClass](#gulpcreateclass)
+
+and the same [gulp API][gulp-api] methods we know and love
+
+[gulp.src](#gulptask) -
+[gulp.dest](#gulptask) -
+[gulp.task](#gulptask) -
+[gulp.watch](#gulptask)
+
+and 4 more to bundle/run tasks
+
+[gulp.start](#gulpstart) -
+[gulp.stack](#gulpstack) -
+[gulp.series](#gulpseries) -
+[gulp.parallel](#gulpparallel)
 
 # documentation
 
@@ -12,10 +31,10 @@
   - [Instance methods](#instance-methods)
     - [gulp.task](#gulptask)
     - [gulp.start](#gulpstart)
-  - [async composers](#async-composers)
-    - [gulp.series](#gulpseries)
-    - [gulp.parallel](#gulpparallel)
-    - [gulp.stack](#gulpstack)
+    - [async composers](#async-composers)
+      - [gulp.series](#gulpseries)
+      - [gulp.parallel](#gulpparallel)
+      - [gulp.stack](#gulpstack)
 - [CLI](#cli)
 - [REPL](#repl)
 
@@ -25,7 +44,9 @@
 
 1. Install `npm install --save-dev gulp-runtime`
 
-2. Open a `gulpfile`, or [create one][example-gulpfile], and change this line
+2. Open a `gulpfile`, or [create one][example-gulpfile], and
+
+  change this line
 
   ```js
   var gulp = require('gulp');
@@ -45,33 +66,21 @@
 
   Thats it! When no arguments are given after `gulpfile` the `default` task will run instead.
 
-3. What about the CLI? Can I run `gulp` from the terminal?
+3. What about the CLI? Can I just run `gulp-runtime` from the terminal?
 
-  Yes. Just add an alias line to your `.bashrc`/`.zshrc`
+  Yes. Just add an alias to your `.bashrc`/`.zshrc`
 
   ```sh
   alias gulp-runtime='node $(find . -name "gulpfile.js" -not -path "./node_modules/*" | head -n1)'
   ```
 
-  which will run the first `gulpfile.js` found excluding `node_moduldes`. Open a new terminal tab and then you can do
+  which will use the first `gulpfile.js` found excluding `node_modules`.
+
+  Open a new terminal tab and then
 
   `gulp-runtime --tasks default watch serve`
 
 ## API
-
-The module comes with the same [gulp API][gulp-api] methods we know and love
-
-[gulp.src](#gulptask) -
-[gulp.dest](#gulptask) -
-[gulp.task](#gulptask) -
-[gulp.watch](#gulptask)
-
-and 4 more
-
-[gulp.start](#gulpstart) -
-[gulp.stack](#gulpstack) -
-[gulp.series](#gulpseries) -
-[gulp.parallel](#gulpparallel)
 
 ### Static methods
 
@@ -93,7 +102,7 @@ function create(Object options)
 
 - `options.log = true` if `false` the instance will have no logging
 - `options.repl = false` no REPL by default
-- `options.wait = false` tasks run in __parallel__ by default. Pass `wait: true` to run tasks in __series__ by default
+- `options.wait = false` tasks run in __parallel__ by default. Pass `wait: true` to make __series__ the default when running tasks
 
 #### Gulp.createClass
 
@@ -119,12 +128,10 @@ var Gulp = require('gulp-runtime').createClass({
   }
 })
 
-module.exports = Gulp;
+exports = module.exports = Gulp;
 ```
 
 ### Instance methods
-
-You can split builds into instances within the same process and run them separately.
 
 #### gulp.task
 
@@ -218,13 +225,13 @@ gulp.task('default', function (done) {
 });
 ```
 
-### async composers
+#### async composers
 
 `gulp.start` just runs tasks which is not enough when you only need to compose them. For this reason we need another function that will bundle and run a set of tasks only when called.
 
 Just as tasks dependencies bundles into one task others, we have 3 async composer functions to help with this (in fact there is only one function and two others are sugar on top).
 
-#### gulp.series
+##### gulp.series
 
 ```js
 function series(tasks...[, Object options])
@@ -234,7 +241,7 @@ function series(tasks...[, Object options])
 
 Its sugar on top of [`gulp.stack`][#gulpstack] to force the tasks to be run in series.
 
-#### gulp.parallel
+##### gulp.parallel
 
 ```js
 function parallel(tasks...[, Object options])
@@ -244,7 +251,7 @@ function parallel(tasks...[, Object options])
 
 Its sugar on top of [`gulp.stack`][#gulpstack] to force the tasks to be run in series.
 
-#### gulp.stack
+##### gulp.stack
 
 ```js
 function stack(tasks...[, Object options])
