@@ -2,21 +2,30 @@
 
 [![build][badge-build]][travis-build]
 
-[install](#install) -
 [docs](#docs) -
+[install](#install) -
+[setup](docs/#setup) -
 [why](#why) -
 [license](#license)
 
 ### features
 
- - [CLI as tasks](docs/README.md#cli)
+ - [gulp API and more](docs/README.md#api)
  - [REPL with autocomplete](docs/README.md#repl)
- - [gulp API and some extra methods](docs/README.md#api)
  - [Tasks :names with :parameters](docs/README.md#tasks-with-parameters)
+ - [pass arguments from the task runner](docs/README.md#task-arguments)
 
 ### samples
 
-task names can have parameters (like express routes)
+#### CLI as tasks
+
+```js
+var gulp = require('gulp-runtime').create();
+
+gulp.task('default', ['--tasks', '--version']);
+```
+
+#### task :parameters
 
 ```js
 var gulp = require('gulp-runtime').create();
@@ -26,33 +35,40 @@ gulp.task('build :src :dest', function () {
     // transform, compress, etc.
     .pipe(gulp.dest(this.params.dest));
 });
+
+gulp.task('build:dev', function (done){
+  gulp.start(["build src/**/*.js public"], done);
+});
 ```
 
-or be passed as arguments to the task runner
+#### pass arguments from the task runner
 
 ```js
 var gulp = require('gulp-runtime').create();
 
 gulp.task('build', function (done, sources, dest) {
-  return gulp.src(sources)
-    // some build step
-    .pipe(gulp.dest(dest));
+  var stream = gulp.src(sources)
+    // some build steps here
+    .pipe(function () {
+      done(stream);
+    });
 });
 
-gulp.task('minify', function (done, sources, dest) {
-  return gulp.src(sources)
+gulp.task('minify', function (done, stream) {
+  return stream
     // minify
     .pipe(gulp.dest(dest));
 });
 
-gulp.task('build min', function (done) {
+// pass arguments
+gulp.task('build and min', function (done) {
   gulp.series('build', 'minify')('src/**/*.js', 'dest/source.min.js', done);
 });
 ```
 
----
+#### functions as tasks
 
-functions can be used directly as gulp#4.0 will do
+Just as gulp#4.0
 
 ```js
 var gulp = require('gulp-runtime').create();
@@ -69,14 +85,14 @@ function minify (done, sources, dest) {
     .pipe(gulp.dest(dest));
 }
 
+// pass arguments
 gulp.task('build min', function (done) {
   gulp.series(build, minify)('src/**/*.js', 'dest/source.min.js', done);
 });
 
 ```
----
 
-split builds using instances
+#### split builds in instances
 
 ```js
 var styles = require('gulp-runtime').create();
@@ -92,12 +108,10 @@ styles.task('less', function (done, sources, dest) {
 
 styles.task('default', ['less']);
 
-module.exports = styles;
+exports = module.exports = styles;
 ```
 
----
-
-create a REPL and continue running tasks after `default` has ended (this will also improve the performance of next tasks since all modules are loaded already)
+#### a REPL after `default` has finished
 
 ```js
 var gulp = require('gulp-runtime').create({ repl: true });
@@ -109,15 +123,13 @@ gulp.task(':number', function (done) {
 gulp.task('default', ['one', 'two']);
 ```
 
-now go to the terminal and do
+go to the terminal and do
 
 ```sh
 node gulpfile.js
 ```
 
 which will run a REPL with the tasks defined.
-
-> [See more](./docs/README.md#REPL)
 
 ### install
 
@@ -129,13 +141,15 @@ npm install --save-dev gulp-runtime
 
 ### why
 
-When I started to use `gulp` it soon came to mind `I want a REPL`. Mainly because a REPL is the closest to `define and use as you like` kind of thing. But there is a CLI and the tasks should also go in which lead to figure out how tasks can be composed which quickly needed for more and more things to go in.
+Soon after I started to use `gulp` it came to mind
 
-- How would it look like to have a REPL that runs tasks?
-- If so, the REPL should have completion, right?
-- What would happen if there are several instances trying to have a REPL?
-- What if we could add parameters to the task names as in expressjs routes?
-- What if I want to compose tasks made of other tasks or just functions not only give dependencies as an array of strings to bundle with the task defined?
+> I want a REPL for this
+
+Mainly because a REPL is the closest to `define and use as you like`. If that was possible then writing task names in this REPL will run them just as doing the same from the command line but with the benefit of not having to end and start another process.
+
+But wait, then I realized that what I really liked from `gulp` is the way you can bundle and compose async functions and, to understand how one could go about this, I had to do it for myself.
+
+The above has lead to [gulp-repl][gulp-repl], [parth][parth], [runtime][runtime] and finally [gulp-runtime][npm].
 
 So yeah, it got out of hand :D.
 
@@ -147,10 +161,13 @@ But well oh well, here we are.
 
 <!-- links -->
 
-[npm]: npmjs.com/gulp-runtime
-[license]: opensource.org/licenses/MIT
-[vinylFs]: npmjs.com/package/vinyl-fs
-[travis-build]: travis-ci.org/stringparser/gulp-runtime/builds
+[npm]: http://npmjs.com/gulp-runtime
+[parth]: http://npmjs.com/parth
+[license]: http://opensource.org/licenses/MIT
+[vinylFs]: http://npmjs.com/vinyl-fs
+[runtime]: http://github.com/stringparser/runtime
+[gulp-repl]: http://github.com/stringparser/gulp-repl
+[travis-build]: http://travis-ci.org/stringparser/gulp-runtime/builds
 
 [badge-build]: http://img.shields.io/travis/stringparser/gulp-runtime/master.svg?style=flat-square
 [badge-version]: http://img.shields.io/npm/v/gulp-runtime.svg?style=flat-square
