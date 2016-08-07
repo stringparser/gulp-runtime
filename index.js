@@ -96,7 +96,37 @@ Gulp.prototype.tree = function (options) {
   var depth = options.depth === void 0 || options.depth;
   if (depth && typeof depth !== 'number') { depth = 1; }
 
-  if (!(this instanceof Runtime.Stack)) {
+  if (this instanceof Runtime.Stack) {
+    var tasks = this.length ? this : this.reduce();
+
+    tasks.forEach(function (task) {
+      if (!task || !task.fn) { return; }
+      var node;
+
+      if (task.fn.stack instanceof Runtime.Stack) {
+        node = task.fn.stack.tree({
+          host: task,
+          depth: depth && (depth + 1) || false
+        });
+      } else {
+        node = {
+          label: depth == 1 && (task.match || task.name) || task.name
+        };
+      }
+
+      tree.label += (tree.label && ', ' + node.label) || node.label;
+      tree.nodes.push(node);
+    });
+
+    if (options.host && options.host.name) {
+      tree.label = options.host.name;
+      tree.nodes = tree.nodes.filter(function (node) {
+        return node.label !== tree.label;
+      });
+      tree.label = util.chalk.underline(tree.label);
+    }
+  } else {
+
     var tasks = Object.keys(this.tasks.store).filter(function (task) {
       return !/^\:cli/.test(task);
     });
@@ -116,32 +146,6 @@ Gulp.prototype.tree = function (options) {
 
       tree.nodes.push(node);
     });
-    return tree;
-  }
-
-  var sites = this.length ? this : this.reduce();
-
-  sites.forEach(function (task) {
-    if (!task || !task.fn) { return; }
-    var node = task;
-
-    if (task.fn.stack instanceof Runtime.Stack) {
-      node = task.fn.stack.tree({
-        host: task,
-        depth: depth < options.depth && (depth + 1) || false
-      });
-    }
-
-    tree.label += (tree.label && ', ' + node.label) || node.label;
-    tree.nodes.push(node);
-  });
-
-  if (options.host && options.host.name) {
-    tree.label = options.host.name;
-    tree.nodes = tree.nodes.filter(function (node) {
-      return node.label !== tree.label;
-    });
-    tree.label = util.chalk.underline(tree.label);
   }
 
   return tree;
@@ -153,7 +157,7 @@ Gulp.prototype.tree = function (options) {
 
 Gulp.prototype.reduceStack = function (stack, site) {
   var task = typeof site === 'function'
-    ? {fn: site}
+    ? {fn: site, name: site.displayName || site.name}
     : this.tasks.get(site);
 
   if (!task) {
@@ -179,7 +183,7 @@ Gulp.prototype.reduceStack = function (stack, site) {
   if (task.fn.stack instanceof Runtime.Stack) {
     task.mode = task.fn.stack.wait ? 'series' : 'parallel';
   } else {
-    task.label = task.name || task.fn.displayName || task.fn.name;
+    task.label = task.match || task.name;
   }
 };
 
@@ -195,12 +199,10 @@ Gulp.prototype.onHandleStart = function (task, stack) {
 
   if (!stack.time) {
     stack.time = process.hrtime();
-
-    stack.deep = stack.length > 1;
     stack.mode = stack.wait ? 'series' : 'parallel';
     stack.label = stack.tree().label;
 
-    if (stack.deep && !stack.host) {
+    if (!stack.host && stack.length > 1) {
       util.log('Start', util.format.task(stack));
     }
   }
@@ -209,7 +211,7 @@ Gulp.prototype.onHandleStart = function (task, stack) {
     task.label = task.fn.stack.tree().label;
   }
 
-  if (task.mode || (!stack.deep && !stack.host)) {
+  if (!stack.host) {
     util.log('Start', util.format.task(task));
   }
 
@@ -219,14 +221,12 @@ Gulp.prototype.onHandleStart = function (task, stack) {
 Gulp.prototype.onHandleEnd = function (task, stack) {
   if (this.log && !(task.params && task.params.cli)) {
 
-    if (!task.mode) {
+    if (stack.host && stack.length > 1) {
       util.log(' %s took %s',
         util.format.task(task),
         util.format.time(task.time)
       );
-    }
-
-    if (!stack.host && stack.end) {
+    } else if (stack.end) {
       util.log('Ended %s after %s',
         util.format.task(stack.deep ? stack : task),
         util.format.time(stack.time)
@@ -253,11 +253,7 @@ Gulp.prototype.onHandleError = function (error, site, stack) {
     util.format.time(site.time)
   );
 
-  if (!this.repl) { throw err; }
-
-  util.log('at %s',
-    util.format.path(error.stack.match(/\/[^)]+/).pop())
-  );
+  util.log(error.stack);
 };
 
 /**
