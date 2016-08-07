@@ -8,9 +8,12 @@
 [why](#why) -
 [license](#license)
 
+![image](https://cloud.githubusercontent.com/assets/7457705/17462066/db4d59f2-5ca0-11e6-8ff1-a48005398cac.png)
+
 ### features
 
  - [gulp API and more](docs/README.md#api)
+ - [customizable logging](docs/README.md#customizable-logging)
  - [REPL with autocomplete](docs/README.md#repl)
  - [Tasks :names with :parameters](docs/README.md#tasks-with-parameters)
  - [pass arguments from the task runner](docs/README.md#task-arguments)
