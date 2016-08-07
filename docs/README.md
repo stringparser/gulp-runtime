@@ -303,21 +303,15 @@ press enter and you will see a prompt `>` that will run the tasks defined in the
 > build less compress png
 ```
 
-This way you can run tasks in the same way you run commands on the terminal.
-
-How will tasks run with the REPL?
-
-- If those tasks are defined they will run in **parallel**
-- If there is more than one instance with `repl: true` the REPL will go through them and run the first task that matched one of those tasks
-- If one or more of those tasks is not defined there will be a warning and none of the tasks will run for that instance of any of the other ones.
-
-For more information see [gulp-repl][gulp-repl].
+For more information about how tasks are run see [gulp-repl][gulp-repl].
 
 ## Customizable logging
 
-Callbacks `onHandleStart`, `onHandleEnd` and `onHandleError` are used to produce logging.
+Callbacks passed to the constructor: `onHandleStart`, `onHandleEnd` and `onHandleError` are used to internally to produce logging but they can be overridden at:
 
-These callbacks can be overridden at a class level with [`Gulp.createClass`](#gulpcreateclass), add a instance level with `Gulp.create` or at a bunlde/run level with one of the composers ([`gulp.start`](#gulpstart), [`gulp.series`](#gulpseries), [`gulp.parallel`](#gulpparallel) and [`gulp.stack`](#gulpstack)).
+- class level with [`Gulp.createClass`](#gulpcreateclass)
+- instance level with `Gulp.create`
+- bunlde/run level using one of the composers ([`gulp.start`](#gulpstart), [`gulp.series`](#gulpseries), [`gulp.parallel`](#gulpparallel) and [`gulp.stack`](#gulpstack)).
 
 Example:
 
@@ -359,7 +353,7 @@ myGulp.stack('one', 'two', 'three', {
 
 ## Task arguments
 
-Any of the task runners (([`gulp.start`](#gulpstart), [`gulp.series`](#gulpseries), [`gulp.parallel`](#gulpparallel) and [`gulp.stack`](#gulpstack))) can be used to pass arguments down.
+Any of the task runners ([`gulp.start`](#gulpstart), [`gulp.series`](#gulpseries), [`gulp.parallel`](#gulpparallel) and [`gulp.stack`](#gulpstack)) can be used to pass arguments down.
 
 ```js
 var gulp = require('gulp-runtime').create();
@@ -383,7 +377,7 @@ gulp.stack('taskNameHere')(1, 2, 3, function (error, result) {
 // with gulp.start
 gulp.task('default', function (done) {
   gulp.start(['taskNameHere'], 1, 2, 3, {
-    onStackEnd: function () {
+    onStackEnd: function (error, result) {
       if (error) {
         console.log('ups, who farted?');
         console.log(error.stack);
