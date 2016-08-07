@@ -8,15 +8,16 @@
 
 - [Setup](#setup)
 - [API](#api)
-	- [Gulp.create](#gulpcreate)
-	- [Gulp.createClass](#gulpcreateclass)
-	- [gulp.task](#gulptask)
-	- [gulp.start](#gulpstart)
-	- [gulp.series](#gulpseries)
-	- [gulp.parallel](#gulpparallel)
-	- [gulp.stack](#gulpstack)
+  - [Gulp.create](#gulpcreate)
+  - [Gulp.createClass](#gulpcreateclass)
+  - [gulp.task](#gulptask)
+  - [gulp.start](#gulpstart)
+  - [gulp.series](#gulpseries)
+  - [gulp.parallel](#gulpparallel)
+  - [gulp.stack](#gulpstack)
 - [CLI](#cli)
 - [REPL](#repl)
+- [Task arguments](#task-arguments)
 - [Customizable logging](#customizable-logging)
 
 <h2>Introduction</h2>
@@ -316,45 +317,86 @@ For more information see [gulp-repl][gulp-repl].
 
 Callbacks `onHandleStart`, `onHandleEnd` and `onHandleError` are used to produce logging.
 
-These callbacks can be overridden at a class level with `Gulp.createClass`, add a instance level with `Gulp.create` or at a bunlde/run level with one of the composers (`gulp.start`, `gulp.series`, `gulp.parallel` and `gulp.stack`).
+These callbacks can be overridden at a class level with [`Gulp.createClass`](#gulpcreateclass), add a instance level with `Gulp.create` or at a bunlde/run level with one of the composers ([`gulp.start`](#gulpstart), [`gulp.series`](#gulpseries), [`gulp.parallel`](#gulpparallel) and [`gulp.stack`](#gulpstack)).
 
 Example:
 
 ```js
 var MyGulp = require('gulp-runtime').createCLass({
-	onHandleEnd: function (task) {
-		console.log('end', task.label);
-	},
+  onHandleEnd: function (task) {
+    console.log('end', task.label);
+  },
   onHandleStart: function (task) {
-		console.log('start', task.label);
-	},
-	onHandleError: function (error, task, stack) {
-		console.log('error!', task.label);
-		throw error;
-	}
+    console.log('start', task.label);
+  },
+  onHandleError: function (error, task, stack) {
+    console.log('error!', task.label);
+    throw error;
+  }
 });
 
 var myGulp = MyGulp.create({
-	onHandleStart: function (task) {
-		console.log(task.label, 'ended!');
-	}
+  onHandleStart: function (task) {
+    console.log(task.label, 'ended!');
+  }
 });
 
 myGulp.task(':name', function (done) {
-	if (this.params && this.params.name === 'three') {
-		throw new Error('ups, something broke');
-	} else {
-		setTimeout(done, 1000);
-	}
+  if (this.params && this.params.name === 'three') {
+    throw new Error('ups, something broke');
+  } else {
+    setTimeout(done, 1000);
+  }
 });
 
-gulp.stack('one', 'two', 'three', {
-	onHandleError: function (error, task, stack) {
-		console.log(task.label, 'is dead');
-		console.log(error);
-	}
-});
+myGulp.stack('one', 'two', 'three', {
+  onHandleError: function (error, task, stack) {
+    console.log(task.label, 'is dead');
+    console.log(error);
+  }
+})();
 ```
+
+## Task arguments
+
+Any of the task runners (([`gulp.start`](#gulpstart), [`gulp.series`](#gulpseries), [`gulp.parallel`](#gulpparallel) and [`gulp.stack`](#gulpstack))) can be used to pass arguments down.
+
+```js
+var gulp = require('gulp-runtime').create();
+var args = [1, 2, 3];
+
+gulp.task(':name', function (done, one, two, three) {
+  console.log(one, two, three);
+  done(null, one + two + three);
+});
+
+// with gulp.stack
+gulp.stack('taskNameHere')(1, 2, 3, function (error, result) {
+  if (error) {
+    console.log('ups, who farted?');
+    console.log(error.stack);
+  } else {
+    console.log('all right, we are done at', result, 'pm today');
+  }
+});
+
+// with gulp.start
+gulp.task('default', function (done) {
+  gulp.start(['taskNameHere'], 1, 2, 3, {
+    onStackEnd: function () {
+      if (error) {
+        console.log('ups, who farted?');
+        console.log(error.stack);
+      } else {
+        console.log('all right, we are done at', result, 'pm today');
+      }
+      done();
+    }
+  })
+});
+
+```
+
 
 <!-- links -->
 
