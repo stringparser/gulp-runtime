@@ -20,7 +20,7 @@ gulp.task('less :src :dest', function (next) {
   setTimeout(next, rand());
 });
 
-gulp.task('jade', function (next) {
+gulp.task('less', function (next) {
   setTimeout(next, rand());
 });
 
@@ -39,7 +39,7 @@ gulp.task('webpack', function (next) {
 
 gulp.task('default',
   gulp.series(
-    gulp.parallel('jade', 'webpack'),
+    gulp.parallel('less', 'webpack'),
     'cssmin', 'serve', 'watch'
   )
 );
