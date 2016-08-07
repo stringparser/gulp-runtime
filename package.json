@@ -1,14 +1,14 @@
 {
   "name": "gulp-runtime",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "an alternate interface to vinly-fs",
   "author": "Javier Carrillo Milla",
   "engines": {
     "node": " >= 0.10"
   },
   "repository": {
-    "type": "git",
-    "url": "https://github.com/stringparser/gulp-runtime"
+    "url": "https://github.com/stringparser/gulp-runtime",
+    "type": "git"
   },
   "keywords": [
     "gulp",
@@ -22,21 +22,22 @@
   "dependencies": {
     "archy": "^1.0.x",
     "chalk": "^1.0.x",
-    "dateformat": "^1.0.x",
-    "gulp-repl": "^1.0.x",
-    "gulp-util": "^3.0.7",
-    "lodash.merge": "^4.1.x",
-    "parth": "^4.0.x",
-    "pretty-hrtime": "^1.0.x",
+    "parth": "^4.2.x",
     "runtime": "^0.12.x",
     "tildify": "^1.0.x",
+    "vinyl-fs": "^2.4.x",
+    "gulp-repl": "^1.1.x",
+    "gulp-util": "^3.0.x",
+    "dateformat": "^1.0.x",
     "utils-type": "^0.12.x",
-    "vinyl-fs": "^1.0.x"
+    "glob-watcher": "^3.0.x",
+    "lodash.merge": "^4.1.x",
+    "pretty-hrtime": "^1.0.x"
   },
   "devDependencies": {
-    "eslint": "^2.x.x",
-    "mkdirp": "*",
     "mocha": "*",
+    "mkdirp": "*",
+    "eslint": "^2.x.x",
     "rimraf": "*",
     "should": "*",
     "through2": "*"

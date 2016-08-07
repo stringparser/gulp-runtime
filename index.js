@@ -2,13 +2,12 @@
 
 var __slice = Array.prototype.slice;
 
-// deps
 var Parth = require('parth');
 var Runtime = require('runtime');
 var vinylFS = require('vinyl-fs');
 var gulpREPL = require('gulp-repl');
+var globWatch = require('glob-watcher');
 
-// local modules
 var util = require('./lib/util');
 var gulpCLI = require('./lib/cli');
 
@@ -69,35 +68,34 @@ Gulp.prototype.task = function (name, deps, handle) {
 
 /**
  * gulp.watch
- **/
-Gulp.prototype.watch = function (glob, opt, handle) {
-  var fn = util.type(handle || opt).function;
+**/
+
+Gulp.prototype.watch = function (glob, opt, fn) {
   var tasks = util.type(opt).array;
+  var handle = util.type(fn || opt).function;
 
   if (tasks) {
     var composer = this.stack.apply(this, tasks);
-    return vinylFS.watch(glob, function (/* arguments */) {
+    return globWatch(glob, function (/* arguments */) {
       var args = __slice.call(arguments);
-      composer.apply(null, fn ? args.concat(fn) : args);
+      composer.apply(null, handle ? args.concat(handle) : args);
     });
   }
 
-  return vinylFS.watch(glob, opt, fn);
+  return globWatch(glob, opt, fn);
 };
 
 /**
- gulp.tree
+ * gulp.tree
 **/
+
 Gulp.prototype.tree = function (options) {
   options = options || {};
-  var depth = options.depth === void 0 || options.depth;
-
-  if (depth && typeof depth !== 'number') {
-    depth = 1;
-  }
 
   var self = this;
   var tree = {label: options.label || '', nodes: []};
+  var depth = options.depth === void 0 || options.depth;
+  if (depth && typeof depth !== 'number') { depth = 1; }
 
   if (!(this instanceof Runtime.Stack)) {
     var tasks = Object.keys(this.tasks.store).filter(function (task) {
@@ -151,8 +149,9 @@ Gulp.prototype.tree = function (options) {
 };
 
 /**
- maps all the arguments of gulp.stack to functions
+ * maps all the arguments of gulp.stack to functions
 **/
+
 Gulp.prototype.reduceStack = function (stack, site) {
   var task = typeof site === 'function'
     ? {fn: site}
@@ -187,7 +186,7 @@ Gulp.prototype.reduceStack = function (stack, site) {
 
 
 /**
- logging
+ * logging
 **/
 
 Gulp.prototype.onHandleStart = function (task, stack) {
@@ -246,8 +245,9 @@ Gulp.prototype.onHandleEnd = function (task, stack) {
 };
 
 /**
- error handling
+ * error handling
 **/
+
 Gulp.prototype.onHandleError = function (error, site, stack) {
   util.log('%s threw an error after %s',
     util.format.error(site.label || stack.tree().label),
@@ -262,7 +262,7 @@ Gulp.prototype.onHandleError = function (error, site, stack) {
 };
 
 /**
-  With some sugar on top please
+ * With some sugar on top please
 **/
 
 Gulp.prototype.series = function (/* arguments */) {
