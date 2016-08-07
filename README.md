@@ -2,13 +2,12 @@
 
 [![build][badge-build]][travis-build]
 
-[docs](#docs) -
-[install](#install) -
-[setup](docs/#setup) -
-[why](#why) -
-[license](#license)
-
 ![image](https://cloud.githubusercontent.com/assets/7457705/17462066/db4d59f2-5ca0-11e6-8ff1-a48005398cac.png)
+
+[documentation](docs/README.md) -
+[install](#install) -
+[setup](docs/README.md#setup) -
+[why](#why)
 
 ### features
 
