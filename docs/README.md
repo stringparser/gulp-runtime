@@ -11,11 +11,13 @@
 	- [Gulp.create](#gulpcreate)
 	- [Gulp.createClass](#gulpcreateclass)
 	- [gulp.task](#gulptask)
+	- [gulp.start](#gulpstart)
 	- [gulp.series](#gulpseries)
 	- [gulp.parallel](#gulpparallel)
 	- [gulp.stack](#gulpstack)
 - [CLI](#cli)
 - [REPL](#repl)
+- [Customizable logging](#customizable-logging)
 
 <h2>Introduction</h2>
 
@@ -110,7 +112,7 @@ Defaults are:
 - `props.onHandleStart` called before a task starts, defaults to empty function
 - `props.onHandleError` called when a task throws, defaults to empty function
 
-These callbacks can be overridden [`gulp.series`](#gulpseries), [`gulp.parallel`](#gulpparallel) and [`gulp.stack`](#gulpstack).
+These callbacks can be overridden in [`gulp.series`](#gulpseries), [`gulp.parallel`](#gulpparallel) and [`gulp.stack`](#gulpstack) passing an object as a last argument.
 
 #### Gulp.createClass
 
@@ -198,6 +200,41 @@ gulp.task('build and min', function (done) {
 });
 ```
 
+#### gulp.start
+
+Can be used in two ways
+
+```js
+function start(tasks...)
+```
+
+Runs any number of `tasks...` given with the defaults of the instance.
+
+Each of the `tasks...` can be either a `string` or a `function`.
+
+Example:
+
+```js
+var gulp = require('gulp-runtime').create({ wait: true });
+
+function build(done){
+  done(); // or do async things
+}
+
+gulp.task('thing', function (done){
+ setTimeout(done, Math.random()*10);
+});
+
+gulp.start(build, 'thing');
+// ^ will run in series since the instance was created with `{wait: true}`
+```
+
+```js
+function start(Array tasks, args...)
+```
+
+Same as `start(tasks...)` but passing the `args...` down to each of the tasks run.
+
 #### gulp.series
 
 ```js
@@ -274,6 +311,50 @@ How will tasks run with the REPL?
 - If one or more of those tasks is not defined there will be a warning and none of the tasks will run for that instance of any of the other ones.
 
 For more information see [gulp-repl][gulp-repl].
+
+## Customizable logging
+
+Callbacks `onHandleStart`, `onHandleEnd` and `onHandleError` are used to produce logging.
+
+These callbacks can be overridden at a class level with `Gulp.createClass`, add a instance level with `Gulp.create` or at a bunlde/run level with one of the composers (`gulp.start`, `gulp.series`, `gulp.parallel` and `gulp.stack`).
+
+Example:
+
+```js
+var MyGulp = require('gulp-runtime').createCLass({
+	onHandleEnd: function (task) {
+		console.log('end', task.label);
+	},
+  onHandleStart: function (task) {
+		console.log('start', task.label);
+	},
+	onHandleError: function (error, task, stack) {
+		console.log('error!', task.label);
+		throw error;
+	}
+});
+
+var myGulp = MyGulp.create({
+	onHandleStart: function (task) {
+		console.log(task.label, 'ended!');
+	}
+});
+
+myGulp.task(':name', function (done) {
+	if (this.params && this.params.name === 'three') {
+		throw new Error('ups, something broke');
+	} else {
+		setTimeout(done, 1000);
+	}
+});
+
+gulp.stack('one', 'two', 'three', {
+	onHandleError: function (error, task, stack) {
+		console.log(task.label, 'is dead');
+		console.log(error);
+	}
+});
+```
 
 <!-- links -->
 
