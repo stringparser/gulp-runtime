@@ -38,36 +38,42 @@ gulp.task('build :src :dest', function () {
     .pipe(gulp.dest(this.params.dest));
 });
 
-gulp.task('build:dev', function (done){
-  gulp.parallel("build src/**/*.js public")(done);
-});
+gulp.task('default',
+  gulp.parallel('build src/**/*.js build')
+);
 ```
 
-#### pass arguments from the task runner
+#### passing arguments
 
 ```js
 var gulp = require('gulp-runtime').create();
 
-gulp.task('build', function (done, sources, dest) {
-  var stream = gulp.src(sources)
-    // some build steps here
+gulp.task('read src', function (callback, src, dest) {
+  dest = path.join(dest, new Date().toISOString());
+  console.log('from', src, 'to', dest);
 
-  stream.on('end', function () {
-    done(stream);
-  });
+  var stream = gulp.src(src);
+
+  callback(null, stream, dest);
 });
 
-gulp.task('minify', function (done, stream) {
-  return stream
-    // minify
-    .pipe(gulp.dest(dest));
+gulp.task('write', function (done, stream, dest) {
+  return stream.pipe(gulp.dest(dest));
 });
 
-// pass arguments
-gulp.task('build and min', function (done) {
-  gulp.series('build', 'minify')('src/**/*.js', 'dest/source.min.js', done);
-});
+// the default takes any arguments after '--' from the terminal
+gulp.task('default',
+  gulp.series('read src', 'write')
+);
 ```
+
+write
+
+```js
+node gulplfile.js -- src/**/*.js build
+```
+
+and arguments after `--` will be passed to the `default` task.
 
 #### functions as tasks
 
@@ -76,23 +82,22 @@ Just as gulp#4.0
 ```js
 var gulp = require('gulp-runtime').create();
 
-function build (done, sources, dest) {
-  return gulp.src(sources)
+function build (done, src, dest) {
+  console.log('from', src, 'to', dest);
+  return gulp.src(src)
     // some build step
     .pipe(gulp.dest(dest));
 }
 
-function minify (done, sources, dest) {
-  return gulp.src(sources)
+function minify (done, src, dest) {
+  return gulp.src(src)
     // minify
     .pipe(gulp.dest(dest));
 }
 
-// pass arguments
-gulp.task('build min', function (done) {
-  gulp.series(build, minify)('src/**/*.js', 'dest/source.min.js', done);
-});
-
+gulp.task('default',
+  gulp.series(build, minify)
+);
 ```
 
 #### split builds in instances
@@ -148,9 +153,9 @@ Soon after I started to use `gulp` it came to mind
 
 > I want a REPL for this
 
-Mainly because a REPL is the closest to `define and use as you like`. If that was possible then writing task names in this REPL will run them just as doing the same from the command line but with the benefit of not having to end and start another process.
+Mainly because a REPL is the closest to `define and use as you like`. If that was possible then writing task names in this REPL will run them just as doing the same from the command line.
 
-But wait, then I realized that what I really liked from `gulp` is the way you can bundle and compose async functions and, to understand how one could go about this, I had to do it for myself.
+Then I realized that what I really liked from `gulp` is the way you can bundle and compose async functions and how its this done under the hood. For that I had to try to do it by myself.
 
 The above has lead to [gulp-repl][gulp-repl], [parth][parth], [runtime][runtime] and finally [gulp-runtime][npm].
 
