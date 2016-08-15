@@ -1,3 +1,10 @@
+[docs](./README.md) | 
+[API](./API.md) |
+[CLI](./CLI.md) |
+[Logging](./logging.md) |
+[REPL](./REPL.md) |
+[task arguments](./task-arguments.md)
+
 ## API
 
 The module has 2 static methods
@@ -201,6 +208,9 @@ function stack(tasks...[, Object options])
 Each `tasks...` can be either a `string` or a `function`.
 
 If given, `options` will override the instance `props` for this `stack`.
+
+---
+[Back to top ↑](#)
 
 <!-- links -->
 

@@ -1,6 +1,13 @@
-## Task arguments
+[docs](./README.md) |
+[API](./API.md) |
+[CLI](./CLI.md) |
+[Logging](./logging.md) |
+[REPL](./REPL.md) |
+[task arguments](./task-arguments.md)
 
-Any of the task runners ([`gulp.start`](#gulpstart), [`gulp.series`](#gulpseries), [`gulp.parallel`](#gulpparallel) and [`gulp.stack`](#gulpstack)) can be used to pass arguments down.
+# Task arguments
+
+Any of the task runners ([`gulp.start`](./API.md#gulpstart), [`gulp.series`](./API.md#gulpseries), [`gulp.parallel`](./API.md#gulpparallel) and [`gulp.stack`](./API.md#gulpstack)) can be used to pass arguments down.
 
 ```js
 var gulp = require('gulp-runtime').create();
@@ -36,3 +43,6 @@ gulp.task('default', function (done) {
   })
 });
 ```
+
+---
+[Back to top ↑](#)

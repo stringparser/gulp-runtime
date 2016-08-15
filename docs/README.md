@@ -1,3 +1,10 @@
+[docs](./README.md) |
+[API](./API.md) |
+[CLI](./CLI.md) |
+[Logging](./logging.md) |
+[REPL](./REPL.md) |
+[task arguments](./task-arguments.md)
+
 > Found something wrong or missing? [Open an issue!](open-an-issue)
 
 <h1>documentation</h1>
@@ -48,6 +55,8 @@
 
   `gulp-runtime --tasks default watch serve`
 
+---
+[Back to top ↑](#)
 
 <!-- links -->
 

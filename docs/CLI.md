@@ -1,3 +1,9 @@
+[docs](./README.md) |
+[API](./API.md) |
+[CLI](./CLI.md) |
+[Logging](./logging.md) |
+[REPL](./REPL.md) |
+[task arguments](./task-arguments.md)
 
 ## CLI
 
@@ -14,3 +20,6 @@ gulp.task('info', ['--tasks', '--version']);
 // other tasks...
 gulp.task('default', ['info']);
 ```
+
+---
+[Back to top ↑](#)
