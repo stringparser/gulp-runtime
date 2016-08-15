@@ -1,7 +1,5 @@
 'use strict';
 
-var readline = require('readline');
-
 exports = module.exports = function (Gulp) {
   it('create() should log by default', function () {
     var gulp = Gulp.create();
@@ -20,6 +18,7 @@ exports = module.exports = function (Gulp) {
 
   it('create({repl: true}) should make a repl at gulp.repl', function () {
     var gulp = Gulp.create({repl: true});
+    var readline = require('readline');
     gulp.should.have.property('repl');
     gulp.repl.should.be.instanceof(readline.Interface);
     gulp.repl.close();
