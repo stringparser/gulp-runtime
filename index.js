@@ -25,8 +25,7 @@ var Gulp = module.exports = Runtime.createClass({
     }
 
     if (this.repl) {
-      this.repl = require('gulp-repl')(this);
-      util.log('REPL enabled');
+      this.repl = Gulp.repl.start(this);
     }
 
     // adds the CLI for this instance and runs it for this
@@ -35,9 +34,16 @@ var Gulp = module.exports = Runtime.createClass({
 });
 
 /**
- * gulp.task
+ * static methods
 **/
 
+Gulp.repl = require('gulp-repl');
+
+/**
+ * instance methods
+**/
+
+// gulp.task
 Gulp.prototype.task = function (name, deps, handle) {
   handle = util.type(handle || deps || name).function || '';
   deps = util.type(deps).array || util.type(name).array;
@@ -65,10 +71,7 @@ Gulp.prototype.task = function (name, deps, handle) {
   return this;
 };
 
-/**
- * gulp.watch
-**/
-
+// gulp.watch
 Gulp.prototype.watch = function (glob, opt, fn) {
   var tasks = util.type(opt).array;
   var handle = util.type(fn || opt).function;
@@ -84,10 +87,7 @@ Gulp.prototype.watch = function (glob, opt, fn) {
   return globWatch(glob, opt, fn);
 };
 
-/**
- * gulp.tree
-**/
-
+// gulp.tree
 Gulp.prototype.tree = function (options) {
   options = options || {};
 
@@ -151,9 +151,8 @@ Gulp.prototype.tree = function (options) {
   return tree;
 };
 
-/**
- * maps all the arguments of gulp.stack to functions
-**/
+// override of runtime.reduceStack
+// maps all the arguments for the gulp.stack to functions
 
 Gulp.prototype.reduceStack = function (stack, site) {
   var task = typeof site === 'function'
@@ -189,7 +188,7 @@ Gulp.prototype.reduceStack = function (stack, site) {
 
 
 /**
- * logging
+ * tasks logging
 **/
 
 Gulp.prototype.onHandleStart = function (task, stack) {
