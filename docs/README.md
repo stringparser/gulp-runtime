@@ -1,19 +1,11 @@
-[docs](./README.md) |
-[API](./API.md) |
-[CLI](./CLI.md) |
-[Logging](./logging.md) |
-[REPL](./REPL.md) |
+[docs](./README.md) -
+[API](./API.md) -
+[CLI](./CLI.md) -
+[Logging](./logging.md) -
+[REPL](./REPL.md) -
 [task arguments](./task-arguments.md)
 
-> Found something wrong or missing? [Open an issue!](open-an-issue)
-
-<h1>documentation</h1>
-
-- [API](./API.md)
-- [CLI](./CLI.md)
-- [REPL](./REPL.md)
-- [logging](./logging.md)
-- [task arguments](./task-arguments.md)
+# documentation
 
 ## Setup
 

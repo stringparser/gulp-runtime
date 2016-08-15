@@ -1,8 +1,8 @@
-[docs](./README.md) |
-[API](./API.md) |
-[CLI](./CLI.md) |
-[Logging](./logging.md) |
-[REPL](./REPL.md) |
+[docs](./README.md) -
+[API](./API.md) -
+[CLI](./CLI.md) -
+[Logging](./logging.md) -
+[REPL](./REPL.md) -
 [task arguments](./task-arguments.md)
 
 ## CLI
