@@ -16,6 +16,7 @@
     "keyword-spacing": 2,
     "no-multi-spaces": 2,
     "no-process-exit": 0,
+    "keyword-spacing": 2,
     "consistent-return": 0,
     "space-before-blocks": 2,
     "no-use-before-define": 0,
