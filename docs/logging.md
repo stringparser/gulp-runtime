@@ -1,16 +1,24 @@
 [docs](./README.md) -
 [API](./API.md) -
 [CLI](./CLI.md) -
-[Logging](./logging.md) -
 [REPL](./REPL.md) -
-[task arguments](./task-arguments.md)
+[logging](./logging.md) -
+[arguments](./arguments.md)
 
-# Logging
+# logging
 
-Callbacks passed to the constructor: `onHandleStart`, `onHandleEnd` and `onHandleError` are used to internally to produce logging but they can be overridden at:
+All callbacks passed to [`Gulp.create`](./API.md#gulpcreate)
+
+- `onHandleStart`
+- `onHandleError`
+- `onHandleEnd`  
+- `onStackEnd`
+
+are used to internally to produce logging.
+
+They can also be overridden at:
 
 - class level with [`Gulp.createClass`](./API.md#gulpcreateclass)
-- instance level with `Gulp.create`
 - bunlde/run level using one of the composers ([`gulp.start`](./API.md#gulpstart), [`gulp.series`](./API.md#gulpseries), [`gulp.parallel`](./API.md#gulpparallel) and [`gulp.stack`](./API.md#gulpstack)).
 
 Example:

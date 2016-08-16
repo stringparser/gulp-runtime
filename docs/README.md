@@ -1,13 +1,13 @@
-[docs](./README.md) -
-[API](./API.md) -
-[CLI](./CLI.md) -
-[Logging](./logging.md) -
-[REPL](./REPL.md) -
-[task arguments](./task-arguments.md)
-
 # documentation
 
-## Setup
+- [docs](./README.md)
+- [API](./API.md)
+- [CLI](./CLI.md)
+- [REPL](./REPL.md)
+- [logging](./logging.md)
+- [arguments](./arguments.md)
+
+## setup
 
 1. Install `npm install --save-dev gulp-runtime`
 
@@ -35,7 +35,7 @@
 
 3. What about the CLI? Can I just run `gulp-runtime` from the terminal?
 
-  Yes. For this add an alias to your `.bashrc`/`.zshrc`
+  Yes. For this add an alias to your `.bashrc` or `.zshrc`
 
   ```sh
   alias gulp-runtime='node $(find . -name "gulpfile.js" -not -path "./node_modules/*" | head -n1)'
@@ -47,18 +47,6 @@
 
   `gulp-runtime --tasks default watch serve`
 
----
-[Back to top ↑](#)
-
 <!-- links -->
 
-[npm]: https://npmjs.com/gulp-runtime
-[gulp]: https://github.com/gulpjs/gulp
-[RxJs]: https://github.com/Reactive-Extensions/RxJS
-[parth]: https://github.com/stringparser/parth
-[license]: http://opensource.org/licenses/MIT
-[runtime]: https://github.com/stringparser/runtime
-[gulp-api]: https://github.com/gulpjs/gulp/blob/master/docs/API.md
-[gulp-repl]: https://github.com/stringparser/gulp-repl
-[open-a-issue]: https://github.com/stringparser/gulp-runtime/issues/new
 [example-gulpfile]: https://github.com/gulpjs/gulp#sample-gulpfilejs

@@ -1,11 +1,11 @@
 [docs](./README.md) -
 [API](./API.md) -
 [CLI](./CLI.md) -
-[Logging](./logging.md) -
 [REPL](./REPL.md) -
-[task arguments](./task-arguments.md)
+[logging](./logging.md) -
+[arguments](./arguments.md)
 
-## API
+# API
 
 The module has 2 static methods
 
@@ -25,7 +25,7 @@ and 3 more to bundle/run tasks
 [gulp.parallel](#gulpparallel) -
 [gulp.stack](#gulpstack)
 
-<h3> Static methods </h3>
+## Static methods
 
 The module exports a constructor function
 
@@ -35,7 +35,7 @@ var Gulp = require('gulp-runtime');
 
 which has two static methods: `Gulp.create` and `Gulp.createClass`.
 
-#### Gulp.create
+### Gulp.create
 
 ```js
 function create([Object props])
@@ -56,7 +56,7 @@ Defaults are:
 
 These callbacks can be overridden in [`gulp.series`](#gulpseries), [`gulp.parallel`](#gulpparallel) and [`gulp.stack`](#gulpstack) passing an object as a last argument.
 
-#### Gulp.createClass
+### Gulp.createClass
 
 ```js
 function createClass([Object mixin])
@@ -85,7 +85,7 @@ exports = module.exports = Gulp;
 
 <h3>Instance methods</h3>
 
-#### gulp.task
+### gulp.task
 
 `gulp.src`, `gulp.dest`, `gulp.watch` and `gulp.task` behave the same as described in the [`gulp` API documentation][gulp-api].
 
@@ -142,7 +142,7 @@ gulp.task('build and min', function (done) {
 });
 ```
 
-#### gulp.start
+### gulp.start
 
 Can be used in two ways
 
@@ -177,7 +177,7 @@ function start(Array tasks, args...)
 
 Same as `start(tasks...)` but passing the `args...` down to each of the tasks run.
 
-#### gulp.series
+### gulp.series
 
 ```js
 function series(tasks...[, Object options])
@@ -187,7 +187,7 @@ function series(tasks...[, Object options])
 
 Its sugar on top of [`gulp.stack`][#gulpstack]. See [`gulp.stack`][#gulpstack] for more information about `options`.
 
-#### gulp.parallel
+### gulp.parallel
 
 ```js
 function parallel(tasks...[, Object options])
@@ -197,7 +197,7 @@ function parallel(tasks...[, Object options])
 
 Its sugar on top of [`gulp.stack`][#gulpstack]. See [`gulp.stack`][#gulpstack] for more information about `options`.
 
-#### gulp.stack
+### gulp.stack
 
 ```js
 function stack(tasks...[, Object options])
