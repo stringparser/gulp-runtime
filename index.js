@@ -184,6 +184,8 @@ Gulp.prototype.reduceStack = function (stack, site) {
   } else {
     task.label = task.match || task.name;
   }
+
+  return stack;
 };
 
 
