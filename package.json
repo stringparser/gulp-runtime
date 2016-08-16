@@ -35,9 +35,9 @@
     "pretty-hrtime": "^1.0.x"
   },
   "devDependencies": {
-    "mocha": "*",
+    "eslint": "^3.3.x",
     "mkdirp": "*",
-    "eslint": "^2.x.x",
+    "mocha": "*",
     "rimraf": "*",
     "should": "*",
     "through2": "*"
