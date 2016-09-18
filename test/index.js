@@ -2,7 +2,6 @@
 
 require('should');
 
-
 var Gulp = require('../');
 var util = require('./util');
 

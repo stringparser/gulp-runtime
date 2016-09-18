@@ -13,6 +13,7 @@ exports = module.exports = function (Gulp) {
 
   it('create({log: false}) should disable logging', function () {
     var gulp = Gulp.create({log: false});
+    gulp.props.log.should.be.eql(false);
     gulp.log.should.be.eql(false);
   });
 

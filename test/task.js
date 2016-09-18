@@ -1,6 +1,7 @@
 'use strict';
 
 exports = module.exports = function (Gulp) {
+  var should = require('should');
 
   it('task(name, fn) registers task `name`', function () {
     var gulp = Gulp.create();
@@ -52,7 +53,7 @@ exports = module.exports = function (Gulp) {
 
     gulp.task('taskName', deps, function () {});
     gulp.stack('taskName')(function (error) {
-      error.should.be.instanceof(Error);
+      should(error).be.instanceof(Error);
       done();
     });
   });

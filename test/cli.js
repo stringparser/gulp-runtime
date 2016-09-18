@@ -23,65 +23,61 @@ exports = module.exports = function (Gulp, util) {
     util.rimraf(test.dirname, done);
   });
 
-  var gulp = Gulp.create();
-
   it('--silent should turn off logging', function (done) {
-    gulp.stack('--silent', {
-      onHandleError: done,
-      onHandleEnd: function () {
-        should(this.log).be.eql(false);
-        done();
-        gulp.log = true;
-      }
-    })();
+    var gulp = Gulp.create();
+
+    gulp.log.should.be.eql(true);
+
+    gulp.start(['--silent'], function (error) {
+      if (error) { return done(error); }
+      should(gulp.log).be.eql(false);
+      done();
+    });
   });
 
   it('--no-color should turn colors off', function (done) {
-    gulp.stack('--no-color', {
-      onHandleError: done,
-      onHandleEnd: function () {
-        should(util.lib.chalk).have.property('enabled', false);
-        done();
-      }
-    })();
+    var gulp = Gulp.create();
+
+    gulp.start(['--no-color'], function (error) {
+      if (error) { return done(error); }
+      should(util.lib.chalk).have.property('enabled', false);
+      done();
+    });
   });
 
   it('--color should restore them', function (done) {
-    gulp.stack('--color', {
-      onHandleError: done,
-      onHandleEnd: function () {
-        should(util.lib.chalk).have.property('enabled', true);
-        done();
-      }
-    })();
+    var gulp = Gulp.create();
+
+    gulp.start(['--color'], function (error) {
+      if (error) { return done(error); }
+      should(util.lib.chalk).have.property('enabled', true);
+      done();
+    });
   });
 
   it('--cwd :dirname should change cwd', function (done) {
     var cwd = process.cwd();
+    var gulp = Gulp.create();
 
-    gulp.stack('--cwd ' + test.dirname, {
-      onHandleError: done,
-      onHandleEnd: function () {
-        should(process.cwd()).be.eql(test.dirname);
-        process.chdir(cwd); // restore previous working directory
-        done();
-      }
-    })();
+    gulp.start(['--cwd ' + test.dirname], function (error) {
+      if (error) { return done(error); }
+      should(process.cwd()).be.eql(test.dirname);
+      process.chdir(cwd); // restore previous working directory
+      done();
+    });
   });
 
   it('--require should require a module from the cwd', function (done) {
     var cwd = process.cwd();
+    var gulp = Gulp.create();
 
-    gulp.stack('--require ' + test.file, {
-      onHandleError: done,
-      onHandleStart: function () {
-        should(require.cache).not.have.property(test.file);
-      },
-      onHandleEnd: function () {
-        should(require.cache).have.property(test.file);
-        process.cwd().should.be.eql(cwd);
-        done();
-      }
-    })();
+    should(require.cache).not.have.property(test.file);
+
+    gulp.start(['--require ' + test.file], function (error) {
+      if (error) { return done(error); }
+      should(require.cache).have.property(test.file);
+      process.cwd().should.be.eql(cwd);
+      done();
+    });
   });
 };
