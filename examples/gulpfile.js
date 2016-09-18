@@ -10,7 +10,7 @@ gulp.task('cssmin', ['autoprefixer'], function (next) {
   setTimeout(next, rand());
 });
 
-gulp.task('autoprefixer', ['less'], function (next) {
+gulp.task('autoprefixer', function (next) {
   setTimeout(next, rand());
 });
 
