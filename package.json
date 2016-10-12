@@ -30,7 +30,7 @@
     "lodash.merge": "^4.1.x",
     "parth": "^4.2.x",
     "pretty-hrtime": "^1.0.x",
-    "runtime": "^0.12.x",
+    "runtime": "^0.14.x",
     "tildify": "^1.0.x",
     "utils-type": "^0.12.x",
     "vinyl-fs": "^2.4.x"
