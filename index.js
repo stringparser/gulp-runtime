@@ -144,8 +144,11 @@ Gulp.prototype.tree = function (stack, options) {
 Gulp.prototype.reduceStack = function (stack, site) {
   var task = null;
 
-  if (typeof site === 'function') {
-    task = { fn: site, name: site.displayName || site.name }
+  if (site && typeof (site.fn || site) === 'function') {
+    task = site.fn && util.clone(site, true) || {
+      fn: site,
+      name: site.displayName || site.name
+    };
   } else {
     task = this.tasks.get(site);
   }
@@ -185,6 +188,12 @@ Gulp.prototype.onHandleStart = function (task, stack) {
   if (!stack.time) {
     stack.time = process.hrtime();
     stack.label = this.tree(stack).label;
+
+    if (Array.isArray(task.fn && task.fn.stack) && task.fn.stack.props) {
+      stack.match = task.match || task.name || task.displayName;
+      stack.siteProps = task.fn.stack.props;
+    }
+
     util.log('Start', util.format.task(stack));
   }
 
@@ -194,7 +203,7 @@ Gulp.prototype.onHandleStart = function (task, stack) {
 Gulp.prototype.onHandleEnd = function (task, stack) {
   if (this.log && !(task.params && task.params.cli)) {
 
-    if (stack.host && task.label) {
+    if (!(task.fn && Array.isArray(task.fn.stack)) && task.label) {
       util.log(' %s took %s',
         util.format.task(task),
         util.format.time(task.time)
