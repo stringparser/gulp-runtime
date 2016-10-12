@@ -2,7 +2,7 @@
 
 [![build][badge-build]][travis-build]
 
-![image](https://cloud.githubusercontent.com/assets/7457705/17462066/db4d59f2-5ca0-11e6-8ff1-a48005398cac.png)
+![image](https://cloud.githubusercontent.com/assets/7457705/19326735/06d81c7e-90cc-11e6-9968-7ae3631326c3.png)
 
 [documentation](docs/README.md) -
 [install](#install) -
