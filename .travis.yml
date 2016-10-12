@@ -1,7 +1,4 @@
 language: node_js
-before_script:
-  - npm install gulp -g
-  - npm link gulp
 node_js:
   - "4"
   - "stable"
