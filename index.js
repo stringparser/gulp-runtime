@@ -112,9 +112,10 @@ Gulp.prototype.tree = function (stack, options) {
     if (options.simple) { return tasks; }
   }
 
-  var tree = {label: options.label || '', nodes: []};
-  var depth = options.depth === void 0 || options.depth;
-  if (depth && typeof depth !== 'number') { depth = 1; }
+  var tree = {
+    label: options.label || '',
+    nodes: []
+  };
 
   tasks.forEach(function (task) {
     if (!task || !task.fn) { return; }
@@ -122,12 +123,11 @@ Gulp.prototype.tree = function (stack, options) {
 
     if (Array.isArray(task.fn.stack)) {
       node = self.tree(task.fn.stack, {
-        host: task,
-        depth: depth && (depth + 1) || false
+        host: task
       });
     } else {
       node = {
-        label: depth == 1 && (task.match || task.name) || task.name
+        label: task.match || task.name
       };
     }
 
@@ -188,12 +188,11 @@ Gulp.prototype.onHandleStart = function (task, stack) {
   if (!stack.time) {
     stack.time = process.hrtime();
     stack.label = this.tree(stack).label;
+  }
 
-    if (Array.isArray(task.fn && task.fn.stack) && task.fn.stack.props) {
-      stack.match = task.match || task.name || task.displayName;
-      stack.siteProps = task.fn.stack.props;
-    }
-
+  if (Array.isArray(task.fn && task.fn.stack) && task.fn.stack.props) {
+    stack.match = task.match || task.name || task.displayName;
+    stack.siteProps = task.fn.stack.props;
     util.log('Start', util.format.task(stack));
   }
 
